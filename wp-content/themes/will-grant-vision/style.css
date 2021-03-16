@@ -1,0 +1,381 @@
+/*
+Theme Name: Will Grant Vision
+Theme URI: http://understrap.com
+Template: understrap
+Author: Holger Koenemann
+Author URI: http://www.holgerkoenemann.de
+Description: Combination of Automattic´s _s theme and Bootstrap 4. Made as a solid starting point for your next theme project and WordPress website. Use it as starter theme or as a parent theme. It is up to you. Including Font Awesome support, built-in widget slider and much more you need for basic websites. IMPORTANT: All developer dependencies are not bundled with this install file. Just download the .zip, extract it and run "npm install" and "gulp copy-assets" inside the extracted /understrap folder.
+Tags: one-column,custom-menu,featured-images,theme-options,translation-ready
+Version: 0.8.9.1547538875
+Updated: 2019-01-15 07:54:35
+
+*/
+
+
+.modal-fullscreen.modal-covid-19 { position: fixed; overflow: auto; top: 0; width: 100%; left: auto; height: 100%; background-color: rgba(0, 0, 0, 0.75); display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; padding: 20px 20px; margin: 0 auto; justify-content: center; }
+.modal-fullscreen.modal-covid-19 .close-modal-fullscreen i { color: #fff; }
+.modal-fullscreen.modal-covid-19 .modal-fullscreen-container { white-space: nowrap !important; max-width: 800px; margin: 0 auto; background-color: #fff; padding:60px 40px;
+	 /* transition: all 3s ease; */
+	  top: 500px; position:fixed;}
+.modal-fullscreen.modal-covid-19.active .modal-fullscreen-container{ top: 13%; position:fixed; }
+.modal-fullscreen.modal-covid-19 .covid-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.modal-fullscreen.modal-covid-19 .covid-images img:first-of-type { width: 30%; padding: 30px 20px 30px 20px; margin: 0; height: 300px; object-fit: contain; object-position: center; }
+.modal-fullscreen.modal-covid-19 .covid-images img:nth-of-type(2) { margin-left: 0; width: 68%; padding: 0 20px 20px 20px; height: 300px; object-fit: contain; object-position: center; margin-bottom: 5%; }
+.modal-fullscreen.modal-covid-19 .covid-images img:last-of-type { margin-bottom: 40px; width: 60%; object-fit: contain; object-position: center; }
+.dr-grant { cursor: pointer; }
+@media only screen and (max-width: 767px){
+
+.modal-fullscreen.modal-covid-19 { padding: 20px 10px; }
+.modal-fullscreen.modal-covid-19 .close-modal-fullscreen { top: 0; right: 0; background-color: #000; }
+.modal-fullscreen.modal-covid-19 .modal-fullscreen-container { white-space: nowrap !important; max-width: 800px; margin: 0 auto; background-color: #fff; padding: 30px 20px;}
+.modal-fullscreen.modal-covid-19 .covid-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.modal-fullscreen.modal-covid-19 .covid-images img:first-of-type { width: 60%; padding: 0px 20px 0px 20px; margin: 0; height: auto; object-fit: contain; object-position: center; }
+.modal-fullscreen.modal-covid-19 .covid-images img:nth-of-type(2) { margin-left: 0; width: 75%; padding: 20px 10px 10px 10px; height: auto; object-fit: contain; object-position: center; margin-bottom: 0%; }
+.modal-fullscreen.modal-covid-19 .covid-images img:last-of-type { margin-bottom: 40px; width: 100%; object-fit: contain; object-position: center; }
+
+}
+
+.modal-fullscreen.modal-ask-dr-grant { position: fixed; overflow: auto; top: 0; width: 100%; left: auto; height: 100%; background-color: rgba(0, 0, 0, 0.75); display: flex; flex-direction: column; align-items: center; text-align: center; 
+	/* transition: all .5s ease;  */
+	opacity: 0; padding: 20px 20px; margin: 0 auto; justify-content: center; }
+.modal-fullscreen.modal-ask-dr-grant .close-modal-fullscreen i { color: #fff; }
+.modal-fullscreen.modal-ask-dr-grant .modal-fullscreen-container {     max-width: 800px; margin: 0 auto; background-color: #fff; padding: 60px 40px; word-break: break-word; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:first-of-type { width: 30%; padding: 30px 20px 30px 20px; margin: 0; height: 300px; object-fit: contain; object-position: center; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:nth-of-type(2) { margin-left: 0; width: 68%; padding: 0 20px 20px 20px; height: 300px; object-fit: contain; object-position: center; margin-bottom: 5%; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:last-of-type { margin-bottom: 40px; width: 60%; object-fit: contain; object-position: center; }
+
+@media only screen and (max-width: 767px){
+
+.modal-fullscreen.modal-ask-dr-grant { padding: 20px 10px; }
+.modal-fullscreen.modal-ask-dr-grant .close-modal-fullscreen { top: 0; right: 0; background-color: #000; }
+.modal-fullscreen.modal-ask-dr-grant .modal-fullscreen-container { max-width: 800px; margin: 20px auto !important; background-color: #fff; padding: 30px 20px; min-height: auto; overflow-y: auto; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:first-of-type { width: 60%; padding: 0px 20px 0px 20px; margin: 0; height: auto; object-fit: contain; object-position: center; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:nth-of-type(2) { margin-left: 0; width: 75%; padding: 20px 10px 10px 10px; height: auto; object-fit: contain; object-position: center; margin-bottom: 0%; }
+.modal-fullscreen.modal-ask-dr-grant .covid-images img:last-of-type { margin-bottom: 40px; width: 100%; object-fit: contain; object-position: center; }
+
+}
+
+
+
+
+.blog_comment_fields {
+    display: flex;
+    flex-flow: column-reverse;
+}
+#commentform p.comment-notes {
+    display: none;
+}	
+.blog-detail .blog-description .social-media ul li {
+    margin-right: 10px !important;
+}
+#commentform .comment-form-comment {
+    padding: 0;
+}
+
+#commentform .comment-form-author {
+    padding-left: 0;
+}
+
+#commentform .comment-form-email {
+    padding-right: 0;
+}
+.post-pagination .post-previous {
+    padding-right: 20px;
+}
+
+.post-pagination .post-next {
+    padding-left: 20px;
+}
+.blog-listing-section, .blog-baner, .blog-detail {
+	font-family: 'Poppins', sans-serif;
+}
+.heateorSssSharingSvg {
+    background-size: 62% !important;
+}
+.blog-categories.filters.filter-button-group a.active {
+    text-decoration: underline !important;
+}
+
+/* add css  */
+
+.modal-fullscreen.modal-covid-19 .covid-images img:last-of-type {
+    cursor: pointer;
+}
+
+.blog-banner-section { padding: 0; margin: 0; position: relative; }
+.blog-banner-section .container { width: 100%; max-width: 100% !important; padding: 0; }
+.blog-banner-section .blog-heading { padding: 0; margin: 0; min-height: 100px; position: absolute; top: 0; left: 0; width: 100%; background-color: rgba(199, 215, 213, .5); display: flex; align-items: center; justify-content: center; }
+.blog-banner-section .blog-heading h1 { margin:0; padding:0; font-size: 48px; font-weight:400; color:#000; }
+
+.blog-banner-section .blog-img-div .banner-img { width: 100%; min-height: 405px; display: inline-block;    object-fit: cover; }
+
+.blog-banner-section .banner-content-div { padding: 20px; margin: 0 auto; position: absolute; bottom: 75px; left: calc(50% - 200px); max-width: 400px; min-height: 150px; width: 100%; background-color: rgba(0,0,0,.5); color: #fff; text-align: center; }
+.blog-banner-section .banner-content-div p { font-size: 16px; margin: 0 0 10px 0; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.5); text-align: center; display: inline-block; font-weight: 700; }
+.blog-banner-section .banner-content-div h3 {     text-align: center; font-weight: 700; color: #fff; display: inline-block; margin: 0 auto; width: 100%; font-size: 32px;}
+.blog-banner-section .banner-content-div .link { font-size: 36px; color: #fff; border: 2px solid rgba(255,255,255,1); padding: 0 0 5px; font-weight: 400; height: 36px; width: 36px; line-height: 0; display: flex; align-items: center; justify-content: center; margin: 25px auto 10px auto; text-decoration: none; }
+.blog-banner-section .banner-content-div .link:hover { border: 2px solid rgba(255,255,255,0.51); }
+
+.blog-listing-section .blog-heading { margin-bottom: 10px; }
+.blog-categories.filters.filter-button-group { margin: 0 0 60px 0; text-align: center; }
+.blog-categories.filters.filter-button-group a { text-decoration: none; font-size: 18px; line-height: 32px; color: #000; font-weight: 600; padding: 0 30px 0 0; margin: 0 0 10px 0; }
+.blog-categories.filters.filter-button-group a:last-child{ padding-right: 0px; }
+
+.blog-listing-section { padding: 70px 0 70px 0; margin: 0 0 30px; }
+
+
+.blog-detail .blog-description .blog-description-info {
+    padding: 0 10px 40px;
+    padding-bottom: 20px;
+}
+.blog-detail .blog-description .social-media {
+    margin-bottom: 50px; padding: 0 10px;
+}
+.blog-detail .blog-description .post-pagination {
+    padding: 0 10px;     margin-bottom: 60px;
+}
+.blog-detail .blog-description .social-media {
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.blog-listing-section .blog-listing .blog-item {
+    min-height: 250px;
+}
+
+.blog-detail .blog-description .social-media h3 {
+    margin-right: 20px;
+}
+
+.media-body h4.media-heading {
+	font-size: 18px;
+    font-weight: 600;
+}
+.media-body h4.media-heading:first-child{ text-transform: capitalize; }
+
+.comment-section .media {
+    margin: 0 0 20px 0;
+}
+
+@media only screen and (max-width: 767px){
+	
+	.blog-banner-section .blog-heading { min-height: 60px;}
+	.blog-banner-section .blog-heading h1 { font-size: 30px; }	
+
+	.blog-banner-section .blog-img-div .banner-img { width: 100%; min-height: auto; display: inline-block; object-fit: cover; }
+
+	.blog-banner-section .banner-content-div { padding: 20px 15px 10px 15px; bottom: 0; left: 0; max-width: 100%; min-height: 100px; width: 100%; }
+	.blog-banner-section .banner-content-div .link { margin: 20px auto 20px auto; }
+
+	.blog-banner-section .banner-content-div { position: relative; bottom: auto; left: auto; max-width: 100%; min-height: 100px; width: 100%;     background-color: rgba(0,0,0,1); }
+
+	.blog-listing-section { padding: 60px 0; }
+	#commentform .comment-form-author {
+		padding-left: 0 !important;
+		padding-right: 0px !important;
+	}
+	.blog-detail .blog-description #commentform .comment-form-email { padding-right: 0; padding-left: 0px; }
+	.blog-categories.filters.filter-button-group a { font-size: 16px; line-height: 32px; padding: 0 10px 0 0; margin: 0 0 10px; }
+	.blog-baner { padding: 0px 0 0; }
+	
+
+	.blog-detail .blog-description .post-pagination { padding: 0 10px; flex-direction: column; }
+	.post-pagination .post-previous { padding-right: 0; width: 100%; margin: 0 0 30px 0; width: 100%; }
+	.post-pagination .post-next { padding-left: 0; margin: 0 0 0 0;  width: 100%;  }
+	.blog-detail .blog-description .post-pagination .post-previous .btn-previous{  justify-content: space-between; }
+	.blog-detail .blog-description .post-pagination .btn-previous.btn-next{ justify-content: space-between; }
+
+	.comment-section .media { margin: 0 0 15px 0; }
+	.blog-detail .comment-list .media-left { height: 44px; width: 44px; border-radius: 100px; overflow: hidden; }
+	.blog-detail .comment-list .media-body { padding-left: 12px; }
+	.blog-detail .comment-list .media-body h4.media-heading { font-size: 16px; font-weight: 600; width: 100%; padding-right: 0; margin: 0 0 5px 0 !important; }
+	.blog-detail .comment-list .media-body small span { padding: 0 8px 0 0; font-size: 13px; }
+	.blog-detail .comment-list .media-body a.comment-reply-link { color: #626dfc; }
+	.blog-detail .comment-list .media-body p { font-size: 14px; line-height: 24px; margin-top: 3px; margin-bottom: 5px; }
+	.blog-detail .comment-list ol.children { padding: 0 0 0 15px; }
+
+	@media only screen and (max-width: 360px){ 
+		.blog-detail .blog-description .comment-section h3#reply-title a {
+			display: block;
+			font-size: 16px;
+			margin: 4px 0 2px 0;
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){ 
+	
+	.blog-banner-section .blog-heading { min-height: 60px;}
+	.blog-banner-section .blog-heading h1 { font-size: 30px; }
+
+	.blog-banner-section .blog-img-div .banner-img { width: 100%; min-height: auto; display: inline-block; object-fit: cover; }
+
+	.blog-banner-section .banner-content-div { padding: 20px 15px 10px 15px; bottom: 0; left: 0; max-width: 100%; min-height: 100px; width: 100%; }
+	.blog-banner-section .banner-content-div .link { margin: 20px auto 20px auto; }
+
+	.blog-banner-section .banner-content-div { position: relative; bottom: auto; left: auto; max-width: 100%; min-height: 100px; width: 100%;     background-color: rgba(0,0,0,1); }
+
+}
+
+
+.modal-fullscreen{
+	transition: none !important;
+}
+
+.modal-fullscreen-container {
+	position: relative;
+}
+
+.modal-fullscreen .close-modal-fullscreen i {
+	color: #000 !important;
+	padding-top: 2px;
+	height: 30px;
+	width: 30px;
+}
+.blog-banner-section .blog-heading h1 {
+	font-weight: 200;
+}
+
+.blog-banner-section{
+	position: relative;
+    background: url(https://willgrantvision.com/wp-content/uploads/2020/05/banner-views1.jpg);
+    background-size: cover;
+    z-index: 1;
+    padding: 150px 0px;
+	background-attachment: fixed;
+	background-position: center !important;
+	min-height: 1000px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding: 150px 0px 295px 0;
+	-webkit-background-size: cover !important;
+	-moz-background-size: cover !important;
+	-o-background-size: cover !important;
+	background-size: cover !important;
+}
+
+
+.modal-fullscreen.modal-covid-19.active .modal-fullscreen-container {
+
+}
+
+
+
+
+
+/* new box section */
+
+.blog-banner-section .banner-content-div {
+	max-width: 100%;
+	width: 100%;
+	left: 0;
+	right: 0;
+}
+
+
+.blog-banner-section .blog-img-div .banner-img {
+	min-height: 300px;
+}
+
+.blog-banner-section .banner-content-div p {
+	font-size: 44px;
+	line-height: 44px;
+	margin-bottom: 30px;
+	border-bottom: 0;
+	max-width: 400px;
+}
+
+.blog-banner-section .banner-content-div h3 {
+	font-size: 19px;
+	line-height: 30px;
+	font-weight: 400;
+	max-width: 400px;
+}
+
+.blog-banner-section .banner-content-div .link {
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 500;
+	border: 0;
+	white-space: nowrap;
+	width: 100%;
+	text-align: center;
+	display: block;
+}
+
+.blog-banner-section .banner-content-div {
+	bottom: 0;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.blog-banner-section .banner-content-div .link:hover {
+	border: 0px solid rgba(255,255,255,.51) !important;
+}
+/* end */
+
+@media (max-width: 767px) {
+	.modal-fullscreen.modal-covid-19.active .modal-fullscreen-container {
+		top: 5%;
+		left: 0;
+		right: 0;
+		width: 95%;
+	
+	}
+
+	/* .modal-fullscreen.modal-covid-19 .close-modal-fullscreen i {color: #fff !important;} */
+
+	.blog-banner-section .blog-img-div .banner-img {
+		min-height: 100px;
+	}
+
+	.blog-banner-section {
+		min-height: 700px;
+		padding: 150px 0px 275px 0;
+		background-attachment: unset !important;
+	}
+
+	.blog-banner-section .banner-content-div p { 
+		font-size: 22px;
+		margin-bottom: 15px;
+	}
+
+	.modal-fullscreen.modal-covid-19 .close-modal-fullscreen {
+		background-color: transparent;
+	}
+
+	.modal-fullscreen.modal-ask-dr-grant .close-modal-fullscreen {
+		background-color: transparent !important;
+	}
+
+	.blog-banner-section .banner-content-div {
+		position: absolute;
+	}
+
+	.blog-banner-section .banner-content-div {
+		background-color: rgba(0,0,0,0.5);
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){  
+
+	.blog-banner-section .blog-img-div .banner-img {
+		min-height: 150px;
+	}
+
+	.blog-banner-section {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding: 150px 0px 0px 0;
+
+	}
+
+	.blog-banner-section .banner-content-div {
+		background-color: rgba(0,0,0,0.5);
+	}
+}
+

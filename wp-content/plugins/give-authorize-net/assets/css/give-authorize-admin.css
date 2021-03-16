@@ -1,0 +1,66 @@
+/**
+ * Give - Authorize Admin CSS
+ */
+
+.give-authorize-webhook-message {
+	background: #FFF;
+	padding: 6px 10px;
+	font-size: 12px;
+	font-style: italic;
+	border-radius: 3px;
+	border: 1px solid #d6d6d6;
+}
+
+.give-authorize-webhook-message .dashicons {
+	font-size: 18px;
+	position: relative;
+	left: -3px;
+	top: 0;
+}
+
+.give-authorize-webhook-no-keys .dashicons {
+	color: #f5ab24;
+}
+
+.give-authorize-webhook-success .dashicons {
+	color: green;
+}
+
+.give-authorize-webhook-issue .dashicons {
+	color: red;
+}
+
+.give-authorize-force-retry {
+	font-style: italic;
+	font-size: 13px;
+	margin-left: 10px;
+}
+
+.give-authorize-loading-icon {
+	background: url('/wp-admin/images/spinner-2x.gif');
+	height: 18px;
+	width: 18px;
+	display: inline-block;
+	background-size: 18px;
+	margin: 0 7px 0 0;
+	position: relative;
+	top: 4px;
+}
+
+.give-authorize-webhook-check-wrap {
+	margin: 15px 0 10px;
+	display: none;
+}
+
+.give-authorize-live-webhook-statuses .give-authorize-webhook-message,
+.give-authorize-sandbox-webhook-statuses .give-authorize-webhook-message {
+	display: none;
+}
+
+.give-authorize-live-webhook-statuses {
+	margin: 5px 0 0;
+}
+
+.give-authorize-sandbox-webhook-statuses {
+	margin: 20px 0 0;
+}

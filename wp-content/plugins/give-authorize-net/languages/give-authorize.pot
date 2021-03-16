@@ -1,0 +1,297 @@
+# Copyright (C) 2019 Give-Authorize
+# This file is distributed under the same license as the Give-Authorize package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Give-Authorize\n"
+"Report-Msgid-Bugs-To: https://github.com/impress-org/give-authorize-gateway/issues/new\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Language-Team: GiveWP <info@>givewp.com\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: give-authorize-net.php:243
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> plugin installed and activated for the Authorize.net gateway to activate."
+msgstr ""
+
+#: give-authorize-net.php:268
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> core version %s or above for the Give - Authorize.net gateway add-on to activate."
+msgstr ""
+
+#: give-authorize-net.php:274
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">cURL</a> installed for the Give - Authorize.net gateway add-on to activate."
+msgstr ""
+
+#: give-authorize-net.php:280
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">PHP</a> version %s or above for the Give - Authorize.net gateway add-on to activate."
+msgstr ""
+
+#: give-authorize-net.php:370, includes/admin/give-authorize-settings.php:70, includes/admin/give-authorize-settings.php:92
+msgid "Authorize.net"
+msgstr ""
+
+#: give-authorize-net.php:371, give-authorize-net.php:398
+msgid "Credit Card"
+msgstr ""
+
+#: give-authorize-net.php:380
+msgid "Authorize.net eCheck (ACH)"
+msgstr ""
+
+#: give-authorize-net.php:381
+msgid "eCheck (ACH)"
+msgstr ""
+
+#: includes/admin/give-authorize-activation.php:42, includes/admin/give-authorize-settings.php:114
+msgid "Authorize.net Gateway"
+msgstr ""
+
+#: includes/admin/give-authorize-activation.php:74
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/give-authorize-activation.php:109
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/give-authorize-activation.php:119
+msgid "Add-ons"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:121
+msgid "Live API Login ID"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:122
+msgid "Please enter your LIVE authorize.net API login ID."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:127
+msgid "Live Transaction Key"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:128
+msgid "Please enter your LIVE authorize.net transaction key."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:133
+msgid "Sandbox API Login ID"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:134
+msgid "Please enter your SANDBOX authorize.net API login ID for testing purposes."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:139
+msgid "Sandbox Transaction Key"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:140
+msgid "Please enter your SANDBOX authorize.net transaction key for testing purposes."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:145
+msgid "Webhooks"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:146
+msgid "Please enable webhooks for both live and test modes."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:151
+msgid "Billing Descriptor"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:152
+msgid "Max 25 characters. The billing descriptor is the way a organization's name appears on a credit card statement and is set up when the merchant account is established. It is used by the credit card customer to identify who a payment was made to on a particular transaction."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:160
+msgid "Collect Billing Details"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:161
+msgid "This option will enable the billing details section for Authorize which requires the donor's address to complete the donation. These fields are not required by Authorize.net to process the transaction, but you may have the need to collect the data."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:166, includes/admin/give-authorize-settings.php:169
+msgid "Authorize.net Gateway Documentation"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:196
+msgid "Authorize.net Webhooks"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:202
+msgid "Checking webhooks status..."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:206
+msgid "Live Webhooks Setup"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:209
+msgid "No Live API Keys Detected"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:212
+msgid "There was a problem setting up the live webhooks."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:218
+msgid "Sandbox Webhooks Setup"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:221
+msgid "No Sandbox API Keys Detected"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:224
+msgid "There was a problem setting up the sandbox webhooks. Please check the <a href=\"%s\">logs</a> for additional details."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:228
+msgid "Check again"
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:231
+msgid "Authorize.net webhooks are important to setup so Give can communicate properly with the payment gateway. Please enter your API keys above and the plugin will automatically enable the webhooks within the gateway. It is not required to have the sandbox webhooks setup unless you are testing. Note: webhooks cannot be setup on localhost or websites in maintenance mode."
+msgstr ""
+
+#: includes/admin/give-authorize-settings.php:275
+msgid "Refund Charge in Authorize.net?"
+msgstr ""
+
+#: includes/class-authorize-echeck-payments.php:26
+msgid "Checking"
+msgstr ""
+
+#: includes/class-authorize-echeck-payments.php:27
+msgid "Savings"
+msgstr ""
+
+#: includes/class-authorize-echeck-payments.php:28
+msgid "Business Checking"
+msgstr ""
+
+#: includes/class-authorize-payments.php:109
+msgid "There was a problem processing this donation. Please contact the site administrator for assistance."
+msgstr ""
+
+#: includes/class-authorize-payments.php:110
+msgid "An Authorize.net transaction was attempted without entering the proper API credentials within the plugin settings."
+msgstr ""
+
+#: includes/class-authorize-payments.php:117, includes/class-authorize-payments.php:131, includes/class-authorize-payments.php:147, includes/class-authorize-payments.php:301, includes/class-authorize-payments.php:399
+msgid "Authorize.net Error"
+msgstr ""
+
+#: includes/class-authorize-payments.php:148
+msgid "Missing API Login or Transaction key. Please enter them in the plugin settings."
+msgstr ""
+
+#: includes/class-authorize-payments.php:380
+msgid "Charge refunded or voided in Authorize.net."
+msgstr ""
+
+#: includes/class-authorize-payments.php:388
+msgid "Authorize.net transaction approved by the fraud filter."
+msgstr ""
+
+#: includes/class-authorize-payments.php:399
+msgid "An error occurred while processing a webhook."
+msgstr ""
+
+#: includes/class-authorize-payments.php:517
+msgid "Authorize.net transaction flagged this donation through the fraud filter. Please approve or void this transaction within your Authorize.net merchant dashboard."
+msgstr ""
+
+#: includes/class-authorize-payments.php:526
+msgid "The donation could not be charged because the type of credit card used is not accepted. Please try again with a supported card type."
+msgstr ""
+
+#: includes/class-authorize-payments.php:529, includes/class-authorize-payments.php:752
+msgid "The transaction has been declined."
+msgstr ""
+
+#: includes/class-authorize-payments.php:530, includes/class-authorize-payments.php:753
+msgid "The donation could not be charged. Please try again. Reason: %s"
+msgstr ""
+
+#: includes/class-authorize-payments.php:552, includes/class-authorize-payments.php:781
+msgid "The donation could not be charged. Please try again."
+msgstr ""
+
+#: includes/class-authorize-payments.php:582
+msgid "Bank Details"
+msgstr ""
+
+#: includes/class-authorize-payments.php:595
+msgid "Routing Number"
+msgstr ""
+
+#: includes/class-authorize-payments.php:596
+msgid "The bank's routing number."
+msgstr ""
+
+#: includes/class-authorize-payments.php:605
+msgid "Account Number"
+msgstr ""
+
+#: includes/class-authorize-payments.php:606
+msgid "The bank account number."
+msgstr ""
+
+#: includes/class-authorize-payments.php:619
+msgid "Name on Account"
+msgstr ""
+
+#: includes/class-authorize-payments.php:620
+msgid "The name of the person who holds the bank account."
+msgstr ""
+
+#: includes/class-authorize-payments.php:630
+msgid "Account Type"
+msgstr ""
+
+#: includes/class-authorize-payments.php:631
+msgid "The type of bank account."
+msgstr ""
+
+#: includes/class-authorize-payments.php:833
+msgid "This is the Authorize.net transction ID. Click the link to view more details at the gateway."
+msgstr ""
+
+#: includes/class-authorize-payments.php:886
+msgid "Non-valid Authorize.net transaction ID found on this payment: %s The refund could not be processed at the gateway."
+msgstr ""
+
+#: includes/class-authorize-payments.php:900
+msgid "The donation could not be refunded. Please try again."
+msgstr ""
+
+#: includes/class-authorize-payments.php:932
+msgid "Charge refunded in Authorize.net: %s"
+msgstr ""
+
+#: includes/class-authorize-payments.php:939
+msgid "The donation could not be refunded at the Authorize.net gateway. This can happen if the transaction has already been refunded, past the 120 day refund window, has been voided, or has yet to be settled. Please check the <a href=\"%s\">error logs</a> for more information."
+msgstr ""
+
+#: includes/class-authorize-payments.php:944
+msgid "There was an error communicating with the Authorize.net gateway. Please check the <a href=\"%s\">error logs</a> for more information."
+msgstr ""
+
+#: includes/give-authorize-helpers.php:29
+msgid "Give is having trouble creating the necessary Authorize.net Live webhooks that are necessary to communicate with the API. Please generate a signature key within the Authorize.net merchant interface to resolve the issue. <a href=\"%s\" target=\"_blank\">Click here for instructions &raquo;</a>"
+msgstr ""
+
+#: includes/give-authorize-helpers.php:37
+msgid "Give is having trouble creating the necessary Authorize.net Sandbox webhooks that are necessary to communicate with the API. Please generate a signature key within the Authorize.net merchant interface to resolve the issue. <a href=\"%s\" target=\"_blank\">Click here for instructions &raquo;</a>"
+msgstr ""
