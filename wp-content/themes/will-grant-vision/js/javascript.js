@@ -306,7 +306,8 @@ jQuery(function($) {
         window.addEventListener('load', function() {
             setTimeout(function(){
                 $("body").addClass("no-scroll");
-                $(".modal-covid-19").addClass("active");
+				//$(".modal-covid-19").addClass("active");
+                $(".modal-ask-dr-grant").addClass("active"); // changed on 04/02/2021
             },1000);
         });
 		$.cookie('covid-19', 1, { expires: 1 });
