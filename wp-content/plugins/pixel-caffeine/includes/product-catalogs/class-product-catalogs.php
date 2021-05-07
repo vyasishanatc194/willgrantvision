@@ -18,7 +18,7 @@ use PixelCaffeine\ProductCatalog\Entity\ProductCatalog as Entity;
 use PixelCaffeine\ProductCatalog\Exception\FeedException;
 use PixelCaffeine\ProductCatalog\Exception\GoogleTaxonomyException;
 use PixelCaffeine\ProductCatalog\Feed\XMLWriter;
-use Symfony\Component\Filesystem\Filesystem;
+use PixelCaffeine\Dependencies\Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Manager class of Product Catalog feature

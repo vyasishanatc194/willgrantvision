@@ -2,10 +2,10 @@
 /**
  * Give Recurring Subscriber
  *
- * @package     Give
+ * @since       1.0
  * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
- * @since       1.0
+ * @package     Give
  */
 
 // Exit if accessed directly
@@ -99,7 +99,7 @@ class Give_Recurring_Subscriber extends Give_Donor {
 	 *
 	 * @return bool|object Give_Subscription
 	 */
-	public function add_subscription( $args = array() ) {
+	public function add_subscription( $args = [] ) {
 
 		$args = wp_parse_args( $args, $this->subs_db->get_column_defaults() );
 
@@ -128,13 +128,13 @@ class Give_Recurring_Subscriber extends Give_Donor {
 	 *
 	 * @return mixed
 	 */
-	public function add_payment( $args = array() ) {
+	public function add_payment( $args = [] ) {
 
-		$args = wp_parse_args( $args, array(
+		$args = wp_parse_args( $args, [
 			'subscription_id' => 0,
 			'amount'          => '0.00',
 			'transaction_id'  => '',
-		) );
+		] );
 
 		if ( empty( $args['subscription_id'] ) ) {
 			return false;
@@ -204,25 +204,25 @@ class Give_Recurring_Subscriber extends Give_Donor {
 	 *
 	 * @return Give_Subscription[]
 	 */
-	public function get_subscriptions( $form_id = 0, $args = array() ) {
+	public function get_subscriptions( $form_id = 0, $args = [] ) {
 
 		if ( ! $this->id > 0 ) {
-			return array();
+			return [];
 		}
 
 		// Backward compatibility
-		if( ! empty( $args ) && is_numeric( current( array_keys( $args ) ) ) ) {
-			$args = array(
-				'status' => $args
-			);
+		if ( ! empty( $args ) && is_numeric( current( array_keys( $args ) ) ) ) {
+			$args = [
+				'status' => $args,
+			];
 		}
 
 		$args = wp_parse_args(
 			$args,
-			array(
+			[
 				'number' => - 1,
 				'status' => give_recurring_get_subscription_statuses_key(),
-			)
+			]
 		);
 
 		if ( ! empty( $form_id ) ) {
@@ -257,30 +257,33 @@ class Give_Recurring_Subscriber extends Give_Donor {
 	 *
 	 * Calculate a new expiration date
 	 *
-	 * @param int  $form_id
-	 * @param null $price_id
-	 * @param int  $frequency
+	 * @param int    $form_id Donation Form ID.
+	 * @param null   $price_id Price ID.
+	 * @param int    $frequency Frequency/Interval Count.
+	 * @param string $period Period/Interval. Default empty.
 	 *
 	 * @return bool|string
 	 */
-	public function get_new_expiration( $form_id = 0, $price_id = null, $frequency = 1 ) {
+	public function get_new_expiration( $form_id = 0, $price_id = null, $frequency = 1, $period = '' ) {
 
-		if ( isset( $_POST['give-recurring-period-donors-choice'] ) ) {
+		// If $period is empty, then try fetching it with possible scenarios.
+		if ( empty( $period ) ) {
+			if ( isset( $_POST['give-recurring-period-donors-choice'] ) ) {
+				$period = give_clean( $_POST['give-recurring-period-donors-choice'] );
+			} else if ( give_has_variable_prices( $form_id ) ) {
+				$period = Give_Recurring::get_period( $form_id, $price_id );
+			} else {
+				$period = Give_Recurring::get_period( $form_id );
+			}
+		}
 
-			$period = give_clean( $_POST['give-recurring-period-donors-choice'] );
-
-		} else if ( give_has_variable_prices( $form_id ) ) {
-
-			$period = Give_Recurring::get_period( $form_id, $price_id );
-
-		} else {
-
-			$period = Give_Recurring::get_period( $form_id );
-
+		// Calculate the quarter as times 3 months
+		if ( $period === 'quarter' ) {
+			$frequency *= 3;
+			$period    = 'month';
 		}
 
 		return date( 'Y-m-d H:i:s', strtotime( '+ ' . $frequency . $period . ' 23:59:59' ) );
-
 	}
 
 	/**
@@ -337,7 +340,7 @@ class Give_Recurring_Subscriber extends Give_Donor {
 		if ( ! is_array( $recurring_ids ) ) {
 
 			$existing      = $recurring_ids;
-			$recurring_ids = array();
+			$recurring_ids = [];
 
 			// If the first three characters match, we know the existing ID belongs to this gateway
 			if ( substr( $recurring_id, 0, 3 ) === substr( $existing, 0, 3 ) ) {
@@ -372,6 +375,87 @@ class Give_Recurring_Subscriber extends Give_Donor {
 		}
 
 		return apply_filters( 'give_recurring_donor_ids', $ids, $this );
+	}
+
+
+	/**
+	 * Return subscriber object.
+	 *
+	 * @since 1.10.1
+	 *
+	 * @return Give_Recurring_Subscriber|null
+	 */
+	public static function getSubscriber() {
+		// Get subscription.
+		$current_user_id = get_current_user_id();
+
+		// Get by user id.
+		if ( ! empty( $current_user_id ) ) {
+			return new static( $current_user_id, true );
+		}
+
+		// Get by email access.
+		if ( Give()->email_access->token_exists ) {
+			return new static( Give()->email_access->token_email, false );
+		}
+
+		// Get by email.
+		if ( Give()->session->get_session_expiration() ) {
+			$subscriber_email = maybe_unserialize( Give()->session->get( 'give_purchase' ) );
+			$subscriber_email = isset( $subscriber_email['user_email'] ) ? $subscriber_email['user_email'] : '';
+
+			return new static( $subscriber_email, false );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Return boolean to determine access
+	 *
+	 * @since 1.10.1
+	 *
+	 * a. Check if a user is logged in
+	 * b. Does an email-access token exist?
+	 */
+	public static function canAccessView() {
+		return is_user_logged_in() || ( give_is_setting_enabled( give_get_option( 'email_access' ) ) && Give()->email_access->token_exists );
+	}
+
+	/**
+	 * Return boolean to determine subscription belongs to donor or not
+	 *
+	 * @param Give_Subscription         $subscription
+	 * @param Give_Recurring_Subscriber $subscriber
+	 *
+	 * @return boolean
+	 */
+	public static function doesSubscriptionBelongsTo( $subscription, $subscriber = null ) {
+		$subscriber = $subscriber ?: self::getSubscriber();
+
+		return $subscription->donor_id === $subscriber->id;
+	}
+
+	/**
+	 * Get subscriber access type.
+	 *
+	 * @since 1.10.1
+	 * @return string
+	 */
+	public static function getAccessType() {
+		if ( is_user_logged_in() ) {
+			return 'wpUser';
+		}
+
+		if ( Give()->email_access->token_exists && give_is_setting_enabled( give_get_option( 'email_access' ) ) ) {
+			return 'EmailAccess';
+		}
+
+		if ( false !== Give()->session->get_session_expiration() ) {
+			return 'DonorSession';
+		}
+
+		return '';
 	}
 
 }

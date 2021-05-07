@@ -92,8 +92,14 @@ class Give_Recurring_PayPal extends Give_Recurring_Gateway {
 			'cancel_paypal_standard',
 		), 10, 2 );
 
-		// Add settings.
+		/**
+		 * Add settings to PayPal standard
+		 *
+		 * Second filter will also add setting to PayPal Standard because
+		 * In Give 2.9.0, PayPal Standard settings moved to "Payment Gateways -> PayPal -> PayPal standard"
+		 */
 		add_filter( 'give_settings_gateways', array( $this, 'settings' ) );
+		add_filter( 'give_get_settings_paypal_standard', array( $this, 'settings' ) );
 
 	}
 
@@ -363,7 +369,7 @@ class Give_Recurring_PayPal extends Give_Recurring_Gateway {
 
 		$args = array(
 			'amount'         => $ipn_data['mc_gross'],
-			'transaction_id' => $ipn_data['txn_id'],
+			'transaction_id' => $ipn_data['txn_id']
 		);
 
 		$subscription->add_payment( $args );
@@ -402,6 +408,11 @@ class Give_Recurring_PayPal extends Give_Recurring_Gateway {
 		$subscription = $this->get_subscription( $ipn_data );
 
 		if ( false === $subscription ) {
+			return;
+		}
+
+		// Subscription must be active to set status completed
+		if( 'active' !== $subscription->status ) {
 			return;
 		}
 

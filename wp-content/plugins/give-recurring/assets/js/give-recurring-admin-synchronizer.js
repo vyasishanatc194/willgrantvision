@@ -29,7 +29,6 @@ jQuery(document).ready(function ($) {
 			body.on('sync_subscription_clicked', this.sync_subscription_details);
 			// Sync transactions after details.
 			body.on('subscription_details_synced', this.sync_subscription_transactions);
-
 		},
 
 		/**
@@ -56,6 +55,7 @@ jQuery(document).ready(function ($) {
 			var data = {
 				action: 'give_recurring_sync_subscription_details',
 				subscription_id: Give_Sync_Vars.id,
+				'give-form-id': Give_Sync_Vars.form_id,
 				security: Give_Recurring_Vars.sync_subscription_details_nonce
 			};
 
@@ -101,6 +101,7 @@ jQuery(document).ready(function ($) {
 			var data = {
 				action: 'give_recurring_sync_subscription_transactions',
 				subscription_id: Give_Sync_Vars.id,
+				'give-form-id': Give_Sync_Vars.form_id,
 				log_id: e.log_id,
 				security: Give_Recurring_Vars.sync_subscription_transactions_nonce
 			};

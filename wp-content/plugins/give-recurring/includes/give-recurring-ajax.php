@@ -107,9 +107,10 @@ class Give_Recurring_AJAX {
 
 		check_ajax_referer( 'sync-subscription-details', 'security' );
 
-		if ( ! current_user_can( 'update_plugins' ) ) {
-			die( - 1 );
-		}
+        $user_can_sync = current_user_can( 'update_plugins' );
+        if ( !apply_filters('give_recurring_user_can_sync_transactions', $user_can_sync) ) {
+            die( -1 );
+        }
 
 		$subscription_id = absint( $_POST['subscription_id'] );
 		$log_id          = isset( $_POST['log_id'] ) ? absint( $_POST['log_id'] ) : 0;
@@ -130,9 +131,10 @@ class Give_Recurring_AJAX {
 
 		check_ajax_referer( 'sync-subscription-transactions', 'security' );
 
-		if ( ! current_user_can( 'update_plugins' ) ) {
-			die( - 1 );
-		}
+        $user_can_sync = current_user_can( 'update_plugins' );
+        if ( !apply_filters('give_recurring_user_can_sync_transactions', $user_can_sync) ) {
+            die( -1 );
+        }
 
 		$subscription_id = absint( $_POST['subscription_id'] );
 		$log_id          = isset( $_POST['log_id'] ) ? absint( $_POST['log_id'] ) : 0;

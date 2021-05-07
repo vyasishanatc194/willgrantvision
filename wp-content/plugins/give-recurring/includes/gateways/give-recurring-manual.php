@@ -93,40 +93,6 @@ $subscriptions_table_name as a INNER JOIN {$donation_meta_table_name} as b ON ( 
 	}
 
 	/**
-	 * Gets interval length and interval unit for cron based on Give subscription period.
-	 *
-	 * @ since 1.4
-	 *
-	 * @param  string $subscription_period .
-	 * @param  string $subscription_interval .
-	 *
-	 * @return string $string.
-	 */
-	public function get_interval( $subscription_period, $subscription_interval ) {
-
-		$subscription_interval = ! empty( $subscription_interval ) ? $subscription_interval : 1;
-		$string                = '+ ' . $subscription_interval . ' day';
-
-		switch ( $subscription_period ) {
-
-			case 'day':
-				$string = '+' . $subscription_interval . ' day';
-				break;
-			case 'week':
-				$string = '+' . $subscription_interval * 7 . ' day';
-				break;
-			case 'month':
-				$string = '+' . $subscription_interval . ' month';
-				break;
-			case 'year':
-				$string = '+' . $subscription_interval . ' year';
-				break;
-		}
-
-		return $string;
-	}
-
-	/**
 	 * Check for the test renewal subscription and renew them.
 	 *
 	 * @since 1.4.

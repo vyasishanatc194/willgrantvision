@@ -5,7 +5,7 @@
  * @package Pixel Caffeine
  */
 
-use FacebookAds\Object\ServerSide\UserData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\UserData;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

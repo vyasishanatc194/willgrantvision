@@ -8,8 +8,8 @@
 namespace PixelCaffeine\FB;
 
 use AEPC_Addons_Support;
-use FacebookAds\Object\ServerSide\UserData;
-use FacebookAds\Object\ServerSide\Util;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\UserData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\Util;
 
 /**
  * Class User_Data_Factory

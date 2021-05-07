@@ -1,4 +1,7 @@
 <?php
+
+use Give\Log\Log;
+
 /**
  * Give Recurring Emails
  *
@@ -30,7 +33,7 @@ class Give_Recurring_Emails {
 	 * Give_Recurring_Emails constructor.
 	 */
 	public function __construct() {
-		
+
 		$this->init();
 	}
 
@@ -38,7 +41,7 @@ class Give_Recurring_Emails {
 	 * Initialize Give_Recurring_Emails
 	 */
 	public function init() {
-		
+
 		add_action( 'give_email_tags', array( $this, 'setup_email_tags' ) );
 	}
 
@@ -79,9 +82,13 @@ class Give_Recurring_Emails {
 			return;
 		}
 
-		$send = true;
 		$user = get_user_by( 'id', $this->subscription->donor->user_id );
-		$send = apply_filters( 'give_recurring_send_' . $reminder_type . '_reminder', $send, $subscription_id, $notice_id );
+		$send = (bool) apply_filters( 'give_recurring_send_' . $reminder_type . '_reminder', true, $subscription_id, $notice_id, $user );
+
+		// Do not send email if revoked.
+		if( ! $send ) {
+			return;
+		}
 
 		$email_to = $this->subscription->donor->email;
 
@@ -119,40 +126,31 @@ class Give_Recurring_Emails {
 	 *
 	 * When an email is sent by the plugin, log it with Give.
 	 *
+	 * @since 1.12.2 switch to new Log facade
+	 *
 	 * @param string $email_type
 	 * @param Give_Subscription $subscription
 	 * @param                   $subject string
 	 * @param int $notice_id
 	 * @param                   $notice  array of the email including subj, send period, etc. Used for reminder emails
 	 */
-	public static function log_recurring_email( $email_type = '', $subscription, $subject, $notice_id = 0, $notice = array() ) {
-
+	public static function log_recurring_email( $email_type, $subscription, $subject, $notice_id = 0, $notice = array() ) {
 		// Dynamic log title based on $email_type
 		$log_title = __( 'LOG - Subscription ' . ucfirst( $email_type ) . ' Email Sent', 'give-recurring' );
 
-		// Create the log post
-		$log_id = wp_insert_post(
-			array(
-				'post_title'  => $log_title,
-				'post_name'   => 'log-subscription-' . $email_type . '-notice-' . $subscription->id . '_sent-' . $subscription->donor_id . '-' . md5( time() ),
-				'post_type'   => 'give_recur_email_log',
-				'post_status' => 'publish',
-			)
-		);
-
-		// Log relevant post meta
-		add_post_meta( $log_id, '_give_recurring_email_log_customer_id', $subscription->donor_id );
-		add_post_meta( $log_id, '_give_recurring_email_log_subscription_id', $subscription->id );
-		add_post_meta( $log_id, '_give_recurring_email_subject', $subject );
-		add_post_meta( $log_id, '_log_type', "{$email_type}_notice" );
+		Log::notice($log_title, [
+			'category' => 'Recurring Donations',
+			'source' => 'Email Logs',
+			'Customer ID'     => $subscription->donor_id,
+			'Subscription ID' => $subscription->id ,
+			'Email Subject'   => $subject
+		]);
 
 		// Is there a notice ID for this email?
 		if ( $notice_id > 0 && ! empty( $notice ) ) {
-			add_post_meta( $log_id, '_give_recurring_' . $email_type . '_notice_id', (int) $notice_id );
 			// Prevent reminder notices from being sent more than once
 			add_user_meta( $subscription->donor->user_id, sanitize_key( '_give_recurring_' . $email_type . '_' . $subscription->id . '_sent_' . $notice['send_period'] ), time() );
 		}
-
 	}
 
 	/**
@@ -184,7 +182,7 @@ class Give_Recurring_Emails {
 						$content = str_replace( '{completion_date}', date_i18n( give_date_format(), $expiration_timestamp ), $content );
 						break;
 					case 'subscription_frequency':
-						$times = intval( $subscription->bill_times ) * intval( $interval );
+						$times = (int) $subscription->bill_times;
 						$content = str_replace( '{subscription_frequency}', give_recurring_pretty_subscription_frequency( $subscription->period, $times, false, $interval
 						), $content );
 						break;
@@ -252,7 +250,7 @@ class Give_Recurring_Emails {
 				break;
 
 			case 'subscription_frequency':
-				$times = intval( $subscription->bill_times ) * intval( $interval );
+				$times = (int) $subscription->bill_times;
 				$content = give_recurring_pretty_subscription_frequency( $subscription->period, $times, false, $interval );
 				break;
 
@@ -272,7 +270,7 @@ class Give_Recurring_Emails {
 
 		return apply_filters( 'give_recurring_filter_template_tags', $content, $tag_args, $email_tag );
 	}
-	
+
 	/**
 	 * This function is used to setup new email tags for recurring add-on.
 	 *
@@ -284,17 +282,31 @@ class Give_Recurring_Emails {
 	 * @return array
 	 */
 	public function setup_email_tags( $email_tags ) {
-	
+
 		$email_tags[] = array(
 			'tag'     => 'subscriptions_link',
 			'desc'    => esc_html__( 'The donor\'s email access link for subscription history.', 'give-recurring' ),
 			'func'    => array( $this, 'email_tag_subscription_history_link' ),
 			'context' => 'donor',
 		);
-		
+
+		$email_tags[] = array(
+			'tag'     => 'next_payment_attempt',
+			'desc'    => esc_html__( 'The date and time when the next payment attempt will be made.', 'give-recurring' ),
+			'func'    => array( $this, 'email_tag_next_payment_attempt_date' ),
+			'context' => 'donor',
+		);
+
+		$email_tags[] = array(
+			'tag'     => 'update_payment_method_link',
+			'desc'    => esc_html__( 'The link to update the payment method of the subscription.', 'give-recurring' ),
+			'func'    => array( $this, 'email_tag_update_payment_method_link' ),
+			'context' => 'donor',
+		);
+
 		return $email_tags;
 	}
-	
+
 	/**
 	 * Email template tag: {subscriptions_link}
 	 *
@@ -306,52 +318,52 @@ class Give_Recurring_Emails {
 	 * @return string
 	 */
 	public function email_tag_subscription_history_link( $tag_args ) {
-		
+
 		$donor_id = 0;
 		$donor    = array();
 		$link     = '';
-		
+
 		// Backward compatibility.
 		$tag_args = __give_20_bc_str_type_email_tag_param( $tag_args );
-		
+
 		switch ( true ) {
-			
+
 			case ! empty( $tag_args['payment_id'] ):
 				$donor_id = Give()->payment_meta->get_meta( $tag_args['payment_id'], '_give_payment_donor_id', true );
 				$donor    = Give()->donors->get_by( 'id', $donor_id );
 				break;
-			
+
 			case ! empty( $tag_args['donor_id'] ):
 				$donor_id = $tag_args['donor_id'];
 				$donor    = Give()->donors->get_by( 'id', $tag_args['donor_id'] );
 				break;
-			
+
 			case ! empty( $tag_args['user_id'] ):
 				$donor    = Give()->donors->get_by( 'user_id', $tag_args['user_id'] );
 				$donor_id = $donor->id;
 				break;
 		}
-		
+
 		// Set email access link if donor exist.
 		if ( $donor_id ) {
 			$verify_key = wp_generate_password( 20, false );
-			
+
 			// Generate a new verify key.
 			Give()->email_access->set_verify_key( $donor_id, $donor->email, $verify_key );
-			
+
 			// update verify key in email tags.
 			$tag_args['verify_key'] = $verify_key;
-			
+
 			// update donor id in email tags.
 			$tag_args['donor_id'] = $donor_id;
-			
+
 			$access_url = add_query_arg(
 				array(
 					'give_nl' => $verify_key,
 				),
 				give_get_subscriptions_page_uri()
 			);
-			
+
 			// Add donation id to email access url, if it exists.
 			$donation_id = give_clean( filter_input( INPUT_GET, 'donation_id' ) );
 			if ( ! empty( $donation_id ) ) {
@@ -362,16 +374,16 @@ class Give_Recurring_Emails {
 					$access_url
 				);
 			}
-			
+
 			if ( empty( $tag_args['email_content_type'] ) || 'text/html' === $tag_args['email_content_type'] ) {
 				$link = sprintf(
 					'<a href="%1$s" target="_blank">%2$s</a>',
 					esc_url( $access_url ),
 					__( 'View your subscription history &raquo;', 'give-recurring' )
 				);
-				
+
 			} else {
-				
+
 				$link = sprintf(
 					'%1$s: %2$s',
 					__( 'View your subscription history', 'give-recurring' ),
@@ -379,7 +391,7 @@ class Give_Recurring_Emails {
 				);
 			}
 		} // End if().
-		
+
 		/**
 		 * Filter the {subscriptions_link} email template tag output.
 		 *
@@ -392,6 +404,60 @@ class Give_Recurring_Emails {
 			'give_recurring_email_tag_subscription_history_link',
 			$link,
 			$tag_args
+		);
+	}
+
+	/**
+	 * Email tag for next payment attempt.
+	 *
+	 * @param array $tag_args List of Email Tag arguments.
+	 *
+	 * @since  1.9.0
+	 * @access public
+	 *
+	 * @return string
+	 */
+	public function email_tag_next_payment_attempt_date( $tag_args ) {
+
+		$date_format = get_option( 'date_format' );
+		$time_format = get_option( 'time_format' );
+		$date_time_format = "{$date_format} {$time_format}";
+		$next_payment_attempt = ! empty( $tag_args['next_payment_attempt'] ) ? date_i18n( $date_time_format, $tag_args['next_payment_attempt'] ) : false;
+
+		/**
+		 * Filter for next payment attempt date.
+		 *
+		 * @param string $next_payment_attempt Next Payment Attempt Date.
+		 *
+		 * @since 1.9.0
+		 */
+		return apply_filters( 'give_recurring_email_tag_next_payment_attempt_date', $next_payment_attempt );
+	}
+
+	/**
+	 * Email tag containing the link to update the payment method of an active subscription.
+	 *
+	 * @param array $tag_args List of email tag arguments.
+	 *
+	 * @since  1.9.0
+	 * @access public
+	 *
+	 * @return mixed
+	 */
+	public function email_tag_update_payment_method_link( $tag_args ) {
+
+		$subscription_id = ! empty( $tag_args['subscription_id'] ) ? $tag_args['subscription_id'] : 0;
+
+		return sprintf(
+			'<a href="%1$s">%2$s</a>',
+			add_query_arg(
+				array(
+					'action'          => 'update',
+					'subscription_id' => $subscription_id,
+				),
+				give_get_subscriptions_page_uri()
+			),
+			__( 'Update Payment Method', 'give-recurring' )
 		);
 	}
 }

@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '2.9.7',
-    'version' => '2.9.7.0',
+    'pretty_version' => '2.10.4',
+    'version' => '2.10.4.0',
     'aliases' => 
     array (
     ),
-    'reference' => '8a1ba3bdba15dbb9574fa8b0866667be25cacb58',
+    'reference' => '5ad7b7e345b5f8428f4036e3dad456ec3add0da3',
     'name' => 'impress-org/give',
   ),
   'versions' => 
@@ -45,12 +45,30 @@
     ),
     'impress-org/give' => 
     array (
-      'pretty_version' => '2.9.7',
-      'version' => '2.9.7.0',
+      'pretty_version' => '2.10.4',
+      'version' => '2.10.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8a1ba3bdba15dbb9574fa8b0866667be25cacb58',
+      'reference' => '5ad7b7e345b5f8428f4036e3dad456ec3add0da3',
+    ),
+    'kjohnson/format-object-list' => 
+    array (
+      'pretty_version' => '0.1.0',
+      'version' => '0.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aaf83123acbe4551379498345fea538f536f16f0',
+    ),
+    'myclabs/php-enum' => 
+    array (
+      'pretty_version' => '1.6.6',
+      'version' => '1.6.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '32c4202886c51fbe5cc3a7c34ec5c9a4a790345e',
     ),
     'paypal/paypal-checkout-sdk' => 
     array (
@@ -95,12 +113,12 @@
     ),
     'tecnickcom/tcpdf' => 
     array (
-      'pretty_version' => '6.3.5',
-      'version' => '6.3.5.0',
+      'pretty_version' => '6.4.1',
+      'version' => '6.4.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '19a535eaa7fb1c1cac499109deeb1a7a201b4549',
+      'reference' => '5ba838befdb37ef06a16d9f716f35eb03cb1b329',
     ),
   ),
 );

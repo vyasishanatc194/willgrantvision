@@ -18,7 +18,7 @@ jQuery( document ).ready( function( $ ) {
 
 			$( '#excluded_gateways' ).chosen({
 				width: '25em',
-			});
+            });
 
 			toggles.each( function() {
 				Give_Admin_Recurring_Settings.toggle_fields( $( this ) );

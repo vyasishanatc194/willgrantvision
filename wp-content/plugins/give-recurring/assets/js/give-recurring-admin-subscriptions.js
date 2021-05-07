@@ -3,6 +3,7 @@
  *
  * Scripts function in admin form creation (single give_forms post) screen.
  */
+/* globals Give */
 var Give_Recurring_Vars;
 
 jQuery( document ).ready( function( $ ) {
@@ -25,7 +26,7 @@ jQuery( document ).ready( function( $ ) {
 			this.handle_bluk_action();
 			this.add_subscription_note();
 			this.remove_subscription_note();
-
+			this.handleSubscriptionStatusOptInField();
 		},
 
 		/**
@@ -42,13 +43,17 @@ jQuery( document ).ready( function( $ ) {
 
 			//User clicks edit
 			if ( link.text() === Give_Recurring_Vars.action_edit ) {
+
 				//Preserve current value
 				link.data( 'current-value', input.val() );
+
 				//Update text to 'cancel'
 				link.text( Give_Recurring_Vars.action_cancel );
 			} else {
+
 				//User clicked cancel, return previous value
 				input.val( link.data( 'current-value' ) );
+
 				//Update link text back to 'edit'
 				link.text( Give_Recurring_Vars.action_edit );
 			}
@@ -72,7 +77,7 @@ jQuery( document ).ready( function( $ ) {
 				//Toggle elements
 				$( '.give-sub-expiration' ).toggle();
 				$( '#give-sub-expiration-update-notice' ).slideToggle();
-			} );
+			});
 
 		},
 
@@ -93,7 +98,7 @@ jQuery( document ).ready( function( $ ) {
 				//Toggle elements
 				$( '.give-sub-profile-id' ).toggle();
 				$( '#give-sub-profile-id-update-notice' ).slideToggle();
-			} );
+			});
 
 		},
 
@@ -113,7 +118,7 @@ jQuery( document ).ready( function( $ ) {
 				Give_Admin_Recurring_Subscription.edit_subscription_input( link, txn_input );
 
 				$( '.give-sub-transaction-id' ).toggle();
-			} );
+			});
 
 		},
 
@@ -123,12 +128,22 @@ jQuery( document ).ready( function( $ ) {
 		confirm_cancel: function() {
 
 			$( '.give-subscription-admin-cancel' ).on( 'click', function() {
-				var response = confirm( Give_Recurring_Vars.confirm_cancel );
-				//Cancel form submit if user rejects confirmation
-				if ( response !== true ) {
-					return false;
-				}
-			} );
+				var $this = $( this );
+
+				new Give.modal.GiveConfirmModal({
+					modalContent: {
+						desc: Give_Recurring_Vars.confirm_cancel
+					},
+					classes: {
+						modalWrapper: 'give-modal--error'
+					},
+					successConfirm: function() {
+						window.location.assign( $this.attr( 'href' ) );
+					}
+				}).render();
+
+				return false;
+			});
 
 		},
 
@@ -138,13 +153,22 @@ jQuery( document ).ready( function( $ ) {
 		confirm_delete: function() {
 
 			$( '.give-delete-subscription' ).on( 'click', function( e ) {
+				var $this = $( this );
 
-				if ( confirm( Give_Recurring_Vars.delete_subscription ) ) {
-					return true;
-				}
+				new Give.modal.GiveConfirmModal({
+					modalContent: {
+						desc: Give_Recurring_Vars.delete_subscription
+					},
+					classes: {
+						modalWrapper: 'give-modal--error'
+					},
+					successConfirm: function() {
+						$this.unbind().click();
+					}
+				}).render();
 
 				return false;
-			} );
+			});
 
 		},
 
@@ -152,32 +176,54 @@ jQuery( document ).ready( function( $ ) {
 		 * Confirm Syncing.
 		 */
 		confirm_sync: function() {
+			var body = $( 'body' );
 
-			$( '#give_sync_subscription, .give-resync-button' ).on( 'click', function() {
+			body.on( 'click', '#give_sync_subscription', function() {
+				new Give.modal.GiveConfirmModal({
+					modalContent: {
+						title: Give_Recurring_Vars.confirm_sync_modal_title,
+						desc: Give_Recurring_Vars.confirm_sync
+					},
+					classes: {
+						modalWrapper: 'give-modal--notice'
+					},
+					successConfirm: function() {
+						var event = $.Event( 'sync_subscription_clicked' );
+						event.subscription = $( this ).data( 'subscription' );
+						event.modal_id = '#sync-subscription-modal';
 
-				var response = confirm( Give_Recurring_Vars.confirm_sync ),
-					subscription = $( this ).data( 'subscription' ),
-					event = jQuery.Event( 'sync_subscription_clicked' );
+						var timer = window.setInterval(function(){
+							// Exit if modal already open.
+							if( jQuery.magnificPopup.instance.content ) {
+								return;
+							}
 
-				event.subscription = subscription;
-				event.modal_id = '#sync-subscription-modal';
+							new GiveRecurringSyncSubscriptionModal({}).render();
+							body.trigger( event ); // Trigger the custom event.
 
-				if ( response !== true ) {
-					return false;
-				}
-
-				// Clear modal content first.
-				$( event.modal_id ).find( '.modal-body' ).empty();
-
-				// Open the modal.
-				$( event.modal_id ).modal( 'show' );
-
-				// Trigger the custom event.
-				$( 'body' ).trigger( event );
+							window.clearInterval( timer );
+						}, 10 );
+					}
+				}).render();
 
 				return false;
 
-			} );
+			});
+
+
+			body.on( 'click', '.give-resync-button', function (){
+				jQuery.magnificPopup.close();
+
+				var timer = window.setInterval(function(){
+					// Exit if modal already open.
+					if( jQuery.magnificPopup.instance.content ) {
+						return;
+					}
+
+					window.clearInterval( timer );
+					$('#give_sync_subscription').trigger('click');
+				}, 10 );
+			})
 		},
 
 		/**
@@ -190,7 +236,7 @@ jQuery( document ).ready( function( $ ) {
 
 				$( '.give-manual-add-renewal' ).toggle();
 
-			} );
+			});
 
 			// Validate add renewal form.
 			$( '#give-sub-add-renewal' ).on( 'submit', function( e ) {
@@ -208,9 +254,9 @@ jQuery( document ).ready( function( $ ) {
 						e.preventDefault();
 					}
 
-				} );
+				});
 
-			} );
+			});
 
 			// Remove validation class.
 			$( '.give-sub-renew-required-field' ).on( 'focusout change', function() {
@@ -221,7 +267,7 @@ jQuery( document ).ready( function( $ ) {
 					$( this ).addClass( 'renewal-invalid-field' );
 				}
 
-			} );
+			});
 
 		},
 
@@ -239,10 +285,10 @@ jQuery( document ).ready( function( $ ) {
 				var status = $( this ).val();
 
 				$( '.give-donation-status' ).removeClass( function( index, css ) {
-					return (css.match( /\bstatus-\S+/g ) || []).join( ' ' );
-				} ).addClass( 'status-' + status );
+					return ( css.match( /\bstatus-\S+/g ) || []).join( ' ' );
+				}).addClass( 'status-' + status );
 
-			} );
+			});
 
 		},
 
@@ -252,14 +298,14 @@ jQuery( document ).ready( function( $ ) {
 		 * Handles status switching.
 		 * @since: 1.0
 		 */
-		handle_bluk_action: function () {
+		handle_bluk_action: function() {
 
-			$( 'body' ).on( 'click', 'form#subscribers-filter .bulkactions input[type="submit"].action', function () {
+			$( 'body' ).on( 'click', 'form#subscribers-filter .bulkactions input[type="submit"].action', function() {
 				var currentAction = $( this ).closest( '.tablenav' ).find( 'select' ).val(),
 					currentActionLabel = $( this ).closest( '.tablenav' ).find( 'option[value="' + currentAction + '"]' ).text(),
 					subscription = $( 'input[name="subscription[]"]:checked' ).length,
 					isStatusTypeAction = (
-						- 1 !== currentAction.indexOf( 'set-status-' )
+						-1 !== currentAction.indexOf( 'set-status-' )
 					),
 					confirmActionNotice = '',
 					status = '';
@@ -300,13 +346,20 @@ jQuery( document ).ready( function( $ ) {
 					}
 				}
 				return true;
-			} );
+			});
 		},
 
 		add_subscription_note: function () {
 
 			$('#give-add-subscription-note').on('click', function (e) {
+
+				var element = $(this);
+
 				e.preventDefault();
+
+				// Disable the button on first click.
+				element.attr('disabled', 'disabled');
+
 				var postData = {
 					action: 'give_insert_subscription_note',
 					subscription_id: $(this).data('subscription-id'),
@@ -320,6 +373,7 @@ jQuery( document ).ready( function( $ ) {
 						data: postData,
 						url: ajaxurl,
 						success: function (response) {
+							element.removeAttr('disabled');
 							$('#give-subscription-notes-inner').append(response);
 							$('.give-no-subscription-notes').hide();
 							$('#give-subscription-note').val('');
@@ -331,6 +385,7 @@ jQuery( document ).ready( function( $ ) {
 					});
 
 				} else {
+					element.removeAttr('disabled');
 					var border_color = $('#give-subscription-note').css('border-color');
 					$('#give-subscription-note').css('border-color', 'red');
 					setTimeout(function () {
@@ -345,39 +400,93 @@ jQuery( document ).ready( function( $ ) {
 		remove_subscription_note: function () {
 
 			$('body').on('click', '.give-delete-subscription-note', function (e) {
+
+				var element = $(this);
+
+				// Prevent redirection.
 				e.preventDefault();
 
-				if ( confirm( give_vars.delete_payment_note ) ) {
-					var postData = {
-						action: 'give_delete_subscription_note',
-						subscription_id: $(this).data('subscription-id'),
-						note_id: $(this).data('note-id')
-					};
+				// Show Give confirm modal popup.
+				new Give.modal.GiveConfirmModal(
+					{
+						modalContent: {
+							title: Give.fn.getGlobalVar('confirm_deletion'),
+							desc: Give_Recurring_Vars.delete_subscription_note
+						},
+						successConfirm: function (args) {
+							var postData = {
+								action: 'give_delete_subscription_note',
+								subscription_id: element.attr('data-subscription-id'),
+								note_id: element.attr('data-note-id'),
+								security: Give_Recurring_Vars.adminAjaxNonce
+							};
 
-					$.ajax({
-						type: 'POST',
-						data: postData,
-						url: ajaxurl,
-						success: function (response) {
-							$('#give-subscription-note-' + postData.note_id).remove();
-							if (!$('.give-subscription-note').length) {
-								$('.give-no-subscription-notes').show();
-							}
-							return false;
-						}
-					}).fail(function (data) {
-						if (window.console && window.console.log) {
-							console.log(data);
-						}
-					});
-				}
+							$.ajax({
+								type: 'POST',
+								data: postData,
+								url: ajaxurl,
+								success: function (response) {
 
+									// Success.
+									if (response.success) {
+										$('#give-subscription-note-' + postData.note_id).remove();
+										if (!$('.give-subscription-note').length) {
+											$('.give-no-subscription-notes').show();
+										}
+										return false;
+									} else {
+										$('#give-subscription-notes-error-wrap').html(response.data);
+									}
+								}
+							}).fail(function (data) {
+								console.log(data);
+							});
+						}
+					}
+				).render();
 			});
 
+		},
+
+		/**
+		 * Handle subscription status op-in field.
+		 *
+		 * @since 1.11.0
+		 */
+		handleSubscriptionStatusOptInField: function(){
+			var fieldContainer = document.getElementById('give-recurring-subscription-status-optin-wrap');
+
+			// Exit if current page is not subscription detail page.
+			if( ! fieldContainer ) {
+				return;
+			}
+
+			var subscriptionStatuesData = JSON.parse( fieldContainer.getAttribute('data-optin-statues') );
+			var subscriptionStatues = Object.keys(subscriptionStatuesData);
+
+			// Show opt-in field only if payment gateway can perform subscription status change action on there server.
+			if( ! subscriptionStatues || ! subscriptionStatues.length ){
+				fieldContainer.remove();
+				return;
+			}
+
+			var subscriptionStatusField = document.getElementById('subscription_status');
+			fieldContainer = subscriptionStatusField.parentElement.appendChild( fieldContainer );
+			var fieldContainerLabel = fieldContainer.querySelector('label');
+
+			subscriptionStatusField.addEventListener('change', function(evt){
+				if( ! subscriptionStatues.includes( evt.target.value ) ) {
+					fieldContainer.classList.add('give-hidden');
+					return;
+				}
+
+				fieldContainerLabel.innerText = subscriptionStatuesData[evt.target.value].checkboxLabel;
+				fieldContainer.classList.remove('give-hidden');
+			});
 		}
 
 	};
 
 	Give_Admin_Recurring_Subscription.init();
 
-} );
+});

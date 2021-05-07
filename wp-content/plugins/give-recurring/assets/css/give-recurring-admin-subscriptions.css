@@ -162,3 +162,8 @@ div#give-subscription-notes h3.hndle {
 div#give-subscription-notes textarea {
 	min-height: 150px;
 }
+
+/* Subscription detail page table */
+#edit-item-info td.row-title{
+	width: 40%;
+}

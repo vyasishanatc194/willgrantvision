@@ -90,5 +90,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div><!-- ./control-wrap -->
 		</div><!-- ./form-group -->
 
+		<div class="form-group">
+			<div class="control-wrap">
+				<div class="checkbox">
+					<label>
+						<input
+								type="checkbox"
+								name="<?php $page->field_name( 'aepc_server_side_track_in_ajax' ); ?>"
+								id="<?php $page->field_id( 'aepc_server_side_track_in_ajax' ); ?>"
+								<?php checked( $page->get_value( 'aepc_server_side_track_in_ajax' ), 'yes' ); ?>>
+						<?php esc_html_e( 'Track through AJAX', 'pixel-caffeine' ); ?>
+					</label>
+					<small class="text"><?php esc_html_e( 'This tracks all server-side events through an AJAX request in order to avoid any server side and/or any page cache enabled by hostings and/or caching plugins.', 'pixel-caffeine' ); ?></small>
+				</div>
+			</div><!-- ./control-wrap -->
+		</div><!-- ./form-group -->
+
 	</div>
 </div>

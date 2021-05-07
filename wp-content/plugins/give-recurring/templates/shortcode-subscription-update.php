@@ -5,52 +5,8 @@
  * @copyright  : http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since      : 1.7
  */
-
-/**
- * Determine access
- *
- * a. Check if a user is logged in and does a session exists
- * b. Does an email-access token exist?
- */
-if (
-	! is_user_logged_in()
-	&& false === Give()->session->get_session_expiration()
-	&& (
-		give_is_setting_enabled( give_get_option( 'email_access' ) )
-		&& ! Give()->email_access->token_exists
-	)
-) {
-	ob_start();
-
-	give_get_template_part( 'email-login-form' );
-
-	echo ob_get_clean();
-
-	return false;
-}
-
-// Get subscription.
-$current_user_id = get_current_user_id();
-
-if ( ! empty( $current_user_id ) ) {
-	//pull by user_id
-	$subscriber = new Give_Recurring_Subscriber( $current_user_id, true );
-} elseif ( Give()->session->get_session_expiration() ) {
-	//pull by email
-	$subscriber_email = maybe_unserialize( Give()->session->get( 'give_purchase' ) );
-	$subscriber_email = isset( $subscriber_email['user_email'] ) ? $subscriber_email['user_email'] : '';
-	$subscriber       = new Give_Recurring_Subscriber( $subscriber_email, false );
-} else {
-	//pull by email access
-	$subscriber = new Give_Recurring_Subscriber( Give()->email_access->token_email, false );
-}
-
-// Sanity Check: Subscribers only
-if ( $subscriber->id <= 0 ) {
-	Give()->notices->print_frontend_notice( __( 'You have not made any recurring donations.', 'give-recurring' ), true, 'warning' );
-
-	return false;
-}
+$subscriber = Give_Recurring_Subscriber::getSubscriber();
+$subscription  = new Give_Subscription( absint( $_GET['subscription_id'] ) );
 
 // If payment method has been updated.
 if ( isset( $_GET['updated'] ) && '1' === give_clean( $_GET['updated'] ) ) {
@@ -61,26 +17,9 @@ if ( isset( $_GET['updated'] ) && '1' === give_clean( $_GET['updated'] ) ) {
 	);
 }
 
-// Sanity Check: Subscription ID should be valid.
-if ( ! isset( $_GET['subscription_id'] ) ) {
-	Give()->notices->print_frontend_notice( __( 'Subscription ID is Invalid.', 'give-recurring' ), true, 'warning' );
-
-	return false;
-}
-
-$subscription_id = absint( $_GET['subscription_id'] );
-$subscription    = new Give_Subscription( $subscription_id );
-
 // Bail out if subscription can not be updated or gateway deactivated.
 if ( ! $subscription->can_update() ) {
-	Give()->notices->print_frontend_notice( __( 'Subscription can not be updated.', 'give-recurring' ), true, 'warning' );
-
-	return false;
-}
-
-// Bail out and print notice if Subscription ID is not valid.
-if ( isset( $subscription ) && empty( $subscription->id ) ) {
-	Give()->notices->print_frontend_notice( __( 'Subscription ID is Invalid.', 'give-recurring' ), true, 'warning' );
+	Give_Notices::print_frontend_notice( __( 'Subscription can not be updated.', 'give-recurring' ), true, 'warning' );
 
 	return false;
 }
@@ -95,19 +34,31 @@ $last_digit   = ! empty( $card_details['last_digit'] ) ? $card_details['last_dig
 $exp_month    = ! empty( $card_details['exp_month'] ) ? $card_details['exp_month'] : '';
 $exp_year     = ! empty( $card_details['exp_year'] ) ? $card_details['exp_year'] : '';
 $cc_type      = ! empty( $card_details['cc_type'] ) ? $card_details['cc_type'] : '';
+
+// Set form html tags.
+$form_html_tags = array(
+	'data-gateway' => esc_attr( $subscription->gateway ),
+	'data-id'      => esc_attr( $form_id ) . '-1'
+);
+$form_html_tags = apply_filters( "give_recurring_update_subscription_form_tags", (array) $form_html_tags, $subscription );
 ?>
 <a href="<?php echo esc_url( $action_url ); ?>">&larr;&nbsp;<?php _e( 'Back', 'give-recurring' ); ?></a>
 <div class="give-recurring-donation-main give-form-wrap" id="give_purchase_form_wrap">
 	<h3 class="give-recurring-donation-title"><?php printf( __( 'Update Payment Method for <em>%s</em>', 'give-recurring' ), $form_title ); ?></h3>
-	<form name="give-recurring-form" action="<?php echo esc_url( $action_url ); ?>" class="give-form give-form-<?php echo esc_attr( $form_id ) . '-1'; ?> give-recurring-form"
-	      method="POST" id="give-form" data-gateway="<?php echo esc_attr( $subscription->gateway ); ?>" data-id="<?php echo esc_attr( $form_id ) . '-1'; ?>">
+	<form
+        name="give-recurring-form"
+        action="<?php echo esc_url( $action_url ); ?>"
+        class="give-form give-form-<?php echo esc_attr( $form_id ) . '-1'; ?> give-recurring-form"
+        method="POST"
+        id="give-form"
+		<?php echo give_get_attribute_str( $form_html_tags ); ?>>
 		<input name="give-recurring-update-gateway" type="hidden" value="<?php echo esc_attr( $subscription->gateway ); ?>" />
 		<input type="hidden" name="give-form-id" value="<?php echo absint( $form_id ); ?>" />
 		<input type="hidden" name="give-form-id-prefix" value="<?php echo esc_attr( $form_id ) . '-1'; ?>" />
 		<input type="hidden" name="give_action" value="recurring_update_payment" />
 		<input type="hidden" name="subscription_id" value="<?php echo absint( $subscription->id ); ?>" />
-		<input type="hidden" name="give_stripe_source" value="" />
-		<?php echo wp_nonce_field( 'update-payment', 'give_recurring_update_nonce', true, false ); ?>
+		<input type="hidden" name="give_stripe_payment_method" value="" />
+		<?php echo wp_nonce_field( "update-payment-{$subscription->id}", 'give_recurring_update_nonce', true, false ); ?>
 
 		<ul id="give-gateway-radio-list" style="display:none;">
 			<li class="give-gateway-option-selected">
@@ -126,7 +77,7 @@ $cc_type      = ! empty( $card_details['cc_type'] ) ? $card_details['cc_type'] :
 						<div class="give-recurring-cc-left">
 							<?php echo sprintf( __( '<span class="give-recurring-updated-card-type %1$s"></span><span class="give-recurring-cc-type-name">%2$s ending in</span><span class="give-recurring-cc-last4">%3$s</span>', 'give-recurring' ),
 								strtolower( $cc_type ),
-								$cc_type,
+								ucwords( $cc_type ),
 								$last_digit
 							);
 							?>
@@ -148,11 +99,9 @@ $cc_type      = ! empty( $card_details['cc_type'] ) ? $card_details['cc_type'] :
 				/**
 				 *  Give Recurring before Update Payment method Form.
 				 *
-				 * @param int $subscription_id
-				 *
 				 * @since 1.7
 				 */
-				do_action( 'give_recurring_before_update', $subscription_id );
+				do_action( 'give_recurring_before_update', $subscription->id );
 
 				/**
 				 *  Give Recurring Payment method Form.
@@ -166,17 +115,12 @@ $cc_type      = ! empty( $card_details['cc_type'] ) ? $card_details['cc_type'] :
 				/**
 				 *  Give Recurring after Update Payment method Form.
 				 *
-				 * @param int $subscription_id
-				 *
 				 * @since 1.7
 				 */
-				do_action( 'give_recurring_after_update', $subscription_id );
+				do_action( 'give_recurring_after_update', $subscription->id );
 				?>
 
-				<?php if ( 'stripe' === $subscription->gateway ): ?>
-					<div id="give-stripe-payment-errors-<?php echo esc_attr( $form_id ); ?>"></div>
-				<?php endif; ?>
-
+                <div id="give-stripe-payment-errors-<?php echo esc_attr( $form_id ); ?>"></div>
 			</div>
 		</div>
 

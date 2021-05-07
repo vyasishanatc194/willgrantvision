@@ -29,6 +29,7 @@ function give_get_subscription_notes( $subscription_id = 0, $search = '' ) {
 			'post_id' => $subscription_id,
 			'order'   => 'ASC',
 			'search'  => $search,
+			'type'    => 'give_sub_note',
 		)
 	);
 
@@ -162,21 +163,11 @@ function give_get_subscription_note_html( $note, $subscription_id = 0 ) {
 
 	$date_format = give_date_format() . ', ' . get_option( 'time_format' );
 
-	$delete_note_url = wp_nonce_url(
-		add_query_arg(
-			array(
-				'give-action'     => 'delete_subscription_note',
-				'note_id'         => $note->comment_ID,
-				'subscription_id' => $subscription_id,
-			)
-		), 'give_delete_subscription_note_' . $note->comment_ID
-	);
-
 	$note_html = '<div class="give-subscription-note" id="give-subscription-note-' . $note->comment_ID . '">';
 	$note_html .= '<p>';
 	$note_html .= '<strong>' . $user . '</strong>&nbsp;&ndash;&nbsp;<span style="color:#aaa;font-style:italic;">' . date_i18n( $date_format, strtotime( $note->comment_date ) ) . '</span><br/>';
 	$note_html .= $note->comment_content;
-	$note_html .= '&nbsp;&ndash;&nbsp;<a href="' . esc_url( $delete_note_url ) . '" class="give-delete-subscription-note" data-note-id="' . absint( $note->comment_ID ) . '" data-subscription-id="' . absint( $subscription_id ) . '" aria-label="' . __( 'Delete this subscription note.', 'give-recurring' ) . '">' . __( 'Delete', 'give-recurring' ) . '</a>';
+	$note_html .= '&nbsp;&ndash;&nbsp;<a href="#" class="give-delete-subscription-note" data-note-id="' . absint( $note->comment_ID ) . '" data-subscription-id="' . absint( $subscription_id ) . '" aria-label="' . __( 'Delete this subscription note.', 'give-recurring' ) . '">' . __( 'Delete', 'give-recurring' ) . '</a>';
 	$note_html .= '</p>';
 	$note_html .= '</div>';
 
@@ -341,30 +332,6 @@ function give_ajax_store_subscription_note() {
 add_action( 'wp_ajax_give_insert_subscription_note', 'give_ajax_store_subscription_note' );
 
 /**
- * Triggers a subscription note deletion without ajax.
- *
- * @since 1.8
- *
- * @param array $data Arguments passed
- *
- * @return void
- */
-function give_trigger_subscription_note_deletion( $data ) {
-
-	if ( ! wp_verify_nonce( $data['_wpnonce'], 'give_delete_subscription_note_' . $data['note_id'] ) ) {
-		return;
-	}
-
-	$edit_order_url = admin_url( 'edit.php?post_type=give_forms&page=give-subscriptions&give-messages[]=donation-note-deleted&id=' . absint( $data['subscription_id'] ) );
-
-	give_delete_payment_note( $data['note_id'], $data['subscription_id'] );
-
-	wp_redirect( $edit_order_url );
-}
-
-add_action( 'give_delete_subscription_note', 'give_trigger_subscription_note_deletion' );
-
-/**
  * Delete a subscription note deletion with ajax.
  *
  * @since 1.8
@@ -373,11 +340,36 @@ add_action( 'give_delete_subscription_note', 'give_trigger_subscription_note_del
  */
 function give_ajax_delete_subscription_note() {
 
-	if ( give_delete_subscription_note( $_POST['note_id'], $_POST['subscription_id'] ) ) {
-		die( '1' );
-	} else {
-		die( '-1' );
+	// Gather POST variables data.
+	$post_data = give_clean( $_POST );
+
+	// Security Check.
+	check_admin_referer( 'give_recurring_admin_ajax_secure_nonce', 'security' );
+	
+	// Permission Check.
+	if ( ! current_user_can( 'delete_give_payments' ) ) {
+		$permission_notice = Give()->notices->print_admin_notices( array(
+			'id'          => 'give-permission-error',
+			'description' => __( 'You are not permitted to delete the subscription note.', 'give-recurring' ),
+			'echo'        => false,
+			'notice_type' => 'error',
+		) );
+		wp_send_json_error( $permission_notice );	
 	}
+
+	// Send success JSON response, if subscription note deleted successfully.
+	if ( give_delete_subscription_note( $post_data['note_id'], $post_data['subscription_id'] ) ) {
+		wp_send_json_success();
+	}
+
+	// Else send JSON error response.
+	$deletion_error_notice = Give()->notices->print_admin_notices( array(
+		'id'          => 'give-permission-error',
+		'description' => __( 'Unable to delete subscription note. Please try again.', 'give-recurring' ),
+		'echo'        => false,
+		'notice_type' => 'error',
+	) );
+	wp_send_json_error( $deletion_error_notice );
 
 }
 
@@ -394,3 +386,33 @@ function give_recurring_check_email_access_on_subscription_page( $status ) {
 }
 
 add_filter( 'give_is_email_access_on_page', 'give_recurring_check_email_access_on_subscription_page' );
+
+/**
+ * Get table list
+ *
+ * @since 1.9.0
+ * @return array
+ */
+function give_recurring_get_tables() {
+	return array(
+		'subscription'      => new Give_Subscriptions_DB(),
+		'subscription_meta' => new Give_Recurring_DB_Subscription_Meta(),
+	);
+}
+
+
+/**
+ *  Register plugin tables
+ *
+ * @sinc 1.9.0
+ */
+function give_recurring_register_tables(){
+   $tables = give_recurring_get_tables();
+
+	/* @var Give_DB $table */
+	foreach ( $tables as $table ) {
+		if( ! $table->installed() ) {
+			$table->register_table();
+		}
+	}
+}

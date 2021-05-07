@@ -5,7 +5,7 @@
  * @package Pixel Caffeine
  */
 
-use FacebookAds\Object\ServerSide\UserData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\UserData;
 use PixelCaffeine\Interfaces\ECommerceAddOnInterface;
 use PixelCaffeine\ProductCatalog\Admin\Metaboxes;
 use PixelCaffeine\ProductCatalog\Configuration;

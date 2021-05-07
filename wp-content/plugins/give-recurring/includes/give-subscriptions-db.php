@@ -21,22 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since  1.0
  */
 class Give_Subscriptions_DB extends Give_DB {
-
-	/**
-	 * @var string
-	 */
-	var $table_name;
-
-	/**
-	 * @var string
-	 */
-	var $primary_key;
-
-	/**
-	 * @var string
-	 */
-	var $version;
-
 	/**
 	 * Get things started.
 	 *
@@ -51,8 +35,6 @@ class Give_Subscriptions_DB extends Give_DB {
 		$this->primary_key = 'id';
 		$this->version     = '1.1';
 
-		$this->register_table();
-
 		parent::__construct();
 	}
 
@@ -64,21 +46,22 @@ class Give_Subscriptions_DB extends Give_DB {
 	 */
 	public function get_columns() {
 		return array(
-			'id'                => '%d',
-			'customer_id'       => '%d',
-			'period'            => '%s',
-			'frequency'         => '%d',
-			'initial_amount'    => '%s',
-			'recurring_amount'  => '%s',
-			'bill_times'        => '%d',
-			'transaction_id'    => '%s',
-			'parent_payment_id' => '%d',
-			'product_id'        => '%d',
-			'created'           => '%s',
-			'expiration'        => '%s',
-			'status'            => '%s',
-			'notes'             => '%s',
-			'profile_id'        => '%s',
+			'id'                   => '%d',
+			'customer_id'          => '%d',
+			'period'               => '%s',
+			'frequency'            => '%d',
+			'initial_amount'       => '%s',
+			'recurring_amount'     => '%s',
+			'recurring_fee_amount' => '%F',
+			'bill_times'           => '%d',
+			'transaction_id'       => '%s',
+			'parent_payment_id'    => '%d',
+			'product_id'           => '%d',
+			'created'              => '%s',
+			'expiration'           => '%s',
+			'status'               => '%s',
+			'notes'                => '%s',
+			'profile_id'           => '%s',
 		);
 	}
 
@@ -91,20 +74,21 @@ class Give_Subscriptions_DB extends Give_DB {
 	 */
 	public function get_column_defaults() {
 		return array(
-			'customer_id'       => 0,
-			'period'            => '',
-			'frequency'         => 1,
-			'initial_amount'    => '',
-			'recurring_amount'  => '',
-			'bill_times'        => 0,
-			'transaction_id'    => '',
-			'parent_payment_id' => 0,
-			'product_id'        => 0,
-			'created'           => date( 'Y-m-d H:i:s' ),
-			'expiration'        => date( 'Y-m-d H:i:s' ),
-			'status'            => '',
-			'notes'             => '',
-			'profile_id'        => '',
+			'customer_id'          => 0,
+			'period'               => '',
+			'frequency'            => 1,
+			'initial_amount'       => '',
+			'recurring_amount'     => '',
+			'recurring_fee_amount' => 0,
+			'bill_times'           => 0,
+			'transaction_id'       => '',
+			'parent_payment_id'    => 0,
+			'product_id'           => 0,
+			'created'              => date( 'Y-m-d H:i:s' ),
+			'expiration'           => date( 'Y-m-d H:i:s' ),
+			'status'               => '',
+			'notes'                => '',
+			'profile_id'           => '',
 		);
 	}
 
@@ -205,14 +189,16 @@ class Give_Subscriptions_DB extends Give_DB {
 	 * @return bool
 	 */
 	public function delete( $subscription_id = 0 ) {
+		$subscriptionData = $this->get( $subscription_id );
 		$status = parent::delete( $subscription_id );
 
 		/**
 		 * Fire the action when subscriptions updated
 		 *
 		 * @since 1.6
+		 * @since 1.11.0 Added third parameter
 		 */
-		do_action( 'give_subscription_deleted', $status, $subscription_id );
+		do_action( 'give_subscription_deleted', $status, $subscription_id, $subscriptionData );
 
 		return $status;
 	}
@@ -286,24 +272,40 @@ class Give_Subscriptions_DB extends Give_DB {
 	 *
 	 * @param array $args
 	 *
-	 * @return int
+	 * @return int|array/null
 	 */
 	public function count( $args = array() ) {
 		global $wpdb;
 
-		$cache_key = Give_Cache::get_key( 'give_subscriptions_count', $args, false );
-		$count     = Give_Recurring_Cache::get_db_query( $cache_key );
+		$cache_key     = Give_Cache::get_key( 'give_subscriptions_count', $args, false );
+		$count         = Give_Recurring_Cache::get_db_query( $cache_key );
+		$group_by_args = ! empty( $args['groupBy'] ) ? $args['groupBy'] : '';
+		$return_count  = empty( $group_by_args );
 
-		if ( is_null( $count ) ) {
-			$where = $this->generate_where_clause( $args );
-			$sql   = "SELECT COUNT($this->primary_key) FROM {$this->table_name} {$where};";
-			$count = $wpdb->get_var( $sql );
+		$result = null;
 
-			Give_Recurring_Cache::set_db_query( $cache_key, $count );
+		if ( null === $count ) {
+			$groupBy = $this->generate_groupby_clause( $group_by_args );
+			$where   = $this->generate_where_clause( $args );
+			$count   = $return_count ? "COUNT({$this->primary_key})" : "{$group_by_args}, COUNT({$this->primary_key})";
+			$sql     = "SELECT {$count} FROM {$this->table_name} {$where} {$groupBy};";
+
+			$result = $return_count ? $wpdb->get_var( $sql ) : $wpdb->get_results( $sql, ARRAY_A );
+
+			// Simplify result if query for groupBy.
+			if( $group_by_args && $result ) {
+				$temp = array();
+				foreach ( $result as $data ) {
+					$temp[$data[$group_by_args]] = $data['COUNT(id)'];
+				}
+
+				$result = $temp;
+			}
+
+			Give_Recurring_Cache::set_db_query( $cache_key, $result );
 		}
 
-		return absint( $count );
-
+		return $return_count ? absint( $result ) : $result;
 	}
 
 	/**
@@ -327,6 +329,7 @@ class Give_Subscriptions_DB extends Give_DB {
                     frequency bigint(20) DEFAULT "1" NOT NULL,
                     initial_amount decimal(18,10) NOT NULL,
                     recurring_amount decimal(18,10) NOT NULL, 
+                    recurring_fee_amount decimal(18,10) NOT NULL, 
                     bill_times bigint(20) NOT NULL,
                     transaction_id varchar(60) NOT NULL,
                     parent_payment_id bigint(20) NOT NULL,
@@ -558,6 +561,21 @@ class Give_Subscriptions_DB extends Give_DB {
 
 		return apply_filters( 'give_subscriptions_mysql_query', $where );
 
+	}
+
+	/**
+	 * Build the query args for subscriptions.
+	 *
+	 * @param string $groupby
+	 *
+	 * @return string The mysql "where" query part.
+	 */
+	private function generate_groupby_clause( $groupby = '' ) {
+		if( ! $groupby ) {
+			return '';
+		}
+
+		return "GROUP BY {$groupby}";
 	}
 
 	/**

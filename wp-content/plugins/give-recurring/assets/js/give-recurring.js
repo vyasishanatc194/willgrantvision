@@ -1,3 +1,4 @@
+/* globals Give*/
 /**
  * Give Frontend Recurring JS
  *
@@ -15,7 +16,6 @@ jQuery( document ).ready( function( $ ) {
 		 * Initialize
 		 */
 		init: function() {
-
 			/**
 			 * Call notifyUserOnLevels.
 			 */
@@ -66,7 +66,6 @@ jQuery( document ).ready( function( $ ) {
 				amount = Give.fn.unFormatCurrency( amount, decimal );
 
 				Give_Recurring.notifyUserOnLevels( form, amount, price_id );
-
 			} );
 
 			Give_Recurring.confirm_subscription_cancellation();
@@ -130,7 +129,6 @@ jQuery( document ).ready( function( $ ) {
 			var form = $this.closest( 'form.give-form' );
 			var currentRecurringPeriod = form.find( '.give-recurring-donors-choice-period' ).val();
 			var prettyPeriods = Give_Recurring_Vars.pretty_periods;
-			var isRecurringOpted = form.find( '.give-recurring-period:checked' ).val();
 
 			if ( $this.is( 'select' ) ) {
 				recurringPeriodLabel = $this.closest( 'div.give-recurring-donors-choice' )
@@ -148,7 +146,7 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			// Display Recurring Label if recurring is opted.
-			if ( 'on' === isRecurringOpted ) {
+			if ( this.isRecurringOpted(form) ) {
 				Give_Recurring.displayModalLabel( recurringPeriodLabel, form );
 			} else {
 				form.find( '#give-recurring-modal-period-wrap' ).hide();
@@ -183,6 +181,13 @@ jQuery( document ).ready( function( $ ) {
 			var multi_level_message_html = Give_Recurring_Vars.multi_level_message_pre_text + ' <span class="amount">' + amount + '</span> ' + multi_level_lower_message + '.';
 
 			form.find( '.give-recurring-multi-level-message' ).html( multi_level_message_html );
+
+			// Update recurring hidden field with the change based on the type of donation.
+			if ( 'once' !== multi_level_lower_message ) {
+				form.find( '#_give_is_donation_recurring' ).val( 1 );
+			} else {
+				form.find( '#_give_is_donation_recurring' ).val( 0 );
+			}
 
 			// Display Modal Label when recurring is enabled.
 			Give_Recurring.displayModalLabel( multi_level_message, form );
@@ -361,7 +366,7 @@ jQuery( document ).ready( function( $ ) {
 					day_option = $form.find( '.give-recurring-donors-choice-period option[value="day"]' );
 
 				// Authorize doesn't support daily.
-				if ( 'authorize' === gateway ) {
+				if ( 'authorize' === gateway || 'razorpay' === gateway ) {
 
 					// Only proceed if day is selected.
 					if ( 'day' !== period ) {
@@ -369,7 +374,7 @@ jQuery( document ).ready( function( $ ) {
 					}
 
 					// Disable and select next option.
-					day_option.prop( 'disabled', true ).next().attr( 'selected', 'selected' );
+					day_option.prop( 'disabled', true ).next().prop( 'selected', true );
 
 					// Only show alert when switching gateways and not on page load.
 					if ( 'undefined' !== typeof response ) {
@@ -402,7 +407,8 @@ jQuery( document ).ready( function( $ ) {
 					update_button = this_form.find( '#give-recurring-update-submit' ),
 					loading_animation = this_form.find( 'input[type="submit"].give-submit + .give-loading-animation' ),
 					give_payment_update_form = this_form.get( 0 ),
-					complete_purchase_val = this_form.find( '#give-recurring-update-submit' ).val();
+					complete_purchase_val = this_form.find( '#give-recurring-update-submit' ).val(),
+					action = $( 'input[name="give_action"]' ).val();
 
 				loading_animation.fadeIn();
 
@@ -420,6 +426,19 @@ jQuery( document ).ready( function( $ ) {
 
 				}
 
+				/**
+				 * Stripe payment method will only update if donor will submit form because Stripe JS SDK need to generate payment method then save it on server.
+				 * This code prevent submitting form on ajax if subscription gateway is Stripe.
+				 *
+				 * @see https://github.com/impress-org/give-recurring/issues/998
+				 */
+				if(
+					-1 !== Give.form.fn.getInfo('gateway', this_form ).indexOf('stripe') &&
+					'recurring_update_payment' === action
+				) {
+					return;
+				}
+
 				// Update submit button text.
 				update_button.val( give_global_vars.purchase_loading );
 
@@ -428,14 +447,17 @@ jQuery( document ).ready( function( $ ) {
 
 				$.ajax( {
 					type: 'POST',
-					url: this_form.attr( 'action' ),
+					url: give_global_vars.ajaxurl,
 					data: this_form.serialize(),
-					success: function( data ) {
-						loading_animation.fadeOut();
-						this_form.find( '.give_errors' ).remove();
-						update_button.val( complete_purchase_val );
-						update_button.prop( 'disabled', false );
-						window.location.href = data;
+					success: function( response ) {
+						if ( response.success ) {
+							loading_animation.fadeOut();
+							this_form.find( '.give_errors' ).remove();
+							update_button.val( complete_purchase_val );
+							update_button.prop( 'disabled', false );
+						}
+
+						window.location.href = response.data.url;
 					}
 				} );
 
@@ -497,6 +519,8 @@ jQuery( document ).ready( function( $ ) {
 				Give.form.fn.disable( parent_form, false );
 			}
 
+			// Added this trigger so that we can extend the functionality.
+			doc.trigger( 'give_recurring_donation_amount_updated', [ parent_form, value_now ] );
 		},
 
 		/**
@@ -525,8 +549,20 @@ jQuery( document ).ready( function( $ ) {
 			return (
 				((- 1 < amount) && amount >= min_amount && amount <= max_amount)
 			);
-		}
+		},
 
+		/**
+		 * Return whether or not donor opt in for subscription.
+		 *
+		 * @since 1.11.0
+		 *
+		 * @param {object} $form
+		 * @return {boolean}
+		 */
+		isRecurringOpted: function ($form){
+			var $field = $form.find( '.give-recurring-period:checked' );
+			return $field &&  $field.val();
+		}
 	};
 
 	Give_Recurring.init();

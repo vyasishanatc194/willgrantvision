@@ -868,6 +868,7 @@ class AEPC_Admin {
 			'aepc_fb_users',
 			'aepc_account_name_%',
 			'aepc_pixel_name_%',
+			'aepc_event_%',
 		);
 
 		// Convert wildcard in complete transient name, in order to use the function delete_transient after.

@@ -7,11 +7,10 @@
 
 namespace PixelCaffeine\ServerSide;
 
-use FacebookAds\Api;
-use FacebookAds\Exception\Exception as FacebookException;
-use FacebookAds\Object\ServerSide\Event;
-use FacebookAds\Object\ServerSide\EventRequest;
-use PixelCaffeine\FB\ConnectorAdapter;
+use PixelCaffeine\Dependencies\FacebookAds\Api;
+use PixelCaffeine\Dependencies\FacebookAds\Exception\Exception as FacebookException;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\Event;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\EventRequest;
 
 /**
  * Class Conversions_API
@@ -56,7 +55,7 @@ class Conversions_API {
 	 * @param Event_Factory $event_factory The event factory to help for event instance creation.
 	 * @param bool          $log_events True if we need to log every events sent (and not only the failed one).
 	 */
-	public function __construct( $pixel_id, Api $api, Event_Factory $event_factory, bool $log_events = false ) {
+	public function __construct( $pixel_id, Api $api, Event_Factory $event_factory, $log_events = false ) {
 		$this->api           = $api;
 		$this->event_factory = $event_factory;
 		$this->pixel_id      = $pixel_id;

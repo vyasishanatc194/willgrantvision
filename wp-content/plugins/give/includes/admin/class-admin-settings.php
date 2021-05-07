@@ -812,7 +812,7 @@ if ( ! class_exists( 'Give_Admin_Settings' ) ) :
 				// File input field.
 				case 'file':
 				case 'media':
-					$option_value = self::get_option( $option_name, $value['id'], $value['default'] );
+					$option_value = esc_url( self::get_option( $option_name, $value['id'], $value['default'] ) );
 					$button_label = sprintf( __( 'Add or Upload %s', 'give' ), ( 'file' === $value['type'] ? __( 'File', 'give' ) : __( 'Image', 'give' ) ) );
 					$fvalue       = empty( $value['fvalue'] ) ? 'url' : $value['fvalue'];
 
@@ -976,21 +976,6 @@ if ( ! class_exists( 'Give_Admin_Settings' ) ) :
 						</td>
 					</tr>
 					<?php
-					break;
-
-				// Custom: Log field.
-				case 'logs':
-					// Get current section.
-					$current_section = $_GET['section'] = give_get_current_setting_section();
-
-					/**
-					 * Fires for each tab of logs view.
-					 *
-					 * @since 1.0
-					 */
-					do_action( "give_logs_view_{$current_section}" );
-
-					echo $description;
 					break;
 
 				// Custom: Data field.

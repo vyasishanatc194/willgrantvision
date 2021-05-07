@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Pixel Caffeine package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pixel Caffeine 2.3.0\n"
+"Project-Id-Version: Pixel Caffeine 2.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pixel-caffeine\n"
-"POT-Creation-Date: 2021-02-18 13:41:05+00:00\n"
+"POT-Creation-Date: 2021-03-18 11:55:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: includes/admin/class-aepc-admin-ca.php:475
 #: includes/admin/class-aepc-admin-view.php:1558
-#: includes/admin/templates/parts/widgets/news.php:43
+#: includes/admin/templates/parts/widgets/news.php:49
 #. translators: es. "2 minutes ago", "2 hours ago"
 #. translators: %s: es. "2 minutes ago", "2 hours ago", etc.
 #. translators: %s: human date diff (example: 2 days ago, 2 hours ago, etc.)
@@ -882,45 +882,45 @@ msgid ""
 "later."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:203
+#: includes/admin/class-aepc-facebook-adapter.php:187
 msgid "Empty Token"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:213
+#: includes/admin/class-aepc-facebook-adapter.php:197
 msgid "Expired Token"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:221
+#: includes/admin/class-aepc-facebook-adapter.php:205
 msgid "Invalid login, please try again."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:260
+#: includes/admin/class-aepc-facebook-adapter.php:244
 msgid "Please, grant the permissions requested"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:263
+#: includes/admin/class-aepc-facebook-adapter.php:247
 #. translators: %s: the error from facebook when permission errors occurs
 #. during the facebook connection.
 msgid "Please, grant the permissions: %s"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:266
+#: includes/admin/class-aepc-facebook-adapter.php:250
 msgid "Facebook authentication error"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:280
+#: includes/admin/class-aepc-facebook-adapter.php:264
 msgid ""
 "<strong>Facebook connected</strong> Your facebook account is properly "
 "connected now."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:445
+#: includes/admin/class-aepc-facebook-adapter.php:429
 msgid ""
 "Please, connect your facebook account to make operations to the custom "
 "audiences of your Ad account."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:525
+#: includes/admin/class-aepc-facebook-adapter.php:509
 #. translators: 1: opening tag for the link to the current page in order to
 #. invite the user to refresh, 2: closing tag.
 msgid ""
@@ -928,13 +928,13 @@ msgid ""
 "to %1$srefresh the page%2$s."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:543
+#: includes/admin/class-aepc-facebook-adapter.php:527
 msgid ""
 "Cannot save on facebook account because of something gone wrong during "
 "facebook connection."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:549
+#: includes/admin/class-aepc-facebook-adapter.php:533
 msgid ""
 "The request goes in error from your server due by some oldest version of "
 "\"cUrl\" package. Please, ask to your hosting to upgrade it in order to fix "
@@ -943,13 +943,13 @@ msgid ""
 "service, to give their more details about the issue."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:564
+#: includes/admin/class-aepc-facebook-adapter.php:548
 #. translators: 1: opening tag for the link to the general setting page where
 #. he can login again to facebook, 2: closing tag.
 msgid "Facebook connection timed out. Please, login again from %1$shere%2$s"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:588
+#: includes/admin/class-aepc-facebook-adapter.php:572
 #. translators: 1: opening tag for the link to the general settings where the
 #. user can connect to Facebook again, 2: closing tag.
 msgid ""
@@ -957,77 +957,77 @@ msgid ""
 "again from %1$shere%2$s"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:590
+#: includes/admin/class-aepc-facebook-adapter.php:574
 #. translators: %s: the error message from the Facebook API.
 msgid "Permission error: %s"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:591
+#: includes/admin/class-aepc-facebook-adapter.php:575
 msgid "This Ads action requires the user to be admin of the application."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:592
+#: includes/admin/class-aepc-facebook-adapter.php:576
 msgid "This Ads action requires the user to be admin of the ad account."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:593
+#: includes/admin/class-aepc-facebook-adapter.php:577
 msgid ""
 "The ad account is not enabled for usage in Ads API. Please add it in "
 "developers.facebook.com/apps -> select your app -> settings -> advanced -> "
 "advertising accounts -> Ads API."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:594
+#: includes/admin/class-aepc-facebook-adapter.php:578
 msgid "The facebook object you are trying to use does not exist."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:595
+#: includes/admin/class-aepc-facebook-adapter.php:579
 msgid "You have to extend permission for ads_read to complete the action."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:596
+#: includes/admin/class-aepc-facebook-adapter.php:580
 msgid "You have to extend permission for ads_management to complete the action."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:597
+#: includes/admin/class-aepc-facebook-adapter.php:581
 msgid "Failed to update the custom audience."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:598
+#: includes/admin/class-aepc-facebook-adapter.php:582
 msgid "Failed to create lookalike custom audience."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:599
+#: includes/admin/class-aepc-facebook-adapter.php:583
 msgid "Failed to create custom audience on your facebook account."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:600
+#: includes/admin/class-aepc-facebook-adapter.php:584
 msgid ""
 "Terms of service has not been accepted. To accept, go to "
 "https://www.facebook.com/ads/manage/customaudiences/tos.php"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:601
+#: includes/admin/class-aepc-facebook-adapter.php:585
 msgid "Failed to delete custom audience because associated lookalikes exist."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:602
+#: includes/admin/class-aepc-facebook-adapter.php:586
 msgid ""
 "Terms of service has not been accepted. To accept, go to "
 "https://www.facebook.com/customaudiences/app/tos"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:603
+#: includes/admin/class-aepc-facebook-adapter.php:587
 msgid ""
 "The corporate terms of service has not been accepted. To accept, go to "
 "https://business.facebook.com/ads/manage/customaudiences/tos.php"
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:604
+#: includes/admin/class-aepc-facebook-adapter.php:588
 msgid "Specified audience is too small."
 msgstr ""
 
-#: includes/admin/class-aepc-facebook-adapter.php:1253
+#: includes/admin/class-aepc-facebook-adapter.php:1237
 msgid ""
 "Unable to create a product catalog because there isn't any business ID "
 "associated to your Ad account."
@@ -2530,6 +2530,17 @@ msgid ""
 "keep it disabled normally."
 msgstr ""
 
+#: includes/admin/templates/parts/panels/server-side-settings.php:102
+msgid "Track through AJAX"
+msgstr ""
+
+#: includes/admin/templates/parts/panels/server-side-settings.php:104
+msgid ""
+"This tracks all server-side events through an AJAX request in order to "
+"avoid any server side and/or any page cache enabled by hostings and/or "
+"caching plugins."
+msgstr ""
+
 #: includes/admin/templates/parts/panels/set-facebook-pixel.php:21
 msgid "Facebook Pixel Setup"
 msgstr ""
@@ -2770,7 +2781,7 @@ msgid ""
 "to track all your conversion events."
 msgstr ""
 
-#: includes/admin/templates/parts/widgets/news.php:28
+#: includes/admin/templates/parts/widgets/news.php:34
 msgid "AdEspresso News"
 msgstr ""
 

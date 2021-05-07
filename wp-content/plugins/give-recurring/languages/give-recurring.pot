@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Give-Recurring
+# Copyright (C) 2021 Give-Recurring
 # This file is distributed under the same license as the Give-Recurring package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
 "Language-Team: GiveWP <info@givewp.com>\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -16,158 +16,194 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: give-recurring.php:555
+#: give-recurring.php:610
 msgctxt "Subscription payment status"
 msgid "Renewal"
 msgstr ""
 
-#: give-recurring.php:560
+#: give-recurring.php:615
 msgid "Renewal <span class=\"count\">(%s)</span>"
 msgid_plural "Subscription <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: give-recurring.php:575, give-recurring.php:576, includes/admin/class-donor-subscription-details.php:86, includes/admin/give-recurring-donors.php:16, includes/admin/give-recurring-donors.php:199, includes/admin/give-recurring-filters.php:293, includes/admin/subscriptions.php:23
+#: give-recurring.php:635, give-recurring.php:636, includes/admin/class-donor-subscription-details.php:86, includes/admin/give-recurring-donors.php:16, includes/admin/give-recurring-donors.php:199, includes/admin/give-recurring-filters.php:168, includes/admin/subscriptions.php:23
 msgid "Subscriptions"
 msgstr ""
 
-#: give-recurring.php:627, includes/admin/metabox.php:297
+#: give-recurring.php:683, includes/admin/metabox.php:297
 msgid "Renewal"
 msgstr ""
 
-#: give-recurring.php:628, includes/give-recurring-helpers.php:1118
+#: give-recurring.php:684, includes/give-recurring-helpers.php:1163, src/DonorDashboard/Routes/SubscriptionsRoute.php:303
 msgid "Cancelled"
 msgstr ""
 
-#: give-recurring.php:650
+#: give-recurring.php:707
 msgctxt "Recurring billing period."
 msgid "day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: give-recurring.php:652
+#: give-recurring.php:718
 msgctxt "Recurring billing period."
 msgid "week"
 msgid_plural "%s weeks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: give-recurring.php:654
+#: give-recurring.php:729
 msgctxt "Recurring billing period."
 msgid "month"
 msgid_plural "%s months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: give-recurring.php:656
+#: give-recurring.php:740
+msgctxt "Recurring billing period."
+msgid "quarter"
+msgid_plural "%s quarters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: give-recurring.php:751
 msgctxt "Recurring billing period."
 msgid "year"
 msgid_plural "%s years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: give-recurring.php:702
+#: give-recurring.php:804
 msgctxt "Subscription length"
 msgid "Ongoing"
 msgstr ""
 
-#: give-recurring.php:707
+#: give-recurring.php:809
 msgctxt "Subscription lengths. e.g. \"For 1 day...\""
 msgid "1 day"
 msgstr ""
 
-#: give-recurring.php:711
+#: give-recurring.php:817
 msgctxt "Subscription lengths. e.g. \"For 1 week...\""
 msgid "1 week"
 msgstr ""
 
-#: give-recurring.php:715
+#: give-recurring.php:825
 msgctxt "Subscription lengths. e.g. \"For 1 month...\""
 msgid "1 month"
 msgstr ""
 
-#: give-recurring.php:719
+#: give-recurring.php:833
+msgctxt "Subscription lengths. e.g. \"For 1 quarter...\""
+msgid "1 quarter"
+msgstr ""
+
+#: give-recurring.php:841
 msgctxt "Subscription lengths. e.g. \"For 1 year...\""
 msgid "1 year"
 msgstr ""
 
-#: give-recurring.php:749
+#: give-recurring.php:874
 msgctxt "period interval (eg \"$10 _every_ 2 weeks\")"
 msgid "every"
 msgstr ""
 
-#: give-recurring.php:753
+#: give-recurring.php:879
 msgctxt "period interval with ordinal number (e.g. \"every 2nd\""
 msgid "every %s"
 msgstr ""
 
-#: give-recurring.php:779, give-recurring.php:796
+#: give-recurring.php:910, give-recurring.php:927
 msgid "%sth"
 msgstr ""
 
-#: give-recurring.php:784
+#: give-recurring.php:915
 msgid "%sst"
 msgstr ""
 
-#: give-recurring.php:788
+#: give-recurring.php:919
 msgid "%snd"
 msgstr ""
 
-#: give-recurring.php:792
+#: give-recurring.php:923
 msgid "%srd"
 msgstr ""
 
-#: give-recurring.php:1438
+#: give-recurring.php:1538
 msgid "The link to the form through which donation was made."
 msgstr ""
 
-#: give-recurring.php:1444
+#: give-recurring.php:1547
 msgid "Displays the subscription frequency based on its period and times. For instance, \"Monthly for 3 Months\", or simply \"Monthly\" if bill times is 0."
 msgstr ""
 
-#: give-recurring.php:1450
+#: give-recurring.php:1556
 msgid "Displays the number of subscriptions completed with the total bill times. For instance \"1/3\" or \"1 / Until cancelled\"."
 msgstr ""
 
-#: give-recurring.php:1456
+#: give-recurring.php:1565
 msgid "The date the donation was cancelled."
 msgstr ""
 
-#: give-recurring.php:1462
+#: give-recurring.php:1574
 msgid "The date the donation was completed."
 msgstr ""
 
-#: give-recurring.php:1468
+#: give-recurring.php:1583
 msgid "The date of renewal."
 msgstr ""
 
-#: give-recurring.php:1474
+#: give-recurring.php:1592
 msgid "The date of expiration."
 msgstr ""
 
-#: give-recurring.php:1524, includes/give-recurring-helpers.php:210
+#: give-recurring.php:1623, includes/give-recurring-emails.php:228
+msgid "n/a"
+msgstr ""
+
+#: give-recurring.php:1650, includes/give-recurring-helpers.php:255
 msgid "Monthly"
 msgstr ""
 
-#: give-recurring.php:1530
+#: give-recurring.php:1656
 msgid "2 / Ongoing"
 msgstr ""
 
-#: give-recurring.php:1536
+#: give-recurring.php:1662
 msgid "September 2, 2018"
 msgstr ""
 
-#: give-recurring.php:1542
+#: give-recurring.php:1668
 msgid "August 12, 2018"
 msgstr ""
 
-#: give-recurring.php:1548
+#: give-recurring.php:1674
 msgid "June 2, 2018"
 msgstr ""
 
-#: give-recurring.php:1555
+#: give-recurring.php:1680
 msgid "July 2, 2018"
+msgstr ""
+
+#: give-recurring.php:1721, includes/give-recurring-helpers.php:1487
+msgid "You have not made any recurring donations."
+msgstr ""
+
+#: give-recurring.php:1746
+msgid "Subscription ID is Invalid."
+msgstr ""
+
+#: give-recurring.php:1760
+msgid "Subscription is not attached with a parent donation."
+msgstr ""
+
+#: give-recurring.php:1772
+msgid "The subscription you are looking for either doesn't exist or belongs to a different donor. Please contact a site administrator for assistance."
+msgstr ""
+
+#: give-recurring.php:1799
+msgid "You must be logged in to view your subscriptions."
 msgstr ""
 
 #: includes/admin/class-admin-notices.php:59
@@ -202,19 +238,19 @@ msgstr ""
 msgid "Renewal donation could not be recorded."
 msgstr ""
 
-#: includes/admin/class-donor-subscription-details.php:47, includes/admin/class-subscriptions-list-table.php:200, includes/admin/class-subscriptions-list-table.php:432, includes/admin/give-recurring-donors.php:20
+#: includes/admin/class-donor-subscription-details.php:47, includes/admin/class-subscriptions-list-table.php:200, includes/admin/class-subscriptions-list-table.php:438, includes/admin/give-recurring-donors.php:20
 msgid "Form"
 msgstr ""
 
-#: includes/admin/class-donor-subscription-details.php:48, includes/admin/give-recurring-donors.php:21, includes/admin/subscriptions-details.php:302, includes/admin/subscriptions-details.php:348
+#: includes/admin/class-donor-subscription-details.php:48, includes/admin/give-recurring-donors.php:21, includes/admin/subscriptions-details.php:323, includes/admin/subscriptions-details.php:369
 msgid "Amount"
 msgstr ""
 
-#: includes/admin/class-donor-subscription-details.php:49, includes/admin/class-subscriptions-list-table.php:428, includes/admin/subscriptions-details.php:350, templates/shortcode-subscriptions.php:109
+#: includes/admin/class-donor-subscription-details.php:49, includes/admin/class-subscriptions-list-table.php:434, includes/admin/subscriptions-details.php:371, src/Receipt/UpdateDonationReceipt.php:148, templates/shortcode-subscriptions.php:92
 msgid "Status"
 msgstr ""
 
-#: includes/admin/class-donor-subscription-details.php:50, includes/admin/give-recurring-donors.php:22, includes/admin/subscriptions-details.php:351, templates/shortcode-subscriptions.php:123
+#: includes/admin/class-donor-subscription-details.php:50, includes/admin/give-recurring-donors.php:22, includes/admin/subscriptions-details.php:372, templates/shortcode-subscriptions.php:106
 msgid "Actions"
 msgstr ""
 
@@ -234,7 +270,7 @@ msgstr ""
 msgid "You do not have permission to view this data."
 msgstr ""
 
-#: includes/admin/class-recurring-reports.php:184, includes/admin/subscriptions.php:61, includes/admin/subscriptions.php:121, includes/admin/subscriptions.php:159, includes/gateways/give-recurring-gateway.php:353, includes/gateways/give-recurring-gateway.php:629, includes/gateways/give-recurring-gateway.php:635, includes/gateways/give-recurring-gateway.php:661, includes/gateways/give-recurring-paypal.php:535, includes/gateways/give-recurring-paypal.php:546, includes/gateways/give-recurring-paypal.php:550, includes/gateways/give-recurring-paypalpro.php:609, includes/gateways/give-recurring-paypalpro.php:778, includes/gateways/give-recurring-paypalpro.php:974, includes/gateways/give-recurring-paypalpro.php:1106, includes/gateways/give-recurring-stripe_ach.php:576, includes/gateways/give-recurring-stripe.php:552, includes/gateways/give-recurring-wepay.php:624, includes/gateways/give-recurring-wepay.php:634
+#: includes/admin/class-recurring-reports.php:184, includes/admin/emails/class-renewal-receipt-email.php:244, includes/admin/subscriptions.php:71, includes/admin/subscriptions.php:131, includes/admin/subscriptions.php:169, includes/gateways/give-recurring-gateway.php:357, includes/gateways/give-recurring-gateway.php:721, includes/gateways/give-recurring-gateway.php:727, includes/gateways/give-recurring-gateway.php:761, includes/gateways/give-recurring-paypal.php:546, includes/gateways/give-recurring-paypal.php:557, includes/gateways/give-recurring-paypal.php:561, includes/gateways/give-recurring-paypalpro.php:609, includes/gateways/give-recurring-paypalpro.php:778, includes/gateways/give-recurring-paypalpro.php:974, includes/gateways/give-recurring-paypalpro.php:1103, includes/gateways/give-recurring-stripe_ach.php:538, includes/gateways/give-recurring-stripe_apple_pay.php:340, includes/gateways/give-recurring-stripe_becs.php:414, includes/gateways/give-recurring-stripe_checkout.php:523, includes/gateways/give-recurring-stripe_google_pay.php:339, includes/gateways/give-recurring-stripe_sepa.php:379, includes/gateways/give-recurring-stripe.php:390, includes/gateways/give-recurring-wepay.php:624, includes/gateways/give-recurring-wepay.php:634
 msgid "Error"
 msgstr ""
 
@@ -242,7 +278,7 @@ msgstr ""
 msgid "Income"
 msgstr ""
 
-#: includes/admin/class-recurring-reports.php:344, includes/admin/give-recurring-filters.php:325, includes/admin/subscriptions-details.php:288
+#: includes/admin/class-recurring-reports.php:344, includes/admin/give-recurring-filters.php:200, includes/admin/subscriptions-details.php:309
 msgid "Renewals"
 msgstr ""
 
@@ -334,7 +370,7 @@ msgstr ""
 msgid "Numbered"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:107, includes/admin/emails/class-subscription-reminder-email.php:867, includes/admin/give-recurring-filters.php:307
+#: includes/admin/class-subscriptions-list-table.php:107, includes/admin/emails/class-subscription-reminder-email.php:867, includes/admin/give-recurring-filters.php:182
 msgid "All"
 msgstr ""
 
@@ -342,11 +378,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:174, includes/admin/class-subscriptions-list-table.php:182, templates/shortcode-subscriptions.php:118
+#: includes/admin/class-subscriptions-list-table.php:174, includes/admin/class-subscriptions-list-table.php:182, templates/shortcode-subscriptions.php:101
 msgid "Start Date"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:186, includes/admin/class-subscriptions-list-table.php:194, templates/shortcode-subscriptions.php:121
+#: includes/admin/class-subscriptions-list-table.php:186, includes/admin/class-subscriptions-list-table.php:194, templates/shortcode-subscriptions.php:104
 msgid "End Date"
 msgstr ""
 
@@ -362,88 +398,96 @@ msgstr ""
 msgid "Name, Email, or ID"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:299
+#: includes/admin/class-subscriptions-list-table.php:301
 msgid "Email donor"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:299
+#: includes/admin/class-subscriptions-list-table.php:301
 msgid "(email unknown)"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:304, includes/admin/class-subscriptions-list-table.php:414, includes/admin/give-recurring-donors.php:42, includes/admin/subscriptions-details.php:366, includes/admin/subscriptions-details.php:399
+#: includes/admin/class-subscriptions-list-table.php:306, includes/admin/class-subscriptions-list-table.php:420, includes/admin/give-recurring-donors.php:42, includes/admin/subscriptions-details.php:387, includes/admin/subscriptions-details.php:420
 msgid "View Details"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:306
+#: includes/admin/class-subscriptions-list-table.php:308
 msgid "by"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:427, templates/shortcode-subscriptions.php:107
+#: includes/admin/class-subscriptions-list-table.php:433, src/Receipt/UpdateDonationReceipt.php:82, templates/shortcode-subscriptions.php:90
 msgid "Subscription"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:429
+#: includes/admin/class-subscriptions-list-table.php:435
 msgid "Billing Cycle"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:430, templates/shortcode-subscriptions.php:115
+#: includes/admin/class-subscriptions-list-table.php:436, src/Receipt/UpdateDonationReceipt.php:180, templates/shortcode-subscriptions.php:98
 msgid "Progress"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:431, includes/admin/tools/class-give-export-subscriptions.php:154, templates/shortcode-subscriptions.php:112
+#: includes/admin/class-subscriptions-list-table.php:437, includes/admin/tools/class-give-export-subscriptions.php:154, src/Receipt/UpdateDonationReceipt.php:166, templates/shortcode-subscriptions.php:95
 msgid "Renewal Date"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:433
+#: includes/admin/class-subscriptions-list-table.php:439
 msgid "Details"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:615, includes/admin/emails/view/add-reminder-buttons.php:80, includes/give-recurring-functions.php:179
+#: includes/admin/class-subscriptions-list-table.php:628, includes/admin/emails/view/add-reminder-buttons.php:80, includes/give-recurring-functions.php:170
 msgid "Delete"
 msgstr ""
 
-#: includes/admin/class-subscriptions-list-table.php:619
+#: includes/admin/class-subscriptions-list-table.php:632
 msgid "Set To %s"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:59
-msgid "Email Type"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:41
+msgid "Subscription Payment Failed Email"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:60
-msgid "Email Subject"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:42
+msgid "Sent to designated recipient(s) when the renewal payments of the donor fails due to card declined or expired"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:61
-msgid "Email Recipient"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:43, includes/admin/emails/class-renewal-receipt-email.php:21, includes/admin/emails/class-subscription-cancelled-email.php:22, includes/admin/emails/class-subscription-completed-email.php:18, includes/admin/emails/class-subscription-reminder-email.php:378, includes/admin/emails/class-subscriptions-email-access.php:24
+msgid "Donor"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:62
-msgid "Date Sent"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:52
+msgid "[%s] Subscription Payment Failed"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:63
-msgid "Donation Form"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:56
+msgid "Subscription Payment Failed"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:105
-msgid "No subject found."
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:93
+msgid "Supported Gateways"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:315
-msgid "Renewal Notice"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:94
+msgid "This email will be sent to the recurring donations processed via the supported gateways."
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:318
-msgid "Expiration Notice"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:101, includes/admin/emails/class-subscription-reminder-email.php:792
+msgid "Select payment gateways"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:321
-msgid "Cancellation Notice"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:122
+msgid "Dear {name},"
 msgstr ""
 
-#: includes/admin/emails/class-recurring-email-log.php:324
-msgid "Renewal Receipt"
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:123
+msgid "We want to inform you that your recurring payment to {sitename} was unsuccessful. Your ongoing support is important to us. To continue your recurring donation, please update your payment method by clicking on this link:"
+msgstr ""
+
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:125
+msgid "If no action is taken, your subscription will automatically cancel after a few more attempts. If possible, please renew your payment method before your next scheduled donation on {next_payment_attempt}."
+msgstr ""
+
+#: includes/admin/emails/class-give-recurring-subscription-payment-failed-email.php:126, includes/admin/emails/class-subscriptions-email-access.php:311
+msgid "Sincerely,"
 msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-admin-email.php:34, includes/admin/emails/class-renewal-receipt-email.php:18
@@ -463,18 +507,18 @@ msgid "Hi there,"
 msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-admin-email.php:40
-msgid "has succesfully completed renewal donation process. Here are donation details:"
+msgid "has succesfully renewed their donation. Here are the donation details:"
 msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-admin-email.php:41, includes/admin/emails/class-renewal-receipt-email.php:24
 msgid "Donation Receipt"
 msgstr ""
 
-#: includes/admin/emails/class-renewal-receipt-admin-email.php:63, includes/admin/emails/class-renewal-receipt-email.php:49
+#: includes/admin/emails/class-renewal-receipt-admin-email.php:63, includes/admin/emails/class-renewal-receipt-email.php:50
 msgid "Renewal Receipt Subject"
 msgstr ""
 
-#: includes/admin/emails/class-renewal-receipt-admin-email.php:65, includes/admin/emails/class-renewal-receipt-email.php:51
+#: includes/admin/emails/class-renewal-receipt-admin-email.php:65, includes/admin/emails/class-renewal-receipt-email.php:52
 msgid "Enter the subject line for the renewal donation receipt email."
 msgstr ""
 
@@ -486,20 +530,16 @@ msgstr ""
 msgid "Enter the header for the renewal donation receipt email."
 msgstr ""
 
-#: includes/admin/emails/class-renewal-receipt-admin-email.php:77, includes/admin/emails/class-renewal-receipt-email.php:56
+#: includes/admin/emails/class-renewal-receipt-admin-email.php:77, includes/admin/emails/class-renewal-receipt-email.php:57
 msgid "Renewal Donation Receipt"
 msgstr ""
 
-#: includes/admin/emails/class-renewal-receipt-admin-email.php:79, includes/admin/emails/class-renewal-receipt-email.php:58
+#: includes/admin/emails/class-renewal-receipt-admin-email.php:79, includes/admin/emails/class-renewal-receipt-email.php:59
 msgid "Enter the email message that is sent to users after upon Give receiving a successful renewal donation. HTML is accepted. Available template tags: "
 msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-email.php:19
 msgid "Check this option if you would like donors to receive an email when a renewal donation payment has been received. Note: some payment gateways like Stripe and Authorize.net may also send out an email depending on your gateway settings."
-msgstr ""
-
-#: includes/admin/emails/class-renewal-receipt-email.php:21, includes/admin/emails/class-subscription-cancelled-email.php:22, includes/admin/emails/class-subscription-completed-email.php:18, includes/admin/emails/class-subscription-reminder-email.php:378, includes/admin/emails/class-subscriptions-email-access.php:24
-msgid "Donor"
 msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-email.php:26, includes/admin/emails/class-subscription-cancelled-email.php:26, includes/admin/emails/class-subscription-completed-email.php:22, includes/admin/emails/class-subscription-reminder-email.php:347, includes/admin/emails/class-subscription-reminder-email.php:353
@@ -508,6 +548,10 @@ msgstr ""
 
 #: includes/admin/emails/class-renewal-receipt-email.php:26
 msgid "Thank you for your donation and continued support. Your generosity is appreciated! Here are your donation details:"
+msgstr ""
+
+#: includes/admin/emails/class-renewal-receipt-email.php:244
+msgid "You do not have permission to send email notifications."
 msgstr ""
 
 #: includes/admin/emails/class-subscription-cancelled-admin-email.php:34, includes/admin/emails/class-subscription-cancelled-email.php:19
@@ -523,7 +567,7 @@ msgid "Subscription Donation Cancelled"
 msgstr ""
 
 #: includes/admin/emails/class-subscription-cancelled-admin-email.php:40
-msgid "This email is to inform you that subscription for {donation} has been successfully cancelled. Here are the subscription details for your records:nn<strong>Donar Name:</strong> {fullname}n<strong>Subscription:</strong> {donation} - {amount}n<strong>Subscription Frequency:</strong> {subscription_frequency} n<strong>Completed Donations:</strong> {subscriptions_completed} n<strong>Payment Method:</strong> {payment_method}n<strong>Cancellation Date:</strong> {cancellation_date}nnSincerely,n{sitename}"
+msgid "This email is to inform you that subscription for {donation} has been successfully cancelled. Here are the subscription details for your records:nn<strong>Donor Name:</strong> {fullname}n<strong>Subscription:</strong> {donation} - {amount}n<strong>Subscription Frequency:</strong> {subscription_frequency} n<strong>Completed Donations:</strong> {subscriptions_completed} n<strong>Payment Method:</strong> {payment_method}n<strong>Cancellation Date:</strong> {cancellation_date}nnSincerely,n{sitename}"
 msgstr ""
 
 #: includes/admin/emails/class-subscription-cancelled-admin-email.php:151, includes/admin/emails/class-subscription-cancelled-email.php:102
@@ -563,7 +607,7 @@ msgid "Subscription Completed Email"
 msgstr ""
 
 #: includes/admin/emails/class-subscription-completed-email.php:17
-msgid "Check this option if you would like donors to receive an email when a subscription has been completed. The email will send when either the donor or admin cancels the subscription"
+msgid "Check this option if you would like donors to receive an email when a subscription has been completed."
 msgstr ""
 
 #: includes/admin/emails/class-subscription-completed-email.php:21
@@ -694,10 +738,6 @@ msgstr ""
 msgid "This email won't be sent if the donations are made using the selected payment methods."
 msgstr ""
 
-#: includes/admin/emails/class-subscription-reminder-email.php:792
-msgid "Select payment gateways"
-msgstr ""
-
 #: includes/admin/emails/class-subscription-reminder-email.php:875
 msgid "All, except %s."
 msgstr ""
@@ -710,7 +750,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: includes/admin/emails/class-subscription-reminder-email.php:915, templates/shortcode-subscription-edit.php:210
+#: includes/admin/emails/class-subscription-reminder-email.php:915
 msgid "Update"
 msgstr ""
 
@@ -780,10 +820,6 @@ msgstr ""
 msgid "Please click the link to access your subscription donations on <a target=\"_blank\" href=\"%1$s\">%1$s</a>. If you did not request this email, please contact <a href=\"mailto:%2$s\">%2$s</a>."
 msgstr ""
 
-#: includes/admin/emails/class-subscriptions-email-access.php:311
-msgid "Sincerely,"
-msgstr ""
-
 #: includes/admin/emails/view/add-reminder-buttons.php:5
 msgid "Add Renewal Reminder"
 msgstr ""
@@ -804,7 +840,7 @@ msgstr ""
 msgid "Content Type"
 msgstr ""
 
-#: includes/admin/emails/view/add-reminder-buttons.php:73, includes/admin/subscriptions-details.php:138, includes/admin/subscriptions-details.php:155, includes/admin/subscriptions-details.php:174, includes/give-recurring-scripts.php:110
+#: includes/admin/emails/view/add-reminder-buttons.php:73, includes/admin/subscriptions-details.php:138, includes/admin/subscriptions-details.php:155, includes/admin/subscriptions-details.php:174, includes/give-recurring-scripts.php:112
 msgid "Edit"
 msgstr ""
 
@@ -852,11 +888,11 @@ msgstr ""
 msgid "one time"
 msgstr ""
 
-#: includes/admin/export-donation.php:124, includes/give-recurring-template.php:285, includes/give-subscription.php:911, templates/shortcode-subscriptions.php:191
+#: includes/admin/export-donation.php:124, includes/give-recurring-template.php:290, includes/give-subscription.php:942, templates/shortcode-subscriptions.php:174
 msgid "Ongoing"
 msgstr ""
 
-#: includes/admin/give-recurring-activation.php:33, includes/admin/give-recurring-install.php:164, includes/admin/metabox.php:225, includes/admin/settings.php:38
+#: includes/admin/give-recurring-activation.php:33, includes/admin/give-recurring-install.php:170, includes/admin/metabox.php:225, includes/admin/settings.php:38
 msgid "Recurring Donations"
 msgstr ""
 
@@ -882,36 +918,40 @@ msgid_plural "Renewal Donations"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/give-recurring-filters.php:30
-msgid "Recurring Emails"
-msgstr ""
-
-#: includes/admin/give-recurring-filters.php:31
-msgid "Synchronizer Logs"
-msgstr ""
-
-#: includes/admin/give-recurring-filters.php:90
-msgid "Sorry, no log found for ID %s"
-msgstr ""
-
-#: includes/admin/give-recurring-filters.php:102
-msgid "Return to Sync Log List"
-msgstr ""
-
-#: includes/admin/give-recurring-filters.php:160
+#: includes/admin/give-recurring-filters.php:35
 msgid "Donation Recurring Page"
 msgstr ""
 
-#: includes/admin/give-recurring-install.php:134
+#: includes/admin/give-recurring-filters.php:301, includes/admin/give-recurring-filters.php:309
+msgid "No subscriptions found."
+msgstr ""
+
+#: includes/admin/give-recurring-filters.php:302
+msgid "Your subscription history will appear here, but first, you need a donation form!"
+msgstr ""
+
+#: includes/admin/give-recurring-filters.php:310
+msgid "When your first recurring donation occurs a record of the subscription will appear here. Have you set up a recurring donation form yet?"
+msgstr ""
+
+#: includes/admin/give-recurring-filters.php:311
+msgid "View All Donation Forms"
+msgstr ""
+
+#: includes/admin/give-recurring-filters.php:315
+msgid "Need help? Learn more about %sSubscriptions%2$s."
+msgstr ""
+
+#: includes/admin/give-recurring-install.php:120
 msgid "Give Subscriber"
 msgstr ""
 
-#: includes/admin/give-recurring-install.php:253
+#: includes/admin/give-recurring-install.php:249
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> core plugin installed and activated for the Recurring Donations add-on to activate."
 msgstr ""
 
-#: includes/admin/give-recurring-install.php:266
-msgid "<strong>Activation Error:</strong> You must have <a href=\"%1$s\" target=\"_blank\">Give</a> version %2$s+ for the Recurring Donations add-on to activate."
+#: includes/admin/give-recurring-install.php:268
+msgid "<strong>Activation Error:</strong> You must have <a href=\"%1$s\" target=\"_blank\">Give</a> version %2$s for the Recurring Donations add-on to activate."
 msgstr ""
 
 #: includes/admin/metabox.php:36
@@ -926,7 +966,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: includes/admin/metabox.php:144, includes/admin/metabox.php:666
+#: includes/admin/metabox.php:144, includes/admin/metabox.php:667
 msgid "For"
 msgstr ""
 
@@ -970,11 +1010,11 @@ msgstr ""
 msgid "The \"Donor's Choice\" option allows the donor to select the time period (commonly also referred as the \"frequency\") of their subscription. The \"Preset Period\" option provides only the selected period for the donor's subscription."
 msgstr ""
 
-#: includes/admin/metabox.php:253, includes/admin/metabox.php:680
+#: includes/admin/metabox.php:253, includes/admin/metabox.php:681
 msgid "Recurring Options"
 msgstr ""
 
-#: includes/admin/metabox.php:256, includes/admin/metabox.php:683
+#: includes/admin/metabox.php:256, includes/admin/metabox.php:684
 msgid "Choose the recurring billing interval, period, and length of time."
 msgstr ""
 
@@ -1018,7 +1058,7 @@ msgstr ""
 msgid "Subscription TXN ID:"
 msgstr ""
 
-#: includes/admin/metabox.php:653, includes/give-recurring-helpers.php:107
+#: includes/admin/metabox.php:653, includes/give-recurring-helpers.php:110
 msgid "One Time"
 msgstr ""
 
@@ -1035,6 +1075,10 @@ msgid "Month"
 msgstr ""
 
 #: includes/admin/metabox.php:657
+msgid "Quarter"
+msgstr ""
+
+#: includes/admin/metabox.php:658
 msgid "Year"
 msgstr ""
 
@@ -1060,15 +1104,15 @@ msgstr ""
 msgid "Choose a page"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:12
+#: includes/admin/subscriptions-details.php:11
 msgid "You are not permitted to view this data."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:17, includes/admin/subscriptions-details.php:25, includes/gateways/give-recurring-gateway.php:550, includes/gateways/give-recurring-gateway.php:757, includes/give-recurring-shortcodes.php:118, includes/give-recurring-shortcodes.php:171
+#: includes/admin/subscriptions-details.php:16, includes/admin/subscriptions-details.php:25, includes/gateways/give-recurring-gateway.php:612, includes/gateways/give-recurring-gateway.php:858, includes/give-recurring-shortcodes.php:136, includes/give-recurring-shortcodes.php:190
 msgid "Invalid subscription ID."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:30, templates/shortcode-subscription-receipt.php:45
+#: includes/admin/subscriptions-details.php:30, src/Receipt/UpdateDonationReceipt.php:38, templates/shortcode-subscription-receipt.php:45
 msgid "Subscription Details"
 msgstr ""
 
@@ -1124,208 +1168,192 @@ msgstr ""
 msgid "Subscription Status:"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:205
+#: includes/admin/subscriptions-details.php:214
 msgid "Changing the expiration date will not affect when renewal payments are processed."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:208
+#: includes/admin/subscriptions-details.php:217
 msgid "Changing the profile ID can result in renewals not being processed. Do this with caution."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:224
+#: includes/admin/subscriptions-details.php:233
 msgid "Sync Subscription"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:234
+#: includes/admin/subscriptions-details.php:243
 msgid "Update Subscription"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:241
+#: includes/admin/subscriptions-details.php:250
 msgid "Cancel Subscription"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:245
+#: includes/admin/subscriptions-details.php:254
 msgid "Delete Subscription"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:254
+#: includes/admin/subscriptions-details.php:263
 msgid "Syncing Subscription %1$s with %2$s"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:259
+#: includes/admin/subscriptions-details.php:268
 msgid "Syncing Subscription..."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:261
+#: includes/admin/subscriptions-details.php:270
 msgid "Close"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:263
+#: includes/admin/subscriptions-details.php:272
 msgid "Resync"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:275
+#: includes/admin/subscriptions-details.php:294
 msgid "Subscription Value"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:289, includes/admin/subscriptions-details.php:331
+#: includes/admin/subscriptions-details.php:310, includes/admin/subscriptions-details.php:352
 msgid "Add Renewal"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:299
+#: includes/admin/subscriptions-details.php:320
 msgid "Manually record a renewal donation below. Please note that this will not charge the donor nor create the renewal at the gateway."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:311, includes/admin/subscriptions-details.php:349, includes/admin/synchronizer/class-recurring-sync-log.php:60
+#: includes/admin/subscriptions-details.php:332, includes/admin/subscriptions-details.php:370
 msgid "Date"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:323
+#: includes/admin/subscriptions-details.php:344
 msgid "Transaction ID"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:335
+#: includes/admin/subscriptions-details.php:356
 msgid "Update Renewal Date"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:347
+#: includes/admin/subscriptions-details.php:368
 msgid "ID"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:364, includes/admin/subscriptions-details.php:397
+#: includes/admin/subscriptions-details.php:385, includes/admin/subscriptions-details.php:418
 msgid "View Donation %s Details"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:375
+#: includes/admin/subscriptions-details.php:396
 msgid "No renewal transactions found. When this subscription renews you will see the renewal transactions display in this section."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:382
+#: includes/admin/subscriptions-details.php:403
 msgid "Initial Donation:"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:418
+#: includes/admin/subscriptions-details.php:439
 msgid "Subscription Notes"
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:435
+#: includes/admin/subscriptions-details.php:458
 msgid "No subscription notes."
 msgstr ""
 
-#: includes/admin/subscriptions-details.php:441
+#: includes/admin/subscriptions-details.php:464
 msgid "Add Note"
 msgstr ""
 
-#: includes/admin/subscriptions.php:60, includes/admin/subscriptions.php:121, includes/admin/subscriptions.php:159, includes/gateways/give-recurring-gateway.php:353, includes/gateways/give-recurring-gateway.php:629
+#: includes/admin/subscriptions.php:70, includes/admin/subscriptions.php:131, includes/admin/subscriptions.php:169, includes/gateways/give-recurring-gateway.php:357, includes/gateways/give-recurring-gateway.php:721
 msgid "Nonce verification failed."
 msgstr ""
 
-#: includes/admin/synchronizer/class-recurring-sync-log.php:59
-msgid "Log ID"
-msgstr ""
-
-#: includes/admin/synchronizer/class-recurring-sync-log.php:61, includes/admin/tools/class-give-export-subscriptions.php:151
-msgid "Subscription ID"
-msgstr ""
-
-#: includes/admin/synchronizer/class-recurring-sync-log.php:62
-msgid "Gateway"
-msgstr ""
-
-#: includes/admin/synchronizer/class-recurring-sync-log.php:63
-msgid "View Log"
-msgstr ""
-
-#: includes/admin/synchronizer/class-recurring-sync-log.php:109, includes/admin/synchronizer/class-recurring-sync-log.php:125
-msgid "Not found"
-msgstr ""
-
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:57
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:63
 msgid "#%1$s Sync Subscription #%2$s with %3$s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:179
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:188
 msgid "Retrieving Subscription Details from Gateway..."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:186
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:195
 msgid "There was an error connecting to the gateway. Please check that you have configured the gateway properly in Give."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:193
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:202
 msgid "Subscription Status"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:196
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:205
 msgid "Billing Period"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:199
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:208
 msgid "Date Created"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:229
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:238
 msgid "Checking %s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:230
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:239
 msgid "Current %1$s: %2$s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:231
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:240
 msgid "Gateway %1$s: %2$s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:235
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:244
 msgid "Gateway failed to return a value for %s."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:242
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:251
 msgid "Mismatch Detected: %s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:243
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:252
 msgid "Fixing Mismatch..."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:250
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:259
 msgid "Mismatch Fixed: %s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:253
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:262
 msgid "Mismatch could not be fixed: %s"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:258
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:267
 msgid "%s is in sync."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:262
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:271
 msgid "The Subscription or Gateway could not be setup"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:423
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:436
 msgid "This subscription cannot be synced."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:427
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:441
 msgid "Checking subscription payments"
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:454
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:468
 msgid "A donation made on %s is missing and has been added."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:473
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:487
 msgid "The donation made on %s is already recorded."
 msgstr ""
 
-#: includes/admin/synchronizer/class-subscription-synchronizer.php:488
+#: includes/admin/synchronizer/class-subscription-synchronizer.php:502
 msgid "%s renewal donations are in sync."
 msgstr ""
 
 #: includes/admin/tools/class-give-export-subscriptions-history.php:47
 msgid "Subscriptions related payments only:"
+msgstr ""
+
+#: includes/admin/tools/class-give-export-subscriptions.php:151, includes/gateways/razorpay/class-give-recurring-razorpay.php:105
+msgid "Subscription ID"
 msgstr ""
 
 #: includes/admin/tools/class-give-export-subscriptions.php:152
@@ -1372,207 +1400,219 @@ msgstr ""
 msgid "Generate CSV"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:150, includes/gateways/give-recurring-authorize.php:144
+#: includes/gateways/give-recurring-authorize_echeck.php:169, includes/gateways/give-recurring-authorize.php:156
 msgid "The Authorize.net gateway is not activated."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:154, includes/gateways/give-recurring-authorize.php:148
+#: includes/gateways/give-recurring-authorize_echeck.php:173, includes/gateways/give-recurring-authorize.php:160
 msgid "The API Login ID or Transaction key is missing."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:182, includes/gateways/give-recurring-authorize.php:175
+#: includes/gateways/give-recurring-authorize_echeck.php:203, includes/gateways/give-recurring-authorize.php:187
 msgid "Could not generate a subscription ID from the API response. Please contact GiveWP support."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:190, includes/gateways/give-recurring-authorize.php:183
+#: includes/gateways/give-recurring-authorize_echeck.php:211, includes/gateways/give-recurring-authorize.php:195
 msgid "Gateway Error %1$s: %2$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:443, includes/gateways/give-recurring-authorize.php:546
+#: includes/gateways/give-recurring-authorize_echeck.php:501, includes/gateways/give-recurring-authorize.php:586
+msgid "You are using an outdated version of the Authorize.net gateway. Please update to accept subscription terminated webhooks."
+msgstr ""
+
+#: includes/gateways/give-recurring-authorize_echeck.php:540, includes/gateways/give-recurring-authorize_echeck.php:581, includes/gateways/give-recurring-authorize.php:624, includes/gateways/give-recurring-authorize.php:664
+msgid "You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks."
+msgstr ""
+
+#: includes/gateways/give-recurring-authorize_echeck.php:622, includes/gateways/give-recurring-authorize.php:704
 msgid "You are using an outdated version of the Authorize.net gateway. Please update to accept renewal webhooks."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:460
+#: includes/gateways/give-recurring-authorize_echeck.php:639
 msgid "The Authorize.net webhook attempted to add a payment that has already been recorded."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:461
+#: includes/gateways/give-recurring-authorize_echeck.php:640
 msgid "Webhook:"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:484
+#: includes/gateways/give-recurring-authorize_echeck.php:663
 msgid "The Recurring Authorize.net gateway could not find the subscription profile ID from the webhook data."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:486, includes/gateways/give-recurring-authorize_echeck.php:502, includes/gateways/give-recurring-authorize_echeck.php:515
+#: includes/gateways/give-recurring-authorize_echeck.php:665, includes/gateways/give-recurring-authorize_echeck.php:681, includes/gateways/give-recurring-authorize_echeck.php:694
 msgid "Response:"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:500
+#: includes/gateways/give-recurring-authorize_echeck.php:679
 msgid "Give could not find the donor's subscription within the database from the response provided by the Authorize.net webhook."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:514
+#: includes/gateways/give-recurring-authorize_echeck.php:693
 msgid "The Recurring Authorize.net gateway could not find the subscription payment number from the webhook data provided."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:664, includes/gateways/give-recurring-authorize.php:742
+#: includes/gateways/give-recurring-authorize_echeck.php:844, includes/gateways/give-recurring-authorize.php:906
 msgid "Please enter your last name."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:794
+#: includes/gateways/give-recurring-authorize_echeck.php:974
 msgid "Access denied. You do not have permissions to call the Authorize.net Transaction Details API. Please"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:796
+#: includes/gateways/give-recurring-authorize_echeck.php:976
 msgid "enable the Transactions Detail API"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:982, includes/gateways/give-recurring-authorize.php:1078, includes/gateways/give-recurring-paypalpro_payflow.php:929, includes/gateways/give-recurring-paypalpro.php:1052, includes/gateways/give-recurring-stripe_ach.php:826, includes/gateways/give-recurring-stripe.php:1423
+#: includes/gateways/give-recurring-authorize_echeck.php:1160, includes/gateways/give-recurring-authorize.php:1239, includes/gateways/give-recurring-gateway.php:1045, includes/gateways/give-recurring-paypalpro_payflow.php:940, includes/gateways/give-recurring-paypalpro.php:1049
 msgid "Please enter the valid subscription amount."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:987
+#: includes/gateways/give-recurring-authorize_echeck.php:1165
 msgid "Missing Profile ID in Authorize eCheck Subscription."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize_echeck.php:1016, includes/gateways/give-recurring-authorize.php:1107
+#: includes/gateways/give-recurring-authorize_echeck.php:1194, includes/gateways/give-recurring-authorize.php:1268
 msgid "There was an error updating your subscription."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:403, includes/gateways/give-recurring-paypalpro.php:918
+#: includes/gateways/give-recurring-authorize.php:443, includes/gateways/give-recurring-paypalpro.php:918
 msgid "Please enter all required fields."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:436
+#: includes/gateways/give-recurring-authorize.php:476
 msgid "There was an error updating your payment method."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:562
+#: includes/gateways/give-recurring-authorize.php:723
 msgid "The Authorize.net webhook attempted to add a payment that has already been recorded. <strong>Webhook:</strong> <br><br> %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:580
+#: includes/gateways/give-recurring-authorize.php:744
 msgid "The Recurring Authorize.net gateway could not find the subscription profile ID from the webhook data. <br><br> %1$s <br><br> <strong>Response:</strong> <br><br> %2$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:590
+#: includes/gateways/give-recurring-authorize.php:754
 msgid "Give could not find the donor's subscription within the database from the response provided by the Authorize.net webhook. <br><br> %1$s <br><br> <strong>Response:</strong> <br><br> %2$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:597
+#: includes/gateways/give-recurring-authorize.php:761
 msgid "The Recurring Authorize.net gateway could not find the subscription payment number from the webhook data provided. <br><br> <strong>Response:</strong> <br><br> %s."
 msgstr ""
 
-#: includes/gateways/give-recurring-authorize.php:870
+#: includes/gateways/give-recurring-authorize.php:1034
 msgid "Access denied. You do not have permissions to call the Authorize.net Transaction Details API. Please <a href=\"%s\" target=\"_blank\">enable the Transactions Detail API</a>."
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:153
+#: includes/gateways/give-recurring-gateway.php:156
 msgid "Please tick the create account button if you want to create a subscription donation"
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:558, includes/gateways/give-recurring-gateway.php:762
+#: includes/gateways/give-recurring-gateway.php:620, includes/gateways/give-recurring-gateway.php:863
 msgid "This subscription cannot be updated."
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:563, includes/gateways/give-recurring-gateway.php:770
+#: includes/gateways/give-recurring-gateway.php:625, includes/gateways/give-recurring-gateway.php:871
 msgid "Invalid subscriber."
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:568, includes/gateways/give-recurring-gateway.php:775
+#: includes/gateways/give-recurring-gateway.php:630, includes/gateways/give-recurring-gateway.php:876
 msgid "User ID and Subscriber do not match."
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:635
+#: includes/gateways/give-recurring-gateway.php:727
 msgid "This subscription cannot be cancelled."
 msgstr ""
 
-#: includes/gateways/give-recurring-gateway.php:861
-msgid "Subscription amount updated, New amount is: %s"
+#: includes/gateways/give-recurring-gateway.php:980
+msgid "Subscription amount updated by donor: Previous amount %1$s, New amount %2$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:154
+#: includes/gateways/give-recurring-gateway.php:1050
+msgid "Please enter the different subscription amount."
+msgstr ""
+
+#: includes/gateways/give-recurring-paypal.php:160
 msgid "Please enter your PayPal email address."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:285
+#: includes/gateways/give-recurring-paypal.php:291
 msgid "PayPal Subscription ID: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:334
+#: includes/gateways/give-recurring-paypal.php:340
 msgid "Payment failed due to invalid amount in PayPal Recurring IPN."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:337, includes/gateways/give-recurring-paypal.php:359, includes/gateways/give-recurring-paypalpro.php:280, includes/gateways/give-recurring-paypalpro.php:288
+#: includes/gateways/give-recurring-paypal.php:343, includes/gateways/give-recurring-paypal.php:365, includes/gateways/give-recurring-paypalpro.php:280, includes/gateways/give-recurring-paypalpro.php:288
 msgid "IPN Error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:337
+#: includes/gateways/give-recurring-paypal.php:343
 msgid "Invalid payment amount in IPN subscr_payment response. IPN data: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:359
+#: includes/gateways/give-recurring-paypal.php:365
 msgid "Invalid currency in IPN response. IPN data: "
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:525, includes/give-recurring-scripts.php:147
+#: includes/gateways/give-recurring-paypal.php:536, includes/give-recurring-scripts.php:149
 msgid "PayPal Standard requires recurring times to be more than 1. Please specify a time with a minimum value of 2 and a maximum value of 52."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:654
+#: includes/gateways/give-recurring-paypal.php:665
 msgid "There was a problem cancelling the subscription, please contact customer support. Error: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:707
+#: includes/gateways/give-recurring-paypal.php:718
 msgid "The following API keys are required in order to process PayPal Standard subscriptions cancellations on site. %1$sClick here%2$s to learn more about PayPal Standard's recurring capabilities and requirements."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:712
+#: includes/gateways/give-recurring-paypal.php:723
 msgid "Live API Username"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:713
+#: includes/gateways/give-recurring-paypal.php:724
 msgid "Enter your live API username"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:718
+#: includes/gateways/give-recurring-paypal.php:729
 msgid "Live API Password"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:719
+#: includes/gateways/give-recurring-paypal.php:730
 msgid "Enter your live API password"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:724
+#: includes/gateways/give-recurring-paypal.php:735
 msgid "Live API Signature"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:725
+#: includes/gateways/give-recurring-paypal.php:736
 msgid "Enter your live API signature"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:730
+#: includes/gateways/give-recurring-paypal.php:741
 msgid "Test API Username"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:731
+#: includes/gateways/give-recurring-paypal.php:742
 msgid "Enter your test API username"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:736
+#: includes/gateways/give-recurring-paypal.php:747
 msgid "Test API Password"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:737
+#: includes/gateways/give-recurring-paypal.php:748
 msgid "Enter your test API password"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:742
+#: includes/gateways/give-recurring-paypal.php:753
 msgid "Test API Signature"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypal.php:743
+#: includes/gateways/give-recurring-paypal.php:754
 msgid "Enter your test API signature"
 msgstr ""
 
@@ -1580,71 +1620,71 @@ msgstr ""
 msgid "Initial donation ID: %1$s / Donation made from: %2$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:253, includes/gateways/give-recurring-paypalpro_payflow.php:401
+#: includes/gateways/give-recurring-paypalpro_payflow.php:263, includes/gateways/give-recurring-paypalpro_payflow.php:411
 msgid "There was a problem creating the recurring subscription."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:297
+#: includes/gateways/give-recurring-paypalpro_payflow.php:307
 msgid "There was a problem connecting to the payment gateway."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:298
+#: includes/gateways/give-recurring-paypalpro_payflow.php:308
 msgid "Payflow Error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:298
+#: includes/gateways/give-recurring-paypalpro_payflow.php:308
 msgid "Error %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:318
+#: includes/gateways/give-recurring-paypalpro_payflow.php:328
 msgid "PayPal Pro (Payflow) initial payment completed (PNREF: %s)"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:327
+#: includes/gateways/give-recurring-paypalpro_payflow.php:337
 msgid "The payment was flagged by a fraud filter. Please check your PayPal Manager account to review and accept or deny the payment and then mark this donation complete or cancelled. Message from PayPal: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:335
+#: includes/gateways/give-recurring-paypalpro_payflow.php:345
 msgid "PayPal Pro (Payflow) payment failed. Payment was rejected due to an error: "
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:336
+#: includes/gateways/give-recurring-paypalpro_payflow.php:346
 msgid "Payment error:"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:343, includes/gateways/give-recurring-paypalpro_payflow.php:414
+#: includes/gateways/give-recurring-paypalpro_payflow.php:353, includes/gateways/give-recurring-paypalpro_payflow.php:424
 msgid "Connection error:"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:385, includes/gateways/give-recurring-paypalpro.php:953, includes/gateways/give-recurring-paypalpro.php:1085
+#: includes/gateways/give-recurring-paypalpro_payflow.php:395, includes/gateways/give-recurring-paypalpro.php:953, includes/gateways/give-recurring-paypalpro.php:1082
 msgid "An unidentified error occurred."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:401
+#: includes/gateways/give-recurring-paypalpro_payflow.php:411
 msgid "It does not appear that this Payflow account has recurring enabled."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:444
+#: includes/gateways/give-recurring-paypalpro_payflow.php:454
 msgid "An error occurred, please try again. Error:.$response->get_error_message"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:459, includes/gateways/give-recurring-paypalpro.php:820, includes/gateways/give-recurring-paypalpro.php:989, includes/gateways/give-recurring-paypalpro.php:1121
+#: includes/gateways/give-recurring-paypalpro_payflow.php:469, includes/gateways/give-recurring-paypalpro.php:820, includes/gateways/give-recurring-paypalpro.php:989, includes/gateways/give-recurring-paypalpro.php:1118
 msgid "Something has gone wrong, please try again"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:562
+#: includes/gateways/give-recurring-paypalpro_payflow.php:572
 msgid "No response message from PayPal provided"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:565, includes/gateways/give-recurring-stripe_ach.php:306, includes/gateways/give-recurring-stripe_ach.php:342, includes/gateways/give-recurring-stripe_ach.php:384, includes/gateways/give-recurring-stripe_ach.php:761, includes/gateways/give-recurring-stripe.php:234, includes/gateways/give-recurring-stripe.php:683, includes/gateways/give-recurring-stripe.php:914, includes/gateways/give-recurring-stripe.php:929, includes/gateways/give-recurring-stripe.php:1207
+#: includes/gateways/give-recurring-paypalpro_payflow.php:575, includes/gateways/give-recurring-stripe_ach.php:107, includes/gateways/give-recurring-stripe_ach.php:115, includes/gateways/give-recurring-stripe_ach.php:350, includes/gateways/give-recurring-stripe_ach.php:393, includes/gateways/give-recurring-stripe_ach.php:663, includes/gateways/give-recurring-stripe_ach.php:778, includes/gateways/give-recurring-stripe_apple_pay.php:198, includes/gateways/give-recurring-stripe_apple_pay.php:276, includes/gateways/give-recurring-stripe_apple_pay.php:709, includes/gateways/give-recurring-stripe_becs.php:255, includes/gateways/give-recurring-stripe_becs.php:339, includes/gateways/give-recurring-stripe_becs.php:783, includes/gateways/give-recurring-stripe_becs.php:1311, includes/gateways/give-recurring-stripe_becs.php:1319, includes/gateways/give-recurring-stripe_checkout.php:375, includes/gateways/give-recurring-stripe_checkout.php:459, includes/gateways/give-recurring-stripe_checkout.php:867, includes/gateways/give-recurring-stripe_checkout.php:1270, includes/gateways/give-recurring-stripe_checkout.php:1278, includes/gateways/give-recurring-stripe_google_pay.php:197, includes/gateways/give-recurring-stripe_google_pay.php:275, includes/gateways/give-recurring-stripe_google_pay.php:708, includes/gateways/give-recurring-stripe_sepa.php:231, includes/gateways/give-recurring-stripe_sepa.php:315, includes/gateways/give-recurring-stripe_sepa.php:748, includes/gateways/give-recurring-stripe_sepa.php:950, includes/gateways/give-recurring-stripe_sepa.php:958, includes/gateways/give-recurring-stripe.php:249, includes/gateways/give-recurring-stripe.php:326, includes/gateways/give-recurring-stripe.php:759, includes/gateways/give-recurring-stripe.php:1223, includes/gateways/give-recurring-stripe.php:1231, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:243, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:258, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:454, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:557
 msgid "Stripe Error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:565, includes/gateways/give-recurring-stripe.php:917, includes/gateways/give-recurring-stripe.php:932
+#: includes/gateways/give-recurring-paypalpro_payflow.php:575, includes/gateways/give-recurring-stripe_ach.php:107, includes/gateways/give-recurring-stripe_ach.php:115, includes/gateways/give-recurring-stripe_becs.php:1311, includes/gateways/give-recurring-stripe_becs.php:1319, includes/gateways/give-recurring-stripe_checkout.php:1270, includes/gateways/give-recurring-stripe_checkout.php:1278, includes/gateways/give-recurring-stripe_sepa.php:950, includes/gateways/give-recurring-stripe_sepa.php:958, includes/gateways/give-recurring-stripe.php:1223, includes/gateways/give-recurring-stripe.php:1231, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:246, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:261
 msgid "The Stripe Gateway returned an error while cancelling a subscription. Details: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro_payflow.php:566, includes/gateways/give-recurring-stripe.php:921, includes/gateways/give-recurring-stripe.php:936
+#: includes/gateways/give-recurring-paypalpro_payflow.php:576, includes/gateways/give-recurring-stripe_ach.php:108, includes/gateways/give-recurring-stripe_ach.php:116, includes/gateways/give-recurring-stripe_becs.php:1312, includes/gateways/give-recurring-stripe_becs.php:1320, includes/gateways/give-recurring-stripe_checkout.php:1271, includes/gateways/give-recurring-stripe_checkout.php:1279, includes/gateways/give-recurring-stripe_sepa.php:951, includes/gateways/give-recurring-stripe_sepa.php:959, includes/gateways/give-recurring-stripe.php:1224, includes/gateways/give-recurring-stripe.php:1232, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:250, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:265
 msgid "An error occurred while cancelling the donation. Please try again."
 msgstr ""
 
@@ -1724,11 +1764,11 @@ msgstr ""
 msgid "Subscription donation successful"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:402, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:170
+#: includes/gateways/give-recurring-paypalpro.php:402, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:172
 msgid "Subscription could not be renewed due to error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:407, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:178
+#: includes/gateways/give-recurring-paypalpro.php:407, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:180
 msgid "Invalid IPN for pay and renew transaction"
 msgstr ""
 
@@ -1736,11 +1776,11 @@ msgstr ""
 msgid "Subscription Cancelled"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:443, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:254
+#: includes/gateways/give-recurring-paypalpro.php:443, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:256
 msgid "Subscription could not be cancelled due to error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:448, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:262
+#: includes/gateways/give-recurring-paypalpro.php:448, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:264
 msgid "Invalid IPN to cancel a subscription"
 msgstr ""
 
@@ -1748,11 +1788,11 @@ msgstr ""
 msgid "Subscription marked as complete"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:485, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:212
+#: includes/gateways/give-recurring-paypalpro.php:485, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:214
 msgid "Subscription could not be completed due to error"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:490, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:220
+#: includes/gateways/give-recurring-paypalpro.php:490, tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:222
 msgid "Invalid IPN to complete a subscription"
 msgstr ""
 
@@ -1812,176 +1852,192 @@ msgstr ""
 msgid "PayPal subscription creation failed."
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:982, includes/gateways/give-recurring-paypalpro.php:1114
+#: includes/gateways/give-recurring-paypalpro.php:982, includes/gateways/give-recurring-paypalpro.php:1111
 msgid "Error updating subscription"
 msgstr ""
 
-#: includes/gateways/give-recurring-paypalpro.php:1101
+#: includes/gateways/give-recurring-paypalpro.php:1098
 msgid "PayPal subscription update failed."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:137, includes/gateways/give-recurring-stripe_ach.php:161
+#: includes/gateways/give-recurring-stripe_ach.php:192, includes/gateways/give-recurring-stripe_ach.php:216
 msgid "Missing Stripe Token"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:137
+#: includes/gateways/give-recurring-stripe_ach.php:192
 msgid "The Stripe ACH gateway failed to generate the Plaid token."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:142
+#: includes/gateways/give-recurring-stripe_ach.php:197
 msgid "Missing Stripe Account ID"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:142
+#: includes/gateways/give-recurring-stripe_ach.php:197
 msgid "The Stripe ACH gateway failed to generate the Plaid account ID."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:161
+#: includes/gateways/give-recurring-stripe_ach.php:216
 msgid "The Stripe ACH gateway failed to make the call to the Plaid server to get the Stripe bank account token along with the Plaid access token that can be used for other Plaid API requests. Details: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:162
+#: includes/gateways/give-recurring-stripe_ach.php:217
 msgid "There was a problem communicating with the payment gateway. Please try again."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:188
+#: includes/gateways/give-recurring-stripe_ach.php:243
 msgid "Plaid API Error"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:188
+#: includes/gateways/give-recurring-stripe_ach.php:243
 msgid "An error occurred when processing a donation via Plaid's API. Details: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:189
+#: includes/gateways/give-recurring-stripe_ach.php:244
 msgid "There was an API error received from the payment gateway. Please try again."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:306, includes/gateways/give-recurring-stripe.php:237
+#: includes/gateways/give-recurring-stripe_ach.php:350, includes/gateways/give-recurring-stripe_apple_pay.php:201, includes/gateways/give-recurring-stripe_becs.php:258, includes/gateways/give-recurring-stripe_checkout.php:378, includes/gateways/give-recurring-stripe_google_pay.php:200, includes/gateways/give-recurring-stripe_sepa.php:234, includes/gateways/give-recurring-stripe.php:252, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:560
 msgid "An error while subscribing a customer to a plan. Details: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:307, includes/gateways/give-recurring-stripe_ach.php:343, includes/gateways/give-recurring-stripe_ach.php:887, includes/gateways/give-recurring-stripe.php:241, includes/gateways/give-recurring-stripe.php:684, includes/gateways/give-recurring-stripe.php:1484
+#: includes/gateways/give-recurring-stripe_ach.php:351, includes/gateways/give-recurring-stripe_ach.php:664, includes/gateways/give-recurring-stripe_ach.php:899, includes/gateways/give-recurring-stripe_apple_pay.php:205, includes/gateways/give-recurring-stripe_apple_pay.php:277, includes/gateways/give-recurring-stripe_becs.php:262, includes/gateways/give-recurring-stripe_becs.php:340, includes/gateways/give-recurring-stripe_checkout.php:382, includes/gateways/give-recurring-stripe_checkout.php:460, includes/gateways/give-recurring-stripe_google_pay.php:204, includes/gateways/give-recurring-stripe_google_pay.php:276, includes/gateways/give-recurring-stripe_sepa.php:238, includes/gateways/give-recurring-stripe_sepa.php:316, includes/gateways/give-recurring-stripe_sepa.php:839, includes/gateways/give-recurring-stripe.php:256, includes/gateways/give-recurring-stripe.php:327, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:455, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:564
 msgid "An error occurred while processing the donation. Please try again."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:342, includes/gateways/give-recurring-stripe.php:683
-msgid "The Stripe Gateway returned an error while creating a plan. Details: %s"
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe_ach.php:369
+#: includes/gateways/give-recurring-stripe_ach.php:378
 msgid "The Stripe payment gateway returned an error while processing the donation."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:373
+#: includes/gateways/give-recurring-stripe_ach.php:382
 msgid "Message: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:375
+#: includes/gateways/give-recurring-stripe_ach.php:384
 msgid "Code: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:380
+#: includes/gateways/give-recurring-stripe_ach.php:389
 msgid "The Stripe API request was invalid, please try again."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:562, includes/gateways/give-recurring-stripe_ach.php:606, includes/gateways/give-recurring-stripe.php:538, includes/gateways/give-recurring-stripe.php:582
+#: includes/gateways/give-recurring-stripe_ach.php:524, includes/gateways/give-recurring-stripe_ach.php:568, includes/gateways/give-recurring-stripe_apple_pay.php:326, includes/gateways/give-recurring-stripe_apple_pay.php:370, includes/gateways/give-recurring-stripe_becs.php:400, includes/gateways/give-recurring-stripe_becs.php:444, includes/gateways/give-recurring-stripe_checkout.php:509, includes/gateways/give-recurring-stripe_checkout.php:553, includes/gateways/give-recurring-stripe_google_pay.php:325, includes/gateways/give-recurring-stripe_google_pay.php:369, includes/gateways/give-recurring-stripe_sepa.php:365, includes/gateways/give-recurring-stripe_sepa.php:409, includes/gateways/give-recurring-stripe.php:376, includes/gateways/give-recurring-stripe.php:420
 msgid "Charge %1$s refunded in Stripe. Refund ID: %1$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:573, includes/gateways/give-recurring-stripe_ach.php:617, includes/gateways/give-recurring-stripe.php:549, includes/gateways/give-recurring-stripe.php:593
+#: includes/gateways/give-recurring-stripe_ach.php:535, includes/gateways/give-recurring-stripe_ach.php:579, includes/gateways/give-recurring-stripe_apple_pay.php:337, includes/gateways/give-recurring-stripe_apple_pay.php:381, includes/gateways/give-recurring-stripe_becs.php:411, includes/gateways/give-recurring-stripe_becs.php:455, includes/gateways/give-recurring-stripe_checkout.php:520, includes/gateways/give-recurring-stripe_checkout.php:564, includes/gateways/give-recurring-stripe_google_pay.php:336, includes/gateways/give-recurring-stripe_google_pay.php:380, includes/gateways/give-recurring-stripe_sepa.php:376, includes/gateways/give-recurring-stripe_sepa.php:420, includes/gateways/give-recurring-stripe.php:387, includes/gateways/give-recurring-stripe.php:431
 msgid "Something went wrong while refunding the charge in Stripe."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:605, includes/gateways/give-recurring-stripe.php:581
+#: includes/gateways/give-recurring-stripe_ach.php:567, includes/gateways/give-recurring-stripe_apple_pay.php:369, includes/gateways/give-recurring-stripe_becs.php:443, includes/gateways/give-recurring-stripe_checkout.php:552, includes/gateways/give-recurring-stripe_google_pay.php:368, includes/gateways/give-recurring-stripe_sepa.php:408, includes/gateways/give-recurring-stripe.php:419
 msgid "Charge %s refunded in Stripe."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:620, includes/gateways/give-recurring-stripe.php:596
+#: includes/gateways/give-recurring-stripe_ach.php:582, includes/gateways/give-recurring-stripe_apple_pay.php:384, includes/gateways/give-recurring-stripe_becs.php:458, includes/gateways/give-recurring-stripe_checkout.php:567, includes/gateways/give-recurring-stripe_google_pay.php:383, includes/gateways/give-recurring-stripe_sepa.php:423, includes/gateways/give-recurring-stripe.php:434
 msgid "Charge %1$s could not be refunded in Stripe. Error: %1$s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:627, includes/gateways/give-recurring-stripe.php:603
+#: includes/gateways/give-recurring-stripe_ach.php:589, includes/gateways/give-recurring-stripe_apple_pay.php:391, includes/gateways/give-recurring-stripe_becs.php:465, includes/gateways/give-recurring-stripe_checkout.php:574, includes/gateways/give-recurring-stripe_google_pay.php:390, includes/gateways/give-recurring-stripe_sepa.php:430, includes/gateways/give-recurring-stripe.php:441
 msgid "Subscription %d cancelled."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:761, includes/gateways/give-recurring-stripe.php:1207
+#: includes/gateways/give-recurring-stripe_ach.php:663, includes/gateways/give-recurring-stripe_apple_pay.php:276, includes/gateways/give-recurring-stripe_becs.php:339, includes/gateways/give-recurring-stripe_checkout.php:459, includes/gateways/give-recurring-stripe_google_pay.php:275, includes/gateways/give-recurring-stripe_sepa.php:315, includes/gateways/give-recurring-stripe.php:326, includes/gateways/stripe/class-give-recurring-stripe-gateway.php:454
+msgid "The Stripe Gateway returned an error while creating a plan. Details: %s"
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_ach.php:778, includes/gateways/give-recurring-stripe_apple_pay.php:709, includes/gateways/give-recurring-stripe_becs.php:783, includes/gateways/give-recurring-stripe_checkout.php:867, includes/gateways/give-recurring-stripe_google_pay.php:708, includes/gateways/give-recurring-stripe_sepa.php:748, includes/gateways/give-recurring-stripe.php:759
 msgid "The Stripe Gateway returned an error while getting invoices a Stripe customer. Details: %s"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:881, includes/gateways/give-recurring-stripe.php:1478
+#: includes/gateways/give-recurring-stripe_ach.php:893, includes/gateways/give-recurring-stripe_sepa.php:833
 msgid "There was an issue creating the Stripe plan."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:911, includes/gateways/give-recurring-stripe.php:1508
+#: includes/gateways/give-recurring-stripe_ach.php:923, includes/gateways/give-recurring-stripe_sepa.php:863
 msgid "Problem in Stripe subscription update."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ach.php:915, includes/gateways/give-recurring-stripe.php:1512
+#: includes/gateways/give-recurring-stripe_ach.php:927, includes/gateways/give-recurring-stripe_sepa.php:867
 msgid "Problem in update subscription amount."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe_ideal.php:51
-msgid "Currently, we are not supporting recurring donations with iDEAL."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:275
-msgid "Something went wrong with processing the payment gateway event."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:279
-msgid "Processed event: %s"
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:285
-msgid "Stripe - Webhook Received"
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:288
-msgid "Webhook received with ID %1$s and TYPE %2$s which processed and returned a message %3$s."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:485
-msgid "Charge refunded in Stripe."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:740
+#: includes/gateways/give-recurring-stripe_apple_pay.php:449, includes/gateways/give-recurring-stripe_google_pay.php:448, includes/gateways/give-recurring-stripe.php:499
 msgid "Please enter a name for the credit card."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe.php:745
-msgid "The Stripe Gateway does not appear to be activated."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:750
-msgid "The Stripe publishable key must be entered in settings."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:754
-msgid "The Stripe secret key must be entered in settings."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:1020
-msgid "<strong>Attention:</strong> The Recurring Donations plugin requires the latest version of the Stripe gateway add-on to process donations properly. Please update to the latest version of Stripe to resolve this issue. If your license is active you should see the update available in WordPress. Otherwise, you can access the latest version by <a href=\"%1$s\" target=\"_blank\">logging into your account</a> and visiting <a href=\"%1$s\" target=\"_blank\">your downloads</a> page on the Give website."
-msgstr ""
-
-#: includes/gateways/give-recurring-stripe.php:1342
+#: includes/gateways/give-recurring-stripe_apple_pay.php:865, includes/gateways/give-recurring-stripe_becs.php:1104, includes/gateways/give-recurring-stripe_checkout.php:1033, includes/gateways/give-recurring-stripe_google_pay.php:864, includes/gateways/give-recurring-stripe.php:924
 msgid "There was an error processing your payment, please ensure you have entered your card number correctly."
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe.php:1353
+#: includes/gateways/give-recurring-stripe_apple_pay.php:876, includes/gateways/give-recurring-stripe_becs.php:1115, includes/gateways/give-recurring-stripe_checkout.php:1044, includes/gateways/give-recurring-stripe_google_pay.php:875, includes/gateways/give-recurring-stripe.php:935
 msgid "There was an error processing your payment (Stripe's API is down), please try again"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe.php:1365, includes/gateways/give-recurring-stripe.php:1376
+#: includes/gateways/give-recurring-stripe_apple_pay.php:888, includes/gateways/give-recurring-stripe_apple_pay.php:899, includes/gateways/give-recurring-stripe_becs.php:1127, includes/gateways/give-recurring-stripe_becs.php:1138, includes/gateways/give-recurring-stripe_checkout.php:1056, includes/gateways/give-recurring-stripe_checkout.php:1067, includes/gateways/give-recurring-stripe_google_pay.php:887, includes/gateways/give-recurring-stripe_google_pay.php:898, includes/gateways/give-recurring-stripe.php:947, includes/gateways/give-recurring-stripe.php:958
 msgid "The Stripe API request was invalid, please try again"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe.php:1388
+#: includes/gateways/give-recurring-stripe_apple_pay.php:911, includes/gateways/give-recurring-stripe_becs.php:1150, includes/gateways/give-recurring-stripe_checkout.php:1079, includes/gateways/give-recurring-stripe_google_pay.php:910, includes/gateways/give-recurring-stripe.php:970
 msgid "The API keys entered in settings are incorrect"
 msgstr ""
 
-#: includes/gateways/give-recurring-stripe.php:1392
+#: includes/gateways/give-recurring-stripe_apple_pay.php:915, includes/gateways/give-recurring-stripe_becs.php:1154, includes/gateways/give-recurring-stripe_checkout.php:1083, includes/gateways/give-recurring-stripe_google_pay.php:914, includes/gateways/give-recurring-stripe.php:974
 msgid "There was an error with this payment method. Please try with another card."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_apple_pay.php:1010, includes/gateways/give-recurring-stripe_becs.php:1220, includes/gateways/give-recurring-stripe_checkout.php:1179, includes/gateways/give-recurring-stripe_google_pay.php:1009, includes/gateways/give-recurring-stripe.php:1069
+msgid "The Stripe gateway returned an error while updating the subscription."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_apple_pay.php:1017, includes/gateways/give-recurring-stripe_becs.php:1227, includes/gateways/give-recurring-stripe_checkout.php:1186, includes/gateways/give-recurring-stripe_google_pay.php:1016
+msgid "The Stripe gateway returned an error while retrieving the plan."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:117, includes/gateways/give-recurring-stripe_checkout.php:135, includes/gateways/give-recurring-stripe_sepa.php:93, includes/gateways/give-recurring-stripe.php:107
+msgid "<strong>Attention:</strong> The Recurring Donations plugin requires the latest version of the Stripe gateway add-on to process donations properly. Please update to the latest version of Stripe to resolve this issue. If your license is active you should see the update available in WordPress. Otherwise, you can access the latest version by <a href=\"%1$s\" target=\"_blank\">logging into your account</a> and visiting <a href=\"%1$s\" target=\"_blank\">your downloads</a> page on the Give website."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:881
+msgid "Bank Account Info"
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:889
+msgid "This is a secure SSL encrypted payment."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:905, includes/gateways/give-recurring-stripe_becs.php:916, includes/gateways/give-recurring-stripe_becs.php:924
+msgid "Notice:"
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:906
+msgid "Mandate form fields are disabled because Stripe is not connected and your site is not running securely over HTTPS."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:917
+msgid "Mandate form fields are disabled because Stripe is not connected."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:925
+msgid "Mandate form fields are disabled because your site is not running securely over HTTPS."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_becs.php:932
+msgid "Bank Account"
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe_ideal.php:56
+msgid "Currently, we are not supporting recurring donations with iDEAL."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe.php:1320
+msgid "Stripe Payment Method Error"
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe.php:1321
+msgid "The payment method failed to generate during a recurring donation. This is usually caused by a JavaScript error on the page preventing Stripe’s JavaScript from running correctly. Reach out to GiveWP support for assistance."
+msgstr ""
+
+#: includes/gateways/give-recurring-stripe.php:1323
+msgid "Unable to generate Payment Method ID. Please contact a site administrator for assistance."
 msgstr ""
 
 #: includes/gateways/give-recurring-wepay.php:98
@@ -2008,44 +2064,144 @@ msgstr ""
 msgid "The subscription plan in WePay could not be created, please try again."
 msgstr ""
 
-#: includes/gateways/give-recurring-wepay.php:614, includes/give-recurring-scripts.php:151
+#: includes/gateways/give-recurring-wepay.php:614, includes/give-recurring-scripts.php:153
 msgid "WePay does not allow for daily recurring donations. Please select a period other than daily."
 msgstr ""
 
-#: includes/give-recurring-emails.php:92
+#: includes/gateways/razorpay/class-give-recurring-razorpay-webhooks.php:120
+msgid "Razorpay Recurring Webhook Error"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay-webhooks.php:121
+msgid "The Stripe Gateway returned an error while canceling the subscription. Details: Subscription can't be canceled."
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:71
+msgid "Invalid donation"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:76
+msgid "Razorpay Error"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:77
+msgid "Transaction Failed."
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:78
+msgid "Error Detail: %s"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:79
+msgid "Razorpay Response: %s"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:82
+msgid "An error occurred while processing your payment. Please try again."
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:95
+msgid "Customer ID"
+msgstr ""
+
+#: includes/gateways/razorpay/class-give-recurring-razorpay.php:113
+msgid "Payment ID"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-gateway.php:137
+msgid "<strong>Attention:</strong> The Stripe Premium plugin requires the latest version of the Recurring donations add-on to process donations properly. Please update to the latest version of Recurring donations plugin to resolve this issue. If your license is active you should see the update available in WordPress. Otherwise, you can access the latest version by <a href=\"%1$s\" target=\"_blank\">logging into your account</a> and visiting <a href=\"%2$s\" target=\"_blank\">your downloads</a> page on the Give website."
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:42, includes/gateways/stripe/class-give-recurring-stripe-subscription.php:71, includes/gateways/stripe/class-give-recurring-stripe-subscription.php:113
+msgid "Stripe Subscription Error"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:45
+msgid "The Stripe Gateway returned an error while retrieving the subscription. Details: %s"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:49
+msgid "An occurred while retrieving the subscription from Stripe. Please try again."
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:74
+msgid "The Stripe Gateway returned an error while updating the subscription. Details: %s"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:78
+msgid "An occurred while updating the subscription from Stripe. Please try again."
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:105
+msgid "Stripe Subscription Cancellation Error"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:106
+msgid "The Stripe Gateway returned an error while canceling the subscription. Details: No cancellation status."
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:116, includes/gateways/stripe/class-give-recurring-stripe-webhooks.php:153
+msgid "The Stripe Gateway returned an error while canceling the subscription. Details: %s"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-subscription.php:120
+msgid "An occurred while canceling the subscription from Stripe. Please try again."
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-webhooks.php:151
+msgid "Stripe Subscription Can Cancel Error"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-webhooks.php:207
+msgid "Subscription - Renewal Payment Failed"
+msgstr ""
+
+#: includes/gateways/stripe/class-give-recurring-stripe-webhooks.php:307
+msgid "Charge succeeded in Stripe."
+msgstr ""
+
+#: includes/give-recurring-emails.php:99
 msgid "Hello {name},nnYour subscription for {subscription_name} will renew on {expiration}."
 msgstr ""
 
-#: includes/give-recurring-emails.php:93, includes/give-recurring-expirations.php:349, includes/give-recurring-renewals.php:115, includes/give-recurring-renewals.php:147
+#: includes/give-recurring-emails.php:100, includes/give-recurring-expirations.php:349, includes/give-recurring-renewals.php:115, includes/give-recurring-renewals.php:147
 msgid "Your Subscription is About to Renew"
 msgstr ""
 
-#: includes/give-recurring-emails.php:98
+#: includes/give-recurring-emails.php:105
 msgid "Hello {name},nnYour subscription for {subscription_name} will expire on {expiration}."
 msgstr ""
 
-#: includes/give-recurring-emails.php:99, includes/give-recurring-expirations.php:133, includes/give-recurring-expirations.php:169
+#: includes/give-recurring-emails.php:106, includes/give-recurring-expirations.php:133, includes/give-recurring-expirations.php:169
 msgid "Your Subscription is About to Expire"
 msgstr ""
 
-#: includes/give-recurring-emails.php:131
+#: includes/give-recurring-emails.php:139
 msgid "LOG - Subscription .ucfirst$email_type. Email Sent"
 msgstr ""
 
-#: includes/give-recurring-emails.php:230
-msgid "n/a"
-msgstr ""
-
-#: includes/give-recurring-emails.php:290
+#: includes/give-recurring-emails.php:288
 msgid "The donor's email access link for subscription history."
 msgstr ""
 
-#: includes/give-recurring-emails.php:370
+#: includes/give-recurring-emails.php:295
+msgid "The date and time when the next payment attempt will be made."
+msgstr ""
+
+#: includes/give-recurring-emails.php:302
+msgid "The link to update the payment method of the subscription."
+msgstr ""
+
+#: includes/give-recurring-emails.php:382
 msgid "View your subscription history &raquo;"
 msgstr ""
 
-#: includes/give-recurring-emails.php:377
+#: includes/give-recurring-emails.php:389
 msgid "View your subscription history"
+msgstr ""
+
+#: includes/give-recurring-emails.php:460, templates/shortcode-subscription-update.php:129
+msgid "Update Payment Method"
 msgstr ""
 
 #: includes/give-recurring-expirations.php:83
@@ -2116,209 +2272,225 @@ msgstr ""
 msgid "Three months after expiration"
 msgstr ""
 
-#: includes/give-recurring-functions.php:160
+#: includes/give-recurring-functions.php:161
 msgid "System"
 msgstr ""
 
-#: includes/give-recurring-functions.php:179
+#: includes/give-recurring-functions.php:170
 msgid "Delete this subscription note."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:50
+#: includes/give-recurring-functions.php:353
+msgid "You are not permitted to delete the subscription note."
+msgstr ""
+
+#: includes/give-recurring-functions.php:368
+msgid "Unable to delete subscription note. Please try again."
+msgstr ""
+
+#: includes/give-recurring-helpers.php:53
 msgid "%1$s for %2$s %3$s"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:60
+#: includes/give-recurring-helpers.php:63
 msgid "%1$s %3$s for %2$s %3$s"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:84
+#: includes/give-recurring-helpers.php:87
 msgid "%1$s %2$s"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:158
+#: includes/give-recurring-helpers.php:202
 msgid "Every"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:159
+#: includes/give-recurring-helpers.php:203
 msgid "Every two"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:160
+#: includes/give-recurring-helpers.php:204
 msgid "Every three"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:161
+#: includes/give-recurring-helpers.php:205
 msgid "Every four"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:162
+#: includes/give-recurring-helpers.php:206
 msgid "Every five"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:163
+#: includes/give-recurring-helpers.php:207
 msgid "Every six"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:181
+#: includes/give-recurring-helpers.php:225
 msgid "days"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:182
+#: includes/give-recurring-helpers.php:226
 msgid "weeks"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:183
+#: includes/give-recurring-helpers.php:227
 msgid "months"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:184
+#: includes/give-recurring-helpers.php:228
+msgid "quarters"
+msgstr ""
+
+#: includes/give-recurring-helpers.php:229
 msgid "years"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:208
+#: includes/give-recurring-helpers.php:253
 msgid "Daily"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:209
+#: includes/give-recurring-helpers.php:254
 msgid "Weekly"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:211
+#: includes/give-recurring-helpers.php:256
 msgid "Quarterly"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:212
+#: includes/give-recurring-helpers.php:257
 msgid "Semi-Annually"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:213
+#: includes/give-recurring-helpers.php:258
 msgid "Yearly"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:322, includes/give-recurring-helpers.php:332
+#: includes/give-recurring-helpers.php:367, includes/give-recurring-helpers.php:377
 msgid "Custom Amount"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:383
+#: includes/give-recurring-helpers.php:428
 msgid "Untitled Donation Form"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:624, includes/give-recurring-helpers.php:772, includes/give-recurring-helpers.php:1137
+#: includes/give-recurring-helpers.php:669, includes/give-recurring-helpers.php:817, includes/give-recurring-helpers.php:1182
 msgid "once"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:636
+#: includes/give-recurring-helpers.php:681
 msgid "You have chosen to donate %s."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:682
+#: includes/give-recurring-helpers.php:727
 msgid "This is a recurring subscription donation."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1115
+#: includes/give-recurring-helpers.php:1160, src/DonorDashboard/Routes/SubscriptionsRoute.php:299
 msgid "Active"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1116
+#: includes/give-recurring-helpers.php:1161
 msgid "Expired"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1117
+#: includes/give-recurring-helpers.php:1162
 msgid "Completed"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1119
+#: includes/give-recurring-helpers.php:1164
 msgid "Pending"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1120
+#: includes/give-recurring-helpers.php:1165
 msgid "Failing"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1121
+#: includes/give-recurring-helpers.php:1166
 msgid "Suspended"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1301
+#: includes/give-recurring-helpers.php:1346
 msgid "One"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1302
+#: includes/give-recurring-helpers.php:1347
 msgid "Two"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1303
+#: includes/give-recurring-helpers.php:1348
 msgid "Three"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1304
+#: includes/give-recurring-helpers.php:1349
 msgid "Four"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1305
+#: includes/give-recurring-helpers.php:1350
 msgid "Five"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1306
+#: includes/give-recurring-helpers.php:1351
 msgid "Six"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1307
+#: includes/give-recurring-helpers.php:1352
 msgid "Seven"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1308
+#: includes/give-recurring-helpers.php:1353
 msgid "Eight"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1309
+#: includes/give-recurring-helpers.php:1354
 msgid "Nine"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1442, templates/shortcode-subscription-edit.php:50, templates/shortcode-subscription-update.php:50, templates/shortcode-subscriptions.php:37
-msgid "You have not made any recurring donations."
-msgstr ""
-
-#: includes/give-recurring-helpers.php:1449, templates/shortcode-subscription-edit.php:76, templates/shortcode-subscription-update.php:76
+#: includes/give-recurring-helpers.php:1494, templates/shortcode-subscription-edit.php:24, templates/shortcode-subscription-update.php:22
 msgid "Subscription can not be updated."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1471
+#: includes/give-recurring-helpers.php:1519
 msgid "Stripe Customer ID not exist."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1548
+#: includes/give-recurring-helpers.php:1545
+msgid "Stripe - Update Payment Method"
+msgstr ""
+
+#: includes/give-recurring-helpers.php:1547
+msgid "Unable to fetch default payment method of the customer. Details: %1$s"
+msgstr ""
+
+#: includes/give-recurring-helpers.php:1622
 msgid "Only count recurring donations"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1552
-msgid "Calculate goal on the basis of recurring donation only."
+#: includes/give-recurring-helpers.php:1626
+msgid "Calculate the goal on the basis of recurring donations only."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1708
+#: includes/give-recurring-helpers.php:1782
 msgid "The minimum renewal amount for this form is"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1709
+#: includes/give-recurring-helpers.php:1783
 msgid "The maximum renewal amount for this form is"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1736
+#: includes/give-recurring-helpers.php:1810
 msgid "Please update the <strong>Give Currency Switcher</strong> add-on to version 1.3+ to be compatible with the latest version of the Recurring Add-on."
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1807
+#: includes/give-recurring-helpers.php:1903
 msgid "or"
 msgstr ""
 
-#: includes/give-recurring-helpers.php:1814
+#: includes/give-recurring-helpers.php:1910
 msgid "Please switch to the %1$s payment gateway to process a subscription donation."
 msgid_plural "Please switch to either the %1$s payment gateways to process a subscription donation."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/give-recurring-helpers.php:1828
+#: includes/give-recurring-helpers.php:1924
 msgid "Sorry we're unable to process subscription donations with %1$s.%2$s"
 msgstr ""
 
@@ -2367,7 +2539,7 @@ msgid "You have chosen to donate"
 msgstr ""
 
 #: includes/give-recurring-scripts.php:102
-msgid "Are you sure you want to cancel this subscription? This will cancel the subscription at the gateway and the donor will no longer be charged."
+msgid "By canceling this Subscription you will no longer receive any further payments. Are you sure you want to do this?"
 msgstr ""
 
 #: includes/give-recurring-scripts.php:103
@@ -2375,89 +2547,93 @@ msgid "Are you sure you want to delete this subscription?"
 msgstr ""
 
 #: includes/give-recurring-scripts.php:104
+msgid "Are you sure you want to delete this subscription note?"
+msgstr ""
+
+#: includes/give-recurring-scripts.php:105
 msgid "Are you sure you want to synchronize this subscription?"
 msgstr ""
 
 #: includes/give-recurring-scripts.php:106
-msgid "Synchronizing Subscription Details..."
+msgid "Confirm Subscription Sync"
 msgstr ""
 
 #: includes/give-recurring-scripts.php:108
+msgid "Synchronizing Subscription Details..."
+msgstr ""
+
+#: includes/give-recurring-scripts.php:110
 msgid "Synchronizing Subscription Donations..."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:111, templates/shortcode-subscriptions.php:215
+#: includes/give-recurring-scripts.php:113, templates/shortcode-subscriptions.php:201
 msgid "Cancel"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:114
+#: includes/give-recurring-scripts.php:116
 msgid "You must choose at least one or more subscriptions to delete."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:115
+#: includes/give-recurring-scripts.php:117
 msgid "Are you sure you want to permanently delete this subscription?"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:116
+#: includes/give-recurring-scripts.php:118
 msgid "Are you sure you want to permanently delete the selected {subscription_count} subscriptions?"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:119
+#: includes/give-recurring-scripts.php:121
 msgid "You must choose at least one or more subscriptions to set status to {status}."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:120
+#: includes/give-recurring-scripts.php:122
 msgid "Are you sure you want to set status of this subscription to {status}?"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:121
+#: includes/give-recurring-scripts.php:123
 msgid "Are you sure you want to set status of {subscription_count} subscriptions to {status}?"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:143
+#: includes/give-recurring-scripts.php:145
 msgctxt "Referring to billing period"
 msgid "time"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:144
+#: includes/give-recurring-scripts.php:146
 msgctxt "Referring to billing period"
 msgid "times"
 msgstr ""
 
-#: includes/give-recurring-scripts.php:148
+#: includes/give-recurring-scripts.php:150
 msgid "Stripe requires that the Times option be set to 0."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:152
+#: includes/give-recurring-scripts.php:154
 msgid "Authorize.net does not allow for daily recurring donations. Please select a period other than daily."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:153
+#: includes/give-recurring-scripts.php:155
 msgid "GoCardless does not allow for daily recurring donations. Please select a period other than daily."
 msgstr ""
 
-#: includes/give-recurring-scripts.php:158
+#: includes/give-recurring-scripts.php:160
 msgid "<strong>Notice:</strong> If you do not have <a href=\"%1$s\" target=\"_blank\">email access</a> enabled, the donor is required to register or login to complete a subscription donation. Turn on email access to not require registration or login."
 msgstr ""
 
-#: includes/give-recurring-shortcodes.php:143
+#: includes/give-recurring-shortcodes.php:162
 msgid "Invalid Payment Update"
 msgstr ""
 
-#: includes/give-recurring-shortcodes.php:149
+#: includes/give-recurring-shortcodes.php:168
 msgid "Unable to verify payment update. Please try again later."
 msgstr ""
 
-#: includes/give-recurring-shortcodes.php:197
+#: includes/give-recurring-shortcodes.php:217
 msgid "Invalid Subscription Update"
 msgstr ""
 
-#: includes/give-recurring-shortcodes.php:205
+#: includes/give-recurring-shortcodes.php:225
 msgid "Unable to verify subscription update. Please try again later."
-msgstr ""
-
-#: includes/give-recurring-shortcodes.php:290
-msgid "You must be logged in to view your subscriptions."
 msgstr ""
 
 #: includes/give-recurring-template.php:98
@@ -2476,27 +2652,27 @@ msgstr ""
 msgid "%s times"
 msgstr ""
 
-#: includes/give-recurring-template.php:307
+#: includes/give-recurring-template.php:312
 msgid "Renewal Payment Complete: Thank you for donation!"
 msgstr ""
 
-#: includes/give-recurring-template.php:337
+#: includes/give-recurring-template.php:342
 msgid "Manage Subscriptions"
 msgstr ""
 
-#: includes/give-subscription.php:196
+#: includes/give-subscription.php:201
 msgid "Can't get property %s"
 msgstr ""
 
-#: includes/give-subscription.php:283
+#: includes/give-subscription.php:289
 msgid "Status changed from %s to %s"
 msgstr ""
 
-#: includes/give-subscription.php:710
+#: includes/give-subscription.php:741
 msgid "gateway"
 msgstr ""
 
-#: includes/give-subscription.php:714
+#: includes/give-subscription.php:745
 msgid "Subscription #%1$d cancelled by %2$s"
 msgstr ""
 
@@ -2516,36 +2692,140 @@ msgstr ""
 msgid "No subscriptions found!"
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:60, templates/shortcode-subscription-update.php:59
-msgid "Success:"
+#: src/DonorDashboard/Routes/SubscriptionsRoute.php:182, src/DonorDashboard/Routes/SubscriptionsRoute.php:183, src/Receipt/UpdateDonationReceipt.php:162, templates/shortcode-subscription-receipt.php:71, templates/shortcode-subscriptions.php:115
+msgid "N/A"
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:61
+#: src/DonorDashboard/Routes/SubscriptionsRoute.php:295
+msgid "Complete"
+msgstr ""
+
+#: src/DonorDashboard/Routes/SubscriptionsRoute.php:309
+msgid "Unknown"
+msgstr ""
+
+#: src/Email/EmailTags/SubscriptionAmount/Register.php:25
+msgid "Latest recurring amount for subscription."
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/PayPalCommerce.php:103
+msgid "Activate the subscription at PayPal?"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/PayPalCommerce.php:106
+msgid "Cancel the subscription at PayPal?"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/PayPalCommerce.php:109
+msgid "Pause the subscription at PayPal?"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/Repositories/Product.php:195
+msgid "Sorry, We are failed to fetch PayPal product. Please try after some time"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:92
+msgid "We're sorry, your donation failed to process. Please try again or contact site support."
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:305, src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/BillingSubscriptionActivated.php:18
+msgid "Subscription activated in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:308, src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:332, src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/BillingSubscriptionCancelled.php:19
+msgid "Subscription cancelled in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:311, src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/BillingSubscriptionSuspended.php:19
+msgid "Subscription suspended in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/SubscriptionProcessor.php:365
+msgid "Subscription status should be active or suspended> Please review subscription in PayPal dashboard."
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/BillingSubscriptionExpired.php:19
+msgid "Subscription expired in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/PaymentSaleCompleted.php:23
+msgid "Charge Completed in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/PaymentSaleCompleted.php:44, src/PaymentGateways/PayPalCommerce/WebHooks/Listeners/PaymentSaleRefunded.php:18
+msgid "Charge refunded in PayPal"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Plan.php:41, src/PaymentGateways/Stripe/Plan.php:71
+msgid "Stripe - Plan Error"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Plan.php:44
+msgid "The Stripe Gateway returned an error while creating a subscription plan. Details: %s"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Plan.php:74
+msgid "The Stripe Gateway returned an error while retrieving the subscription plan. Details: %s"
+msgstr ""
+
+#: src/Receipt/UpdateDonationReceipt.php:117, templates/shortcode-subscriptions.php:193
+msgid "Edit Amount"
+msgstr ""
+
+#: src/Receipt/UpdateDonationReceipt.php:118
+msgid "Edit amount of subscription"
+msgstr ""
+
+#: src/resources/views/admin/subscription-select-fund.php:11
+msgid "Associated Fund"
+msgstr ""
+
+#: src/resources/views/admin/subscription-select-fund.php:25
+msgid "Default fund"
+msgstr ""
+
+#: src/resources/views/notices/give-inactive.php:5, src/resources/views/notices/give-version-error.php:4
+msgid "Activation Error:"
+msgstr ""
+
+#: src/resources/views/notices/give-inactive.php:6, src/resources/views/notices/give-version-error.php:6
+msgid "You must have"
+msgstr ""
+
+#: src/resources/views/notices/give-inactive.php:7
+msgid "plugin installed and activated for the %s add-on to activate"
+msgstr ""
+
+#: src/resources/views/notices/give-version-error.php:7
+msgid "version"
+msgstr ""
+
+#: src/resources/views/notices/give-version-error.php:8
+msgid "for the %1$s add-on to activate"
+msgstr ""
+
+#: templates/shortcode-subscription-edit.php:16
 msgid "Your subscription amount has been updated."
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:68, templates/shortcode-subscription-edit.php:83, templates/shortcode-subscription-update.php:66, templates/shortcode-subscription-update.php:83
-msgid "Subscription ID is Invalid."
-msgstr ""
-
-#: templates/shortcode-subscription-edit.php:118, templates/shortcode-subscription-update.php:99
+#: templates/shortcode-subscription-edit.php:67, templates/shortcode-subscription-update.php:45
 msgid "Back"
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:124
+#: templates/shortcode-subscription-edit.php:73
 msgid "Update Subscription for"
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:171
+#: templates/shortcode-subscription-edit.php:130
 msgid "Update subscription amount"
 msgstr ""
 
-#: templates/shortcode-subscription-edit.php:175
+#: templates/shortcode-subscription-edit.php:134
 msgid "Renewal Amount:"
 msgstr ""
 
-#: templates/shortcode-subscription-receipt.php:71, templates/shortcode-subscriptions.php:132
-msgid "N/A"
+#: templates/shortcode-subscription-edit.php:175
+msgid "Update Amount"
 msgstr ""
 
 #: templates/shortcode-subscription-receipt.php:78
@@ -2564,58 +2844,58 @@ msgstr ""
 msgid "Progress:"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:60
+#: templates/shortcode-subscription-update.php:15
+msgid "Success:"
+msgstr ""
+
+#: templates/shortcode-subscription-update.php:16
 msgid "Your payment method has been updated."
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:101
+#: templates/shortcode-subscription-update.php:47
 msgid "Update Payment Method for <em>%s</em>"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:124
+#: templates/shortcode-subscription-update.php:75
 msgid "Current Payment method"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:127
+#: templates/shortcode-subscription-update.php:78
 msgid "<span class=\"give-recurring-updated-card-type %1$s\"></span><span class=\"give-recurring-cc-type-name\">%2$s ending in</span><span class=\"give-recurring-cc-last4\">%3$s</span>"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:135
+#: templates/shortcode-subscription-update.php:86
 msgid "<div class=\"give-recurring-cc-right\">%1$s<span class=\"give-recurring-card-expiration\">%2$s / %3$s</span>"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:136
+#: templates/shortcode-subscription-update.php:87
 msgid "Expiration:"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:146
+#: templates/shortcode-subscription-update.php:97
 msgid "Update Payment method"
 msgstr ""
 
-#: templates/shortcode-subscription-update.php:185
-msgid "Update Payment Method"
-msgstr ""
-
-#: templates/shortcode-subscriptions.php:16
+#: templates/shortcode-subscriptions.php:18
 msgid "Notice"
 msgstr ""
 
-#: templates/shortcode-subscriptions.php:16
+#: templates/shortcode-subscriptions.php:18
 msgid "Your subscription has been cancelled."
 msgstr ""
 
-#: templates/shortcode-subscriptions.php:162
+#: templates/shortcode-subscriptions.php:145
 msgid "Auto renew on "
 msgstr ""
 
-#: templates/shortcode-subscriptions.php:200
+#: templates/shortcode-subscriptions.php:183
 msgid "View Receipt"
 msgstr ""
 
-#: templates/shortcode-subscriptions.php:207
+#: templates/shortcode-subscriptions.php:190
 msgid "Update Payment Info"
 msgstr ""
 
-#: templates/shortcode-subscriptions.php:285
+#: templates/shortcode-subscriptions.php:271
 msgid "You have not made any subscription donations."
 msgstr ""

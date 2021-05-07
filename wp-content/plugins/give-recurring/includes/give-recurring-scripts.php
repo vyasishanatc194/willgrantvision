@@ -70,7 +70,6 @@ function give_recurring_admin_scripts( $hook ) {
 	wp_register_style( 'give_recurring_subscription_sync_modal', GIVE_RECURRING_PLUGIN_URL . 'assets/css/give-recurring-admin-modal.css', array( 'give-admin-styles' ), GIVE_RECURRING_VERSION );
 	wp_register_style( 'give_recurring_settings_styles', GIVE_RECURRING_PLUGIN_URL . 'assets/css/give-recurring-admin-settings.css' );
 
-	wp_register_script( 'give_recurring_subscription_sync_modal', GIVE_RECURRING_PLUGIN_URL . 'assets/js/give-recurring-admin-modal.js', array( 'jquery' ), GIVE_RECURRING_VERSION );
 	wp_register_script( 'give_admin_recurring_subscriptions', GIVE_RECURRING_PLUGIN_URL . 'assets/js/give-recurring-admin-subscriptions.js', array( 'jquery' ), GIVE_RECURRING_VERSION );
 	wp_register_script( 'give_admin_recurring_sync_modal', GIVE_RECURRING_PLUGIN_URL . 'assets/js/give-recurring-admin-modal.js', array( 'jquery' ), GIVE_RECURRING_VERSION );
 	wp_register_script( 'give_admin_recurring_synchronizer', GIVE_RECURRING_PLUGIN_URL . 'assets/js/give-recurring-admin-synchronizer.js', array( 'jquery' ), GIVE_RECURRING_VERSION );
@@ -99,9 +98,12 @@ function give_recurring_admin_scripts( $hook ) {
 		wp_enqueue_script( 'give_admin_recurring_subscriptions' );
 
 		$ajax_vars = array(
-			'confirm_cancel'                       => __( 'Are you sure you want to cancel this subscription? This will cancel the subscription at the gateway and the donor will no longer be charged.', 'give-recurring' ),
+			'adminAjaxNonce'                       => wp_create_nonce( 'give_recurring_admin_ajax_secure_nonce' ),
+			'confirm_cancel'                       => esc_html__( 'By canceling this Subscription you will no longer receive any further payments. Are you sure you want to do this?', 'give-recurring' ),
 			'delete_subscription'                  => __( 'Are you sure you want to delete this subscription?', 'give-recurring' ),
+			'delete_subscription_note'             => __( 'Are you sure you want to delete this subscription note?', 'give-recurring' ),
 			'confirm_sync'                         => __( 'Are you sure you want to synchronize this subscription?', 'give-recurring' ),
+			'confirm_sync_modal_title'             => esc_html__( 'Confirm Subscription Sync', 'give-recurring' ),
 			'sync_subscription_details_nonce'      => wp_create_nonce( 'sync-subscription-details' ),
 			'sync_subscription_details'            => __( 'Synchronizing Subscription Details...', 'give-recurring' ),
 			'sync_subscription_transactions_nonce' => wp_create_nonce( 'sync-subscription-transactions' ),

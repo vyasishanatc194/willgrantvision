@@ -7,9 +7,9 @@
  * Author URI:      https://adespresso.com/
  * Text Domain:     pixel-caffeine
  * Domain Path:     /languages
- * Version:         2.3.0
+ * Version:         2.3.3
  * WC requires at least: 4.0.0
- * WC tested up to: 5.0.0
+ * WC tested up to: 5.1.0
  *
  * @package         PixelCaffeine
  */
@@ -24,7 +24,7 @@ if ( ! class_exists( 'PixelCaffeine' ) ) :
 	 * Main PixelCaffeine Class.
 	 *
 	 * @class PixelCaffeine
-	 * @version 2.3.0
+	 * @version 2.3.3
 	 */
 	final class PixelCaffeine {
 
@@ -33,7 +33,7 @@ if ( ! class_exists( 'PixelCaffeine' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '2.3.0';
+		public $version = '2.3.3';
 
 		/**
 		 * The single instance of the class.
@@ -121,7 +121,7 @@ if ( ! class_exists( 'PixelCaffeine' ) ) :
 		 * @return void
 		 */
 		public function includes() {
-			require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+			require_once dirname( __FILE__ ) . '/third-party/vendor/scoper-autoload.php';
 
 			// Include.
 			include_once dirname( __FILE__ ) . '/includes/functions-helpers.php';

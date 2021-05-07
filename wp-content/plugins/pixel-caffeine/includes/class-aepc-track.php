@@ -5,11 +5,11 @@
  * @package Pixel Caffeine
  */
 
-use FacebookAds\Object\ServerSide\UserData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\UserData;
 use PixelCaffeine\FB\User_Data_Factory;
 use PixelCaffeine\ServerSide\Pixel_Event;
 use PixelCaffeine\ServerSide\Server_Side_Tracking;
-use Ramsey\Uuid\Uuid;
+use PixelCaffeine\Dependencies\Ramsey\Uuid\Uuid;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -77,23 +77,25 @@ class AEPC_Track {
 	 */
 	public static function track( $event, $args = array(), $custom_params = array(), $user_data = null, $delay = false ) {
 		$event_params = array();
-		try {
-			$event_id = Uuid::uuid4()->toString();
-		} catch ( Exception $e ) {
-			$logger = new \AEPC_Admin_Logger();
-			$logger->log(
-				sprintf( 'Unable to generate event_id: %s', $e->getMessage() ),
-				array(
-					'exception' => $e,
-				)
-			);
-			$event_id = null;
-		}
 
-		// Get the event_id if any.
-		if ( ! empty( $args['event_id'] ) ) {
+		$event_id = null;
+		if ( ! self::is_server_side_tracking_enabled() ) {
+			unset( $args['event_id'] );
+		} elseif ( ! empty( $args['event_id'] ) ) {
 			$event_id = $args['event_id'];
 			unset( $args['event_id'] );
+		} else {
+			try {
+				$event_id = Uuid::uuid4()->toString();
+			} catch ( Exception $e ) {
+				$logger = new \AEPC_Admin_Logger();
+				$logger->log(
+					sprintf( 'Unable to generate event_id: %s', $e->getMessage() ),
+					array(
+						'exception' => $e,
+					)
+				);
+			}
 		}
 
 		// Check if it must be unique.
@@ -162,18 +164,26 @@ class AEPC_Track {
 
 		$track_type = self::get_track_type( $event );
 
-		$pixel = ( new Pixel_Event( $event_id, $event ) )
+		$pixel = ( new Pixel_Event( $event ) )
 			->set_event_data( $event_params ?: array() )
 			->set_user_data( $user_data )
 			->set_delay( (int) $delay )
 			->must_be_unique( $unique );
 
+		if ( $event_id ) {
+			$pixel->set_event_id( $event_id );
+		}
+
 		// Register event track.
 		if ( $pixel->can_be_tracked( Pixel_Event::TYPE_BROWSER ) ) {
 			if ( ! isset( self::$tracked[ $track_type ][ $event ] ) ) {
-				self::$tracked[ $track_type ][ $event ] = array( $pixel->get_event_id() => $pixel );
+				self::$tracked[ $track_type ][ $event ] = array();
+			}
+
+			if ( $event_id ) {
+				self::$tracked[ $track_type ][ $event ][ $event_id ] = $pixel;
 			} else {
-				self::$tracked[ $track_type ][ $event ][ $pixel->get_event_id() ] = $pixel;
+				self::$tracked[ $track_type ][ $event ][] = $pixel;
 			}
 		}
 

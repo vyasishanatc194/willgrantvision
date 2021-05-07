@@ -27,6 +27,7 @@ class Give_Renewal_Recipient_Email extends Give_Email_Notification {
 		) );
 
 		add_action( 'give_recurring_add_subscription_payment', array( $this, 'setup_email_notification' ), 10, 2 );
+		add_action( 'give_email_links', array( $this, 'handle_renewal_resend_email' ), 0 );
 	}
 
 	/**
@@ -142,6 +143,11 @@ class Give_Renewal_Recipient_Email extends Give_Email_Notification {
 	 * @return bool
 	 */
 	public function setup_email_notification( $payment, $subscription ) {
+		// Check if it is valid payment id or not.
+		if( ! $payment->ID ) {
+			return false;
+		}
+
 		// Sent recipient email.
 		$this->recipient_email = $subscription->donor->email;
 
@@ -167,6 +173,78 @@ class Give_Renewal_Recipient_Email extends Give_Email_Notification {
 		}
 
 		return $sent;
+	}
+
+	/**
+	 * Resend email notification.
+	 *
+	 * @since 1.9.8
+	 *
+	 * @access public
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
+	public function resend_email_notification( $data ) {
+		$donation_id = absint( $data['purchase_id'] );
+
+		if ( empty( $donation_id ) ) {
+			return false;
+		}
+
+		// Get donation payment information.
+		$payment = new Give_Payment( $donation_id );
+
+		$this->can_send_notification( $donation_id );
+
+		$subscription = new Give_Subscription( give_recurring_get_subscription_by( 'payment', $payment->parent_payment ?: $payment->ID ));
+
+		if( $this->setup_email_notification( $payment, $subscription ) ) {
+			wp_redirect( add_query_arg( array(
+				'give-messages[]' => 'email-sent',
+				'give-action'     => false,
+				'purchase_id'     => false,
+			) ) );
+			exit;
+		}
+	}
+
+
+	/**
+	 * Prevent Give core to resend receipt for renewal
+	 *
+	 * @param array $data
+	 *
+	 * @since  1.9.8
+	 * @access public
+	 */
+	public function handle_renewal_resend_email( $data ) {
+		$donation_id = absint( $data['purchase_id'] );
+
+		if ( $donation_id && 'give_subscription' === get_post_status( $donation_id ) ) {
+			remove_action( 'give_email_links', array(
+				Give_Donation_Receipt_Email::get_instance(),
+				'resend_donation_receipt',
+			) );
+			add_action( 'give_email_links', array( $this, 'resend_email_notification' ) );
+		}
+	}
+
+	/**
+	 * Handle user access to send email
+	 *
+	 * @since  1.9.8
+	 * @access private
+	 *
+	 * @param int $donation_id
+	 */
+	private function can_send_notification( $donation_id ){
+		if ( ! current_user_can( 'edit_give_payments', $donation_id ) ) {
+			wp_die( esc_html__( 'You do not have permission to send email notifications.', 'give-recurring' ), esc_html__( 'Error', 'give-recurring' ), array(
+				'response' => 403,
+			) );
+		}
 	}
 }
 

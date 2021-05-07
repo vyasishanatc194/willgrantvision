@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.9.3',
-    'version' => '1.9.3.0',
+    'pretty_version' => '1.9.4',
+    'version' => '1.9.4.0',
     'aliases' => 
     array (
     ),
-    'reference' => '5e64a317823f2d3683f3cf919fb37077e9f97765',
+    'reference' => '1998040d0c6bb47bf9cb71a99cba8d1a3dcb825e',
     'name' => 'desertsnowman/caldera-forms',
   ),
   'versions' => 
@@ -40,21 +40,21 @@
     ),
     'composer/installers' => 
     array (
-      'pretty_version' => 'v1.9.0',
-      'version' => '1.9.0.0',
+      'pretty_version' => 'v1.10.0',
+      'version' => '1.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b93bcf0fa1fccb0b7d176b0967d969691cd74cca',
+      'reference' => '1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d',
     ),
     'desertsnowman/caldera-forms' => 
     array (
-      'pretty_version' => '1.9.3',
-      'version' => '1.9.3.0',
+      'pretty_version' => '1.9.4',
+      'version' => '1.9.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5e64a317823f2d3683f3cf919fb37077e9f97765',
+      'reference' => '1998040d0c6bb47bf9cb71a99cba8d1a3dcb825e',
     ),
     'inpsyde/wonolog' => 
     array (
@@ -169,12 +169,12 @@
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '39d483bdf39be819deabf04ec872eb0b2410b531',
+      'reference' => '5232de97ee3b75b0360528dae24e73db49566ab1',
     ),
     'symfony/translation' => 
     array (

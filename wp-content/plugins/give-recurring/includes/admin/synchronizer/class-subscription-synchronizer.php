@@ -1,5 +1,8 @@
 <?php
 
+use Give\Log\LogFactory;
+use Give\Log\LogRepository;
+
 /**
  * Engine that synchronizes subscriptions in our system and gateway
  *
@@ -28,7 +31,7 @@ class Give_Subscription_Synchronizer {
 	 *
 	 * @var array
 	 */
-	private $payments = array();
+	private $payments = [];
 
 	/**
 	 * [$log_id description]
@@ -42,34 +45,38 @@ class Give_Subscription_Synchronizer {
 	 *
 	 * @var array
 	 */
-	public $messages = array();
+	public $messages = [];
 
 	/**
 	 * Maybe create log.
 	 *
+	 * @since 1.12.2 prevent logging from throwing exception
+	 *
 	 * @param string $post_content The post content.
 	 */
 	private function maybe_create_log( $post_content = '' ) {
+		if ( ! empty( $this->log_id ) ) {
+			return;
+		}
 
-		if ( ! isset( $this->log_id ) ) {
+		$log_title = sprintf(
+			esc_html__( '#%1$s Sync Subscription #%2$s with %3$s', 'give-recurring' ),
+			$this->log_id,
+			$this->subscription->id,
+			give_get_gateway_admin_label( $this->subscription->gateway )
+		);
 
+		$context = [
+			'Subscription ID' => $this->subscription->id,
+			'Additional'      => $post_content,
+			'category'        => 'Recurring Donations',
+			'source'          => give_get_gateway_admin_label( $this->subscription->gateway )
+		];
 
-			$log_title = sprintf( __( '#%1$s Sync Subscription #%2$s with %3$s', 'give-recurring' ), $this->log_id, $this->subscription->id, give_get_gateway_admin_label( $this->subscription->gateway ) );
+		$log = Log::info( $log_title, $context );
 
-			$log = array(
-				'post_title'   => $log_title,
-				'post_type'    => 'give_recur_sync_log',
-				'post_status'  => 'publish',
-				'post_parent'  => 0,
-				'post_content' => $post_content,
-				'log_type'     => false,
-			);
-
-			$this->log_id = wp_insert_post( $log );
-
-			// Save custom meta w/ gateway and sub ID.
-			update_post_meta( $this->log_id, '__give_recurring_sync_log_gateway', give_get_gateway_admin_label( $this->subscription->gateway ) );
-			update_post_meta( $this->log_id, '__give_recurring_sync_log_subscription_id', $this->subscription->id );
+		if ( $log ) {
+			$this->log_id = $log->getId();
 		}
 	}
 
@@ -79,17 +86,19 @@ class Give_Subscription_Synchronizer {
 	 * @return array|null|WP_Post
 	 */
 	private function do_sync_log() {
-
-		$log = array();
+		$log = [];
 
 		$new_log_content = $this->generate_log_content();
 
-		if ( isset( $this->log_id ) ) {
+		if ( ! empty( $this->log_id ) ) {
 
-			$log               = get_post( $this->log_id );
-			$log->post_content = $log->post_content . $new_log_content;
+			if ( empty( $new_log_content ) ) {
+				return null;
+			}
 
-			wp_update_post( $log );
+			$log = give( LogRepository::class )->getLog( $this->log_id );
+			$log->addSupplemental( 'Sync Update', $new_log_content );
+			$log->save();
 
 		} else {
 
@@ -102,7 +111,7 @@ class Give_Subscription_Synchronizer {
 	/**
 	 * Print notice.
 	 *
-	 * @param string $message     The message that appears.
+	 * @param string $message The message that appears.
 	 * @param string $notice_type The type of message.
 	 */
 	public function print_notice( $message, $notice_type = 'normal' ) {
@@ -185,20 +194,20 @@ class Give_Subscription_Synchronizer {
 			if ( false == $gateway_subscription ) {
 				$this->print_notice( __( 'There was an error connecting to the gateway. Please check that you have configured the gateway properly in Give.', 'give-recurring' ), 'error' );
 
-				return array( 'html' => $this->generate_log_content(), 'error' => true );
+				return [ 'html' => $this->generate_log_content(), 'error' => true ];
 			}
 
-			$details = array(
-				'status'         => array(
+			$details = [
+				'status'         => [
 					'label' => __( 'Subscription Status', 'give-recurring' ),
-				),
-				'billing_period' => array(
+				],
+				'billing_period' => [
 					'label' => __( 'Billing Period', 'give-recurring' ),
-				),
-				'created'        => array(
+				],
+				'created'        => [
 					'label' => __( 'Date Created', 'give-recurring' ),
-				),
-			);
+				],
+			];
 
 			foreach ( $details as $key => $detail ) {
 
@@ -267,10 +276,10 @@ class Give_Subscription_Synchronizer {
 			$this->do_sync_log();
 		}
 
-		$out = array(
+		$out = [
 			'html'   => $this->generate_log_content(),
-			'log_id' => $this->log_id
-		);
+			'log_id' => $this->log_id,
+		];
 
 		$this->clear_notices();
 
@@ -292,22 +301,22 @@ class Give_Subscription_Synchronizer {
 		switch ( $key ) {
 			case 'billing_period':
 				// Sync a billing_period mismatch.
-				$updated = $this->subscription->update( array(
-					'period' => $this->normalize_gateway_period( $gateway_data['billing_period'] )
-				) );
+				$updated = $this->subscription->update( [
+					'period' => $this->normalize_gateway_period( $gateway_data['billing_period'] ),
+				] );
 				break;
 			case 'status':
 				// Sync a status mismatch.
 				$new_status = $this->normalize_gateway_stati( $gateway_detail );
-				$updated    = $this->subscription->update( array(
-					'status' => $new_status
-				) );
+				$updated    = $this->subscription->update( [
+					'status' => $new_status,
+				] );
 				break;
 			case 'created':
 				// Sync a date created mismatch.
-				$updated = $this->subscription->update( array(
+				$updated = $this->subscription->update( [
 					'created' => date( 'Y-m-d H:i:s', $gateway_data['created'] ),
-				) );
+				] );
 				break;
 		}
 
@@ -327,21 +336,25 @@ class Give_Subscription_Synchronizer {
 	 */
 	function normalize_gateway_stati( $gateway_status ) {
 
-		$cancelled_array = array(
+		$cancelled_array = [
 			'cancelled',
 			'canceled',
 			'unpaid',
 			'terminated',
 			'vendor inactive',
-			'deactivated by merchant'
-		);
-		$expired_array   = array( 'expired', 'too many failures' );
-		$pending_array   = array( 'pending', 'past_due', 'suspended' );
-		$completed_array = array( 'complete', 'completed' );
+			'deactivated by merchant',
+		];
+		$expired_array   = [ 'expired', 'too many failures' ];
+		$pending_array   = [ 'pending', 'past_due' ];
+		$suspended_array = [ 'suspended' ];
+		$completed_array = [ 'complete', 'completed' ];
 
 		switch ( true ) {
 			case in_array( $gateway_status, $cancelled_array ) :
 				$normalized_status = 'cancelled';
+				break;
+			case in_array( $gateway_status, $suspended_array ) :
+				$normalized_status = 'suspended';
 				break;
 			case in_array( $gateway_status, $expired_array ) :
 				$normalized_status = 'expired';
@@ -373,10 +386,10 @@ class Give_Subscription_Synchronizer {
 	 */
 	function normalize_gateway_period( $gateway_period ) {
 
-		$daily_array   = array( 'days', 'day', 'daily' );
-		$weekly_array  = array( 'week', 'weekly' );
-		$monthly_array = array( 'month', 'mont', 'monthly' );
-		$yearly_array  = array( 'year', 'yearly', 'annually', 'annual' );
+		$daily_array   = [ 'days', 'day', 'daily' ];
+		$weekly_array  = [ 'week', 'weekly' ];
+		$monthly_array = [ 'month', 'mont', 'monthly' ];
+		$yearly_array  = [ 'year', 'yearly', 'annually', 'annual' ];
 
 		switch ( true ) {
 			case in_array( $gateway_period, $daily_array ) :
@@ -421,6 +434,7 @@ class Give_Subscription_Synchronizer {
 
 		if ( ! $can_sync ) {
 			$this->print_notice( __( 'This subscription cannot be synced.', 'give-recurring' ), 'error' );
+
 			return false;
 		}
 
@@ -458,11 +472,11 @@ class Give_Subscription_Synchronizer {
 				);
 
 				// Add missing payment.
-				$this->subscription->add_payment( array(
+				$this->subscription->add_payment( [
 					'amount'         => $gateway_transaction['amount'],
 					'transaction_id' => $gateway_transaction['transaction_id'],
 					'post_date'      => date( 'Y-m-d H:i:s', $gateway_transaction['date'] ),
-				) );
+				] );
 
 			} else {
 
@@ -496,10 +510,10 @@ class Give_Subscription_Synchronizer {
 			$this->do_sync_log();
 		}
 
-		$out = array(
+		$out = [
 			'html'   => $this->generate_log_content(),
 			'log_id' => $this->log_id,
-		);
+		];
 
 		return $out;
 	}
@@ -590,14 +604,14 @@ class Give_Subscription_Synchronizer {
 	 */
 	public function get_details() {
 
-		$details = array(
+		$details = [
 			'status'         => $this->subscription->status,
 			'created'        => strtotime( $this->subscription->created ),
 			'expiration'     => strtotime( $this->subscription->expiration ),
 			'billing_period' => $this->subscription->period,
 			'bill_times'     => $this->subscription->bill_times,
 			'frequency'      => ! empty( $this->subscription->frequency ) ? intval( $this->subscription->frequency ) : 1,
-		);
+		];
 
 		return $details;
 	}

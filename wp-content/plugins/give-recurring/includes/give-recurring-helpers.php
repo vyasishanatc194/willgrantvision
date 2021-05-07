@@ -31,6 +31,9 @@ function give_recurring_pretty_subscription_frequency( $period, $times = false, 
 	}
 
 	$frequency       = '';
+	$frequency_data  = give_recurring_simplify_pretty_subscription_frequency( $period, $interval );
+	$period          = $frequency_data['period'];
+	$interval        = $frequency_data['interval'];
 	$pretty_interval = give_recurring_pretty_interval( $interval );
 	$pretty_periods  = give_recurring_get_default_pretty_periods();
 	$pretty_period   = isset( $pretty_periods[ $period ] ) ? $pretty_periods[ $period ] : '';
@@ -115,6 +118,47 @@ function give_recurring_pretty_subscription_frequency( $period, $times = false, 
 }
 
 /**
+ * This function is used to simplify the terms for the other gateways which can have different words in period.
+ *
+ * Note: Use this function for display purposes, not for storing data to DB.
+ *
+ * @param string $period   Subscription Period.
+ * @param string $interval Subscription Interval.
+ *
+ * @since 1.9.1
+ *
+ * @return array
+ */
+function give_recurring_simplify_pretty_subscription_frequency( $period, $interval ) {
+
+	if ( 'month' === substr( $period, 0, 5 ) ) {
+		if ( 3 === $interval ) {
+			$period   = 'quarter';
+			$interval = 1;
+		} elseif ( 12 === $interval ) {
+			$period   = 'year';
+			$interval = 1;
+		} else {
+			$period = 'month';
+		}
+
+	} elseif ( 'day' === substr( $period, 0, 3 ) ) {
+
+		if ( 7 === $interval ) {
+			$period   = 'week';
+			$interval = 1;
+		} else {
+			$period = 'day';
+		}
+	}
+
+	return array(
+		'period'   => $period,
+		'interval' => $interval,
+	);
+}
+
+/**
  * Get Pretty description of Interval.
  *
  * @since 1.6.0
@@ -178,10 +222,11 @@ function give_recurring_get_default_pretty_intervals() {
  */
 function give_recurring_get_pretty_plural_period( $period ) {
 	$periods = array(
-		'day'   => __( 'days', 'give-recurring' ),
-		'week'  => __( 'weeks', 'give-recurring' ),
-		'month' => __( 'months', 'give-recurring' ),
-		'year'  => __( 'years', 'give-recurring' ),
+		'day'     => __( 'days', 'give-recurring' ),
+		'week'    => __( 'weeks', 'give-recurring' ),
+		'month'   => __( 'months', 'give-recurring' ),
+		'quarter' => __( 'quarters', 'give-recurring' ),
+		'year'    => __( 'years', 'give-recurring' ),
 	);
 
 	$pretty_period = isset( $periods[ $period ] ) ? $periods[ $period ] : '';
@@ -1458,6 +1503,9 @@ function give_recurring_get_card_details( $subscriber, $subscription ) {
 
 	switch ( $gateway ) {
 		case 'stripe':
+		case 'stripe_checkout':
+		case 'stripe_google_pay':
+		case 'stripe_apple_pay':
 			// Get Stripe customer id.
 			$customer_id = Give()->donor_meta->get_meta( $subscriber->id, give_stripe_get_customer_key(), true );
 
@@ -1473,13 +1521,39 @@ function give_recurring_get_card_details( $subscriber, $subscription ) {
 				return false;
 			}
 
-			$customer = \Stripe\Customer::retrieve( $customer_id );
-			$card     = $customer->sources->retrieve( $customer->default_source );
+			try {
 
-			$card_info['last_digit'] = isset( $card->card->last4 ) ? $card->card->last4 : '';
-			$card_info['exp_month']  = isset( $card->card->exp_month ) ? $card->card->exp_month : '';
-			$card_info['exp_year']   = isset( $card->card->exp_year ) ? $card->card->exp_year : '';
-			$card_info['cc_type']    = isset( $card->card->brand ) ? $card->card->brand : '';
+				$subscription_id     = $subscription->profile_id;
+				$stripe_subscription = \Stripe\Subscription::retrieve( $subscription_id );
+
+				if ( ! empty( $stripe_subscription->default_payment_method ) ) {
+					$stripe_payment_method  = new Give_Stripe_Payment_Method();
+					$default_payment_method = $stripe_payment_method->retrieve( $stripe_subscription->default_payment_method );
+					$card                   = $default_payment_method->card;
+				} else {
+					$customer               = \Stripe\Customer::retrieve( $customer_id );
+                    $default_payment_method = ! empty( $customer->default_source ) ?
+                        $customer->default_source :
+                        $customer->invoice_settings->default_payment_method;
+                    $give_payment_method    = new Give_Stripe_Payment_Method();
+					$payment_method_details = $give_payment_method->retrieve( $default_payment_method );
+					$card                   = $payment_method_details->card;
+				}
+
+			} catch( Exception $e ) {
+				give_stripe_record_log(
+					__( 'Stripe - Update Payment Method', 'give-recurring' ),
+					sprintf(
+						__( 'Unable to fetch default payment method of the customer. Details: %1$s', 'give-recurring' ),
+						$e
+					)
+				);
+			}
+
+			$card_info['last_digit'] = isset( $card->last4 ) ? $card->last4 : '';
+			$card_info['exp_month']  = isset( $card->exp_month ) ? $card->exp_month : '';
+			$card_info['exp_year']   = isset( $card->exp_year ) ? $card->exp_year : '';
+			$card_info['cc_type']    = isset( $card->brand ) ? $card->brand : '';
 
 			break;
 		case 'authorize':
@@ -1549,7 +1623,7 @@ function give_recurring_add_goal_recurring_checkbox( $field ) {
 
 			echo Give()->tooltips->render_help(
 				array(
-					'label'    => esc_html__( 'Calculate goal on the basis of recurring donation only.', 'give-recurring' ),
+					'label'    => esc_html__( 'Calculate the goal on the basis of recurring donations only.', 'give-recurring' ),
 					'position' => 'top-right',
 				)
 			);
@@ -1632,7 +1706,7 @@ function give_recurring_goal_amount_raised_output( $income, $form_id ) {
 	}
 
 	$new_income         = 0;
-	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id );
+	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id, array( 'status' => 'active', 'number' => -1 ) );
 	foreach ( $form_subscriptions as $subscription ) {
 		$new_income = $new_income + $subscription->initial_amount;
 	}
@@ -1658,7 +1732,7 @@ function give_recurring_donations_raised_output( $donation_number, $form_id ) {
 		return $donation_number;
 	}
 
-	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id, array( 'status' => 'active' ) );
+	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id, array( 'status' => 'active', 'number' => -1 ) );
 
 	return count( $form_subscriptions );
 }
@@ -1668,12 +1742,12 @@ add_filter( 'give_goal_donations_raised_output', 'give_recurring_donations_raise
 /**
  * Modify total number of donor who has made recurring donation to the form
  *
+ * @param int $donors  Number of donor who made recurring donation to the Form.
+ * @param int $form_id Donation form id.
+ *
+ * @return int $new_donors Form total earning.
  * @since 1.7
  *
- * @param array $donors  Number of donor who made recurring donation to the Form.
- * @param int   $form_id Donation form id.
- *
- * @return array $new_donors Form total earning.
  */
 function give_recurring_donors_target_output( $donors, $form_id ) {
 	if ( ! give_recurring_goal_format_enable( $form_id ) ) {
@@ -1681,7 +1755,7 @@ function give_recurring_donors_target_output( $donors, $form_id ) {
 	}
 
 	$new_donors         = array();
-	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id, array( 'status' => 'active' ) );
+	$form_subscriptions = give_recurring_get_form_subscriptions( $form_id, array( 'status' => 'active', 'number' => -1 ) );
 	foreach ( $form_subscriptions as $subscription ) {
 		$new_donors[] = $subscription->donor_id;
 	}
@@ -1773,6 +1847,28 @@ function give_recurring_is_parent_donation( $donation_id ) {
 
 
 /**
+ * Install plugin tables on plugin version update
+ *
+ * Note: internal use only
+ *
+ * @since 1.9.0
+ * @param  string $old_version
+ */
+function give_recurring_install_table( $old_version ) {
+	// Fresh install?
+	// This hook will only run on first install after that update_option_give_recurring_version will use.
+	if( 'add_option_give_recurring_version' === current_filter() ) {
+		$old_version = '';
+	}
+
+	update_option( 'give_recurring_version_upgraded_from', $old_version, false );
+
+	give_recurring_register_tables();
+}
+add_filter( 'update_option_give_recurring_version', 'give_recurring_install_table', 0, 1  );
+add_filter( 'add_option_give_recurring_version', 'give_recurring_install_table', 0, 1 );
+
+/**
  * Subscription donation processing errors
  * 1. Check if current gateway support recurring donation or not.
  *
@@ -1835,3 +1931,60 @@ function give_recurring_checkout_errors( $valid_data ) {
 }
 
 add_action( 'give_checkout_error_checks', 'give_recurring_checkout_errors', 0, 1 );
+
+/**
+ * This function will add form tags when required for update payment method.
+ *
+ * @param array             $formHtmlTags HTML Form Tags.
+ * @param Give_Subscription $subscription Subscription object.
+ *
+ * @since 1.9.11
+ *
+ * @return mixed
+ */
+function give_recurring_stripe_add_form_tags( $formHtmlTags, $subscription ) {
+
+    // If payment gateway is not Stripe.
+    if ( ! in_array( $subscription->gateway, give_stripe_supported_payment_methods(), true ) ) {
+        return $formHtmlTags;
+    }
+
+    $formId         = ! empty( $subscription->form_id ) ? absint( $subscription->form_id ) : 0;
+    $publishableKey = give_stripe_get_publishable_key( $formId );
+    $accountId      = give_stripe_get_connected_account_id( $formId );
+
+	$formHtmlTags['data-publishable-key'] = $publishableKey;
+	$formHtmlTags['data-account']         = $accountId;
+
+    return $formHtmlTags;
+}
+
+add_filter( 'give_recurring_update_subscription_form_tags', 'give_recurring_stripe_add_form_tags', 0, 2 );
+
+/**
+ * This function is used to add global parameters to Stripe Global Vars.
+ *
+ * @param array $args List of Parameters.
+ *
+ * @since 1.10.2
+ *
+ * @return array
+ */
+function give_recurring_stripe_add_global_parameters( $args ) {
+
+	$is_update_pm_allowed = give_stripe_is_update_payment_method_screen();
+	$subscription_db      = new Give_Subscriptions_DB();
+	$subscription_details = ! empty( $is_update_pm_allowed ) ?
+		$subscription_db->get_subscriptions( [ 'id' => $is_update_pm_allowed ] ) :
+		false;
+
+	// Donor can update card for only following Stripe payment methods.
+	$stripePaymentMethods = [ 'stripe', 'stripe_checkout', 'stripe_apple_pay', 'stripe_google_pay' ];
+
+	$args['stripe_card_update'] = $is_update_pm_allowed && in_array( $subscription_details[0]->gateway, $stripePaymentMethods );
+	$args['stripe_becs_update'] = $is_update_pm_allowed && 'stripe_becs' === $subscription_details[0]->gateway;
+
+    return $args;
+}
+
+add_filter( 'give_stripe_global_parameters', 'give_recurring_stripe_add_global_parameters' );

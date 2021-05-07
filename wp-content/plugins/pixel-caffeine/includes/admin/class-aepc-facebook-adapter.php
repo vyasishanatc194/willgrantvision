@@ -9,11 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Firebase\JWT\JWT;
+use PixelCaffeine\Dependencies\Firebase\JWT\JWT;
 use PixelCaffeine\Admin\Exception\FBAPIException;
 use PixelCaffeine\Admin\Exception\FBAPILoginException;
-use Ramsey\Uuid\Uuid;
-use Symfony\Component\Yaml\Yaml;
+use PixelCaffeine\Dependencies\Ramsey\Uuid\Uuid;
 
 /**
  * Adapter for facebook API
@@ -107,24 +106,9 @@ class AEPC_Facebook_Adapter {
 	 * @return void
 	 */
 	public function connect() {
-		// Load local configuration, if defined the file resources/fb.yml.
-		if ( file_exists( PixelCaffeine()->plugin_path() . '/includes/resources/fb.dev.yml' ) && class_exists( '\Symfony\Component\Yaml\Yaml' ) ) {
-			if ( ! function_exists( 'WP_Filesystem' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/file.php';
-			}
-
-			if ( WP_Filesystem() ) {
-				global $wp_filesystem;
-				/**
-				 * Get the global filesystem layer from WP
-				 *
-				 * @var WP_Filesystem_Base $wp_filesystem
-				 */
-
-				$local_config    = Yaml::parse( $wp_filesystem->get_contents( PixelCaffeine()->plugin_path() . '/includes/resources/fb.dev.yml' ) );
-				$this->api_url   = $local_config['fb']['api_url'];
-				$this->api_stage = $local_config['fb']['api_stage'];
-			}
+		if ( defined( 'AEPC_API_URL' ) && defined( 'AEPC_API_STAGE' ) ) {
+			$this->api_url   = AEPC_API_URL;
+			$this->api_stage = AEPC_API_STAGE;
 		}
 
 		// Get access token, it means logged in to facebook if it's not empty.

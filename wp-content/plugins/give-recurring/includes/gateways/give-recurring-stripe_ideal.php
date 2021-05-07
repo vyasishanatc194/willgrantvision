@@ -32,6 +32,11 @@ class Give_Recurring_Stripe_Ideal extends Give_Recurring_Gateway {
 
 		// Set ID for Recurring.
 		$this->id = 'stripe_ideal';
+
+		// Bailout, if gateway is not active.
+		if ( ! give_is_gateway_active( $this->id ) ) {
+			return;
+		}
 	}
 
 	/**

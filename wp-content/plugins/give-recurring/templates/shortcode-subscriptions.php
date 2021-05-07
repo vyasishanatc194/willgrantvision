@@ -8,35 +8,14 @@
  * @copyright  : http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since      : 1.0
  */
-
 global $give_subscription_args;
+
+/* @var Give_Recurring_Subscriber $subscriber */
+$subscriber = Give_Recurring_Subscriber::getSubscriber();
 
 // If cancelled Show message
 if ( isset( $_GET['give-message'] ) && $_GET['give-message'] == 'cancelled' ) {
 	echo '<div class="give_error give_success" id="give_error_test_mode"><p><strong>' . __( 'Notice', 'give-recurring' ) . '</strong>: ' . apply_filters( 'give_recurring_subscription_cancelled_message', __( 'Your subscription has been cancelled.', 'give-recurring' ) ) . '</p></div>';
-}
-
-// Get Subscriber
-$current_user_id = get_current_user_id();
-
-if ( ! empty( $current_user_id ) ) {
-	// pull by user_id.
-	$subscriber = new Give_Recurring_Subscriber( $current_user_id, true );
-} elseif ( Give()->session->get_session_expiration() ) {
-	// pull by email.
-	$subscriber_email = maybe_unserialize( Give()->session->get( 'give_purchase' ) );
-	$subscriber_email = isset( $subscriber_email['user_email'] ) ? $subscriber_email['user_email'] : '';
-	$subscriber       = new Give_Recurring_Subscriber( $subscriber_email, false );
-} else {
-	// pull by email access.
-	$subscriber = new Give_Recurring_Subscriber( Give()->email_access->token_email, false );
-}
-
-// Sanity Check: Subscribers only
-if ( $subscriber->id <= 0 ) {
-	Give()->notices->print_frontend_notice( __( 'You have not made any recurring donations.', 'give-recurring' ), true, 'warning' );
-
-	return false;
 }
 
 /**
@@ -55,12 +34,16 @@ $page = isset( $_GET['s_page'] ) ? give_clean( intval( $_GET['s_page'] ) ) : 1;
 
 // Get total number of subscriptions.
 $gsdb                = new Give_Subscriptions_DB();
-$subscriptions_count = $gsdb->count();
+$subscriptions_count = $gsdb->count(['donor_id' => $subscriber->id]);
 
 
 // Get number of subscriptions to show per page. Default: 30
 $subscriptions_per_page = $give_subscription_args['subscriptions_per_page'];
 
+// Show limited subscription if donor only has donation session.
+if( 'DonorSession' === Give_Recurring_Subscriber::getAccessType() ){
+	$subscriptions_count = $subscriptions_per_page = give_get_limit_display_donations();
+}
 
 /**
  * Maximum number of pages that is possible given the
@@ -206,6 +189,9 @@ if ( $subscriptions ) {
 						&nbsp;|&nbsp;
 						<a href="<?php echo esc_url( $subscription->get_update_url() ); ?>"><?php _e( 'Update Payment Info', 'give-recurring' ); ?></a>
 					<?php endif; ?>
+					<?php if ( give_get_option( 'subscriptions_page', 0 ) && $subscription->can_update_subscription() ): ?>
+						&nbsp;|&nbsp;<a class="give-recurring-edit-amount" href="<?php echo esc_url( $subscription->get_edit_subscription_url() ); ?>"><?php _e( 'Edit Amount', 'give-recurring' ); ?></a>
+					<?php endif; ?>
 					<?php
 					// Cancelling the subscription.
 					if ( $subscription->can_cancel() ) :
@@ -282,5 +268,5 @@ if ( $subscriptions ) {
 	?>
 
 <?php } else {
-	Give()->notices->print_frontend_notice( __( 'You have not made any subscription donations.', 'give-recurring' ), true, 'warning' );
+	Give_Notices::print_frontend_notice( __( 'You have not made any subscription donations.', 'give-recurring' ), true, 'warning' );
 } ?>

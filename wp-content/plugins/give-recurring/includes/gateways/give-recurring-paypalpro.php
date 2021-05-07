@@ -896,23 +896,23 @@ class Give_Recurring_PayPal_Website_Payments_Pro extends Give_Recurring_Gateway 
 	}
 
 	/**
-	 * Process the update payment form
-	 *
-	 * @since  1.7
-	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
-	 *
-	 * @return void
+	 * @inheritdoc
 	 */
-	public function update_payment_method( $subscriber, $subscription ) {
+	public function update_payment_method( $subscriber, $subscription, $data = null ) {
 
-		$card_number    = isset( $_POST['card_number'] ) ? give_clean( str_replace( ' ', '', $_POST['card_number'] ) ) : '';
-		$card_exp_month = isset( $_POST['card_exp_month'] ) ? give_clean( $_POST['card_exp_month'] ) : '';
-		$card_exp_year  = isset( $_POST['card_exp_year'] ) ? give_clean( $_POST['card_exp_year'] ) : '';
-		$card_cvc       = isset( $_POST['card_cvc'] ) ? give_clean( $_POST['card_cvc'] ) : '';
-
-		$card_zip = isset( $_POST['card_zip'] ) ? give_clean( $_POST['card_zip'] ) : '';
+		if ( $data === null ) {
+			$card_number    = isset( $_POST['card_number'] ) ? give_clean( str_replace( ' ', '', $_POST['card_number'] ) ) : '';
+			$card_exp_month = isset( $_POST['card_exp_month'] ) ? give_clean( $_POST['card_exp_month'] ) : '';
+			$card_exp_year  = isset( $_POST['card_exp_year'] ) ? give_clean( $_POST['card_exp_year'] ) : '';
+			$card_cvc       = isset( $_POST['card_cvc'] ) ? give_clean( $_POST['card_cvc'] ) : '';
+			$card_zip 		= isset( $_POST['card_zip'] ) ? give_clean( $_POST['card_zip'] ) : '';
+		} else {
+			$card_number    = isset( $data['card_number'] ) ? str_replace( ' ', '', $data['card_number'] ) : '';
+			$card_exp_month = isset( $data['card_exp_month'] ) ? $data['card_exp_month'] : '';
+			$card_exp_year  = isset( $data['card_exp_year'] ) ? $data['card_exp_year'] : '';
+			$card_cvc       = isset( $data['card_cvc'] ) ? $data['card_cvc'] : '';
+			$card_zip 		= isset( $data['card_zip'] ) ? $data['card_zip'] : '';
+		}
 
 		if ( empty( $card_number ) || empty( $card_exp_month ) || empty( $card_exp_year ) || empty( $card_cvc ) ) {
 			give_set_error( 'give_recurring_paypalpro', __( 'Please enter all required fields.', 'give-recurring' ) );
@@ -1025,19 +1025,16 @@ class Give_Recurring_PayPal_Website_Payments_Pro extends Give_Recurring_Gateway 
 	}
 
 	/**
-	 * Process the update subscription.
-	 *
-	 * @since  1.8
-	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
-	 *
-	 * @return void
+	 * @inheritdoc
 	 */
-	public function update_subscription( $subscriber, $subscription ) {
+	public function update_subscription( $subscriber, $subscription, $data = null ) {
 
-		// Sanitize the values submitted with donation form.
-		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		if ( $data === null ) {
+			// Sanitize the values submitted with donation form.
+			$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		} else {
+			$post_data = $data;
+		}
 
 		// Get update renewal amount.
 		$renewal_amount           = isset( $post_data['give-amount'] ) ? give_maybe_sanitize_amount( $post_data['give-amount'] ) : 0;

@@ -20,7 +20,8 @@ function give_subscriptions_page() {
 	}
 	?>
 	<div class="wrap">
-		<h1 id="give-subscription-list-h1"><?php esc_html_e( 'Subscriptions', 'give-recurring' ); ?></h1>
+		<h1 id="give-subscription-list-h1" class="wp-heading-inline"><?php esc_html_e( 'Subscriptions', 'give-recurring' ); ?></h1>
+		<hr class="wp-header-end">
 		<?php
 		$subscribers_table = new Give_Subscription_Reports_Table();
 		$subscribers_table->prepare_items();
@@ -33,6 +34,15 @@ function give_subscriptions_page() {
 			<?php $subscribers_table->advanced_filters() ?>
 			<?php $subscribers_table->display() ?>
 		</form>
+
+		<?php
+		/**
+		 * Fires in subscription history screen, at the bottom of the page.
+		 *
+		 * @since 1.9.9
+		 */
+		do_action( 'give_recurring_subscriptions_page_bottom' );
+		?>
 	</div>
 	<?php
 }

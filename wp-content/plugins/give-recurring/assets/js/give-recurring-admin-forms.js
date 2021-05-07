@@ -42,27 +42,27 @@ jQuery( document ).ready( function( $ ) {
 					Give_Admin_Recurring.toggle_multi_recurring_fields();
 				}
 
-			} );
+			});
 
 			// Multi level Custom Amount Recurring Support.
 			Give_Admin_Recurring.toggle_custom_amount_period();
 
 			// Toggle repeatable admin choice recurring fields.
-			$('body').on( 'change', '.give-recurring-admin-choice-level', function() {
+			$( 'body' ).on( 'change', '.give-recurring-admin-choice-level', function() {
 				Give_Admin_Recurring.toggle_admin_choice_fields( $( this ) );
-			} );
+			});
 
 			// Update subscription ranges when subscription period or interval is changed.
 			$( 'select[name="_give_period_interval"], select[name="_give_period"],select[name="_give_period_default_donor_choice"], input[name="_give_period_functionality"]' ).on( 'change', function() {
 
-					var $current_value = $(this).val();
+					var $current_value = $( this ).val();
 
 				Give_Admin_Recurring.set_recurring_limits( $current_value );
 			});
 
 			// Update subscription ranges when subscription period or interval is changed.
-			$('body').on( 'change', '.give-inline-row-period select, .give-inline-row-interval select', function() {
-				var $this =  $(this),
+			$( 'body' ).on( 'change', '.give-inline-row-period select, .give-inline-row-interval select', function() {
+				var $this =  $( this ),
 					$current_value = $this.val();
 				Give_Admin_Recurring.set_multi_level_recurring_limits( $this, $current_value, 'change' );
 			});
@@ -70,11 +70,11 @@ jQuery( document ).ready( function( $ ) {
 			// Set recurring options on recurring limit.
 			$( '.give-add-repeater-field-section-row' ).on( 'click', function() {
 
-				var $this =  $(this);
-				setTimeout(function () {
-						var $multi_give_times = $this.closest('table').find(' tbody tr:last-child');
+				var $this =  $( this );
+				setTimeout( function() {
+						var $multi_give_times = $this.closest( 'table' ).find( ' tbody tr:last-child' );
 					Give_Admin_Recurring.set_multi_level_recurring_limits( $multi_give_times, 'month', 'add' );
-				}, 100);
+				}, 100 );
 			});
 
 		},
@@ -138,29 +138,29 @@ jQuery( document ).ready( function( $ ) {
 				$lengthElement.empty();
 
 				var selected_value = $( periodSelector ).val();
-				if ( $.inArray( $current_value, [ 'day', 'week', 'month', 'year' ] ) >= 0 ) {
+				if ( 0 <= $.inArray( $current_value, [ 'day', 'week', 'month', 'quarter', 'year' ]) ) {
 					selected_value = $current_value;
 				}
 
 				$.each( Give_Recurring_Vars.billingLimits[ selected_value ], function( length, description ) {
-					if ( parseInt( length ) === 0 || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
+					if ( 0 === parseInt( length ) || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
 						$lengthElement.append( $( '<option></option>' ).attr( 'value', length ).text( description ) );
 					}
-				} );
+				});
 
 				$lengthElement.children( 'option' ).each( function() {
 					if ( this.value === Give_Recurring_Vars.selected_billing_limit ) {
 						hasSelectedLength = true;
 						return false;
 					}
-				} );
+				});
 
 				$lengthElement.val( 0 );
 				if ( hasSelectedLength ) {
 					$lengthElement.val( Give_Recurring_Vars.selected_billing_limit );
 				}
 
-			} );
+			});
 		},
 
 		/**
@@ -172,18 +172,18 @@ jQuery( document ).ready( function( $ ) {
 			var $multi_give_times;
 
 			if ( 'add' !== $action && 'change' !== $action ) {
-				$multi_give_times = $('#_give_donation_levels_field table.give-repeatable-fields-section-wrapper tbody tr.give-row').not('.give-template');
+				$multi_give_times = $( '#_give_donation_levels_field table.give-repeatable-fields-section-wrapper tbody tr.give-row' ).not( '.give-template' );
 			} else {
 				$multi_give_times = $current_obj;
 			}
 
-			if ( 'change' === $action && $.type($current_obj) !== 'undefined' ){
-				$multi_give_times = $current_obj.parent().closest('tr');
+			if ( 'change' === $action && 'undefined' !== $.type( $current_obj ) ) {
+				$multi_give_times = $current_obj.parent().closest( 'tr' );
 			}
 
 			$multi_give_times.each( function( index ) {
 				var $this = $( this ),
-					$lengthElement = $this.find('.give-inline-row-limit select'),
+					$lengthElement = $this.find( '.give-inline-row-limit select' ),
 					hasSelectedLength = false,
 					matches = $lengthElement.attr( 'name' ).match( /\[(.*?)\]/ ),
 					periodSelector,
@@ -200,18 +200,18 @@ jQuery( document ).ready( function( $ ) {
 				$lengthElement.empty();
 
 				var selected_value = $( periodSelector ).val();
-				if ( $.inArray( $current_value, [ 'day', 'week', 'month', 'year' ] ) >= 0 ) {
+				if ( 0 <= $.inArray( $current_value, [ 'day', 'week', 'month', 'year' ]) ) {
 					selected_value = $current_value;
 				}
 
 				$.each( Give_Recurring_Vars.billingLimits[ selected_value ], function( length, description ) {
-					if ( parseInt( length ) === 0 || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
+					if ( 0 === parseInt( length ) || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
 						$lengthElement.append( $( '<option></option>' ).attr( 'value', length ).text( description ) );
 					}
-				} );
+				});
 
 				var multilevel_billing_limit_val = 0;
-				if (  'add' !== $action && 'change' !== $action && '' !== multilevel_billing_limit[index] ){
+				if (  'add' !== $action && 'change' !== $action && '' !== multilevel_billing_limit[index]) {
 					multilevel_billing_limit_val = multilevel_billing_limit[index];
 				}
 
@@ -220,14 +220,14 @@ jQuery( document ).ready( function( $ ) {
 						hasSelectedLength = true;
 						return false;
 					}
-				} );
+				});
 
 				$lengthElement.val( 0 );
 				if ( hasSelectedLength ) {
 					$lengthElement.val( multilevel_billing_limit_val );
 				}
 
-			} );
+			});
 		},
 
 		/**
@@ -244,29 +244,29 @@ jQuery( document ).ready( function( $ ) {
 				$lengthElement.empty();
 
 				var selected_value = $( periodSelector ).val();
-				if ( $.inArray( $current_value, [ 'day', 'week', 'month', 'year' ] ) >= 0 ) {
+				if ( 0 <= $.inArray( $current_value, [ 'day', 'week', 'month', 'year' ]) ) {
 					selected_value = $current_value;
 				}
 
 				$.each( Give_Recurring_Vars.billingLimits[ selected_value ], function( length, description ) {
-					if ( parseInt( length ) === 0 || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
+					if ( 0 === parseInt( length ) || ( ( 0 === ( parseInt( length ) % billingInterval ) ) && ( parseInt( length ) !== billingInterval ) ) ) {
 						$lengthElement.append( $( '<option></option>' ).attr( 'value', length ).text( description ) );
 					}
-				} );
+				});
 
 				$lengthElement.children( 'option' ).each( function() {
 					if ( this.value === Give_Recurring_Vars.selected_custom_amount_billing_limit ) {
 						hasSelectedLength = true;
 						return false;
 					}
-				} );
+				});
 
 				$lengthElement.val( 0 );
 				if ( hasSelectedLength ) {
 					$lengthElement.val( Give_Recurring_Vars.selected_custom_amount_billing_limit );
 				}
 
-			} );
+			});
 		},
 
 		/**
@@ -280,12 +280,12 @@ jQuery( document ).ready( function( $ ) {
 			$( 'input[name="_give_price_option"], input[name="_give_custom_amount"], input[name="_give_recurring"]' ).on( 'change', function() {
 
 				Give_Admin_Recurring.toggle_custom_amount_fields();
-			} );
+			});
 
 			// Set recurring limit based on custom amount period.
 			$( '#_give_recurring_custom_amount_period' ).on( 'change', function() {
 
-				var $this =  $(this),
+				var $this =  $( this ),
 					$current_value = $this.val();
 
 				if ( 'once' !== $current_value ) {
@@ -293,19 +293,19 @@ jQuery( document ).ready( function( $ ) {
 					Give_Admin_Recurring.set_custom_amount_recurring_limits( $current_value );
 
 					$( '.give-recurring-custom-amount-times' ).show();
-					$( '._give_recurring_custom_amount_interval_field').show();
-					$this.parent().removeClass('give-control-select-onetime');
+					$( '._give_recurring_custom_amount_interval_field' ).show();
+					$this.parent().removeClass( 'give-control-select-onetime' );
 				} else {
 					$( '.give-recurring-custom-amount-times' ).hide();
-					$( '._give_recurring_custom_amount_interval_field').hide();
-					$this.parent().addClass('give-control-select-onetime');
+					$( '._give_recurring_custom_amount_interval_field' ).hide();
+					$this.parent().addClass( 'give-control-select-onetime' );
 				}
 			});
 
 			// Set recurring limit based on custom amount interval.
 			$( '#_give_recurring_custom_amount_interval' ).on( 'change', function() {
 
-				var $this =  $(this),
+				var $this =  $( this ),
 					$current_value = $this.val();
 
 				Give_Admin_Recurring.set_custom_amount_recurring_limits( $current_value );
@@ -336,7 +336,7 @@ jQuery( document ).ready( function( $ ) {
 					$( '.give-recurring-period-default-choice' ).hide();
 				}
 
-			} ).change();
+			}).change();
 
 		},
 
@@ -356,16 +356,20 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			if ( 'yes_admin' === recurring_option ) {
+
 				// Show fields
 				$( '.give-recurring-row.give-hidden' ).show();
+
 				// Hide checkbox opt-in option field
 				$( '.give-recurring-checkbox-option' ).hide();
 				$( '.give-recurring-period-default-choice' ).hide();
 				$( '.give-recurring-period-functionality' ).hide();
 
 			} else if ( 'yes_donor' === recurring_option ) {
+
 				// Show fields
 				$( '.give-recurring-row.give-hidden' ).show();
+
 				// Show checkbox opt-in option field
 				$( '.give-recurring-checkbox-option' ).show();
 				$( '.give-recurring-period-default-choice' ).show();
@@ -395,6 +399,7 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			if ( 'yes_admin' === recurring_option ) {
+
 				// Hide donor-recurring settings fields
 				$( '.give-recurring-row.give-hidden' ).hide();
 
@@ -403,7 +408,7 @@ jQuery( document ).ready( function( $ ) {
 
 				$( '.give-recurring-admin-choice-level-row' ).each( function() {
 					Give_Admin_Recurring.toggle_admin_choice_fields( $( this ).find( '.give-recurring-admin-choice-level' ) );
-				} );
+				});
 
 			} else if ( 'yes_donor' === recurring_option ) {
 
@@ -463,7 +468,7 @@ jQuery( document ).ready( function( $ ) {
 				}
 
 				// Check if PayPal Standard is set & Validate times are over 1
-				if ( typeof Give_Recurring_Vars.enabled_gateways.paypal !== 'undefined' && time_val === 1 ) {
+				if ( 'undefined' !== typeof Give_Recurring_Vars.enabled_gateways.paypal && 1 === time_val ) {
 
 					// Alert user of issue
 					alert( Give_Recurring_Vars.invalid_time.paypal );
@@ -476,7 +481,7 @@ jQuery( document ).ready( function( $ ) {
 
 				}
 
-			} );
+			});
 
 		},
 
@@ -504,12 +509,15 @@ jQuery( document ).ready( function( $ ) {
 				if ( 'day' === period_val ) {
 
 					if ( 'undefined' !== typeof Give_Recurring_Vars.enabled_gateways.authorize ) {
+
 						// Alert user of issue
 						alert( Give_Recurring_Vars.invalid_period.authorize );
+
 						// Change to a valid value
 						$( this ).val( 'month' );
 
 					} else if ( 'undefined' !== typeof Give_Recurring_Vars.enabled_gateways.wepay ) {
+
 						// Alert user of issue
 						alert( Give_Recurring_Vars.invalid_period.wepay );
 
@@ -517,6 +525,7 @@ jQuery( document ).ready( function( $ ) {
 						$( this ).val( 'month' );
 
 					} else if ( 'undefined' !== typeof Give_Recurring_Vars.enabled_gateways.gocardless ) {
+
 						// Alert user of issue
 						alert( Give_Recurring_Vars.invalid_period.gocardless );
 
@@ -529,7 +538,7 @@ jQuery( document ).ready( function( $ ) {
 
 				}
 
-			} );
+			});
 
 		},
 
@@ -546,8 +555,8 @@ jQuery( document ).ready( function( $ ) {
 
 			// Email Access Not Enabled & Recurring Enabled.
 			if (
-				! Give_Recurring_Vars.email_access
-				&& 'no' !== recurring_option
+				! Give_Recurring_Vars.email_access &&
+				'no' !== recurring_option
 			) {
 				Give_Admin_Recurring.toggle_login_message( 'on' );
 			}
@@ -562,7 +571,7 @@ jQuery( document ).ready( function( $ ) {
 					Give_Admin_Recurring.toggle_login_message( 'off' );
 				}
 
-			} );
+			});
 
 		},
 
@@ -577,17 +586,21 @@ jQuery( document ).ready( function( $ ) {
 				login_req_msg = $( '.give-recurring-login-required' );
 
 			if (
-				'on' === toggle_state
-				&& 0 === login_req_msg.length
+				'on' === toggle_state &&
+				0 === login_req_msg.length
 			) {
+
 				// Add class for styles
 				register_field.addClass( 'recurring-email-access-message' );
+
 				// Prepend message
 				register_field.before( Give_Recurring_Vars.messages.login_required );
 
 			} else if ( 'off' === toggle_state ) {
+
 				// Add class for styles
 				register_field.removeClass( 'recurring-email-access-message' );
+
 				// Prepend message
 				login_req_msg.remove();
 			}
@@ -598,4 +611,4 @@ jQuery( document ).ready( function( $ ) {
 
 	Give_Admin_Recurring.init();
 
-} );
+});

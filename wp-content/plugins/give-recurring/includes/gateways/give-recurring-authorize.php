@@ -75,6 +75,18 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 			$this,
 			'process_webhook_renewal'
 		), 1, 2 );
+		add_action( 'give_authorize_event_net.authorize.customer.subscription.suspended', array(
+			$this,
+			'process_webhook_subscription_suspended'
+		), 10, 2 );
+		add_action( 'give_authorize_event_net.authorize.customer.subscription.terminated', array(
+			$this,
+			'process_webhook_subscription_terminated'
+		), 10, 2 );
+		add_action( 'give_authorize_event_net.authorize.customer.subscription.expiring', array(
+			$this,
+			'process_webhook_subscription_expiring'
+		), 10, 2 );
 
 		// Require last name.
 		add_filter( 'give_donation_form_before_personal_info', array( $this, 'maybe_require_last_name' ) );
@@ -236,7 +248,10 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 			'subscription' => array(
 				'name'            => $name,
 				'paymentSchedule' => array(
-					'interval'         => $this->get_interval( $subscription['period'], $subscription['frequency'] ),
+					'interval'         => array(
+						'length' => $this->get_interval_count( $subscription['period'], $subscription['frequency'] ),
+						'unit'   => $this->get_interval( $subscription['period'], $subscription['frequency'] ),
+					),
 					'startDate'        => $today,
 					'totalOccurrences' => $total_occurrences,
 				),
@@ -272,39 +287,67 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 	}
 
 	/**
-	 * Gets interval length and interval unit for Authorize.net based on Give subscription period.
+	 * Gets interval length for Authorize.net based on Give subscription period.
 	 *
 	 * @param  string $subscription_period
 	 * @param  int    $subscription_interval
 	 *
 	 * @return array
 	 */
-	public function get_interval( $subscription_period, $subscription_interval ) {
+	public static function get_interval( $subscription_period, $subscription_interval ) {
 
-		$length = $subscription_interval;
-		$unit   = 'days';
+		$unit = $subscription_period;
 
 		switch ( $subscription_period ) {
 
 			case 'day':
-				$unit = 'days';
-				break;
 			case 'week':
-				$length = 7 * $subscription_interval;
 				$unit   = 'days';
 				break;
+			case 'quarter':
 			case 'month':
-				$length = 1 * $subscription_interval;
-				$unit   = 'months';
-				break;
 			case 'year':
-				$length = 12 * $subscription_interval;
 				$unit   = 'months';
 				break;
 		}
 
-		return compact( 'length', 'unit' );
+		return $unit;
 	}
+
+	/**
+	 * Gets interval unit for Authorize.net based on Give subscription period.
+	 *
+	 * @param  string $subscription_period
+	 * @param  int    $subscription_interval
+	 * 
+	 * @since 1.9.0
+	 *
+	 * @return array
+	 */
+	public static function get_interval_count( $subscription_period, $subscription_interval ) {
+
+		$length = $subscription_interval;
+
+		switch ( $subscription_period ) {
+
+			case 'week':
+				$length = 7 * $subscription_interval;
+				break;
+			case 'quarter':
+				$length = 3 * $subscription_interval;
+				break;
+			case 'month':
+				$length = 1 * $subscription_interval;
+				break;
+			case 'year':
+				$length = 12 * $subscription_interval;
+				break;
+		}
+
+		return $length;
+	}
+
+	
 
 	/**
 	 * Determines if the subscription can be cancelled.
@@ -381,18 +424,15 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 	}
 
 	/**
-	 * Process the update payment form.
-	 *
-	 * @since  1.7
-	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
-	 *
-	 * @return void
+	 * @inheritdoc
 	 */
-	public function update_payment_method( $subscriber, $subscription ) {
+	public function update_payment_method( $subscriber, $subscription, $data = null ) {
 
-		$card_info = give_get_donation_cc_info();
+		if ( $data === null ) {
+			$card_info = give_get_donation_cc_info();
+		} else {
+			$card_info = $data;
+		}
 
 		$card_details = $this->generate_card_info( $card_info );
 		$values       = array_search( '', $card_details );
@@ -529,6 +569,124 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 	}
 
 	/**
+	 * Process the subscription terminated webhook.
+	 *
+	 * Processes the net.authorize.payment.authcapture.subscription.terminated webhook for subscription termination.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param object $event_json Webhook data sent over from Authorize.net
+	 *
+	 * @return bool|\Give_Subscription
+	 */
+	public function process_webhook_subscription_terminated( $event_json ) {
+
+		// Must be using latest Authorize with webhook support.
+		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
+			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription terminated webhooks.', 'give-recurring' ) );
+
+			return false;
+		}
+
+		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
+		
+		// Must have the transaction id.
+		if ( empty( $transaction_id ) ) {
+			return false;
+		}
+
+		$subscription = new Give_Subscription( $transaction_id, true );
+
+		// Check for subscription ID.
+		if ( 0 === $subscription->id ) {
+			return false;
+		}
+		
+		// Set subscription status to cancelled.
+		$subscription->cancel();
+	}
+
+	/**
+	 * Process the subscription suspended webhook.
+	 *
+	 * Processes the net.authorize.payment.authcapture.subscription.suspended webhook for subscription suspension.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param object $event_json Webhook data sent over from Authorize.net
+	 *
+	 * @return bool|\Give_Subscription
+	 */
+	public function process_webhook_subscription_suspended( $event_json ) {
+
+		// Must be using latest Authorize with webhook support.
+		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
+			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
+
+			return false;
+		}
+		
+		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
+		
+		// Must have the transaction id.
+		if ( empty( $transaction_id ) ) {
+			return false;
+		}
+
+		$subscription = new Give_Subscription( $transaction_id, true );
+
+		// Check for subscription ID.
+		if ( 0 === $subscription->id ) {
+			return false;
+		}
+		
+		// Set subscription status to suspended.
+		$subscription->update( array(
+			'status' => 'suspended',
+		) );
+	}
+
+	/**
+	 * Process the subscription expiring webhook.
+	 *
+	 * Processes the net.authorize.payment.authcapture.subscription.expiring webhook for subscription expiration.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param object $event_json Webhook data sent over from Authorize.net
+	 *
+	 * @return bool|\Give_Subscription
+	 */
+	public function process_webhook_subscription_expiring( $event_json ) {
+
+		// Must be using latest Authorize with webhook support.
+		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
+			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
+
+			return false;
+		}
+		
+		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
+		
+		// Must have the transaction id.
+		if ( empty( $transaction_id ) ) {
+			return false;
+		}
+
+		$subscription = new Give_Subscription( $transaction_id, true );
+
+		// Check for subscription ID.
+		if ( 0 === $subscription->id ) {
+			return false;
+		}
+		
+		// Set subscription status to expired.
+		$subscription->update( array(
+			'status' => 'expired',
+		) );
+	}
+
+	/**
 	 * Process the renewal webhook.
 	 *
 	 * Processes the net.authorize.payment.authcapture.created webhook for subscription renewals.
@@ -559,7 +717,13 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 		if ( give_get_purchase_id_by_transaction_id( $transaction_id ) ) {
 
 			// Payment already recorded.
-			give_record_gateway_error( 'Authorize.net Webhook Error', sprintf( __( 'The Authorize.net webhook attempted to add a payment that has already been recorded. <strong>Webhook:</strong> <br><br> %s', 'give-recurring' ), $event_json ) );
+			give_record_gateway_error(
+				'Authorize.net Webhook Error',
+				sprintf(
+					__( 'The Authorize.net webhook attempted to add a payment that has already been recorded. <strong>Webhook:</strong> <br><br> %s', 'give-recurring' ),
+					json_encode( $event_json )
+				)
+			);
 
 			return false;
 
@@ -612,7 +776,7 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 			$args = array(
 				'amount'         => $response->transaction->authAmount,
 				'transaction_id' => $transaction_id,
-				'gateway'        => $this->id,
+				'gateway'        => $subscription->gateway,
 			);
 
 			// We have a renewal.
@@ -1051,19 +1215,16 @@ class Give_Recurring_Authorize extends Give_Recurring_Gateway {
 	}
 
 	/**
-	 * Process the update subscription.
-	 *
-	 * @since  1.8
-	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
-	 *
-	 * @return void
+	 * @inheritdoc
 	 */
-	public function update_subscription( $subscriber, $subscription ) {
+	public function update_subscription( $subscriber, $subscription, $data = null ) {
 
-		// Sanitize the values submitted with donation form.
-		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		if ( $data === null ) {
+			// Sanitize the values submitted with donation form.
+			$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		} else {
+			$post_data = $data;
+		}
 
 		// Get update renewal amount.
 		$renewal_amount           = isset( $post_data['give-amount'] ) ? give_maybe_sanitize_amount( $post_data['give-amount'] ) : 0;

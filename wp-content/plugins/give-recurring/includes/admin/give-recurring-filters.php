@@ -17,131 +17,6 @@ function give_recurring_report_page( $settings ) {
 
 add_filter( 'give-reports_get_settings_pages', 'give_recurring_report_page' );
 
-/**
- * Adds "Renewals" to the report views
- *
- * @since  1.2.2
- *
- * @param $views
- *
- * @return mixed
- */
-function give_recurring_log_tabs( $views ) {
-	$views['recurring_email_notices'] = __( 'Recurring Emails', 'give-recurring' );
-	$views['recurring_sync_logs']     = __( 'Synchronizer Logs', 'give-recurring' );
-
-	return $views;
-}
-
-add_filter( 'give_log_views', 'give_recurring_log_tabs' );
-
-
-/**
- * Show Recurring Email Notices Table.
- *
- * @since 1.2.2
- */
-function give_recurring_show_email_notices_table() {
-
-	include GIVE_RECURRING_PLUGIN_DIR . 'includes/admin/emails/class-recurring-email-log.php';
-
-	$logs_table = new Give_Recurring_Email_Log();
-	$logs_table->prepare_items();
-	?>
-	<div class="wrap">
-		<?php do_action( 'give_logs_recurring_email_notices_top' ); ?>
-		<form id="give-logs-filter" method="get" action="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-reports&tab=logs' ); ?>">
-			<?php
-			$logs_table->display();
-			?>
-			<input type="hidden" name="post_type" value="give_forms"/>
-			<input type="hidden" name="page" value="give-reports"/>
-			<input type="hidden" name="tab" value="logs"/>
-		</form>
-		<?php do_action( 'give_logs_recurring_email_notices_bottom' ); ?>
-	</div>
-	<?php
-}
-
-add_action( 'give_logs_view_recurring_email_notices', 'give_recurring_show_email_notices_table' );
-
-
-/**
- * Display log details.
- *
- * @param $log_id
- *
- * @return bool
- */
-function give_recurring_get_single_sync_log( $log_id ) {
-
-	$args = array(
-		'post_type'   => 'give_recur_sync_log',
-		'post_status' => array( 'publish', 'future' ),
-		'include'     => $log_id,
-	);
-
-	$log = get_posts( $args );
-
-	// Need log WP_Post object to continue.
-	if ( isset( $log[0] ) ) {
-		$log = $log[0];
-	} else {
-		echo '<h2>' . sprintf( __( 'Sorry, no log found for ID %s', 'give-recurring' ), $log_id ) . '</h2>';
-
-		return false;
-	}
-
-	?>
-
-	<h2><?php echo $log->post_title; ?></h2>
-	<div class="give-recurring-sync-log-content">
-		<?php echo $log->post_content; ?>
-	</div>
-	<a href="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-tools&section=recurring_sync_logs&tab=logs' ); ?>" class="button button-small">
-		&laquo; <?php esc_html_e( 'Return to Sync Log List', 'give-recurring' ); ?>
-	</a>
-
-	<?php
-}
-
-/**
- * Show Sync Log Table.
- *
- * @since 1.2.2
- */
-function give_recurring_show_sync_logs_table() {
-
-	if ( isset( $_GET['log-id'] ) ) {
-
-		give_recurring_get_single_sync_log( $_GET['log-id'] );
-
-		return;
-	}
-
-	require_once GIVE_RECURRING_PLUGIN_DIR . 'includes/admin/synchronizer/class-recurring-sync-log.php';
-
-	$logs_table = new Give_Recurring_Sync_Log();
-	$logs_table->prepare_items();
-	?>
-	<div class="wrap">
-		<?php do_action( 'give_logs_recurring_sync_logs_top' ); ?>
-		<form id="give-logs-filter" method="get"
-		      action="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-tools&tab=logs' ); ?>">
-			<?php
-			$logs_table->display();
-			?>
-			<input type="hidden" name="post_type" value="give_forms"/>
-			<input type="hidden" name="page" value="give-tools"/>
-			<input type="hidden" name="tab" value="logs"/>
-		</form>
-		<?php do_action( 'give_logs_recurring_sync_logs_bottom' ); ?>
-	</div>
-	<?php
-
-}
-
-add_action( 'give_logs_view_recurring_sync_logs', 'give_recurring_show_sync_logs_table' );
 
 /**
  * Add a page display state for special Give Recurring pages in the page list table.
@@ -404,3 +279,51 @@ function give_recurring_payment_table_payments_query( $args ) {
 }
 
 add_filter( 'give_payment_table_payments_query', 'give_recurring_payment_table_payments_query' );
+
+
+/**
+ * Add blank slate for subscription list
+ *
+ * @param string $screen
+ *
+ * @since 2.5.11
+ */
+function give_recurring_blank_slate( $screen ) {
+	$subscription_db = new Give_Subscriptions_DB();
+
+	if ( 'give_forms_page_give-subscriptions' === $screen && ! $subscription_db->count() ) {
+		$blank_slate          = Give_Blank_Slate::get_instance();
+		$blank_slate->content = $blank_slate->get_default_content();
+
+		if ( ! $blank_slate->post_exists( 'give_forms' ) ) {
+			$blank_slate->content = wp_parse_args(
+				array(
+					'heading' => __( 'No subscriptions found.', 'give-recurring' ),
+					'message' => __( 'Your subscription history will appear here, but first, you need a donation form!', 'give-recurring' ),
+				),
+				$blank_slate->content
+			);
+		} else {
+			$blank_slate->content = wp_parse_args(
+				array(
+					'heading'  => __( 'No subscriptions found.', 'give-recurring' ),
+					'message'  => __( 'When your first recurring donation occurs a record of the subscription will appear here. Have you set up a recurring donation form yet?', 'give-recurring' ),
+					'cta_text' => __( 'View All Donation Forms', 'give-recurring' ),
+					'cta_link' => admin_url( 'edit.php?post_type=give_forms' ),
+					'help'     => sprintf(
+					/* translators: 1: Opening anchor tag. 2: Closing anchor tag. */
+						__( 'Need help? Learn more about %sSubscriptions%2$s.', 'give-recurring' ),
+						'<a href="http://docs.givewp.com/addon-recurring">',
+						'</a>'
+					),
+				),
+				$blank_slate->content
+			);
+		}
+
+		add_action( 'give_recurring_subscriptions_page_bottom', array( $blank_slate, 'render' ) );
+		add_action( 'admin_head', array( $blank_slate, 'hide_ui' ) );
+	}
+}
+
+add_action( 'give_blank_slate', 'give_recurring_blank_slate', 10, 2 );

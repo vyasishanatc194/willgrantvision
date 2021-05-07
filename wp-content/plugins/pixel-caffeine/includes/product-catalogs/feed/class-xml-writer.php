@@ -15,7 +15,7 @@ use PixelCaffeine\ProductCatalog\Exception\FeedException;
 use PixelCaffeine\ProductCatalog\FeedMapper;
 use PixelCaffeine\ProductCatalog\Helper\FeedDirectoryHelper;
 use PixelCaffeine\ProductCatalog\ProductCatalogManager;
-use Symfony\Component\Filesystem\Filesystem;
+use PixelCaffeine\Dependencies\Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class XMLWriter

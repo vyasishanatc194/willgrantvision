@@ -7,7 +7,7 @@
 
 namespace PixelCaffeine\ServerSide;
 
-use FacebookAds\Object\ServerSide\UserData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\UserData;
 
 /**
  * Class Pixel_Event
@@ -22,9 +22,9 @@ class Pixel_Event {
 	/**
 	 * The event ID
 	 *
-	 * @var string
+	 * @var null|string
 	 */
-	protected $event_id;
+	protected $event_id = null;
 
 	/**
 	 * The event name
@@ -64,21 +64,32 @@ class Pixel_Event {
 	/**
 	 * Pixel_Event constructor.
 	 *
-	 * @param string $event_id The event ID.
 	 * @param string $event_name The event name.
 	 */
-	public function __construct( $event_id, $event_name ) {
-		$this->event_id   = $event_id;
+	public function __construct( $event_name ) {
 		$this->event_name = $event_name;
 	}
 
 	/**
 	 * Get the event id
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function get_event_id() {
 		return $this->event_id;
+	}
+
+	/**
+	 * Set the event ID
+	 *
+	 * @param string $event_id The event ID to set.
+	 *
+	 * @return Pixel_Event
+	 */
+	public function set_event_id( $event_id ) {
+		$this->event_id = $event_id;
+
+		return $this;
 	}
 
 	/**
@@ -258,10 +269,12 @@ class Pixel_Event {
 	public function to_array() {
 		return apply_filters(
 			'aepc_track_event_data',
-			array(
-				'params'   => $this->get_event_data() ?: array(),
-				'delay'    => $this->get_delay(),
-				'event_id' => $this->get_event_id(),
+			array_filter(
+				array(
+					'params'   => $this->get_event_data() ?: array(),
+					'delay'    => $this->get_delay(),
+					'event_id' => $this->get_event_id(),
+				)
 			),
 			$this->get_event_name()
 		);

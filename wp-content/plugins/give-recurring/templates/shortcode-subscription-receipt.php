@@ -71,7 +71,7 @@ if ( empty( $subscriptions ) ) {
 			$renewal_date = ! empty( $subscription->expiration ) ? date_i18n( get_option( 'date_format' ), strtotime( $subscription->expiration ) ) : __( 'N/A', 'give-recurring' );
 
 			$interval  = ! empty( $subscription->frequency ) ? $subscription->frequency : 1;
-			$frequency = give_recurring_pretty_subscription_frequency( $subscription->period, false, false, $interval );
+			$frequency = give_recurring_pretty_subscription_frequency( $subscription->period, $subscription->bill_times, false, $interval );
 			$sub       = new Give_Subscription( $subscription->id ); ?>
 
 			<tr>
@@ -86,7 +86,7 @@ if ( empty( $subscriptions ) ) {
 						echo give_currency_filter( give_format_amount( $subscription->recurring_amount, array( 'donation_id' => $payment->ID ) ), $args ) . ' / ' . $frequency;
 						?>
 					</span>
-					<?php if ( $subscription->can_update_subscription() ): ?>
+					<?php if ( give_get_option( 'subscriptions_page', 0 ) && $subscription->can_update_subscription() ): ?>
 						<a class="give-recurring-edit-amount" href="<?php echo esc_url( $subscription->get_edit_subscription_url() ); ?>"><?php _e( 'Edit amount', 'give-recurring' ); ?></a>
 					<?php endif; ?>
 				</td>

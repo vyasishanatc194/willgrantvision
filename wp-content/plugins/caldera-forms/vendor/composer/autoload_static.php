@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad
+class ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -217,6 +217,7 @@ class ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad
         'Composer\\Installers\\Plugin' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Plugin.php',
         'Composer\\Installers\\PortoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PortoInstaller.php',
         'Composer\\Installers\\PrestashopInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PrestashopInstaller.php',
+        'Composer\\Installers\\ProcessWireInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ProcessWireInstaller.php',
         'Composer\\Installers\\PuppetInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PuppetInstaller.php',
         'Composer\\Installers\\PxcmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PxcmsInstaller.php',
         'Composer\\Installers\\RadPHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RadPHPInstaller.php',
@@ -228,6 +229,7 @@ class ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad
         'Composer\\Installers\\ShopwareInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ShopwareInstaller.php',
         'Composer\\Installers\\SilverStripeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SilverStripeInstaller.php',
         'Composer\\Installers\\SiteDirectInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SiteDirectInstaller.php',
+        'Composer\\Installers\\StarbugInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/StarbugInstaller.php',
         'Composer\\Installers\\SyDESInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyDESInstaller.php',
         'Composer\\Installers\\SyliusInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyliusInstaller.php',
         'Composer\\Installers\\Symfony1Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Symfony1Installer.php',
@@ -721,11 +723,11 @@ class ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3a1e0d3aab866deb21febf509494c8ad::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb6656ff7e1a4bf56611bfebfbafb5265::$classMap;
 
         }, null, ClassLoader::class);
     }

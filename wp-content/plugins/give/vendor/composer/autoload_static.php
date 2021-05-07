@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647
+class ComposerStaticInit5128c662424ce006940518806f690101
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -17,12 +17,17 @@ class ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647
             'PayPalHttp\\' => 11,
             'PayPalCheckoutSdk\\' => 18,
         ),
+        'M' => 
+        array (
+            'MyCLabs\\Enum\\' => 13,
+        ),
         'G' => 
         array (
             'Give\\' => 5,
         ),
         'F' => 
         array (
+            'FormatObjectList\\' => 17,
             'Faker\\' => 6,
         ),
         'C' => 
@@ -48,9 +53,17 @@ class ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647
         array (
             0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk',
         ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
         'Give\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'FormatObjectList\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kjohnson/format-object-list/src',
         ),
         'Faker\\' => 
         array (
@@ -83,9 +96,9 @@ class ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit411cec03f82b7f6f4e2b3041d95ad647::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5128c662424ce006940518806f690101::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5128c662424ce006940518806f690101::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5128c662424ce006940518806f690101::$classMap;
 
         }, null, ClassLoader::class);
     }

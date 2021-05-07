@@ -55,14 +55,6 @@ function give_recurring_show_upgrade_notices( $give_updates ) {
 
 	$give_updates->register(
 		array(
-			'id'       => 'give_recurring_v153_create_log_type_metadata',
-			'version'  => '1.5.4',
-			'callback' => 'give_recurring_v153_create_log_type_metadata_callback',
-		)
-	);
-
-	$give_updates->register(
-		array(
 			'id'       => 'give_recurring_v160_add_db_frequency_column',
 			'version'  => '1.6',
 			'callback' => 'give_recurring_v160_add_db_frequency_column_callback',
@@ -97,68 +89,46 @@ add_action( 'give_register_updates', 'give_recurring_show_upgrade_notices' );
  * @return void
  */
 function give_recurring_do_automatic_upgrades() {
-	$did_upgrade            = false;
 	$give_recurring_version = preg_replace( '/[^0-9.].*/', '', get_option( 'give_recurring_version' ) );
 
+	// Is Fresh install?
 	if ( ! $give_recurring_version ) {
-		// 1.0 is the first version to use this option so we must add it.
-		$give_recurring_version = '1.0';
+		$give_recurring_version = '1.0.0';
+	}
+
+	if ( version_compare( $give_recurring_version, GIVE_RECURRING_VERSION, '<' ) ) {
+		update_option(
+			'give_recurring_version',
+			preg_replace( '/[^0-9.].*/', '',
+				GIVE_RECURRING_VERSION
+			)
+		);
 	}
 
 	switch ( true ) {
 
 		case version_compare( $give_recurring_version, '1.5.3', '<' ) :
 			give_recurring_v153_add_db_notes_column_callback();
-			$did_upgrade = true;
 			break;
 
 		case version_compare( $give_recurring_version, '1.6', '<' ) :
 			give_recurring_v160_add_db_frequency_column_callback();
-			$did_upgrade = true;
 
 		case version_compare( $give_recurring_version, '1.8.2', '<' ) :
 			give_recurring_v182_alter_amount_column_type_callback();
-			$did_upgrade = true;
 
 		case version_compare( $give_recurring_version, '1.8.4', '<' ) :
 		case version_compare( $give_recurring_version, '1.8.7', '<' ) :
 			give_recurring_v184_alter_amount_column_type_callback();
-			$did_upgrade = true;
-	}
-
-	if ( $did_upgrade ) {
-		update_option( 'give_recurring_version', preg_replace( '/[^0-9.].*/', '', GIVE_RECURRING_VERSION ) );
+		case version_compare( $give_recurring_version, '1.10.3', '<' ) :
+			give_recurring_v1103_add_fee_amount_column_callback();
+			give_recurring_v1103_alter_db_for_object_id_length();
 	}
 }
 
-add_action( 'admin_init', 'give_recurring_do_automatic_upgrades' );
+add_action( 'admin_init', 'give_recurring_do_automatic_upgrades', 0 );
+add_action( 'give_recurring_install_complete', 'give_recurring_do_automatic_upgrades', 0 );
 
-/**
- * For new installs mark upgrade routines complete.
- *
- * @since 1.4
- */
-function give_recurring_mark_upgrades_complete() {
-
-	// Is this a new install or old install?
-	$prev_version = get_option( 'give_recurring_version_upgraded_from' );
-
-	if ( empty( $prev_version ) ) {
-		// New install, no need to run these upgrades.
-		give_set_upgrade_complete( 'give_recurring_v12_upgraded' );
-		give_set_upgrade_complete( 'give_recurring_v14_update_donor_count' );
-		give_set_upgrade_complete( 'give_recurring_v153_update_donor_count' );
-		give_set_upgrade_complete( 'give_recurring_v153_create_log_type_metadata' );
-		give_set_upgrade_complete( 'give_recurring_v153_add_db_notes_column' );
-		give_set_upgrade_complete( 'give_recurring_v160_add_db_frequency_column' );
-		give_set_upgrade_complete( 'give_recurring_v170_sanitize_db_amount' );
-		give_set_upgrade_complete( 'give_recurring_v172_renewal_payment_level' );
-		give_set_upgrade_complete( 'give_recurring_v182_alter_amount_column_type' );
-	}
-
-}
-
-add_action( 'give_recurring_install_complete', 'give_recurring_mark_upgrades_complete' );
 
 /**
  * Add the notes column to give_subscriptions db.
@@ -317,48 +287,6 @@ function give_recurring_v160_add_db_frequency_column_callback() {
 
 }
 
-/**
- * Remove give_log_type taxonomy from log and create log meta.
- *
- * @since 1.5.4
- */
-function give_recurring_v153_create_log_type_metadata_callback() {
-	$give_updates = Give_Updates::get_instance();
-
-	// form query
-	$logs = new WP_Query( array(
-			'paged'          => $give_updates->step,
-			'order'          => 'DESC',
-			'post_type'      => 'give_recur_email_log',
-			'post_status'    => 'any',
-			'posts_per_page' => 100,
-		)
-	);
-
-	if ( $logs->have_posts() ) {
-		$give_updates->set_percentage( $logs->found_posts, $give_updates->step * 100 );
-
-		while ( $logs->have_posts() ) {
-			$logs->the_post();
-
-			$term      = get_the_terms( get_the_ID(), 'give_log_type' );
-			$term      = ! is_wp_error( $term ) && ! empty( $term ) ? $term[0] : array();
-			$term_name = ! empty( $term ) ? $term->slug : '';
-
-			if ( empty( $term_name ) ) {
-				continue;
-			}
-
-			give_update_meta( get_the_ID(), '_log_type', $term_name );
-			wp_remove_object_terms( get_the_ID(), $term_name, 'give_log_type' );
-		}// End while().
-
-		wp_reset_postdata();
-	} else {
-		// No more forms found, finish up.
-		give_set_upgrade_complete( 'give_recurring_v153_create_log_type_metadata' );
-	}
-}
 
 /**
  * Upgrade for sanitize db amount for the initial_amount,recurring_amount.
@@ -512,4 +440,50 @@ function give_recurring_v184_alter_amount_column_type_callback() {
 	// The Update Ran.
 	give_set_upgrade_complete( 'give_recurring_v184_alter_amount_column_type' );
 
+}
+
+/**
+ * Add "recurring_fee_amount" column after "recurring_amount" to add support for fee amount to subscriptions.
+ * @see https://github.com/impress-org/give-fee-recovery/issues/266
+ *
+ * @since 1.10.3
+ */
+function give_recurring_v1103_add_fee_amount_column_callback() {
+	global $wpdb;
+
+	$completed = give_has_upgrade_completed( 'give_recurring_v1103_add_fee_amount_column' );
+
+	if ( $completed ) {
+		return;
+	}
+
+	// Alter columns.
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions ADD `recurring_fee_amount` DECIMAL(18,10) NOT NULL AFTER `recurring_amount`" );
+
+	// The Update Ran.
+	give_set_upgrade_complete( 'give_recurring_v1103_add_fee_amount_column' );
+}
+
+/**
+ * Update Transaction ID Column Data type length.
+ *
+ * @see https://github.com/impress-org/give-recurring/issues/945
+ *
+ * @since 1.10.3
+ */
+function give_recurring_v1103_alter_db_for_object_id_length() {
+	global $wpdb;
+
+	$completed = give_has_upgrade_completed( 'give_recurring_v1103_alter_db_for_object_id_length' );
+
+	if ( $completed ) {
+		return;
+	}
+
+	// Alter columns.
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions MODIFY `transaction_id` VARCHAR(255)" );
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions MODIFY `profile_id` VARCHAR(255)" );
+
+	// The Update Ran.
+	give_set_upgrade_complete( 'give_recurring_v1103_alter_db_for_object_id_length' );
 }

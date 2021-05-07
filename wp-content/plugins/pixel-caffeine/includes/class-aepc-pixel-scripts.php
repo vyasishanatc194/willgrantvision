@@ -251,6 +251,11 @@ class AEPC_Pixel_Scripts {
 					'css_events'      => self::track_css_events(),
 					'link_clicks'     => self::track_link_click_events(),
 					'js_events'       => self::track_js_event_events(),
+					'ss_in_ajax'      => AEPC_Track::is_server_side_tracking_enabled() && Server_Side_Tracking::must_track_in_ajax(),
+					'api'             => array(
+						'root'  => esc_url_raw( rest_url() ),
+						'nonce' => wp_create_nonce( 'wp_rest' ),
+					),
 				)
 			)
 		);

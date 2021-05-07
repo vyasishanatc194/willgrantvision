@@ -7,10 +7,10 @@
 
 namespace PixelCaffeine\ServerSide;
 
-use FacebookAds\Object\ServerSide\ActionSource;
-use FacebookAds\Object\ServerSide\CustomData;
-use FacebookAds\Object\ServerSide\Event;
-use FacebookAds\Object\ServerSide\Util;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\ActionSource;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\CustomData;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\Event;
+use PixelCaffeine\Dependencies\FacebookAds\Object\ServerSide\Util;
 use PixelCaffeine\FB\User_Data_Factory;
 
 /**
@@ -23,19 +23,24 @@ class Event_Factory {
 	/**
 	 * Create the event object instance
 	 *
-	 * @param Pixel_Event $event The event instance.
+	 * @param Pixel_Event $pixel The event instance.
 	 *
 	 * @return Event
 	 */
-	public function create_event( Pixel_Event $event ) {
+	public function create_event( Pixel_Event $pixel ) {
 		$event = ( new Event() )
-			->setEventId( $event->get_event_id() )
-			->setEventName( $event->get_event_name() )
+			->setEventName( $pixel->get_event_name() )
 			->setEventTime( time() )
 			->setEventSourceUrl( Util::getRequestUri() )
 			->setActionSource( ActionSource::WEBSITE )
-			->setUserData( User_Data_Factory::decorate_server_side( $event->get_user_data() ) )
-			->setCustomData( $this->create_custom_data( $event->get_event_data() ) );
+			->setUserData( User_Data_Factory::decorate_server_side( $pixel->get_user_data() ) )
+			->setCustomData( $this->create_custom_data( $pixel->get_event_data() ) );
+
+		$event_id = $pixel->get_event_id();
+
+		if ( null !== $event_id ) {
+			$event->setEventId( $event_id );
+		}
 
 		return $event;
 	}

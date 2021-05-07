@@ -140,7 +140,7 @@ class Give_Subscription_Reports_Table extends WP_List_Table {
 						'status' => $key,
 						'paged'  => false,
 					) ) ),
-					( ( 'all' === $key && empty( $current ) ) ) ? 'class="current"' : ( $current == $key ) ? 'class="current"' : '',
+					$this->isCurrentTab( $key, $current ) ? 'class="current"' : '',
 					$name,
 					$count
 				);
@@ -275,13 +275,15 @@ class Give_Subscription_Reports_Table extends WP_List_Table {
 	/**
 	 * Render most columns.
 	 *
+	 * @since 1.11.3 add a filter for setting custom column values
+	 *
 	 * @param object $item
 	 * @param string $column_name
 	 *
 	 * @return mixed
 	 */
-	function column_default( $item, $column_name ) {
-		return $item->$column_name;
+	public function column_default( $item, $column_name ) {
+		return apply_filters( 'give_subscriptions_table_column_default', null, $item, $column_name );
 	}
 
 	/**
@@ -328,7 +330,11 @@ class Give_Subscription_Reports_Table extends WP_List_Table {
 
 		$interval = ! empty( $item->frequency ) ? $item->frequency : 1;
 
-		return give_currency_filter( give_format_amount( $item->initial_amount ), $args ) . '&nbsp;/&nbsp;' . give_recurring_pretty_subscription_frequency( $item->period, false, false, $interval );
+		return sprintf(
+			'%1$s&nbsp;/&nbsp;%2$s',
+			give_currency_filter( give_format_amount( $item->recurring_amount, array( 'currency' => $args['currency_code'] ) ), $args ),
+			give_recurring_pretty_subscription_frequency( $item->period, false, false, $interval )
+		);
 	}
 
 
@@ -502,11 +508,18 @@ class Give_Subscription_Reports_Table extends WP_List_Table {
 
 		$this->statuses_array['total_count'] = $db->count( $default_args );
 
-		foreach ( $this->statuses as $status_key => $status_name ) {
-			$key                          = $status_key . '_count';
-			$this->statuses_array[ $key ] = $db->count( array_merge( $default_args, array(
-				'status' => $status_key,
-			) ) );
+		$result = $db->count( array_merge( $default_args, array(
+				'status'  => $this->statuses,
+				'groupBy' => 'status',
+			) )
+		);
+
+		if ( $result ) {
+			foreach ( $this->statuses as $status_key => $status_name ) {
+				$key                          = "{$status_key}_count";
+				$this->statuses_array[ $key ] = ! empty( $result[ $status_key ] ) ? $result[ $status_key ] : 0;
+
+			}
 		}
 	}
 
@@ -685,4 +698,25 @@ class Give_Subscription_Reports_Table extends WP_List_Table {
 			do_action( 'give_recurring_subscriptions_table_do_bulk_action', $id, $this->current_action() );
 		}// End foreach().
 	}
+
+    /**
+     * Check if is the current tab
+     *
+     * @param string $key
+     * @param string $current
+     * @since 1.11.1
+     *
+     * @return bool
+     */
+    private function isCurrentTab( $key, $current ) {
+	    if ( 'all' === $key && empty( $current ) ) {
+	        return true;
+        }
+
+	    if ( $current === $key ) {
+	        return true;
+        }
+
+	    return false;
+    }
 }

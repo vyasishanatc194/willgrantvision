@@ -5,7 +5,7 @@ Tags: facebook, facebook pixel, facebook ad, facebook insertions, custom audienc
 Requires at least: 4.4.24
 Requires PHP: 7.2.5
 Tested up to: 5.7.0
-Stable tag: 2.3.0
+Stable tag: 2.3.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -123,6 +123,19 @@ Unfortunately there isn’t any way at the moment to import custom audiences _fr
 7. Product Catalog created
 
 == Changelog ==
+
+= 2.3.3 - 2021-03-18 =
+* Fix - null in "content_ids" of AddToCart event when some WooCommerce extensions are installed
+
+= 2.3.2 - 2021-03-16 =
+* Add - Option to enable server-side tracking through AJAX in order to resolve issues with cache systems (server and/or third-party plugins)
+* Enhancement - Avoid to pass `eventID` if server-side tracking is disabled
+* Update - Facebook API SDK to v10
+
+= 2.3.1 - 2021-02-25 =
+* Enhancement - Scoped third-party vendor dependencies in order to avoid conflicts with other third-party vendor of other installed plugins
+* Fix - Guzzle conflicts with other plugins
+* Fix - Syntax error with PHP <7.4 versions
 
 = 2.3.0 - 2021-02-18 =
 * Support - **Dropping support to <7.2 PHP versions. It's now officially supported only 7.2+ PHP version (the plugin will continue to work with lower versions, but it might occur in some issues).**

@@ -7,9 +7,7 @@
 
 namespace PixelCaffeine\ServerSide;
 
-use AEPC_Facebook_Adapter;
-use FacebookAds\Api;
-use PixelCaffeine\FB\ConnectorAdapter;
+use PixelCaffeine\Dependencies\FacebookAds\Api;
 
 /**
  * Class Server_Side_Tracking
@@ -40,6 +38,24 @@ final class Server_Side_Tracking {
 	public static function init( $access_token = null ) {
 		add_action( 'template_redirect', array( __CLASS__, 'send_events' ) );
 		add_action( 'shutdown', array( __CLASS__, 'send_events' ) ); // Try another time if any other events will be added.
+
+		// Server-side tracking through AJAX.
+		if ( self::must_track_in_ajax() ) {
+			add_action(
+				'rest_api_init',
+				function () {
+					register_rest_route(
+						'aepc/v1',
+						'/fbq',
+						array(
+							'methods'             => \WP_REST_Server::CREATABLE,
+							'callback'            => array( __CLASS__, 'server_side_fbq' ),
+							'permission_callback' => '__return_true',
+						)
+					);
+				}
+			);
+		}
 	}
 
 	/**
@@ -77,7 +93,7 @@ final class Server_Side_Tracking {
 	 * @return void
 	 */
 	public static function send_events() {
-		if ( empty( self::$events ) ) {
+		if ( empty( self::$events ) || ( self::must_track_in_ajax() && ! defined( 'REST_REQUEST' ) ) ) {
 			return;
 		}
 
@@ -87,6 +103,33 @@ final class Server_Side_Tracking {
 			self::$service->send_events( array_values( self::$events ) );
 			self::$events = array(); // Allow to re-call send_events if any other events will be added.
 		}
+	}
+
+	/**
+	 * Handle the AJAX request to send server-side events
+	 *
+	 * @param \WP_REST_Request $request The AJAX request.
+	 *
+	 * @return \WP_REST_Response|\WP_Error
+	 */
+	public static function server_side_fbq( \WP_REST_Request $request ) {
+		$query = $request->get_param( 'query' );
+
+		if ( ! isset( $query[1], $query[3]['eventID'] ) ) {
+			return new \WP_Error( 'fbq_unexpected_query', 'Invalid query for fbq server-side', array( 'status' => 422 ) );
+		}
+
+		\AEPC_Track::track(
+			$query[1],
+			array_merge(
+				isset( $query[2] ) ? $query[2] : array(),
+				array(
+					'event_id' => $query[3]['eventID'],
+				)
+			)
+		);
+
+		return new \WP_REST_Response( null, 204 );
 	}
 
 	/**
@@ -105,5 +148,14 @@ final class Server_Side_Tracking {
 	 */
 	public static function must_log_all_events() {
 		return 'yes' === get_option( 'aepc_server_side_log_events' );
+	}
+
+	/**
+	 * Check if the server-side events must be track through AJAX (fixes cache plugin conflicts)
+	 *
+	 * @return bool
+	 */
+	public static function must_track_in_ajax() {
+		return 'yes' === get_option( 'aepc_server_side_track_in_ajax' );
 	}
 }

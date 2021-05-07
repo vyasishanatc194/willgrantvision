@@ -7,7 +7,6 @@
 function give_recurring_subscription_details() {
 
 	$render = true;
-
 	if ( ! current_user_can( 'view_give_reports' ) ) {
 		give_set_error( 'give-no-access', __( 'You are not permitted to view this data.', 'give-recurring' ) );
 		$render = false;
@@ -18,8 +17,9 @@ function give_recurring_subscription_details() {
 		$render = false;
 	}
 
-	$sub_id = (int) $_GET['id'];
-	$sub    = new Give_Subscription( $sub_id );
+	$sub_id            = (int) $_GET['id'];
+	$sub               = new Give_Subscription( $sub_id );
+	$donation_currency = give_get_meta( $sub->parent_payment_id, '_give_payment_currency', true );
 
 	if ( empty( $sub ) ) {
 		give_set_error( 'give-invalid_subscription', __( 'Invalid subscription ID.', 'give-recurring' ) );
@@ -27,7 +27,7 @@ function give_recurring_subscription_details() {
 	}
 	?>
 	<div class="wrap">
-	<h1 id="give-subscription-details-h1"><?php _e( 'Subscription Details', 'give-recurring' ); ?> -
+	<h1 id="give-subscription-details-h1" class="wp-heading-inline"><?php _e( 'Subscription Details', 'give-recurring' ); ?> -
 		<?php echo "{$sub_id} {$sub->donor->name}"; ?></h1>
 	<hr class="wp-header-end">
 	<?php if ( give_get_errors() ) : ?>
@@ -197,6 +197,15 @@ function give_recurring_subscription_details() {
 
 							</td>
 						</tr>
+						<?php
+						/**
+						 * Use this action to add additional subscription detail.
+						 *
+						 * @since 1.11.0
+						 * @param int $sub
+						 */
+						do_action( 'give_recurring_add_subscription_detail', $sub->id );
+						?>
 						</tbody>
 					</table>
 				</div>
@@ -247,7 +256,7 @@ function give_recurring_subscription_details() {
 				</div>
 			</form>
 
-			<div id="sync-subscription-modal" class="modal-sync-subscription modal fade" tabindex="-1">
+			<div id="sync-subscription-modal" class="modal-sync-subscription give-modal give-modal--zoom give-hidden" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -255,11 +264,11 @@ function give_recurring_subscription_details() {
 									give_get_gateway_admin_label( $sub->gateway ) ); ?></h4>
 						</div>
 						<div class="modal-body"></div>
-						<div class="modal-footer">
+						<div class="give-modal__controls">
 							<span class="give-active-sync-message"><?php esc_html_e( 'Syncing Subscription...', 'give-recurring' ); ?></span>
-							<button class="button give-close-sync-modal" type="button"
+							<button class="give-button give-button--secondary give-popup-close-button" type="button"
 							        data-dismiss="modal"><?php esc_html_e( 'Close', 'give-recurring' ); ?></button>
-							<button class="button button-primary give-resync-button" disabled
+							<button class="give-button give-button--primary give-resync-button" disabled
 							        type="button"><?php esc_html_e( 'Resync', 'give-recurring' ); ?></button>
 						</div>
 					</div>
@@ -272,7 +281,19 @@ function give_recurring_subscription_details() {
 				<ul>
 					<li>
 						<span class="dashicons dashicons-chart-area"></span>
-						<?php echo give_currency_filter( give_format_amount( $sub->get_lifetime_value() ) ); ?> <?php _e( 'Subscription Value', 'give-recurring' ); ?>
+						<?php
+						printf(
+								'%1$s %2$s',
+							give_currency_filter(
+									give_format_amount(
+											$sub->get_lifetime_value(),
+											array( 'currency' => $donation_currency )
+									),
+									array( 'currency_code' => $donation_currency )
+							),
+							__( 'Subscription Value', 'give-recurring' )
+						);
+						?>
 					</li>
 					<?php do_action( 'give_subscription_stats_list', $sub ); ?>
 				</ul>
@@ -419,6 +440,8 @@ function give_recurring_subscription_details() {
 
 			<div class="inside">
 				<div id="give-subscription-notes-inner">
+					<div id="give-subscription-notes-error-wrap">
+					</div>
 					<?php
 					$notes = give_get_subscription_notes( $sub_id );
 					if ( ! empty( $notes ) ) {

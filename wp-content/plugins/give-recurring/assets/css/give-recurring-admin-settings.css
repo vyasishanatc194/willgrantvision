@@ -116,3 +116,13 @@ ul.doc-list ul.children {
 #excluded_gateways_chosen .chosen-choices {
 	width: 25em;
 }
+
+.give-email-tags-wrap .give_next_payment_attempt_tag,
+.give-email-tags-wrap .give_update_payment_method_link_tag {
+	display: none;
+}
+
+.give-settings-donor-subscription-payment-failed-section .give-email-tags-wrap .give_next_payment_attempt_tag,
+.give-settings-donor-subscription-payment-failed-section .give-email-tags-wrap .give_update_payment_method_link_tag {
+	display: block;
+}

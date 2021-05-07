@@ -50,6 +50,11 @@ return array(
 		'default' => 'no',
 	),
 
+	'aepc_server_side_track_in_ajax'    => array(
+		'type'    => 'checkbox',
+		'default' => 'no',
+	),
+
 	'aepc_enable_dpa'                   => array(
 		'type'    => 'checkbox',
 		'default' => 'no',
