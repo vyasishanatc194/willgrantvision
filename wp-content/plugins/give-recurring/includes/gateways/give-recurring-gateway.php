@@ -926,6 +926,7 @@ class Give_Recurring_Gateway {
 	 * Process the update subscription.
 	 *
 	 * @since  1.8
+	 * @since 1.12.0 add third argument
 	 *
 	 * @param Give_Recurring_Subscriber 	$subscriber Give_Recurring_Subscriber
 	 * @param Give_Subscription     		$subscription Give_Subscription
@@ -1001,7 +1002,7 @@ class Give_Recurring_Gateway {
 	 * Return new subscription amount selected by donor.
 	 *
 	 * @param array (optional) $data Array of update args
-	 * 
+	 *
 	 * @since 1.10.3
 	 * @return string
 	 */
@@ -1024,7 +1025,7 @@ class Give_Recurring_Gateway {
 		if ( $isFeeOpted ) {
 			$renewalAmount += $feeAmount;
 		}
-		
+
 		return $renewalAmount;
 	}
 

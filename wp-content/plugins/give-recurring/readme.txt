@@ -1,10 +1,10 @@
 === Give - Recurring Donations ===
 Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
-Requires at least: 4.8
+Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 1.12.0
-Requires Give: 2.10.0
+Stable tag: 1.12.4
+Requires Give: 2.11.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -18,9 +18,9 @@ This plugin requires the GiveWP core plugin activated to function properly. When
 
 = Minimum Requirements =
 
-* WordPress 4.8 or greater
-* PHP version 5.3 or greater
-* MySQL version 5.0 or greater
+* WordPress 4.9 or greater
+* PHP version 5.6 or greater
+* MySQL version 5.5 or greater
 * Some payment gateways require fsockopen support (for IPN access)
 
 = Automatic installation =
@@ -38,6 +38,16 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.12.4: May 25th, 2021 =
+* Fix: Resolved remaining issue with toggling Failed Subscription email notification
+
+= 1.12.3: May 20th, 2021 =
+* Change: Abandoned subscriptions are now marked as abandoned instead of canceled
+* Fix: Syncing subscriptions with the payment gateway has been fixed
+* Fix: Subscriptions that used Apple/Google pay now cancel at Stripe when canceled in GiveWP
+* Fix: Updating a Stripe subscription amount now supports Currency Switcher
+* Fix: Stripe + Plaid no longer throws errors related to card details being passed
 
 = 1.12.2: April 12th, 2021 =
 * Fix: Send Failed Subscription email now goes to the correct email (the donor's)

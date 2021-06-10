@@ -14,7 +14,7 @@ use Give\Framework\Migrations\Contracts\Migration;
  *
  * Migrate existing logs to the new logging db table
  *
- * @unreleased
+ * @since 1.12.3
  */
 class MigrateLogs extends Migration {
 	/**

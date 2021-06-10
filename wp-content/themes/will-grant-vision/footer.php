@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<img src="<?php bloginfo('stylesheet_directory'); ?>/img/icon-give.png" alt="give something">
 						<span>give something</span>
 					</a>
-					<a href="#" class="btn-something btn-get-something">
+					<a href="https://www.towards2020glasses.com" class="btn-something btn-get-something">
 						<img src="<?php bloginfo('stylesheet_directory'); ?>/img/icon-get.png" alt="get something">
 						<span>get something</span>
 					</a>

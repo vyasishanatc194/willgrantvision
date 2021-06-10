@@ -7,6 +7,7 @@
  * @license   https://opensource.org/licenses/gpl-license GNU Public License
  * @since     1.6
  */
+use GiveRecurring\Infrastructure\Log;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -239,8 +240,17 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 
 		// Is there an error returned from the API?
 		if ( isset( $response->error_code ) ) {
-
-			give_record_gateway_error( __( 'Plaid API Error', 'give-recurring' ), sprintf( __( 'An error occurred when processing a donation via Plaid\'s API. Details: %s', 'give-recurring' ), $response->error_code . ' (error code) - ' . $response->error_type . '(error type) - ' . $response->error_message ) );
+			Log::error(
+				esc_html__( 'Plaid API Error', 'give-recurring' ),
+				[
+					'category' => 'Plaid Subscription',
+					'Error Message' => sprintf(
+						__( 'An error occurred when processing a donation via Plaid\'s API. Details: %s', 'give-recurring' ),
+						"$response->error_code (error code) - $response->error_type (error type) - $response->error_message"
+					),
+					'Stripe Response' => $response
+				]
+			);
 			give_set_error( 'stripe_ach_request_error', __( 'There was an API error received from the payment gateway. Please try again.', 'give-recurring' ) );
 			give_send_back_to_checkout( '?payment-mode=stripe_ach' );
 
@@ -263,7 +273,27 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 	 */
 	public function create_payment_profiles() {
 
-		$source    = ! empty( $_POST['give_stripe_payment_method'] ) ? give_clean( $_POST['give_stripe_payment_method'] ) : $this->generate_source_dictionary();
+		// Check if Stripe payment method is defined. If not, log error and return.
+		if ( ! empty( $_POST['give_stripe_payment_method'] ) ) {
+			$source = give_clean( $_POST['give_stripe_payment_method'] );
+		} else {
+			Log::error(
+				'Plaid API Error',
+				[
+					'category' => 'Plaid Subscription',
+					'Description' => 'Required ACH Stripe payment method was not found in request.',
+					'Data' => give_clean( $_POST )
+				]
+			);
+
+			give_set_error(
+				'stripe_ach_payment_method_empty_error',
+				esc_html__( 'There was an API error received from the payment gateway. Please try again.', 'give-recurring' )
+			);
+
+			return false;
+		}
+
 		$email     = $this->purchase_data['user_email'];
 
 		// Create a new plan or fetch the existing plan.
@@ -276,35 +306,6 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 		// Subscribe Customer to Plan.
 		return $this->subscribe_customer_to_plan( $stripe_customer, $source, $plan_id );
 
-	}
-
-	/**
-	 * Generates source dictionary, used for testing purpose only.
-	 *
-	 * @param array $card_info Card Information.
-	 *
-	 * @since  1.6
-	 * @access public
-	 *
-	 * @return array
-	 */
-	public function generate_source_dictionary( $card_info = array() ) {
-
-		if ( empty( $card_info ) ) {
-			$card_info = $this->purchase_data['card_info'];
-		}
-
-		$card_info = array_map( 'trim', $card_info );
-		$card_info = array_map( 'strip_tags', $card_info );
-
-		return array(
-			'object'    => 'card',
-			'exp_month' => $card_info['card_exp_month'],
-			'exp_year'  => $card_info['card_exp_year'],
-			'number'    => $card_info['card_number'],
-			'cvc'       => $card_info['card_cvc'],
-			'name'      => $card_info['card_name'],
-		);
 	}
 
 	/**

@@ -10,7 +10,7 @@ use Give\Framework\Migrations\Contracts\Migration;
  *
  * Delete old logs after migration to the new logging system is completed
  *
- * @unreleased
+ * @since 1.12.3
  */
 class DeleteEmailLogs extends Migration {
 	/**

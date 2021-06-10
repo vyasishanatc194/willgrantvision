@@ -13,7 +13,7 @@ use GiveRecurring\Logs\Migrations\DeleteEmailLogs;
  * Class LogsServiceProvider
  * @package GiveRecurring\Logs
  *
- * @unreleased
+ * @since 1.12.3
  */
 class LogsServiceProvider implements ServiceProvider{
 	/**

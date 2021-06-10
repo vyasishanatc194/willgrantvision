@@ -24,6 +24,7 @@ if ( ! class_exists( 'Give_Recurring_Subscription_Payment_Failed_Email' ) ) :
 	 * Class Give_Recurring_Subscription_Payment_Failed_Email
 	 *
 	 * @since 1.9.0
+	 * @since 1.12.4 Make notification status editable
 	 */
 	class Give_Recurring_Subscription_Payment_Failed_Email extends Give_Email_Notification {
 
@@ -45,7 +46,6 @@ if ( ! class_exists( 'Give_Recurring_Subscription_Payment_Failed_Email' ) ) :
 					'has_recipient_field'          => false,
 					'has_preview_header'           => true,
 					'notification_status'          => 'enabled',
-					'notification_status_editable' => false,
 					'email_tag_context'            => array( 'donor', 'general' ),
 					'default_email_subject'        => sprintf(
 						/* translators: %s: site name */

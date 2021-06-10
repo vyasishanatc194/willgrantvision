@@ -20,29 +20,31 @@ use Composer\Semver\VersionParser;
 
 
 
+
+
 class InstalledVersions
 {
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.12.2',
-    'version' => '1.12.2.0',
+    'pretty_version' => '1.12.4',
+    'version' => '1.12.4.0',
     'aliases' => 
     array (
     ),
-    'reference' => '274e712363f17247e660a8f5437c368e1d2aeb7e',
+    'reference' => '28f19e206924de58293cf8cc6b8d5ede22a273e2',
     'name' => 'impress-org/give-recurring',
   ),
   'versions' => 
   array (
     'impress-org/give-recurring' => 
     array (
-      'pretty_version' => '1.12.2',
-      'version' => '1.12.2.0',
+      'pretty_version' => '1.12.4',
+      'version' => '1.12.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '274e712363f17247e660a8f5437c368e1d2aeb7e',
+      'reference' => '28f19e206924de58293cf8cc6b8d5ede22a273e2',
     ),
   ),
 );
@@ -61,7 +63,6 @@ $packages = array();
 foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
-
 
 if (1 === \count($packages)) {
 return $packages[0];
@@ -226,9 +227,23 @@ return $installed[0]['root'];
 
 
 
+
 public static function getRawData()
 {
+@trigger_error('getRawData only returns the first dataset loaded, which may not be what you expect. Use getAllRawData() instead which returns all datasets for all autoloaders present in the process.', E_USER_DEPRECATED);
+
 return self::$installed;
+}
+
+
+
+
+
+
+
+public static function getAllRawData()
+{
+return self::getInstalled();
 }
 
 
@@ -254,6 +269,7 @@ public static function reload($data)
 self::$installed = $data;
 self::$installedByVendor = array();
 }
+
 
 
 

@@ -80,6 +80,8 @@ if ( ! class_exists( 'Give_Recurring_Stripe_Google_Pay' ) ) {
 			$this->payment_intent = new Give_Stripe_Payment_Intent();
 			$this->plan           = new Plan();
 			$this->subscription   = new Give_Recurring_Stripe_Subscription();
+
+			add_action( "give_recurring_cancel_{$this->id}_subscription", array( $this, 'cancel' ), 10, 2 );
 		}
 
 		/**
@@ -1105,6 +1107,21 @@ if ( ! class_exists( 'Give_Recurring_Stripe_Google_Pay' ) ) {
 				$canCancel = give_recurring_stripe_can_cancel( $canCancel, $subscription );
 			}
 			return $canCancel;
+		}
+
+		/**
+		 * Cancel subscription on stripe.
+		 *
+		 * @since 1.12.3
+		 *
+		 * @param Give_Subscription $subscription
+		 * @param bool $valid
+		 *
+		 * @return bool
+		 */
+		public function cancel( $subscription, $valid ) {
+			$stripeCreditCardPaymentMethod = new Give_Recurring_Stripe();
+			return $stripeCreditCardPaymentMethod->cancel( $subscription, $valid );
 		}
 
 		/**

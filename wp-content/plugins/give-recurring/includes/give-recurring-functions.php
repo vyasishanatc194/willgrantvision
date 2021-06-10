@@ -416,3 +416,29 @@ function give_recurring_register_tables(){
 		}
 	}
 }
+
+
+/**
+ * Update a subscription as abandoned if the payment is abandoned.
+ *
+ * @since 1.12.3
+ *
+ * @param \Give_Payment $payment
+ */
+function give_recurring_update_abandoned_subscription( $payment ) {
+
+    $db = new Give_Subscriptions_DB;
+    $results = $db->get_subscriptions([
+        'parent_payment_id' => $payment->ID,
+    ]);
+
+    if ( $results ) {
+        // Only one subscription should be returned, but the return value is an array.
+        foreach ( $results as $result ) {
+            $subscription = new \Give_Subscription( $result->id );
+            // Using the Give_Subscription API to update the status will also add a note to the record.
+            $subscription->update([ 'status' => 'abandoned' ]);
+        }
+    }
+}
+add_action( 'give_post_abandoned_payment', 'give_recurring_update_abandoned_subscription' );

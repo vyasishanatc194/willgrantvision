@@ -369,6 +369,8 @@ class Give_Subscription_Reminder_Email extends Give_Email_Notification {
 
 		/**
 		 * Set up the default values for various fields.
+		 *
+		 * @since 1.12.4 Add notice which appear when admin click on lock icon on email listing setting page.
 		 */
 		$fields = wp_parse_args(
 			$fields, array(
@@ -379,6 +381,14 @@ class Give_Subscription_Reminder_Email extends Give_Email_Notification {
 				'form_metabox_setting'         => false,
 				'has_recipient_field'          => false,
 				'notification_status_editable' => false,
+				'notices'                      => array(
+					'non-notification-status-editable' => sprintf(
+						'%1$s <a href="%2$s">%3$s &raquo;</a>',
+						esc_html__( 'This notification is automatically toggled based on whether or not the reminder email is enabled.', 'give-recurring' ),
+						admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=emails&section=subscription-reminder' ),
+						esc_html__( 'Edit Setting', 'give-recurring' )
+					),
+				),
 			)
 		);
 

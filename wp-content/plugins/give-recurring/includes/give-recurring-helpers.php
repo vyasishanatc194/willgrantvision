@@ -1164,6 +1164,7 @@ function give_recurring_get_subscription_statuses() {
 			'pending'   => __( 'Pending', 'give-recurring' ),
 			'failing'   => __( 'Failing', 'give-recurring' ),
 			'suspended' => __( 'Suspended', 'give-recurring' ),
+			'abandoned' => __( 'Abandoned', 'give-recurring' ),
 		)
 	);
 }

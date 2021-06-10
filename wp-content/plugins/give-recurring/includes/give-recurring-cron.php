@@ -38,11 +38,9 @@ class Give_Recurring_Cron {
 
 		$this->db = new Give_Subscriptions_DB;
 
-		add_action( 'give_daily_scheduled_events', array( $this, 'check_for_expired_subscriptions' ) );
-		add_action( 'give_daily_scheduled_events', array( $this, 'delete_abandoned_subscriptions' ) );
-		add_action( 'give_weekly_scheduled_events', array( $this, 'delete_old_sync_logs' ) );
-
-	}
+        add_action( 'give_daily_scheduled_events', array( $this, 'check_for_expired_subscriptions' ) );
+        add_action( 'give_weekly_scheduled_events', array( $this, 'delete_old_sync_logs' ) );
+    }
 
 	/**
 	 * Check for expired subscriptions once per day and mark them as expired
@@ -75,41 +73,6 @@ class Give_Recurring_Cron {
 
 	}
 
-
-	/**
-	 * Deletes pending subscription records older than 1 week.
-	 *
-	 * @since 1.3
-	 * @return void
-	 */
-	public function delete_abandoned_subscriptions() {
-
-		$db = new Give_Subscriptions_DB;
-
-		$args = array(
-			'status' => 'pending',
-			'number' => 1000,
-			'date'   => array(
-				'end' => '-1 week'
-			),
-		);
-
-		$subscriptions = $db->get_subscriptions( $args );
-
-		if ( $subscriptions ) {
-
-			foreach ( $subscriptions as $subscription ) {
-
-				delete_post_meta( $subscription->parent_payment_id, '_give_subscription_payment' );
-				$db->delete( $subscription->id );
-
-			}
-
-		}
-
-	}
-
-
 	/**
 	 * Deletes old Sync log data.
 	 *
@@ -118,5 +81,4 @@ class Give_Recurring_Cron {
 	public function delete_old_sync_logs() {
 
 	}
-
 }

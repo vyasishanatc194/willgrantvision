@@ -1012,34 +1012,47 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 	 * Update Stripe Subscription plan.
 	 *
 	 * @since 1.8
+	 * @since 1.12.3 Adds currency to the plan name to ensure uniqueness.
 	 *
-	 * @param \Give_Subscription $subscription
-	 * @param int                $renewal_amount
+	 * @param  \Give_Subscription  $subscription
+	 * @param  int  $renewal_amount
 	 */
 	private function update_subscription_plan( $subscription, $renewal_amount ) {
-		$stripe_plan_name = give_recurring_generate_subscription_name( $subscription->form_id, $subscription->price_id );
-		$stripe_plan_id   = $this->generate_stripe_plan_id( $stripe_plan_name, $renewal_amount, $subscription->period, $subscription->frequency );
+		$parentPayment = new \Give_Payment( $subscription->parent_payment_id );
 
+		$stripe_plan_name = give_recurring_generate_subscription_name( $subscription->form_id );
+
+		// Append the currency to the plan name to ensure a unique plan name.
+		$stripe_plan_name .= '-' . $parentPayment->currency;
+
+		$stripe_plan_id = $this->generate_stripe_plan_id(
+			$stripe_plan_name,
+			$renewal_amount,
+			$subscription->period,
+			$subscription->frequency
+		);
 
 		$stripe_plan = $this->plan->retrieve( $stripe_plan_id );
 
 		// If Plan not found, then create one.
 		if ( empty( $stripe_plan ) ) {
 			// The plan does not exist, please create a new plan.
-			$args = array(
+			$args = [
 				'amount'         => give_stripe_dollars_to_cents( $renewal_amount ),
 				'interval'       => $subscription->period,
 				'interval_count' => $subscription->frequency,
-				'currency'       => give_get_currency(),
+				'currency'       => $parentPayment->currency,
 				'id'             => $stripe_plan_id,
-			);
+			];
 
 			// Create a Subscription Product Object and Pass plan parameters as per the latest version of stripe api.
-			$args['product'] = \Stripe\Product::create( array(
-				'name'                 => $stripe_plan_name,
-				'statement_descriptor' => give_stripe_get_statement_descriptor( $subscription ),
-				'type'                 => 'service',
-			) );
+			$args['product'] = \Stripe\Product::create(
+				[
+					'name'                 => $stripe_plan_name,
+					'statement_descriptor' => give_stripe_get_statement_descriptor( $subscription ),
+					'type'                 => 'service',
+				]
+			);
 
 			$stripe_plan = $this->plan->create( $args );
 		}
@@ -1051,22 +1064,27 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 				isset( $stripe_subscription->items->data[0]->id )
 				&& isset( $stripe_plan->id )
 			) {
-				$stripe_subscription->update( $subscription->profile_id, array(
-						'items'   => array(
-							array(
+				$stripe_subscription->update(
+					$subscription->profile_id,
+					[
+						'items'   => [
+							[
 								'id'   => $stripe_subscription->items->data[0]->id,
-								'plan' => $stripe_plan->id
-							)
-						),
+								'plan' => $stripe_plan->id,
+							],
+						],
 						'prorate' => false,
-					)
+					]
 				);
 
 				$stripe_subscription->save();
 			} else {
 				give_set_error(
 					'give_recurring_stripe_update_subscription',
-					esc_html__( 'The Stripe gateway returned an error while updating the subscription.', 'give-recurring' )
+					esc_html__(
+						'The Stripe gateway returned an error while updating the subscription.',
+						'give-recurring'
+					)
 				);
 			}
 		}

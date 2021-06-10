@@ -304,7 +304,7 @@ class SubscriptionsRoute extends RouteAbstract {
 			],
 		];
 
-		return $statusMap[ $status ] ? $statusMap[ $status ] : [
+		return isset( $statusMap[ $status ] ) ? $statusMap[ $status ] : [
 			'color' => '#FFBA00',
 			'label' => esc_html__( 'Unknown', 'give-recurring' ),
 		];

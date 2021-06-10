@@ -7,7 +7,7 @@ use Give\ServiceProviders\ServiceProvider;
  * Class TrackingServiceProvider
  *
  * @package GiveRecurring\Tracking
- * @unreleased
+ * @since 1.12.3
  */
 class TrackingServiceProvider implements ServiceProvider {
 	/**

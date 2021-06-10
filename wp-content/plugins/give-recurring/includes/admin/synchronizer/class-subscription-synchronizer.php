@@ -1,7 +1,7 @@
 <?php
 
-use Give\Log\LogFactory;
 use Give\Log\LogRepository;
+use GiveRecurring\Infrastructure\Log;
 
 /**
  * Engine that synchronizes subscriptions in our system and gateway
@@ -69,7 +69,6 @@ class Give_Subscription_Synchronizer {
 		$context = [
 			'Subscription ID' => $this->subscription->id,
 			'Additional'      => $post_content,
-			'category'        => 'Recurring Donations',
 			'source'          => give_get_gateway_admin_label( $this->subscription->gateway )
 		];
 

@@ -172,14 +172,14 @@ jQuery(function($) {
 
     // Get something modal
 
-    $(".btn-get-something").on("click", function(e) {
+    /*$(".btn-get-something").on("click", function(e) {
         e.preventDefault();
         $(".get-something-modal").addClass("active");
         $("body").addClass("no-scroll");
         setTimeout(function() {
             location.href = 'https://visionarystream.com';
         }, 3000);
-    });
+    });*/
 
     $(".bv-trigger").on("click", function(e) {
         e.preventDefault();
