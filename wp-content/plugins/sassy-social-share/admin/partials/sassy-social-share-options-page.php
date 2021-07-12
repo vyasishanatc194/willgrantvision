@@ -1108,7 +1108,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							<td>
 							<input id="heateor_sss_counts" name="heateor_sss[horizontal_counts]" type="checkbox" <?php echo isset( $options['horizontal_counts'] ) ? 'checked = "checked"' : '';?> value="1" onclick="if(this.checked){heateorSssHorizontalShares = true;}else{heateorSssHorizontalShares = false;} heateor_sss_toggle_fb_share_count_options()" />
 							<br/>
-							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Facebook, Twitter, Linkedin, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
+							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
 							<span class="heateor_sss_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'sassy-social-share' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
@@ -1574,7 +1574,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							<td>
 							<input id="heateor_sss_vertical_counts" name="heateor_sss[vertical_counts]" type="checkbox" <?php echo isset( $options['vertical_counts'] ) ? 'checked = "checked"' : '';?> value="1" onclick="if(this.checked){heateorSssVerticalShares = true;}else{heateorSssVerticalShares = false;} heateor_sss_toggle_fb_share_count_options()" />
 							<br/>
-							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Facebook, Twitter, Linkedin, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
+							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
 							<span class="heateor_sss_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'sassy-social-share' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
@@ -1713,6 +1713,10 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 			<div class="menu_containt_div" id="tabs-4">
 				<div class="clear"></div>
 				<div class="heateor_sss_left_column">
+
+				<div>
+					<a href="https://www.heateor.com/comparison-between-sassy-social-share-pro-and-premium/" target="_blank"><img style="margin-bottom:19px;" src="<?php echo plugins_url( '../../images/unlock/track-shares.png', __FILE__ ) ?>" /></a>
+				</div>
 
 				<div class="stuffbox" id="heateor_sss_fb_share_count_options" <?php echo ! ( in_array( 'facebook', $options['vertical_re_providers'] ) || in_array( 'facebook', $options['horizontal_re_providers'] ) ) ? 'style = "display: none"' : '';?>>
 					<h3><label><?php _e( 'Facebook Share Count', 'sassy-social-share' ) ?></label></h3>

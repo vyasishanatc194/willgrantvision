@@ -314,6 +314,21 @@ class Sassy_Social_Share_Sharing_Networks {
 	 */
 	public function fetch_amp_sharing_networks() {
 		
+		if ( in_array( 'pinterest', $this->options['horizontal_re_providers'] ) || in_array( 'pinterest', $this->options['vertical_re_providers'] ) ) {
+			global $post;
+			$pinterest_image_url = '';
+			if ( is_object( $post ) && has_post_thumbnail( $post->ID ) ) {
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+				if ( isset( $image[0] ) && $image[0] ) {
+					$pinterest_image_url = $image[0];
+				}
+			}
+			if ( $pinterest_image_url ) {
+				$pinterest_share_url = 'http://pinterest.com/pin/create/link/?url=%encoded_post_url%&media=' . $pinterest_image_url . '&description=%post_title%';
+			} else {
+				$pinterest_share_url = 'http://pinterest.com/pin/create/link/?url=%encoded_post_url%';
+			}
+		}
 		$this->amp_sharing_networks['instagram'] = str_replace( '%instagram_username%', $this->options['instagram_username'] != '' ? $this->options['instagram_username'] : $this->options['vertical_instagram_username'], $this->amp_sharing_networks['instagram'] );
 		$this->amp_sharing_networks['youtube'] = str_replace( '%youtube_username%', $this->options['youtube_username'] != '' ? $this->options['youtube_username'] : $this->options['vertical_youtube_username'], $this->amp_sharing_networks['youtube'] );
 		$this->amp_sharing_networks['Comment'] = str_replace( '%comment_container_id%', $this->options['comment_container_id'] != '' ? $this->options['comment_container_id'] : $this->options['vertical_comment_container_id'], $this->amp_sharing_networks['Comment'] );
@@ -322,6 +337,7 @@ class Sassy_Social_Share_Sharing_Networks {
 			$fb_key = $this->options['fb_key'];
 		}
 		$this->amp_sharing_networks['Facebook_Messenger'] = '<a class="heateor_sss_amp heateor_sss_amp_facebook_messenger" href="' . ( $this->check_if_mobile() ? 'fb-messenger://share/?link=%encoded_post_url%' : 'https://www.facebook.com/dialog/send?app_id=' . $fb_key . '&display=popup&link=%encoded_post_url%&redirect_uri=%encoded_post_url%' ) . '" title="Facebook Messenger" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/facebook_messenger.svg" width="%width%" height="%height%" alt="Facebook Messenger" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
+		$this->amp_sharing_networks['pinterest'] = '<a class="heateor_sss_amp heateor_sss_amp_pinterest" href="' . $pinterest_share_url . '" title="Pinterest" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/pinterest.svg" width="%width%" height="%height%" alt="Pinterest" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
 
 		return $this->amp_sharing_networks;
 	

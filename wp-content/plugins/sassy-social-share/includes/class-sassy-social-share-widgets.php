@@ -63,7 +63,7 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 			return;
 		}
 		extract( $args );
-		if ( $instance['hide_for_logged_in'] == 1 && is_user_logged_in() ) return;
+		if ( isset( $instance['hide_for_logged_in'] ) && is_user_logged_in() ) return;
 		
 		global $post;
 
@@ -83,7 +83,7 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 			$inline_script .= 'var heateorSssUrlCountFetched = [], heateorSssSharesText = \''. htmlspecialchars(__('Shares', 'sassy-social-share'), ENT_QUOTES) .'\', heateorSssShareText = \''. htmlspecialchars(__('Share', 'sassy-social-share'), ENT_QUOTES) .'\';';
 			$inline_script .= 'function heateorSssPopup(e) {window.open(e,"popUpWindow","height=400,width=600,left=400,top=100,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status")}';
 			if ( $this->public_class_object->facebook_like_recommend_enabled() || $this->public_class_object->facebook_share_enabled() ) {
-				$inline_script .= 'function heateorSssInitiateFB() {FB.init({appId:"",channelUrl:"",status:!0,cookie:!0,xfbml:!0,version:"v9.0"})}window.fbAsyncInit=function() {heateorSssInitiateFB(),' . ( defined( 'HEATEOR_SOCIAL_SHARE_MYCRED_INTEGRATION_VERSION' ) && $this->public_class_object->facebook_like_recommend_enabled() ? 1 : 0 ) . '&&(FB.Event.subscribe("edge.create",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"","Minus point(s) for undoing Facebook like-recommend")}) ),'. ( defined( 'HEATEOR_SHARING_GOOGLE_ANALYTICS_VERSION' ) ? 1 : 0 ) .'&&(FB.Event.subscribe("edge.create",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Like",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Unlike",e?e:"")}) )},function(e) {var n,i="facebook-jssdk",o=e.getElementsByTagName("script")[0];e.getElementById(i)||(n=e.createElement("script"),n.id=i,n.async=!0,n.src="//connect.facebook.net/'. ( $this->options['language'] ? $this->options['language'] : 'en_US' ) .'/sdk.js",o.parentNode.insertBefore(n,o) )}(document);';
+				$inline_script .= 'function heateorSssInitiateFB() {FB.init({appId:"",channelUrl:"",status:!0,cookie:!0,xfbml:!0,version:"v11.0"})}window.fbAsyncInit=function() {heateorSssInitiateFB(),' . ( defined( 'HEATEOR_SOCIAL_SHARE_MYCRED_INTEGRATION_VERSION' ) && $this->public_class_object->facebook_like_recommend_enabled() ? 1 : 0 ) . '&&(FB.Event.subscribe("edge.create",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"","Minus point(s) for undoing Facebook like-recommend")}) ),'. ( defined( 'HEATEOR_SHARING_GOOGLE_ANALYTICS_VERSION' ) ? 1 : 0 ) .'&&(FB.Event.subscribe("edge.create",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Like",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Unlike",e?e:"")}) )},function(e) {var n,i="facebook-jssdk",o=e.getElementsByTagName("script")[0];e.getElementById(i)||(n=e.createElement("script"),n.id=i,n.async=!0,n.src="//connect.facebook.net/'. ( $this->options['language'] ? $this->options['language'] : 'en_US' ) .'/sdk.js",o.parentNode.insertBefore(n,o) )}(document);';
 			}
 			$inline_script .= ';var heateorSssWhatsappShareAPI = "' . $this->public_class_object->whatsapp_share_api() . '";';
 			wp_enqueue_script( 'heateor_sss_sharing_js', plugins_url( '../public/js/sassy-social-share-public.js', __FILE__ ), array( 'jquery' ), $this->public_class_object->version, $in_footer );
@@ -105,7 +105,7 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 					$post_id = 0;
 				} elseif ( isset( $_SERVER['QUERY_STRING'] ) && $_SERVER['QUERY_STRING'] ) {
 					$sharing_url = html_entity_decode( esc_url( $this->public_class_object->get_http_protocol() . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) );
-				} elseif ( get_permalink( $post -> ID ) ) {
+				} elseif ( get_permalink( $post->ID ) ) {
 					$sharing_url = get_permalink( $post->ID );
 				}
 			} elseif ( $instance['target_url'] == 'homepage' ) {
@@ -120,7 +120,7 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 		}
 		$share_count_url = $sharing_url;
 		if ( isset( $instance['target_url'] ) && $instance['target_url'] == 'default' && is_singular() ) {
-			$share_count_url = get_permalink( $post -> ID );
+			$share_count_url = get_permalink( $post->ID );
 		}
 		$custom_post_url = $this->public_class_object->apply_target_share_url_filter( $sharing_url, 'horizontal', ! is_singular() ? true : false );
 		if ( $custom_post_url != $sharing_url ) {
@@ -173,21 +173,33 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) { 
 		
 		$instance = $old_instance; 
-		$instance['title'] = strip_tags( $new_instance['title'] ); 
-		$instance['show_counts'] = $new_instance['show_counts'];
-		$instance['total_shares'] = $new_instance['total_shares']; 
-		$instance['target_url'] = $new_instance['target_url'];
-		$instance['target_url_custom'] = $new_instance['target_url_custom'];  
-		$instance['before_widget_content'] = $new_instance['before_widget_content']; 
-		$instance['after_widget_content'] = $new_instance['after_widget_content']; 
-		$instance['hide_for_logged_in'] = $new_instance['hide_for_logged_in'];  
+		$instance['title'] = isset( $new_instance['title'] ) ? strip_tags( $new_instance['title'] ) : ''; 
+		if ( isset( $new_instance['show_counts'] ) ) {
+			$instance['show_counts'] = $new_instance['show_counts'];
+		} else {
+			unset( $instance['show_counts'] );
+		}
+		if ( isset( $new_instance['total_shares'] ) ) {
+			$instance['total_shares'] = $new_instance['total_shares'];
+		} else {
+			unset( $instance['total_shares'] );
+		}
+		$instance['target_url'] = isset( $new_instance['target_url'] ) ? $new_instance['target_url'] : ''; 
+		$instance['target_url_custom'] = isset( $new_instance['target_url_custom'] ) ? $new_instance['target_url_custom'] : '';  
+		$instance['before_widget_content'] = isset( $new_instance['before_widget_content'] ) ? $new_instance['before_widget_content'] : '';  
+		$instance['after_widget_content'] = isset( $new_instance['after_widget_content'] ) ? $new_instance['after_widget_content'] : ''; 
+		if ( isset( $new_instance['hide_for_logged_in'] ) ) {
+			$instance['hide_for_logged_in'] = $new_instance['hide_for_logged_in'];
+		} else {
+			unset( $instance['hide_for_logged_in'] );
+		}
 
 		return $instance; 
 
 	}  
 
 	/** 
-	 * Widget options form at admin panel.
+	 * Widget options form at admin panel
 	 *
 	 * @since    1.0.0
 	 */
@@ -198,25 +210,25 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 
 		foreach ( $instance as $key => $value ) {
 			if ( is_string( $value ) ) {
-				$instance[ $key ] = esc_attr( $value );
+				$instance[$key] = esc_attr( $value );
 			}
 		}
 		
 		$instance = wp_parse_args( ( array ) $instance, $defaults );
 		?> 
 		<script type="text/javascript">
-			function heateorSssToggleHorSharingTargetUrl(val) {
-				if (val == 'custom' ) {
-					jQuery( '.heateorSssHorSharingTargetUrl' ).css( 'display', 'block' );
-				} else {
-					jQuery( '.heateorSssHorSharingTargetUrl' ).css( 'display', 'none' );
-				}
+		function heateorSssToggleHorSharingTargetUrl(val){
+			if(val == 'custom'){
+				jQuery('.heateorSssHorSharingTargetUrl').css('display', 'block');
+			}else{
+				jQuery('.heateorSssHorSharingTargetUrl').css('display', 'none');
 			}
+		}
 		</script>
 		<p> 
-			<p><strong>Note:</strong> <?php _e( 'Make sure "Standard Sharing Interface" is enabled in "Standard Interface" section at "Sassy Social Share" page.', 'sassy-social-share' ) ?></p>
+			<p><strong><?php _e( 'Note', 'sassy-social-share' ) ?>:</strong> <?php _e( 'Make sure "Standard Sharing Interface" is enabled in "Standard Interface" section at "Sassy Social Share" page.', 'sassy-social-share' ) ?></p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" /> <br/><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo isset( $instance['title'] ) ? $instance['title'] : ''; ?>" /> <br/><br/>
 			<label for="<?php echo $this->get_field_id( 'show_counts' ); ?>"><?php _e( 'Show individual share counts:', 'sassy-social-share' ); ?></label> 
 			<input id="<?php echo $this->get_field_id( 'show_counts' ); ?>" name="<?php echo $this->get_field_name( 'show_counts' ); ?>" type="checkbox" value="1" <?php echo isset( $instance['show_counts'] ) && $instance['show_counts'] == 1 ? 'checked' : ''; ?> /><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'total_shares' ); ?>"><?php _e( 'Show total shares:', 'sassy-social-share' ); ?></label> 
@@ -230,11 +242,11 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 			</select>
 			<input placeholder="Custom url" style="margin-top: 5px; <?php echo ! isset( $instance['target_url'] ) || $instance['target_url'] != 'custom' ? 'display: none' : '' ; ?>" class="widefat heateorSssHorSharingTargetUrl" id="<?php echo $this->get_field_id( 'target_url_custom' ); ?>" name="<?php echo $this->get_field_name( 'target_url_custom' ); ?>" type="text" value="<?php echo isset( $instance['target_url_custom'] ) ? $instance['target_url_custom'] : ''; ?>" /> 
 			<label for="<?php echo $this->get_field_id( 'before_widget_content' ); ?>"><?php _e( 'Before widget content:', 'sassy-social-share' ); ?></label> 
-			<input class="widefat" id="<?php echo $this->get_field_id( 'before_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'before_widget_content' ); ?>" type="text" value="<?php echo $instance['before_widget_content']; ?>" /> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'before_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'before_widget_content' ); ?>" type="text" value="<?php echo isset( $instance['before_widget_content'] ) ? $instance['before_widget_content'] : ''; ?>" /> 
 			<label for="<?php echo $this->get_field_id( 'after_widget_content' ); ?>"><?php _e( 'After widget content:', 'sassy-social-share' ); ?></label> 
-			<input class="widefat" id="<?php echo $this->get_field_id( 'after_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'after_widget_content' ); ?>" type="text" value="<?php echo $instance['after_widget_content']; ?>" /> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'after_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'after_widget_content' ); ?>" type="text" value="<?php echo isset( $instance['after_widget_content'] ) ? $instance['after_widget_content'] : ''; ?>" /> 
 			<br /><br /><label for="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>"><?php _e( 'Hide for logged in users:', 'sassy-social-share' ); ?></label> 
-			<input type="checkbox" id="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>" name="<?php echo $this->get_field_name( 'hide_for_logged_in' ); ?>" type="text" value="1" <?php if ( isset( $instance['hide_for_logged_in'] )  && $instance['hide_for_logged_in'] == 1 ) echo 'checked="checked"'; ?> /> 
+			<input type="checkbox" id="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>" name="<?php echo $this->get_field_name( 'hide_for_logged_in' ); ?>" type="text" value="1" <?php if ( isset( $instance['hide_for_logged_in'] ) && $instance['hide_for_logged_in'] == 1 ) echo 'checked="checked"'; ?> /> 
 		</p> 
 	<?php 
     }
@@ -298,7 +310,7 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 			return;
 		}
 		extract( $args );
-		if ( $instance['hide_for_logged_in'] == 1 && is_user_logged_in() ) return;
+		if ( isset( $instance['hide_for_logged_in'] ) && is_user_logged_in() ) return;
 		
 		global $post;
 
@@ -318,14 +330,14 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 			$inline_script .= 'var heateorSssUrlCountFetched = [], heateorSssSharesText = \''. htmlspecialchars(__('Shares', 'sassy-social-share'), ENT_QUOTES) .'\', heateorSssShareText = \''. htmlspecialchars(__('Share', 'sassy-social-share'), ENT_QUOTES) .'\';';
 			$inline_script .= 'function heateorSssPopup(e) {window.open(e,"popUpWindow","height=400,width=600,left=400,top=100,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status")}';
 			if ( $this->public_class_object->facebook_like_recommend_enabled() || $this->public_class_object->facebook_share_enabled() ) {
-				$inline_script .= 'function heateorSssInitiateFB() {FB.init({appId:"",channelUrl:"",status:!0,cookie:!0,xfbml:!0,version:"v9.0"})}window.fbAsyncInit=function() {heateorSssInitiateFB(),' . ( defined( 'HEATEOR_SOCIAL_SHARE_MYCRED_INTEGRATION_VERSION' ) && $this->public_class_object->facebook_like_recommend_enabled() ? 1 : 0 ) . '&&(FB.Event.subscribe("edge.create",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"","Minus point(s) for undoing Facebook like-recommend")}) ),'. ( defined( 'HEATEOR_SHARING_GOOGLE_ANALYTICS_VERSION' ) ? 1 : 0 ) .'&&(FB.Event.subscribe("edge.create",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Like",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Unlike",e?e:"")}) )},function(e) {var n,i="facebook-jssdk",o=e.getElementsByTagName("script")[0];e.getElementById(i)||(n=e.createElement("script"),n.id=i,n.async=!0,n.src="//connect.facebook.net/'. ( $this->options['language'] ? $this->options['language'] : 'en_US' ) .'/sdk.js",o.parentNode.insertBefore(n,o) )}(document);';
+				$inline_script .= 'function heateorSssInitiateFB() {FB.init({appId:"",channelUrl:"",status:!0,cookie:!0,xfbml:!0,version:"v11.0"})}window.fbAsyncInit=function() {heateorSssInitiateFB(),' . ( defined( 'HEATEOR_SOCIAL_SHARE_MYCRED_INTEGRATION_VERSION' ) && $this->public_class_object->facebook_like_recommend_enabled() ? 1 : 0 ) . '&&(FB.Event.subscribe("edge.create",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsmiMycredPoints("Facebook_like_recommend","",e?e:"","Minus point(s) for undoing Facebook like-recommend")}) ),'. ( defined( 'HEATEOR_SHARING_GOOGLE_ANALYTICS_VERSION' ) ? 1 : 0 ) .'&&(FB.Event.subscribe("edge.create",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Like",e?e:"")}),FB.Event.subscribe("edge.remove",function(e) {heateorSsgaSocialPluginsTracking("Facebook","Unlike",e?e:"")}) )},function(e) {var n,i="facebook-jssdk",o=e.getElementsByTagName("script")[0];e.getElementById(i)||(n=e.createElement("script"),n.id=i,n.async=!0,n.src="//connect.facebook.net/'. ( $this->options['language'] ? $this->options['language'] : 'en_US' ) .'/sdk.js",o.parentNode.insertBefore(n,o) )}(document);';
 			}
 			$inline_script .= ';var heateorSssWhatsappShareAPI = "' . $this->public_class_object->whatsapp_share_api() . '";';
 			wp_enqueue_script( 'heateor_sss_sharing_js', plugins_url( '../public/js/sassy-social-share-public.js', __FILE__ ), array( 'jquery' ), $this->public_class_object->version, $in_footer );
 			wp_add_inline_script( 'heateor_sss_sharing_js', $inline_script, $position = 'before' );
 		}
 
-		$post_id = $post -> ID;
+		$post_id = $post->ID;
 		if ( isset( $instance['target_url'] ) ) {
 			if ( $instance['target_url'] == 'default' ) {
 				$sharing_url = html_entity_decode( esc_url( $this->public_class_object->get_http_protocol() . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) );
@@ -336,7 +348,7 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 					$post_id = 0;
 				} elseif ( isset( $_SERVER['QUERY_STRING'] ) && $_SERVER['QUERY_STRING'] ) {
 					$sharing_url = html_entity_decode( esc_url( $this->public_class_object->get_http_protocol() . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) );
-				} elseif ( get_permalink( $post -> ID ) ) {
+				} elseif ( get_permalink( $post->ID ) ) {
 					$sharing_url = get_permalink( $post->ID );
 				}
 			} elseif ( $instance['target_url'] == 'homepage' ) {
@@ -351,7 +363,7 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 		}
 		$share_count_url = $sharing_url;
 		if ( isset( $instance['target_url'] ) && $instance['target_url'] == 'default' && is_singular() ) {
-			$share_count_url = get_permalink( $post -> ID );
+			$share_count_url = get_permalink( $post->ID );
 		}
 		$custom_post_url = $this->public_class_object->apply_target_share_url_filter( $sharing_url, 'vertical', false );
 		if ( $custom_post_url != $sharing_url ) {
@@ -367,7 +379,7 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 		$this->public_class_object->share_count_transient_id = $this->public_class_object->get_share_count_transient_id( $sharing_url );
 		$cached_share_count = $this->public_class_object->get_cached_share_count( $this->public_class_object->share_count_transient_id );
 
-		echo "<div class='heateor_sss_sharing_container heateor_sss_vertical_sharing" . ( isset( $this->options['hide_mobile_sharing'] ) ? ' heateor_sss_hide_sharing' : '' ) . ( isset( $this->options['bottom_mobile_sharing'] ) ? ' heateor_sss_bottom_sharing' : '' ) . "' ss-offset='" . $ssOffset . "' style='width:" . ( ( $this->options['vertical_sharing_size'] ? $this->options['vertical_sharing_size'] : 35) + 4) . "px;".( isset( $instance['alignment'] ) && $instance['alignment'] != '' && isset( $instance[$instance['alignment'].'_offset'] ) ? $instance['alignment'].': '. ( $instance[$instance['alignment'].'_offset'] == '' ? 0 : $instance[$instance['alignment'].'_offset'] ) .'px;' : '' ).( isset( $instance['top_offset'] ) ? 'top: '. ( $instance['top_offset'] == '' ? 0 : $instance['top_offset'] ) .'px;' : '' ) . ( isset( $instance['vertical_bg'] ) && $instance['vertical_bg'] != '' ? 'background-color: '.$instance['vertical_bg'] . ';' : '-webkit-box-shadow:none;box-shadow:none;' ) . "' " . ( $this->public_class_object->is_amp_page() ? "" : "heateor-sss-data-href='" . ( isset( $share_count_url ) && $share_count_url ? $share_count_url : $sharing_url ) . "'" ) . ( ( $cached_share_count === false || $this->public_class_object->is_amp_page() ) ? "" : 'heateor-sss-no-counts="1"' ) .">";
+		echo "<div class='heateor_sss_sharing_container heateor_sss_vertical_sharing" . ( isset( $this->options['hide_mobile_sharing'] ) ? ' heateor_sss_hide_sharing' : '' ) . ( isset( $this->options['bottom_mobile_sharing'] ) ? ' heateor_sss_bottom_sharing' : '' ) . "' ss-offset='" . $ssOffset . "' style='width:" . ( ( $this->options['vertical_sharing_size'] ? $this->options['vertical_sharing_size'] : 35) + 4) . "px;".( isset( $instance['alignment'] ) && $instance['alignment'] != '' && isset( $instance[$instance['alignment'].'_offset'] ) ? $instance['alignment'] . ': ' . ( $instance[$instance['alignment'].'_offset'] == '' ? 0 : $instance[$instance['alignment'] . '_offset'] ) . 'px;' : '' ) . ( isset( $instance['top_offset'] ) ? 'top: '. ( $instance['top_offset'] == '' ? 0 : $instance['top_offset'] ) . 'px;' : '' ) . ( isset( $instance['vertical_bg'] ) && $instance['vertical_bg'] != '' ? 'background-color: ' . $instance['vertical_bg'] . ';' : '-webkit-box-shadow:none;box-shadow:none;' ) . "' " . ( $this->public_class_object->is_amp_page() ? "" : "heateor-sss-data-href='" . ( isset( $share_count_url ) && $share_count_url ? $share_count_url : $sharing_url ) . "'" ) . ( ( $cached_share_count === false || $this->public_class_object->is_amp_page() ) ? "" : 'heateor-sss-no-counts="1"' ) . ">";
 		
 		$short_url = $this->public_class_object->get_short_url( $sharing_url, $post_id );
 
@@ -397,18 +409,30 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) { 
 		
 		$instance = $old_instance; 
-		$instance['target_url'] = $new_instance['target_url'];
-		$instance['show_counts'] = $new_instance['show_counts']; 
-		$instance['total_shares'] = $new_instance['total_shares']; 
-		$instance['target_url_custom'] = $new_instance['target_url_custom'];
-		$instance['alignment'] = $new_instance['alignment'];
-		$instance['left_offset'] = $new_instance['left_offset'];
-		$instance['right_offset'] = $new_instance['right_offset'];
-		$instance['top_offset'] = $new_instance['top_offset'];
-		$instance['vertical_bg'] = $new_instance['vertical_bg'];
-		$instance['hide_for_logged_in'] = $new_instance['hide_for_logged_in'];  
+		$instance['target_url'] = isset( $new_instance['target_url'] ) ? $new_instance['target_url'] : '';
+		if ( isset( $new_instance['show_counts'] ) ) {
+			$instance['show_counts'] = $new_instance['show_counts'];
+		} else {
+			unset( $instance['show_counts'] );
+		}
+		if ( isset( $new_instance['total_shares'] ) ) {
+			$instance['total_shares'] = $new_instance['total_shares'];
+		} else {
+			unset( $instance['total_shares'] );
+		}
+		$instance['target_url_custom'] = isset( $new_instance['target_url_custom'] ) ? $new_instance['target_url_custom'] : '';
+		$instance['alignment'] = isset( $new_instance['alignment'] ) ? $new_instance['alignment'] : '';
+		$instance['left_offset'] = isset( $new_instance['left_offset'] ) ? $new_instance['left_offset'] : '';
+		$instance['right_offset'] = isset( $new_instance['right_offset'] ) ? $new_instance['right_offset'] : '';
+		$instance['top_offset'] = isset( $new_instance['top_offset'] ) ? $new_instance['top_offset'] : '';
+		$instance['vertical_bg'] = isset( $new_instance['vertical_bg'] ) ? $new_instance['vertical_bg'] : '';
+		if ( isset( $new_instance['hide_for_logged_in'] ) ) {
+			$instance['hide_for_logged_in'] = $new_instance['hide_for_logged_in'];
+		} else {
+			unset( $instance['hide_for_logged_in'] );
+		}
 
-		return $instance; 
+		return $instance;
 
 	}  
 
@@ -464,25 +488,25 @@ class Sassy_Social_Share_Floating_Widget extends WP_Widget {
 			<input placeholder="Custom url" style="width:95%; margin-top: 5px; <?php echo ! isset( $instance['target_url'] ) || $instance['target_url'] != 'custom' ? 'display: none' : '' ; ?>" class="widefat heateorSssVerticalSharingTargetUrl" id="<?php echo $this->get_field_id( 'target_url_custom' ); ?>" name="<?php echo $this->get_field_name( 'target_url_custom' ); ?>" type="text" value="<?php echo isset( $instance['target_url_custom'] ) ? $instance['target_url_custom'] : ''; ?>" /> 
 			<label for="<?php echo $this->get_field_id( 'alignment' ); ?>"><?php _e( 'Alignment', 'sassy-social-share' ); ?></label> 
 			<select onchange="heateorSssToggleSharingOffset(this.value)" style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'alignment' ); ?>" name="<?php echo $this->get_field_name( 'alignment' ); ?>">
-				<option value="left" <?php echo $instance['alignment'] == 'left' ? 'selected' : ''; ?>><?php _e( 'Left', 'sassy-social-share' ) ?></option>
-				<option value="right" <?php echo $instance['alignment'] == 'right' ? 'selected' : ''; ?>><?php _e( 'Right', 'sassy-social-share' ) ?></option>
+				<option value="left" <?php echo ! isset( $instance['alignment'] ) || $instance['alignment'] == 'left' ? 'selected' : ''; ?>><?php _e( 'Left', 'sassy-social-share' ) ?></option>
+				<option value="right" <?php echo isset( $instance['alignment'] ) && $instance['alignment'] == 'right' ? 'selected' : ''; ?>><?php _e( 'Right', 'sassy-social-share' ) ?></option>
 			</select>
-			<div class="heateorSssSharingLeftOffset" <?php echo $instance['alignment'] == 'right' ? 'style="display: none"' : ''; ?>>
+			<div class="heateorSssSharingLeftOffset" <?php echo isset( $instance['alignment'] ) && $instance['alignment'] == 'right' ? 'style="display: none"' : ''; ?>>
 				<label for="<?php echo $this->get_field_id( 'left_offset' ); ?>"><?php _e( 'Left Offset', 'sassy-social-share' ); ?></label> 
-				<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'left_offset' ); ?>" name="<?php echo $this->get_field_name( 'left_offset' ); ?>" type="text" value="<?php echo $instance['left_offset']; ?>" />px<br/>
+				<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'left_offset' ); ?>" name="<?php echo $this->get_field_name( 'left_offset' ); ?>" type="text" value="<?php echo isset( $instance['left_offset'] ) ? $instance['left_offset'] : ''; ?>" />px<br/>
 			</div>
-			<div class="heateorSssSharingRightOffset" <?php echo $instance['alignment'] == 'left' ? 'style="display: none"' : ''; ?>>
+			<div class="heateorSssSharingRightOffset" <?php echo ! isset( $instance['alignment'] ) || $instance['alignment'] == 'left' ? 'style="display: none"' : ''; ?>>
 				<label for="<?php echo $this->get_field_id( 'right_offset' ); ?>"><?php _e( 'Right Offset', 'sassy-social-share' ); ?></label> 
-				<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'right_offset' ); ?>" name="<?php echo $this->get_field_name( 'right_offset' ); ?>" type="text" value="<?php echo $instance['right_offset']; ?>" />px<br/>
+				<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'right_offset' ); ?>" name="<?php echo $this->get_field_name( 'right_offset' ); ?>" type="text" value="<?php echo isset( $instance['right_offset'] ) ? $instance['right_offset'] : ''; ?>" />px<br/>
 			</div>
 			<label for="<?php echo $this->get_field_id( 'top_offset' ); ?>"><?php _e( 'Top Offset', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'top_offset' ); ?>" name="<?php echo $this->get_field_name( 'top_offset' ); ?>" type="text" value="<?php echo $instance['top_offset']; ?>" />px<br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'top_offset' ); ?>" name="<?php echo $this->get_field_name( 'top_offset' ); ?>" type="text" value="<?php echo isset( $instance['top_offset'] ) ? $instance['top_offset'] : ''; ?>" />px<br/>
 			
 			<label for="<?php echo $this->get_field_id( 'vertical_bg' ); ?>"><?php _e( 'Background Color', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vertical_bg' ); ?>" name="<?php echo $this->get_field_name( 'vertical_bg' ); ?>" type="text" value="<?php echo $instance['vertical_bg']; ?>" />
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vertical_bg' ); ?>" name="<?php echo $this->get_field_name( 'vertical_bg' ); ?>" type="text" value="<?php echo isset( $instance['vertical_bg'] ) ? $instance['vertical_bg'] : ''; ?>" />
 			
 			<br /><br /><label for="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>"><?php _e( 'Hide for logged in users:', 'sassy-social-share' ); ?></label> 
-			<input type="checkbox" id="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>" name="<?php echo $this->get_field_name( 'hide_for_logged_in' ); ?>" type="text" value="1" <?php if ( isset( $instance['hide_for_logged_in'] )  && $instance['hide_for_logged_in'] == 1 ) echo 'checked="checked"'; ?> /> 
+			<input type="checkbox" id="<?php echo $this->get_field_id( 'hide_for_logged_in' ); ?>" name="<?php echo $this->get_field_name( 'hide_for_logged_in' ); ?>" type="text" value="1" <?php if ( isset( $instance['hide_for_logged_in'] ) ) echo 'checked="checked"'; ?> /> 
 		</p> 
 	<?php 
     } 
@@ -540,23 +564,26 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 			echo '<div>' . $instance['before_widget_content'] . '</div>'; 
 		}
 		$check_theme = '';
-		if ( $instance['custom_color'] == '' ) {
-			$check_theme = '';
-		} elseif ( $instance['custom_color'] == 'standard' ) {
-			$check_theme = 'standard_';
-		} elseif ( $instance['custom_color'] == 'floating' ) {
-			$check_theme = 'floating_';
+		if ( isset( $instance['custom_color'] ) ) {
+			if ( $instance['custom_color'] == '' ) {
+				$check_theme = '';
+			} elseif ( $instance['custom_color'] == 'standard' ) {
+				$check_theme = 'standard_';
+			} elseif ( $instance['custom_color'] == 'floating' ) {
+				$check_theme = 'floating_';
+			}
 		}
-		echo '<div ' . ( $instance['type'] == 'floating' ? 'style="position:fixed;top:' . $instance['top_offset'] . 'px;' . $instance['alignment'] . ':' . $instance['alignment_value'] . 'px;width:' . $instance['size'] . 'px;"' : '' ) . 'class="heateor_sss_' . $check_theme . 'follow_icons_container">';
+		$icon_size = isset( $instance['size'] ) ? $instance['size'] : '30';
+		echo '<div ' . ( isset( $instance['type'] ) && $instance['type'] == 'floating' ? 'style="position:fixed;top:' . ( isset( $instance['top_offset'] ) && $instance['top_offset'] ? $instance['top_offset'] : '200' ) . 'px;' . ( isset( $instance['alignment'] ) ? $instance['alignment'] : 'left' ) . ':' . ( isset( $instance['alignment_value'] ) ? $instance['alignment_value'] : '-10' ) . 'px;width:' . $icon_size . 'px;"' : '' ) . 'class="heateor_sss_' . $check_theme . 'follow_icons_container">';
 
 		if ( ! empty( $instance['title'] ) ) { 
 			$title = apply_filters( 'widget_title', $instance[ 'title' ] ); 
 			echo $before_title;
-			if ( $instance['type'] == 'floating' ) {
-				echo '<div class="heateor_sss_follow_icons_title" style="text-align:center;font-size:' . $instance['size']*30/100 . 'px">';
+			if ( isset( $instance['type'] ) && $instance['type'] == 'floating' ) {
+				echo '<div class="heateor_sss_follow_icons_title" style="text-align:center;font-size:' . $icon_size*30/100 . 'px">';
 			}
 			echo $title;
-			if ( $instance['type'] == 'floating' ) {
+			if ( isset( $instance['type'] ) && $instance['type'] == 'floating' ) {
 				echo '</div>';
 			}
 			echo $after_title;
@@ -583,7 +610,8 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 	private function follow_icons( $instance ) {
 
 		$html = '';
-		$icon_style = 'width:'. $instance['size'] .'px;height:'. $instance['size'] .'px;'. ( $instance['icon_shape'] == 'round' ? 'border-radius:999px;' : '' );
+		$icon_size = isset( $instance['size'] ) ? $instance['size'] : '30';
+		$icon_style = 'width:'. $icon_size .'px;height:'. $icon_size .'px;'. ( ! isset( $instance['icon_shape'] ) || $instance['icon_shape'] == 'round' ? 'border-radius:999px;' : '' );
 		$html .= '<ul class="heateor_sss_follow_ul">';
 		if ( isset( $instance['facebook'] ) && $instance['facebook'] ) {
 			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Facebook" title="Facebook" class="heateorSssSharing heateorSssFacebookBackground"><a target="_blank" aria-label="Facebook" href="'. $instance['facebook'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFacebookSvg"></ss></a></i></li>';
@@ -677,42 +705,42 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 
 		$instance = $old_instance;
 
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['type'] = $new_instance['type'];
-		$instance['top_offset'] = $new_instance['top_offset'];
-		$instance['alignment_value'] = $new_instance['alignment_value'];
-		$instance['alignment'] = $new_instance['alignment'];
-		$instance['size'] = intval( $new_instance['size'] );
-		$instance['icon_shape'] = $new_instance['icon_shape'];
-		$instance['custom_color'] = $new_instance['custom_color'];
-		$instance['facebook'] = $new_instance['facebook'];
-		$instance['twitter'] = $new_instance['twitter'];
-		$instance['parler'] = $new_instance['parler'];
-		$instance['gab'] = $new_instance['gab'];
-		$instance['instagram'] = $new_instance['instagram'];
-		$instance['pinterest'] = $new_instance['pinterest'];
-		$instance['behance'] = $new_instance['behance'];
-		$instance['flickr'] = $new_instance['flickr'];
-		$instance['foursquare'] = $new_instance['foursquare'];
-		$instance['github'] = $new_instance['github'];
-		$instance['gitlab'] = $new_instance['gitlab'];
-		$instance['linkedin'] = $new_instance['linkedin'];
-		$instance['linkedin_company'] = $new_instance['linkedin_company'];
-		$instance['medium'] = $new_instance['medium'];
-		$instance['mewe'] = $new_instance['mewe'];
-		$instance['odnoklassniki'] = $new_instance['odnoklassniki'];
-		$instance['snapchat'] = $new_instance['snapchat'];
-		$instance['telegram'] = $new_instance['telegram'];
-		$instance['tumblr'] = $new_instance['tumblr'];
-		$instance['vimeo'] = $new_instance['vimeo'];
-		$instance['vkontakte'] = $new_instance['vkontakte'];
-		$instance['whatsapp'] = $new_instance['whatsapp'];
-		$instance['xing'] = $new_instance['xing'];
-		$instance['youtube'] = $new_instance['youtube'];
-		$instance['youtube_channel'] = $new_instance['youtube_channel'];
-		$instance['rss_feed'] = $new_instance['rss_feed'];
-		$instance['before_widget_content'] = $new_instance['before_widget_content']; 
-		$instance['after_widget_content'] = $new_instance['after_widget_content'];
+		$instance['title'] = isset( $new_instance['title'] ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['type'] = isset( $new_instance['type'] ) ? $new_instance['type'] : 'standard';
+		$instance['top_offset'] = isset( $new_instance['top_offset'] ) ? $new_instance['top_offset'] : '200';
+		$instance['alignment_value'] = isset( $new_instance['alignment_value'] ) ? $new_instance['alignment_value'] : '-10';
+		$instance['alignment'] = isset( $new_instance['alignment'] ) ? $new_instance['alignment'] : 'left';
+		$instance['size'] = isset( $new_instance['size'] ) ? intval( $new_instance['size'] ) : '30';
+		$instance['icon_shape'] = isset( $new_instance['icon_shape'] ) ? $new_instance['icon_shape'] : 'round';
+		$instance['custom_color'] = isset( $new_instance['custom_color'] ) ? $new_instance['custom_color'] : '';
+		$instance['facebook'] = isset( $new_instance['facebook'] ) ? $new_instance['facebook'] : '';
+		$instance['twitter'] = isset( $new_instance['twitter'] ) ? $new_instance['twitter'] : '';
+		$instance['parler'] = isset( $new_instance['parler'] ) ? $new_instance['parler'] : '';
+		$instance['gab'] = isset( $new_instance['gab'] ) ? $new_instance['gab'] : '';
+		$instance['instagram'] = isset( $new_instance['instagram'] ) ? $new_instance['instagram'] : '';
+		$instance['pinterest'] = isset( $new_instance['pinterest'] ) ? $new_instance['pinterest'] : '';
+		$instance['behance'] = isset( $new_instance['behance'] ) ? $new_instance['behance'] : '';
+		$instance['flickr'] = isset( $new_instance['flickr'] ) ? $new_instance['flickr'] : '';
+		$instance['foursquare'] = isset( $new_instance['foursquare'] ) ? $new_instance['foursquare'] : '';
+		$instance['github'] = isset( $new_instance['github'] ) ? $new_instance['github'] : '';
+		$instance['gitlab'] = isset( $new_instance['gitlab'] ) ? $new_instance['gitlab'] : '';
+		$instance['linkedin'] = isset( $new_instance['linkedin'] ) ? $new_instance['linkedin'] : '';
+		$instance['linkedin_company'] = isset( $new_instance['linkedin_company'] ) ? $new_instance['linkedin_company'] : '';
+		$instance['medium'] = isset( $new_instance['medium'] ) ? $new_instance['medium'] : '';
+		$instance['mewe'] = isset( $new_instance['mewe'] ) ? $new_instance['mewe'] : '';
+		$instance['odnoklassniki'] = isset( $new_instance['odnoklassniki'] ) ? $new_instance['odnoklassniki'] : '';
+		$instance['snapchat'] = isset( $new_instance['snapchat'] ) ? $new_instance['snapchat'] : '';
+		$instance['telegram'] = isset( $new_instance['telegram'] ) ? $new_instance['telegram'] : '';
+		$instance['tumblr'] = isset( $new_instance['tumblr'] ) ? $new_instance['tumblr'] : '';
+		$instance['vimeo'] = isset( $new_instance['vimeo'] ) ? $new_instance['vimeo'] : '';
+		$instance['vkontakte'] = isset( $new_instance['vkontakte'] ) ? $new_instance['vkontakte'] : '';
+		$instance['whatsapp'] = isset( $new_instance['whatsapp'] ) ? $new_instance['whatsapp'] : '';
+		$instance['xing'] = isset( $new_instance['xing'] ) ? $new_instance['xing'] : '';
+		$instance['youtube'] = isset( $new_instance['youtube'] ) ? $new_instance['youtube'] : '';
+		$instance['youtube_channel'] = isset( $new_instance['youtube_channel'] ) ? $new_instance['youtube_channel'] : '';
+		$instance['rss_feed'] = isset( $new_instance['rss_feed'] ) ? $new_instance['rss_feed'] : '';
+		$instance['before_widget_content'] = isset( $new_instance['before_widget_content'] ) ? $new_instance['before_widget_content'] : ''; 
+		$instance['after_widget_content'] = isset( $new_instance['after_widget_content'] ) ? $new_instance['after_widget_content'] : '';
 
 		return $instance;
 
@@ -738,19 +766,19 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'before_widget_content' ); ?>"><?php _e( 'Before widget content:', 'sassy-social-share' ); ?></label> 
-			<input class="widefat" id="<?php echo $this->get_field_id( 'before_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'before_widget_content' ); ?>" type="text" value="<?php echo $instance['before_widget_content']; ?>" /><br/><br/>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'before_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'before_widget_content' ); ?>" type="text" value="<?php echo isset( $instance['before_widget_content'] ) ? $instance['before_widget_content'] : ''; ?>" /><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" /><br/><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo isset( $instance['title'] ) ? $instance['title'] : ''; ?>" /><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'mode_standard' ); ?>"><?php _e( 'Type:', 'sassy-social-share' ) ?></label><br>
-			<input id="<?php echo $this->get_field_id( 'mode_standard' ); ?>" type="radio" onclick='heateorSssFloatingAlignment(this.value)' name="<?php echo $this->get_field_name( 'type' ); ?>" value="standard" <?php if($instance['type'] == 'standard' ) {
+			<input id="<?php echo $this->get_field_id( 'mode_standard' ); ?>" type="radio" onclick='heateorSssFloatingAlignment(this.value)' name="<?php echo $this->get_field_name( 'type' ); ?>" value="standard" <?php if ( ! isset( $instance['type'] ) || $instance['type'] == 'standard' ) {
 				echo "checked";
 			} ?>><label for="<?php echo $this->get_field_id( 'mode_standard' ); ?>"> <?php _e( 'Standard', 'sassy-social-share' ) ?></label><br>
- 			<input id="<?php echo $this->get_field_id( 'mode_floating' ); ?>" type="radio" name="<?php echo $this->get_field_name( 'type' ); ?>" onclick='heateorSssFloatingAlignment(this.value)' value="floating" <?php if($instance['type'] == 'floating' ) {
+ 			<input id="<?php echo $this->get_field_id( 'mode_floating' ); ?>" type="radio" name="<?php echo $this->get_field_name( 'type' ); ?>" onclick='heateorSssFloatingAlignment(this.value)' value="floating" <?php if ( isset( $instance['type'] ) && $instance['type'] == 'floating' ) {
 				echo "checked";
 			}?>><label for="<?php echo $this->get_field_id( 'mode_floating' ); ?>"> <?php _e( 'Floating', 'sassy-social-share' ) ?></label><br><br>
 
 			<div class="heateorSssFloatingAlignment"
-				<?php echo $instance['type'] == 'standard' ? "style='display:none'" : "style='display:block'" ?>>
+				<?php echo ! isset( $instance['type'] ) || $instance['type'] == 'standard' ? "style='display:none'" : "style='display:block'" ?>>
 				<label for="<?php echo $this->get_field_id( 'top_offset' ); ?>">
 				<?php _e( 'Top offset:', 'sassy-social-share' ) ?>
 				</label>
@@ -759,14 +787,14 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 				<?php _e( 'Alignment:', 'sassy-social-share' ) ?>
 				</label>
 				<input id="<?php echo $this->get_field_id( 'floating_left' ); ?>" type="radio" name="<?php echo $this->get_field_name( 'alignment' ); ?>" value="left" onclick='heateorSssAlignmentOffsetLabel(this.value)' 
-				<?php if ($instance['alignment'] == 'left' ) {
+				<?php if ( ! isset( $instance['alignment'] ) || $instance['alignment'] == 'left' ) {
 				echo 'checked';
 				} ?>>
 				<label for="<?php echo $this->get_field_id( 'floating_left' ); ?>"> 
 				<?php _e( 'Left', 'sassy-social-share' ) ?>
 				</label>
 				<input id="<?php echo $this->get_field_id( 'floating_right' ); ?>" type="radio" name="<?php echo $this->get_field_name( 'alignment' ); ?>" value="right" onclick='heateorSssAlignmentOffsetLabel(this.value)' 
-				<?php if ($instance['alignment'] == 'right' ) {
+				<?php if ( isset( $instance['alignment'] ) && $instance['alignment'] == 'right' ) {
 				echo 'checked';
 				} ?> />
 				<label for="<?php echo $this->get_field_id( 'floating_right' ); ?>" > 
@@ -776,14 +804,14 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 				<br>
 				<label id="<?php echo $this->get_field_id( 'alignment_value_label' ); ?>" for="<?php echo $this->get_field_id( 'alignment_value' ); ?>">
 				<?php
-				echo $instance['alignment'] == 'right' ? __( 'Right offset', 'sassy-social-share' ) : __( 'Left offset', 'sassy-social-share' ) ?>
+				echo isset( $instance['alignment'] ) && $instance['alignment'] == 'right' ? __( 'Right offset', 'sassy-social-share' ) : __( 'Left offset', 'sassy-social-share' ) ?>
 				</label>
 				<br>
-				<input id='<?php echo $this->get_field_id( 'alignment_value' ); ?>' type="text" name="<?php echo $this->get_field_name( 'alignment_value' ); ?>" value="<?php echo $instance['alignment_value']; ?>" />px<br><br>
+				<input id='<?php echo $this->get_field_id( 'alignment_value' ); ?>' type="text" name="<?php echo $this->get_field_name( 'alignment_value' ); ?>" value="<?php echo isset( $instance['alignment_value'] ) ? $instance['alignment_value'] : ''; ?>" />px<br><br>
 			</div>
 	 					
 			<label for="<?php echo $this->get_field_id( 'size' ); ?>"><?php _e( 'Size of icons', 'sassy-social-share' ); ?></label> 
-			<input style="width: 82%" class="widefat" id="<?php echo $this->get_field_id( 'size' ); ?>" name="<?php echo $this->get_field_name( 'size' ); ?>" type="text" value="<?php echo $instance['size']; ?>" />px<br/><br/>
+			<input style="width: 82%" class="widefat" id="<?php echo $this->get_field_id( 'size' ); ?>" name="<?php echo $this->get_field_name( 'size' ); ?>" type="text" value="<?php echo isset( $instance['size'] ) ? $instance['size'] : ''; ?>" />px<br/><br/>
 			<label for="<?php echo $this->get_field_id( 'icon_shape' ); ?>"><?php _e( 'Icon Shape', 'sassy-social-share' ); ?></label> 
 			<select style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'icon_shape' ); ?>" name="<?php echo $this->get_field_name( 'icon_shape' ); ?>">
 				<option value="round" <?php echo ! isset( $instance['icon_shape'] ) || $instance['icon_shape'] == 'round' ? 'selected' : '' ; ?>><?php _e( 'Round', 'sassy-social-share' ); ?></option>
@@ -805,8 +833,8 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 				}
 			}
 			jQuery(function(){
-				heateorSssFloatingAlignment('<?php echo $instance['type'] ?>');
-				heateorSssAlignmentOffsetLabel('<?php echo $instance['alignment'] ?>');
+				heateorSssFloatingAlignment('<?php echo isset( $instance['type'] ) ? $instance['type'] : 'standard' ?>');
+				heateorSssAlignmentOffsetLabel('<?php echo isset( $instance['alignment'] ) ? $instance['alignment'] : 'left' ?>');
 			});
 			</script>
 			<label for="<?php echo $this->get_field_id( 'custom_color' ); ?>"><?php _e( 'Apply icon color and background color from Theme Selection section:', 'sassy-social-share' ); ?></label> 
@@ -816,79 +844,79 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 				<option value="floating" <?php echo isset( $instance['custom_color'] ) && $instance['custom_color'] == 'floating' ? 'selected' : '' ; ?>><?php _e( 'Yes, Floating Interface Theme', 'sassy-social-share' ); ?></option>
 			</select><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'facebook' ); ?>"><?php _e( 'Facebook URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'facebook' ); ?>" name="<?php echo $this->get_field_name( 'facebook' ); ?>" type="text" value="<?php echo $instance['facebook']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'facebook' ); ?>" name="<?php echo $this->get_field_name( 'facebook' ); ?>" type="text" value="<?php echo isset( $instance['facebook'] ) ? $instance['facebook'] : ''; ?>" /><br/>
 			<span>https://www.facebook.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'twitter' ); ?>"><?php _e( 'Twitter URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'twitter' ); ?>" name="<?php echo $this->get_field_name( 'twitter' ); ?>" type="text" value="<?php echo $instance['twitter']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'twitter' ); ?>" name="<?php echo $this->get_field_name( 'twitter' ); ?>" type="text" value="<?php echo isset( $instance['twitter'] ) ? $instance['twitter'] : ''; ?>" /><br/>
 			<span>https://twitter.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'parler' ); ?>"><?php _e( 'Parler URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'parler' ); ?>" name="<?php echo $this->get_field_name( 'parler' ); ?>" type="text" value="<?php echo $instance['parler']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'parler' ); ?>" name="<?php echo $this->get_field_name( 'parler' ); ?>" type="text" value="<?php echo isset( $instance['parler'] ) ? $instance['parler'] : ''; ?>" /><br/>
 			<span>https://parler.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'instagram' ); ?>"><?php _e( 'Instagram URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'instagram' ); ?>" name="<?php echo $this->get_field_name( 'instagram' ); ?>" type="text" value="<?php echo $instance['instagram']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'instagram' ); ?>" name="<?php echo $this->get_field_name( 'instagram' ); ?>" type="text" value="<?php echo isset( $instance['instagram'] ) ? $instance['instagram'] : ''; ?>" /><br/>
 			<span>https://www.instagram.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'pinterest' ); ?>"><?php _e( 'Pinterest URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'pinterest' ); ?>" name="<?php echo $this->get_field_name( 'pinterest' ); ?>" type="text" value="<?php echo $instance['pinterest']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'pinterest' ); ?>" name="<?php echo $this->get_field_name( 'pinterest' ); ?>" type="text" value="<?php echo isset( $instance['pinterest'] ) ? $instance['pinterest'] : ''; ?>" /><br/>
 			<span>https://www.pinterest.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'behance' ); ?>"><?php _e( 'Behance URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'behance' ); ?>" name="<?php echo $this->get_field_name( 'behance' ); ?>" type="text" value="<?php echo $instance['behance']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'behance' ); ?>" name="<?php echo $this->get_field_name( 'behance' ); ?>" type="text" value="<?php echo isset( $instance['behance'] ) ? $instance['behance'] : ''; ?>" /><br/>
 			<span>https://www.behance.net/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'flickr' ); ?>"><?php _e( 'Flickr URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'flickr' ); ?>" name="<?php echo $this->get_field_name( 'flickr' ); ?>" type="text" value="<?php echo $instance['flickr']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'flickr' ); ?>" name="<?php echo $this->get_field_name( 'flickr' ); ?>" type="text" value="<?php echo isset( $instance['flickr'] ) ? $instance['flickr'] : ''; ?>" /><br/>
 			<span>https://www.flickr.com/photos/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'foursquare' ); ?>"><?php _e( 'Foursquare URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'foursquare' ); ?>" name="<?php echo $this->get_field_name( 'foursquare' ); ?>" type="text" value="<?php echo $instance['foursquare']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'foursquare' ); ?>" name="<?php echo $this->get_field_name( 'foursquare' ); ?>" type="text" value="<?php echo isset( $instance['foursquare'] ) ? $instance['foursquare'] : ''; ?>" /><br/>
 			<span>https://foursquare.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'github' ); ?>"><?php _e( 'Github URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'github' ); ?>" name="<?php echo $this->get_field_name( 'github' ); ?>" type="text" value="<?php echo $instance['github']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'github' ); ?>" name="<?php echo $this->get_field_name( 'github' ); ?>" type="text" value="<?php echo isset( $instance['github'] ) ? $instance['github'] : ''; ?>" /><br/>
 			<span>https://github.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'linkedin' ); ?>"><?php _e( 'LinkedIn URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin' ); ?>" name="<?php echo $this->get_field_name( 'linkedin' ); ?>" type="text" value="<?php echo $instance['linkedin']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin' ); ?>" name="<?php echo $this->get_field_name( 'linkedin' ); ?>" type="text" value="<?php echo isset( $instance['linkedin'] ) ? $instance['linkedin'] : ''; ?>" /><br/>
 			<span>https://www.linkedin.com/in/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'linkedin_company' ); ?>"><?php _e( 'LinkedIn Company URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin_company' ); ?>" name="<?php echo $this->get_field_name( 'linkedin_company' ); ?>" type="text" value="<?php echo $instance['linkedin_company']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin_company' ); ?>" name="<?php echo $this->get_field_name( 'linkedin_company' ); ?>" type="text" value="<?php echo isset( $instance['linkedin_company'] ) ? $instance['linkedin_company'] : ''; ?>" /><br/>
 			<span>https://www.linkedin.com/company/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'gab' ); ?>"><?php _e( 'Gab URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'gab' ); ?>" name="<?php echo $this->get_field_name( 'gab' ); ?>" type="text" value="<?php echo $instance['gab']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'gab' ); ?>" name="<?php echo $this->get_field_name( 'gab' ); ?>" type="text" value="<?php echo isset( $instance['gab'] ) ? $instance['gab'] : ''; ?>" /><br/>
 			<span>https://gab.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'medium' ); ?>"><?php _e( 'Medium URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'medium' ); ?>" name="<?php echo $this->get_field_name( 'medium' ); ?>" type="text" value="<?php echo $instance['medium']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'medium' ); ?>" name="<?php echo $this->get_field_name( 'medium' ); ?>" type="text" value="<?php echo isset( $instance['medium'] ) ? $instance['medium'] : ''; ?>" /><br/>
 			<span>https://medium.com/@ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'mewe' ); ?>"><?php _e( 'MeWe URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'mewe' ); ?>" name="<?php echo $this->get_field_name( 'mewe' ); ?>" type="text" value="<?php echo $instance['mewe']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'mewe' ); ?>" name="<?php echo $this->get_field_name( 'mewe' ); ?>" type="text" value="<?php echo isset( $instance['mewe'] ) ? $instance['mewe'] : ''; ?>" /><br/>
 			<span>https://mewe.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>"><?php _e( 'Odnoklassniki URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>" name="<?php echo $this->get_field_name( 'odnoklassniki' ); ?>" type="text" value="<?php echo $instance['odnoklassniki']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>" name="<?php echo $this->get_field_name( 'odnoklassniki' ); ?>" type="text" value="<?php echo isset( $instance['odnoklassniki'] ) ? $instance['odnoklassniki'] : ''; ?>" /><br/>
 			<span>https://ok.ru/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'snapchat' ); ?>"><?php _e( 'Snapchat URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'snapchat' ); ?>" name="<?php echo $this->get_field_name( 'snapchat' ); ?>" type="text" value="<?php echo $instance['snapchat']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'snapchat' ); ?>" name="<?php echo $this->get_field_name( 'snapchat' ); ?>" type="text" value="<?php echo isset( $instance['snapchat'] ) ? $instance['snapchat'] : ''; ?>" /><br/>
 			<span>https://www.snapchat.com/add/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'telegram' ); ?>"><?php _e( 'Telegram URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'telegram' ); ?>" name="<?php echo $this->get_field_name( 'telegram' ); ?>" type="text" value="<?php echo $instance['telegram']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'telegram' ); ?>" name="<?php echo $this->get_field_name( 'telegram' ); ?>" type="text" value="<?php echo isset( $instance['telegram'] ) ? $instance['telegram'] : ''; ?>" /><br/>
 			<span>https://t.me/username</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'tumblr' ); ?>"><?php _e( 'Tumblr URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'tumblr' ); ?>" name="<?php echo $this->get_field_name( 'tumblr' ); ?>" type="text" value="<?php echo $instance['tumblr']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'tumblr' ); ?>" name="<?php echo $this->get_field_name( 'tumblr' ); ?>" type="text" value="<?php echo isset( $instance['tumblr'] ) ? $instance['tumblr'] : ''; ?>" /><br/>
 			<span>https://ID.tumblr.com</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'vimeo' ); ?>"><?php _e( 'Vimeo URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vimeo' ); ?>" name="<?php echo $this->get_field_name( 'vimeo' ); ?>" type="text" value="<?php echo $instance['vimeo']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vimeo' ); ?>" name="<?php echo $this->get_field_name( 'vimeo' ); ?>" type="text" value="<?php echo isset( $instance['vimeo'] ) ? $instance['vimeo'] : ''; ?>" /><br/>
 			<span>https://vimeo.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'vkontakte' ); ?>"><?php _e( 'Vkontakte URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vkontakte' ); ?>" name="<?php echo $this->get_field_name( 'vkontakte' ); ?>" type="text" value="<?php echo $instance['vkontakte']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vkontakte' ); ?>" name="<?php echo $this->get_field_name( 'vkontakte' ); ?>" type="text" value="<?php echo isset( $instance['vkontakte'] ) ? $instance['vkontakte'] : ''; ?>" /><br/>
 			<span>https://vk.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'whatsapp' ); ?>"><?php _e( 'Whatsapp URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'whatsapp' ); ?>" name="<?php echo $this->get_field_name( 'whatsapp' ); ?>" type="text" value="<?php echo $instance['whatsapp']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'whatsapp' ); ?>" name="<?php echo $this->get_field_name( 'whatsapp' ); ?>" type="text" value="<?php echo isset( $instance['whatsapp'] ) ? $instance['whatsapp'] : ''; ?>" /><br/>
 			<span>https://wa.me/PHONE_NUMBER</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'xing' ); ?>"><?php _e( 'Xing URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'xing' ); ?>" name="<?php echo $this->get_field_name( 'xing' ); ?>" type="text" value="<?php echo $instance['xing']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'xing' ); ?>" name="<?php echo $this->get_field_name( 'xing' ); ?>" type="text" value="<?php echo isset( $instance['xing'] ) ? $instance['xing'] : ''; ?>" /><br/>
 			<span>https://www.xing.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'youtube' ); ?>"><?php _e( 'Youtube URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube' ); ?>" name="<?php echo $this->get_field_name( 'youtube' ); ?>" type="text" value="<?php echo $instance['youtube']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube' ); ?>" name="<?php echo $this->get_field_name( 'youtube' ); ?>" type="text" value="<?php echo isset( $instance['youtube'] ) ? $instance['youtube'] : ''; ?>" /><br/>
 			<span>https://www.youtube.com/user/ID</span><br/><br/>
-			<label for="<?php echo $this->get_field_id( 'youtube_channel' ); ?>"><?php _e( 'Youtube Channel URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube_channel' ); ?>" name="<?php echo $this->get_field_name( 'youtube_channel' ); ?>" type="text" value="<?php echo $instance['youtube_channel']; ?>" /><br/>
+			<label for="<?php echo $this->get_field_id( 'youtube_channel' ); ?>"><?php _e( 'Youtube Channel URL:', 'sassy-social-share' ); ?></label>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube_channel' ); ?>" name="<?php echo $this->get_field_name( 'youtube_channel' ); ?>" type="text" value="<?php echo isset( $instance['youtube_channel'] ) ? $instance['youtube_channel'] : ''; ?>" /><br/>
 			<span>https://www.youtube.com/channel/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'rss_feed' ); ?>"><?php _e( 'RSS Feed URL:', 'sassy-social-share' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'rss_feed' ); ?>" name="<?php echo $this->get_field_name( 'rss_feed' ); ?>" type="text" value="<?php echo $instance['rss_feed']; ?>" /><br/>
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'rss_feed' ); ?>" name="<?php echo $this->get_field_name( 'rss_feed' ); ?>" type="text" value="<?php echo isset( $instance['rss_feed'] ) ? $instance['rss_feed'] : ''; ?>" /><br/>
 			<span>http://www.example.com/feed/</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'after_widget_content' ); ?>"><?php _e( 'After widget content:', 'sassy-social-share' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'after_widget_content' ); ?>" name="<?php echo $this->get_field_name( 'after_widget_content' ); ?>" type="text" value="<?php echo $instance['after_widget_content']; ?>" /> 

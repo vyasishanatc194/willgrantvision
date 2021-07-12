@@ -46,6 +46,9 @@ class Plugin {
 			add_action( 'plugins_loaded', [ self::$instance, 'includes' ] );
 			add_action( 'carousel_slider/activation', [ self::$instance, 'activation_includes' ] );
 			add_action( 'carousel_slider/deactivation', [ self::$instance, 'deactivation_includes' ] );
+
+			add_action( 'in_plugin_update_message-carousel-slider/carousel-slider.php',
+				[ self::$instance, 'in_plugin_update_message' ] );
 		}
 
 		return self::$instance;
@@ -161,5 +164,33 @@ class Plugin {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Show in plugin update message
+	 *
+	 * @param array $plugin_data
+	 */
+	public function in_plugin_update_message( array $plugin_data ) {
+		$current_version       = CAROUSEL_SLIDER_VERSION;
+		$current_version_array = explode( '.', $current_version );
+		$new_version           = $plugin_data['new_version'];
+		$new_version_array     = explode( '.', $new_version );
+
+		$html = '';
+		if ( version_compare( $current_version_array[0], $new_version_array[0], '<' ) ) {
+			$html .= '</p><div class="cs_plugin_upgrade_notice extensions_warning major_update">';
+			$html .= '<div class="cs_plugin_upgrade_notice__title">';
+			$html .= sprintf( __( "<strong>%s</strong> version <strong>%s</strong> is a major update.", 'carousel-slider' ), $plugin_data['Title'], $new_version );
+			$html .= '</div>';
+			$html .= '<div class="cs_plugin_upgrade_notice__description">';
+			$html .= __( 'We made a lot of major changes to this version.', 'carousel-slider' ) . ' ';
+			$html .= __( 'We believe that all functionality will remain same after update (remember to refresh you cache plugin).', 'carousel-slider' ) . ' ';
+			$html .= __( 'Still make sure that you took a backup so you can role back if anything happen wrong to you.', 'carousel-slider' );
+			$html .= '</div>';
+			$html .= '</div><p class="dummy" style="display: none">';
+		}
+
+		echo apply_filters( 'carousel_slider/in_plugin_update_message', $html, $plugin_data );
 	}
 }

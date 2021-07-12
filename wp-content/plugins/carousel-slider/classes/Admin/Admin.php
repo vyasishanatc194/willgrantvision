@@ -40,8 +40,9 @@ class Admin {
 
 		$_is_carousel = is_a( $post, 'WP_Post' ) && ( 'carousels' == $post->post_type );
 		$_is_doc      = ( 'carousels_page_carousel-slider-documentation' == $hook );
+		$_is_plugin_page = 'plugins.php' == $hook;
 
-		if ( ! $_is_carousel && ! $_is_doc ) {
+		if ( ! ( $_is_carousel || $_is_doc || $_is_plugin_page ) ) {
 			return;
 		}
 

@@ -172,8 +172,6 @@ class Sassy_Social_Share {
 
 		// hook the plugin functions on 'init' event.
 		add_action( 'init', array( $plugin_public, 'init' ) );
-		// remove render sharing action from Excerpts, as it gets nasty due to strip_tags()
-		add_filter( 'get_the_excerpt', array( $plugin_public, 'remove_render_sharing' ), 9 );
 		// hooks to enable sharing interface
 		add_filter( 'the_content', array( $plugin_public, 'render_sharing' ), 99 );
 		add_filter( 'the_excerpt', array( $plugin_public, 'render_sharing' ), 99 );

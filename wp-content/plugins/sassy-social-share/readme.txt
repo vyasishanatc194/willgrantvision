@@ -1,10 +1,10 @@
-﻿=== WordPress Social Sharing Plugin - Sassy Social Share ===
+﻿=== Social Sharing Plugin - Sassy Social Share ===
 Contributors: Heateor, jatin8heateor, farhan8heateor
 Donate link: https://www.heateor.com/donate/?action=Sassy+Social+Share
 Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, parler share
 Requires at least: 2.5.0
-Tested up to: 5.6.1
-Stable tag: 3.3.20
+Tested up to: 5.7.2
+Stable tag: 3.3.21
 License: GPLv2 or later
 
 Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, Whatsapp, Parler, Gab and over 100 more.
@@ -25,7 +25,7 @@ This is the Simplest and Smoothest Social Sharing plugin with optimized and grea
 * Compatible with myCRED (append myCRED referral ID at the end of the url being shared)
 * Around **100 Social Sharing/Bookmarking** services
 * Social Media follow icons (Redirect website visitors to your Social Media pages)
-* Share counts are supported for Facebook, Linkedin, Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
+* Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
 * FREE **Icon Customization** options
 * Options to specify sharing icon shape - Square, Round and Rectangular
 * Options to specify sharing icon size - minimum 16 pixels, no upper limit
@@ -123,6 +123,14 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 4. **Universal Sharing Popup**: Universal Sharing popup having all the supported sharing and bookmarking services
 
 == Changelog ==
+= 3.3.21 [29 June 2021] =
+* [Bugfix] Floating share Bar was not appearing at the home page when Yoast SEO plugin was active
+* [Bugfix] Pinterest share icon was not working in AMP
+* [Improvement] Updated the Facebook JS SDK being used to the latest version 11.0
+* [Improvement] Admin UI improvement
+* [Improvement] Widgets enabled from the "Appearance > Widgets" page were causing PHP notices in some cases
+* [Improvement] Compatible with PHP 8
+
 = 3.3.20 [11 February 2021] =
 * [Improvement] Improved Gab logo 
 * [Bugfix] Color of Gab share logo was not changing in the "Rearrange Icons" section at the plugin configuration page when customizing from "Theme Selection" section
@@ -988,3 +996,11 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 * [Improvement] Improved Gab logo 
 * [Bugfix] Color of Gab share logo was not changing in the "Rearrange Icons" section at the plugin configuration page when customizing from "Theme Selection" section
 * [Bugfix] Title above the standard share bar was not being translated when using WPML
+
+= 3.3.21 [29 June 2021] =
+* [Bugfix] Floating share Bar was not appearing at the home page when Yoast SEO plugin was active
+* [Bugfix] Pinterest share icon was not working in AMP
+* [Improvement] Updated the Facebook JS SDK being used to the latest version 11.0
+* [Improvement] Admin UI improvement
+* [Improvement] Widgets enabled from the "Appearance > Widgets" page were causing PHP notices in some cases
+* [Improvement] Compatible with PHP 8
