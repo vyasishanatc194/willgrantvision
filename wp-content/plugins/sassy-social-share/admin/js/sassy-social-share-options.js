@@ -26,6 +26,47 @@ function heateorSssUpdateSharingPreview(e, property, defaultVal, targetId) {
     jQuery('#' + targetId).css(property, e);
 }
 
+function heateorSssExportConfig(){
+    jQuery('#export_config_loading').css('display', 'block');
+    jQuery.ajax({
+        type: 'GET',
+        dataType: 'json',
+        url: heateorSssSharingAjaxUrl,
+        data: {
+            action: 'heateor_sss_export_config'
+        },
+        success: function(data, textStatus, XMLHttpRequest){
+            jQuery('#export_config_loading').css('display', 'none');
+            if(typeof data.config != 'undefined' && data.config){
+                jQuery('#heateor_sss_exported_config').val(data.config);
+            }
+        }
+    });
+}
+
+function heateorSssImportConfig(){
+    jQuery('#import_config_loading').css('display', 'block');
+    jQuery.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: heateorSssSharingAjaxUrl,
+        data: {
+            config: jQuery('#heateor_sss_import_config_txt').val().trim(),
+            action: 'heateor_sss_import_config'
+        },
+        success: function(data, textStatus, XMLHttpRequest){
+            jQuery('#import_config_loading').css('display', 'none');
+            if(data != null && typeof data.success != 'undefined' && data.success == 1){
+                location.href = heateorSssPluginPageUrl + "&settings-updated=true";
+            }else{
+                alert("Something went wrong");
+            }
+        },
+        error: function(data, textStatus, XMLHttpRequest){
+        }
+    });
+}
+
 function heateorSssUpdateSharingPreviewHover(e, property, targetId) {
     var val = jQuery(e).val().trim();
     if(!val){
@@ -247,19 +288,6 @@ function heateorSssVerticalCounterPreview(val){
     }
 }
 
-function heateor_sss_toggle_fb_share_count_options() {
-    if(heateorSssHorizontalFacebookShareEnabled || heateorSssVerticalFacebookShareEnabled){
-        jQuery('#heateor_sss_fb_share_count_options').css('display', 'block');
-    }else{
-        jQuery('#heateor_sss_fb_share_count_options').css('display', 'none');
-    }
-    if(((heateorSssHorizontalFacebookShareEnabled && (heateorSssHorizontalShares || heateorSssHorizontalTotalShares)) || (heateorSssVerticalFacebookShareEnabled && (heateorSssVerticalShares || heateorSssVerticalTotalShares))) && heateorSssFacebookIDSecretNotSaved){
-        jQuery('.heateor_sss_fb_share_count_msg').css('display', 'table-row-group');
-    }else{
-        jQuery('.heateor_sss_fb_share_count_msg').css('display', 'none');
-    }
-}
-
 jQuery(document).ready(function() {
     // instagram username option
     jQuery('input#heateor_sss_instagram').click(function(){
@@ -298,7 +326,6 @@ jQuery(document).ready(function() {
         }else{
             heateorSssHorizontalFacebookShareEnabled = false;
         }
-        heateor_sss_toggle_fb_share_count_options();
     });
     jQuery('input#heateor_sss_vertical_sharing_facebook').click(function(){
         if(jQuery(this).is(':checked')){
@@ -306,7 +333,6 @@ jQuery(document).ready(function() {
         }else{
             heateorSssVerticalFacebookShareEnabled = false;
         }
-        heateor_sss_toggle_fb_share_count_options();
     });
     jQuery('input#heateor_sss_vertical_instagram_username').keyup(function(){
         jQuery('#heateor_sss_instagram_username').val(jQuery(this).val().trim());

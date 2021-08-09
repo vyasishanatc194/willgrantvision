@@ -296,9 +296,6 @@ class Sassy_Social_Share_Sharing_Networks {
 		$this->sharing_networks['pinterest_pin'] = '<li style="padding:%padding%px 0!important;margin-top:-1px!important" class="heateor_sss_%network%">%like_count_container%<a data-pin-lang="%language%" href="//www.pinterest.com/pin/create/button/?url=%post_url%" ' . ( isset( $this->options[$sharing_type . '_counts'] ) ? 'data-pin-count="true"' : 'data-pin-count="false"' ) . ' data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a><script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script></li>';
 		$this->sharing_networks['xing_share'] = '<li style="padding:%padding%px 0 !important" class="heateor_sss_xing">%like_count_container%<div data-type="XING/Share" ' . ( isset( $this->options[$sharing_type . '_counts'] ) ? 'data-counter="right" ' : '' ) . 'data-url="%post_url%" data-lang="%language%"></div><script>(function (d, s) {var x = d.createElement(s), s = d.getElementsByTagName(s)[0]; x.src = "https://www.xing-share.com/js/external/share.js"; s.parentNode.insertBefore(x, s); })(document, "script");</script></li>';
 		$fb_key = '1904103319867886';
-		if ( $this->options['fb_key'] != '' ) {
-			$fb_key = $this->options['fb_key'];
-		}
 		$this->sharing_networks['Facebook_Messenger'] = '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("' . ( $this->check_if_mobile() ? 'fb-messenger://share/?link=%encoded_post_url%' : 'https://www.facebook.com/dialog/send?app_id='. $fb_key .'&display=popup&link=%encoded_post_url%&redirect_uri=%encoded_post_url%' ) . '")\'><ss style="%inner_style%" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>';
 		$whatsapp_share_url = $this->whatsapp_share_api();
 		$this->sharing_networks['whatsapp'] = '<li class="%li_class%"><i %style% alt="%title%" Title="%title%" class="heateorSssSharing heateorSss%ucfirst_network%Background" onclick=\'heateorSssPopup("https://' . $whatsapp_share_url . '.whatsapp.com/send?text=%post_title% %encoded_post_url%")\'><ss style="display:block" class="heateorSssSharingSvg heateorSss%ucfirst_network%Svg"></ss></i></li>';
@@ -333,9 +330,6 @@ class Sassy_Social_Share_Sharing_Networks {
 		$this->amp_sharing_networks['youtube'] = str_replace( '%youtube_username%', $this->options['youtube_username'] != '' ? $this->options['youtube_username'] : $this->options['vertical_youtube_username'], $this->amp_sharing_networks['youtube'] );
 		$this->amp_sharing_networks['Comment'] = str_replace( '%comment_container_id%', $this->options['comment_container_id'] != '' ? $this->options['comment_container_id'] : $this->options['vertical_comment_container_id'], $this->amp_sharing_networks['Comment'] );
 		$fb_key = '1904103319867886';
-		if ( $this->options['fb_key'] ) {
-			$fb_key = $this->options['fb_key'];
-		}
 		$this->amp_sharing_networks['Facebook_Messenger'] = '<a class="heateor_sss_amp heateor_sss_amp_facebook_messenger" href="' . ( $this->check_if_mobile() ? 'fb-messenger://share/?link=%encoded_post_url%' : 'https://www.facebook.com/dialog/send?app_id=' . $fb_key . '&display=popup&link=%encoded_post_url%&redirect_uri=%encoded_post_url%' ) . '" title="Facebook Messenger" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/facebook_messenger.svg" width="%width%" height="%height%" alt="Facebook Messenger" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
 		$this->amp_sharing_networks['pinterest'] = '<a class="heateor_sss_amp heateor_sss_amp_pinterest" href="' . $pinterest_share_url . '" title="Pinterest" rel="nofollow noopener" target="_blank"><amp-img src="%img_url%/pinterest.svg" width="%width%" height="%height%" alt="Pinterest" class="amp-wp-enforced-sizes" style="width:%width%px;"></amp-img></a>';
 

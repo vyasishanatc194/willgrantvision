@@ -723,7 +723,6 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 		$instance['flickr'] = isset( $new_instance['flickr'] ) ? $new_instance['flickr'] : '';
 		$instance['foursquare'] = isset( $new_instance['foursquare'] ) ? $new_instance['foursquare'] : '';
 		$instance['github'] = isset( $new_instance['github'] ) ? $new_instance['github'] : '';
-		$instance['gitlab'] = isset( $new_instance['gitlab'] ) ? $new_instance['gitlab'] : '';
 		$instance['linkedin'] = isset( $new_instance['linkedin'] ) ? $new_instance['linkedin'] : '';
 		$instance['linkedin_company'] = isset( $new_instance['linkedin_company'] ) ? $new_instance['linkedin_company'] : '';
 		$instance['medium'] = isset( $new_instance['medium'] ) ? $new_instance['medium'] : '';
@@ -754,7 +753,7 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 	public function form( $instance ) { 
 		
 		/* default widget settings. */ 
-		$defaults = array( 'title' => '', 'type' => 'standard', 'alignment' => 'right', 'size' => '32', 'icon_shape' => 'round', 'custom_color' => '', 'facebook' => '', 'twitter' => '','parler' => '', 'gab' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'gitlab' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'telegram' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'whatsapp' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '', 'top_offset' => '200', 'alignment_value' => '0' );
+		$defaults = array( 'title' => '', 'type' => 'standard', 'alignment' => 'right', 'size' => '32', 'icon_shape' => 'round', 'custom_color' => '', 'facebook' => '', 'twitter' => '','parler' => '', 'gab' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'telegram' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'whatsapp' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '', 'top_offset' => '200', 'alignment_value' => '0' );
 
 		foreach ( $instance as $key => $value ) {
 			if ( is_string( $value ) ) {

@@ -3,8 +3,8 @@ Contributors: Heateor, jatin8heateor, farhan8heateor
 Donate link: https://www.heateor.com/donate/?action=Sassy+Social+Share
 Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, parler share
 Requires at least: 2.5.0
-Tested up to: 5.7.2
-Stable tag: 3.3.21
+Tested up to: 5.8
+Stable tag: 3.3.23
 License: GPLv2 or later
 
 Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, Whatsapp, Parler, Gab and over 100 more.
@@ -123,6 +123,13 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 4. **Universal Sharing Popup**: Universal Sharing popup having all the supported sharing and bookmarking services
 
 == Changelog ==
+= 3.3.23 [29 July 2021] =
+* [New] Added options to export and import plugin configuration
+
+= 3.3.22 [13 July 2021] =
+* [Improvement] Admin UI improvements
+* [Improvement] Performance improvement of Social Media Follow widget
+
 = 3.3.21 [29 June 2021] =
 * [Bugfix] Floating share Bar was not appearing at the home page when Yoast SEO plugin was active
 * [Bugfix] Pinterest share icon was not working in AMP
@@ -1004,3 +1011,10 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 * [Improvement] Admin UI improvement
 * [Improvement] Widgets enabled from the "Appearance > Widgets" page were causing PHP notices in some cases
 * [Improvement] Compatible with PHP 8
+
+= 3.3.22 [13 July 2021] =
+* [Improvement] Admin UI improvements
+* [Improvement] Performance improvement of Social Media Follow widget
+
+= 3.3.23 [29 July 2021] =
+* [New] Added options to export and import plugin configuration 

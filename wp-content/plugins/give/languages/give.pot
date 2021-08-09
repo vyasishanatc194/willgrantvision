@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Give - Donation Plugin plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Give - Donation Plugin 2.11.3\n"
+"Project-Id-Version: Give - Donation Plugin 2.12.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/givewp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-07T00:37:47+00:00\n"
+"POT-Creation-Date: 2021-07-30T20:12:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: give\n"
@@ -912,7 +912,7 @@ msgstr ""
 #: includes/admin/donors/class-donor-table.php:608
 #: includes/admin/payments/class-payments-table.php:639
 #: includes/admin/payments/class-payments-table.php:769
-#: includes/payments/functions.php:1451
+#: includes/payments/functions.php:1453
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/address-controls/index.js:51
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/email-controls/index.js:50
 msgid "Delete"
@@ -1102,7 +1102,7 @@ msgstr ""
 #: includes/admin/donors/donor-actions.php:452
 #: includes/admin/donors/donor-actions.php:510
 #: includes/admin/donors/donor-actions.php:562
-#: includes/payments/functions.php:1431
+#: includes/payments/functions.php:1433
 msgid "System"
 msgstr ""
 
@@ -1342,7 +1342,7 @@ msgid "No Emails Found"
 msgstr ""
 
 #: includes/admin/donors/donors.php:859
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:56
+#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:46
 msgid "Recent Donations"
 msgstr ""
 
@@ -2072,9 +2072,9 @@ msgstr ""
 #: includes/admin/import-functions.php:182
 #: includes/admin/tools/export/give-export-donations-exporter.php:427
 #: includes/forms/template.php:526
-#: includes/payments/functions.php:1541
-#: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:26
-#: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:78
+#: includes/payments/functions.php:1543
+#: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:25
+#: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:77
 msgid "Custom Amount"
 msgstr ""
 
@@ -3323,7 +3323,7 @@ msgstr ""
 
 #: includes/admin/plugins.php:553
 #: src/Onboarding/Config/CauseTypes.php:10
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:44
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:46
 msgid "Other"
 msgstr ""
 
@@ -5436,7 +5436,7 @@ msgstr ""
 
 #: includes/admin/tools/import/class-give-import-donations.php:252
 #: includes/admin/tools/import/class-give-import-donations.php:258
-#: includes/forms/functions.php:1264
+#: includes/forms/functions.php:1270
 msgid "donors"
 msgstr ""
 
@@ -5477,7 +5477,7 @@ msgstr[1] ""
 
 #: includes/admin/tools/import/class-give-import-donations.php:270
 #: includes/admin/tools/import/class-give-import-donations.php:276
-#: includes/forms/functions.php:1264
+#: includes/forms/functions.php:1270
 msgid "donations"
 msgstr ""
 
@@ -6037,7 +6037,7 @@ msgid "The hosting provider for this WordPress installation."
 msgstr ""
 
 #: includes/admin/tools/views/html-admin-page-system-info.php:195
-#: src/DonorDashboards/Repositories/Donations.php:332
+#: src/DonorDashboards/Repositories/Donations.php:335
 msgid "Unknown"
 msgstr ""
 
@@ -7457,7 +7457,7 @@ msgstr ""
 #: src/DonorDashboards/resources/js/app/tabs/donation-history/content.js:49
 #: src/DonorDashboards/resources/js/app/tabs/donation-history/content.js:80
 #: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:20
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:56
+#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:46
 #: src/DonorDashboards/resources/js/app/tabs/recurring-donations/content.js:54
 #: src/DonorDashboards/resources/js/app/tabs/recurring-donations/content.js:80
 #: src/DonorDashboards/resources/js/app/tabs/recurring-donations/content.js:110
@@ -12456,7 +12456,7 @@ msgstr ""
 msgid "%s million"
 msgstr ""
 
-#: includes/forms/functions.php:1261
+#: includes/forms/functions.php:1267
 #: src/DonorDashboards/resources/js/app/components/annual-receipt-table/index.js:73
 #: src/DonorDashboards/resources/js/app/components/donation-table/index.js:75
 #: src/DonorDashboards/resources/js/app/components/subscription-table/index.js:74
@@ -12464,21 +12464,21 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: includes/forms/functions.php:1268
+#: includes/forms/functions.php:1274
 msgid "Goal achieved"
 msgstr ""
 
-#: includes/forms/functions.php:1491
+#: includes/forms/functions.php:1497
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:36
 msgid "Mr."
 msgstr ""
 
-#: includes/forms/functions.php:1492
+#: includes/forms/functions.php:1498
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:44
 msgid "Mrs."
 msgstr ""
 
-#: includes/forms/functions.php:1493
+#: includes/forms/functions.php:1499
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:40
 msgid "Ms."
 msgstr ""
@@ -14221,11 +14221,11 @@ msgstr ""
 msgid "Pre-Approved"
 msgstr ""
 
-#: includes/payments/functions.php:1451
+#: includes/payments/functions.php:1453
 msgid "Delete this donation note."
 msgstr ""
 
-#: includes/payments/functions.php:1673
+#: includes/payments/functions.php:1680
 msgctxt "custom donation dropdown item"
 msgid "Custom"
 msgstr ""
@@ -14868,7 +14868,7 @@ msgstr ""
 msgid "No files were included in request for upload."
 msgstr ""
 
-#: src/Form/LegacyConsumer/Commands/DeprecateOldTemplateHook.php:28
+#: src/Form/LegacyConsumer/Commands/DeprecateOldTemplateHook.php:29
 msgid "The %s action"
 msgstr ""
 
@@ -14963,7 +14963,7 @@ msgstr ""
 msgid "To create a Group object, please provide id, name and fields."
 msgstr ""
 
-#: src/Framework/FieldsAPI/FormField/FieldRequired.php:29
+#: src/Framework/FieldsAPI/Concerns/IsRequired.php:30
 msgid "Please enter a value for "
 msgstr ""
 
@@ -15179,13 +15179,13 @@ msgstr ""
 
 #: src/Onboarding/Routes/AddonsRoute.php:95
 #: src/Onboarding/Routes/FeaturesRoute.php:104
-#: src/Onboarding/Routes/SettingsRoute.php:123
+#: src/Onboarding/Routes/SettingsRoute.php:124
 msgid "The reference name for the setting being updated."
 msgstr ""
 
 #: src/Onboarding/Routes/AddonsRoute.php:99
 #: src/Onboarding/Routes/FeaturesRoute.php:108
-#: src/Onboarding/Routes/SettingsRoute.php:127
+#: src/Onboarding/Routes/SettingsRoute.php:128
 msgid "The value of the setting being updated."
 msgstr ""
 
@@ -16617,7 +16617,7 @@ msgid "Welcome To"
 msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/app/steps/introduction/index.js:29
-msgid "You're minutes away from accepting donations on your website. Use the Onboarding Wizard if this is your first time using GiveWP."
+msgid "You're only minutes away from accepting donations on your website! Use the Onboarding Wizard if this is your first time using GiveWP."
 msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/app/steps/introduction/index.js:31
@@ -16625,40 +16625,59 @@ msgid "Start Setup"
 msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/app/steps/location/index.js:34
-msgid "Where are you fundraising?"
+msgid "🌎 Where are you fundraising?"
 msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/app/steps/location/index.js:37
 msgid "State / Province"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:29
-msgid "What does fundraising look like for you?"
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:30
+msgid "👋 Hi there! Tell us a little about your Organization."
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:33
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:31
+msgid "This information will be used to customize your experience to your fundraising needs."
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:35
 msgid "I'm fundraising as an"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:34
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:36
 msgid "Individual"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:38
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:40
 msgid "I'm fundraising within an"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:39
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:41
 msgid "Organization"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:43
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:45
 msgid "My fundraising is"
 msgstr ""
 
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:47
-#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:48
-msgid "What is your cause?"
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:51
+msgid "What are you fundraising for?"
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:52
+msgid "What type of cause is yours?"
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:57
+msgid "🌱 Would you like to join the GiveWP Community?"
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:58
+msgid "By opting-in, you allow some basic data about how you use GiveWP to be used for us to improve the plugin for others. You also will receive emails from us with fundraising tips and more (which you can always unsubscribe from if you need to). If you skip this step, that's okay! GiveWP will still be setup for you no problem."
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/app/steps/your-cause/index.js:61
+msgid "Accept & Continue"
 msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/components/dismiss-link/index.js:14
@@ -16667,6 +16686,10 @@ msgstr ""
 
 #: assets/src/js/admin/onboarding-wizard/components/donation-form/index.js:71
 msgid "Building Form Preview..."
+msgstr ""
+
+#: assets/src/js/admin/onboarding-wizard/components/skip-optin-link/index.js:18
+msgid "Skip joining community"
 msgstr ""
 
 #: assets/src/js/admin/reports/app/pages/overview-page/index.js:37
@@ -16893,12 +16916,16 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-#: src/DonorDashboards/resources/js/app/components/currency-control/index.js:67
+#: src/DonorDashboards/resources/js/app/components/currency-control/index.js:70
 msgid "Enter amount..."
 msgstr ""
 
 #: src/DonorDashboards/resources/js/app/components/donation-table/index.js:55
 msgid "Campaign"
+msgstr ""
+
+#: src/DonorDashboards/resources/js/app/components/donor-info/index.js:42
+msgid "Last donated %s ago"
 msgstr ""
 
 #: src/DonorDashboards/resources/js/app/components/donor-info/index.js:47
@@ -16992,16 +17019,11 @@ msgstr ""
 msgid "Download Receipt"
 msgstr ""
 
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/content.js:89
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:43
-msgid "No Donations"
-msgstr ""
-
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/content.js:95
+#: src/DonorDashboards/resources/js/app/tabs/donation-history/content.js:88
 msgid "Total Donations"
 msgstr ""
 
-#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:52
+#: src/DonorDashboards/resources/js/app/tabs/donation-history/dashboard-content.js:42
 msgid "Your Giving Stats"
 msgstr ""
 

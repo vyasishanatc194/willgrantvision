@@ -278,7 +278,7 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.1.2
 	 *
-	 * @param Give_Recuring_Subscriber	$subscriber Give_Recurring_Subscriber
+	 * @param Give_Recurring_Subscriber	$subscriber Give_Recurring_Subscriber
 	 * @param Give_Subscription         $subscription Give_Subscription
 	 * @param array						(optional) $data Array of update arguments
 	 *

@@ -883,21 +883,6 @@ class Sassy_Social_Share_Public {
 	}
 
 	/**
-	 * Fetch Facebook access token
-	 *
-	 * @since    3.2.20
-	 */
-	private function fetch_fb_access_token() {
-
-		if ( $this->options['fb_key'] && $this->options['fb_secret'] ) {
-			return $this->options['fb_key'] . '|' . $this->options['fb_secret'];
-		}
-
-		return false;
-
-	}
-
-	/**
 	 * Get share counts for sharing networks
 	 *
 	 * @since    1.0.0
@@ -962,19 +947,8 @@ class Sassy_Social_Share_Public {
 				$share_count_transient = array();
 				foreach ( $sharing_networks as $provider ) {
 					switch ( $provider ) {
-						case 'facebook':
-							$fb_access_token = $this->fetch_fb_access_token();
-							if ( $fb_access_token ) {
-								$url = "https://graph.facebook.com/?access_token=" . $fb_access_token . "&fields=engagement&id=" . $target_url;
-							} else {
-								$url = '';
-							}
-							break;
 						case 'twitter':
 							$url = "https://counts.twitcount.com/counts.php?url=" . $target_url;
-							break;
-						case 'linkedin':
-							$url = 'https://www.linkedin.com/countserv/count/share?url=' . $target_url . '&format=json';
 							break;
 						case 'reddit':
 							$url = 'https://www.reddit.com/api/info.json?url=' . $target_url;

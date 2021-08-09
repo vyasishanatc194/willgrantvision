@@ -316,6 +316,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 	 * @param  string           $plan_id         Plan ID.
 	 *
 	 * @since  1.6
+	 * @since 1.12.5 Add `default_payment_method` param to Stripe subscription cretation request
 	 * @access public
 	 *
 	 * @return bool|\Stripe\Subscription
@@ -334,6 +335,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 				$args                              = array(
 					'plan'     => $plan_id,
 					'metadata' => $metadata,
+					'default_source' => $stripe_customer->default_source
 				);
 				$subscription                      = $stripe_customer->subscriptions->create( $args, give_stripe_get_connected_account_options() );
 				$this->subscriptions['profile_id'] = $subscription->id;
@@ -866,7 +868,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 				'amount'         => give_stripe_dollars_to_cents( $renewal_amount ),
 				'interval'       => $subscription->period,
 				'interval_count' => $subscription->frequency,
-				'currency'       => give_get_currency(),
+				'currency'       => give_get_payment_currency_code( $subscription->parent_payment_id ),
 				'id'             => $stripe_plan_id,
 			);
 

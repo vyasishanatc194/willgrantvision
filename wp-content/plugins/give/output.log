@@ -5,11 +5,6 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
 Pulling docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
-WARNING: ⚠️ Failed to pull manifest by the resolved digest. This registry does not
-	appear to conform to the distribution registry specification; falling back to
-	pull by tag.  This fallback is DEPRECATED, and will be removed in a future
-	release.  Please contact admins of https://docker.pkg.github.com. ⚠️
-
 php-7.2-build2: Pulling from impress-org/givewp/php-actions_composer_givewp
 801bfaa63ef2: Pulling fs layer
 30e209609427: Pulling fs layer
@@ -21,19 +16,18 @@ c88517be8365: Pulling fs layer
 181891da1ea0: Pulling fs layer
 2a0fa75da19b: Pulling fs layer
 136539a47de8: Pulling fs layer
+4612e05a72cf: Waiting
+f1478d838f46: Waiting
 c88517be8365: Waiting
 142abe9b67c6: Waiting
 181891da1ea0: Waiting
 2a0fa75da19b: Waiting
 136539a47de8: Waiting
-4612e05a72cf: Waiting
-f1478d838f46: Waiting
 320f26ee9b1c: Verifying Checksum
 320f26ee9b1c: Download complete
+801bfaa63ef2: Verifying Checksum
 30e209609427: Verifying Checksum
 30e209609427: Download complete
-801bfaa63ef2: Verifying Checksum
-801bfaa63ef2: Download complete
 801bfaa63ef2: Pull complete
 4612e05a72cf: Verifying Checksum
 4612e05a72cf: Download complete
@@ -41,23 +35,24 @@ c88517be8365: Verifying Checksum
 c88517be8365: Download complete
 30e209609427: Pull complete
 320f26ee9b1c: Pull complete
-4612e05a72cf: Pull complete
-f1478d838f46: Verifying Checksum
-f1478d838f46: Download complete
 181891da1ea0: Verifying Checksum
 181891da1ea0: Download complete
-f1478d838f46: Pull complete
-c88517be8365: Pull complete
-2a0fa75da19b: Download complete
+f1478d838f46: Verifying Checksum
+f1478d838f46: Download complete
 142abe9b67c6: Verifying Checksum
 142abe9b67c6: Download complete
+4612e05a72cf: Pull complete
+2a0fa75da19b: Verifying Checksum
+2a0fa75da19b: Download complete
+f1478d838f46: Pull complete
+c88517be8365: Pull complete
 136539a47de8: Verifying Checksum
 136539a47de8: Download complete
 142abe9b67c6: Pull complete
 181891da1ea0: Pull complete
 2a0fa75da19b: Pull complete
 136539a47de8: Pull complete
-Digest: sha256:f1169d1e7b3706fc60eb8b36299e6588e4f656cacfdaf9c5ff1c42fb2ca3034d
+Digest: sha256:e18a4a2e8f8acca5f1d1858eb7dddfb92afdfe850d11fc6d65dee871b6b64584
 Status: Downloaded newer image for docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
 docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
 Docker tag: docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
@@ -70,13 +65,8 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
 Pulling docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
-WARNING: ⚠️ Failed to pull manifest by the resolved digest. This registry does not
-	appear to conform to the distribution registry specification; falling back to
-	pull by tag.  This fallback is DEPRECATED, and will be removed in a future
-	release.  Please contact admins of https://docker.pkg.github.com. ⚠️
-
 php-7.2-build2: Pulling from impress-org/givewp/php-actions_composer_givewp
-Digest: sha256:f1169d1e7b3706fc60eb8b36299e6588e4f656cacfdaf9c5ff1c42fb2ca3034d
+Digest: sha256:e18a4a2e8f8acca5f1d1858eb7dddfb92afdfe850d11fc6d65dee871b6b64584
 Status: Image is up to date for docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
 docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2
 Docker tag: docker.pkg.github.com/impress-org/givewp/php-actions_composer_givewp:php-7.2-build2

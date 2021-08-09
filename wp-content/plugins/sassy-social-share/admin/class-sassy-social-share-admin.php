@@ -215,7 +215,7 @@ class Sassy_Social_Share_Admin {
 				<?php _e( 'Disable Floating Sharing interface on this ' . $postType, 'sassy-social-share' ) ?>
 			</label>
 			<?php
-			$valid_networks = array( 'facebook', 'twitter', 'linkedin', 'buffer', 'reddit', 'pinterest', 'vkontakte', 'Odnoklassniki', 'Fintel' );
+			$valid_networks = array( 'twitter', 'buffer', 'reddit', 'pinterest', 'vkontakte', 'Odnoklassniki', 'Fintel' );
 			if ( isset( $this->options['hor_enable'] ) && isset( $this->options['horizontal_counts'] ) && isset( $this->options['horizontal_re_providers'] ) && count( $this->options['horizontal_re_providers'] ) > 0 ) {
 				?>
 				<p>
@@ -317,6 +317,7 @@ class Sassy_Social_Share_Admin {
 	public function admin_options_scripts() {
 
 		wp_enqueue_script( 'heateor_sss_admin_options_script', plugins_url( 'js/sassy-social-share-options.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable' ), $this->version );
+		wp_add_inline_script( 'heateor_sss_admin_options_script', 'var heateorSssPluginPageUrl = "' . admin_url() . 'admin.php?page=heateor-sss-options";var heateorSssAjaxLoader = "' . plugins_url( '../images/ajax_loader.gif', __FILE__ ) . '"', $position = 'before' );
 	
 	}
 
@@ -409,6 +410,46 @@ class Sassy_Social_Share_Admin {
 		<script type="text/javascript">var heateorSssWebsiteUrl = '<?php echo home_url() ?>', heateorSssHelpBubbleTitle = "<?php echo __( 'Click to toggle help', 'sassy-social-share' ) ?>", heateorSssSharingAjaxUrl = '<?php echo get_admin_url() ?>admin-ajax.php';</script>
 		<?php
 		wp_enqueue_script( 'heateor_sss_admin_script', plugins_url( 'js/sassy-social-share-admin.js', __FILE__ ), array( 'jquery', 'jquery-ui-tabs' ), $this->version );
+	
+	}
+
+	/**
+	 * Export plugin configuration
+	 *
+	 * @since    3.3.22
+	 */
+	public function export_config() {
+		
+		$config = get_option( 'heateor_sss' );
+		header( 'Content-Type: application/json' );
+		die( json_encode(
+			array(
+				'config' => base64_encode( maybe_serialize( $config ) )
+			)
+		) );
+	
+	}
+
+	/**
+	 * Import plugin configuration
+	 *
+	 * @since    3.3.22
+	 */
+	public function import_config() {
+		
+		if ( isset( $_POST['config'] ) && strlen( trim( $_POST['config'] ) ) > 0 ) {
+			$config = maybe_unserialize( base64_decode( trim( $_POST['config'] ) ) );
+			if ( is_array( $config ) && count( $config ) > 0 ) {
+				update_option( 'heateor_sss', $config );
+				header( 'Content-Type: application/json' );
+				die( json_encode(
+					array(
+						'success' => 1
+					)
+				) );
+			}
+		}
+		die;
 	
 	}
 
@@ -527,18 +568,6 @@ class Sassy_Social_Share_Admin {
 	}
 
 	/**
-	 * Save Facebook share count notification flag in DB
-	 *
-	 * @since    3.2.20
-	 */
-	public function fb_count_notification_read() {
-
-		update_option( 'heateor_sss_fb_count_notification_read', '1' );
-		die;
-	
-	}
-
-	/**
 	 * Show notices in admin area
 	 *
 	 * @since    2.4
@@ -564,34 +593,6 @@ class Sassy_Social_Share_Admin {
 					<p><?php _e( 'Update "Social Share myCRED Integration" add-on for maximum compatibility with current version of Sassy Social Share', 'sassy-social-share' ) ?></p>
 				</div>
 				<?php
-			}
-
-			if ( version_compare( '3.2.20', $this->version ) <= 0 ) {
-				if ( ( ( isset( $this->options['horizontal_re_providers'] ) && in_array( 'facebook', $this->options['horizontal_re_providers'] ) && ( isset( $this->options['horizontal_counts'] ) || isset( $this->options['horizontal_total_shares'] ) ) ) || ( isset( $this->options['vertical_re_providers'] ) && in_array( 'facebook', $this->options['vertical_re_providers'] ) && ( isset( $this->options['vertical_counts'] ) || isset( $this->options['vertical_total_shares'] ) ) ) ) && ! get_option( 'heateor_sss_fb_count_notification_read' ) ) {
-					?>
-					<script type="text/javascript">
-					function heateorSssFBCountNotificationRead(){
-						jQuery.ajax({
-							type: 'GET',
-							url: '<?php echo get_admin_url() ?>admin-ajax.php',
-							data: {
-								action: 'heateor_sss_fb_count_notification_read'
-							},
-							success: function(data, textStatus, XMLHttpRequest){
-								jQuery('#heateor_sss_fb_count_notification').fadeOut();
-							}
-						});
-					}
-					</script>
-					<div id="heateor_sss_fb_count_notification" class="notice notice-warning">
-						<h3>Sassy Social Share</h3>
-						<p>
-							<?php _e( 'Save Facebook App ID and Secret keys in "Standard Interface" and/or "Floating Interface" section(s) to fix the issue with Facebook share count. After that, clear share counts cache from "Miscellaneous" section.', 'sassy-social-share' ); ?>
-							<p><input type="button" onclick="heateorSssFBCountNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e( 'Okay', 'sassy-social-share' ) ?>" /></p>
-						</p>
-					</div>
-					<?php
-				}
 			}
 
 			if ( version_compare( '3.2.1', $this->version ) <= 0 ) {

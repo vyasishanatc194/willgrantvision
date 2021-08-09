@@ -805,7 +805,7 @@ class Give_Recurring_Stripe_Sepa extends Give_Recurring_Gateway {
 				'amount'         => give_stripe_dollars_to_cents( $renewal_amount ),
 				'interval'       => $subscription->period,
 				'interval_count' => $subscription->frequency,
-				'currency'       => give_get_currency(),
+				'currency'       => give_get_payment_currency_code( $subscription->parent_payment_id ),
 				'id'             => $stripe_plan_id,
 			);
 

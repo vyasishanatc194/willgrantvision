@@ -2,9 +2,9 @@
 Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 4.9
-Tested up to: 5.7
-Stable tag: 1.12.4
-Requires Give: 2.11.0
+Tested up to: 5.8
+Stable tag: 1.12.5
+Requires Give: 2.12.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -38,6 +38,11 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.12.5: July 21st, 2021 =
+* Fix: Activating on a fresh install no longer prompts a database update
+* Fix: Updating subscriptions from Donor Dashboard works properly
+* Fix: Plaid subscriptions no longer have issues with existing subscriptions
 
 = 1.12.4: May 25th, 2021 =
 * Fix: Resolved remaining issue with toggling Failed Subscription email notification

@@ -1,5 +1,6 @@
 <?php
 
+use GiveRecurring\Logs\Migrations\MigrateEmailLogs;
 use GiveRecurring\Logs\Migrations\MigrateLogs;
 
 /**
@@ -133,6 +134,7 @@ function give_recurring_install() {
 			'give_recurring_v172_renewal_payment_level',
 			'give_recurring_v182_alter_amount_column_type',
 			MigrateLogs::id(),
+			MigrateEmailLogs::id()
 		];
 
 		foreach ( $updates as $update ) {

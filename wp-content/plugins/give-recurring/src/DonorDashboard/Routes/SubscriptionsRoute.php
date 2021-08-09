@@ -2,9 +2,12 @@
 
 namespace GiveRecurring\DonorDashboard\Routes;
 
-use \WP_REST_Request;
-use \Give\DonorDashboards\Tabs\Contracts\Route as RouteAbstract;
-use \GiveRecurring\DonorDashboard\Repositories\SubscriptionRepository as SubscriptionRepository;
+use Give\Receipt\LineItem;
+use Give_Payment;
+use Give_Subscription;
+use WP_REST_Request;
+use Give\DonorDashboards\Tabs\Contracts\Route as RouteAbstract;
+use GiveRecurring\DonorDashboard\Repositories\SubscriptionRepository as SubscriptionRepository;
 use Give\Receipt\DonationReceipt;
 
 /**
@@ -12,7 +15,9 @@ use Give\Receipt\DonationReceipt;
  */
 class SubscriptionsRoute extends RouteAbstract {
 
-	/** @var string */
+	/**
+	 * @return string
+	 */
 	public function endpoint() {
 		return 'recurring-donations/subscriptions';
 	}
@@ -86,6 +91,7 @@ class SubscriptionsRoute extends RouteAbstract {
 			}
 		}
 
+		return '';
 	}
 
 	/**
@@ -119,11 +125,13 @@ class SubscriptionsRoute extends RouteAbstract {
 	 * @return array Subscription gateway info
 	 */
 	protected function getGatewayInfo( $subscription ) {
-		return [
+		$data = [
 			'id' => $subscription->gateway,
 			'can_update' => $subscription->can_update_subscription(),
 			'can_cancel' => $subscription->can_cancel(),
 		];
+
+		return array_merge( $data, $this->getPaymentGatewayOptions( $subscription ) );
 	}
 
 	/**
@@ -176,13 +184,13 @@ class SubscriptionsRoute extends RouteAbstract {
 			],
 			'currency' 		=> $this->getCurrencyInfo( $subscription ),
 			'fee'      		=> $this->getFormattedAmount($subscription->recurring_fee_amount, $subscription),
-			'total'    		=> $this->getFormattedAmount(($subscription->recurring_amount + $subscription->recurring_fee_amount), $subscription),
+			'total'    		=> $this->getFormattedAmount(( $subscription->recurring_amount + $subscription->recurring_fee_amount), $subscription),
 			'method'   		=> $gateways[ $subscription->gateway ]['checkout_label'],
 			'status'   		=> $this->getFormattedStatus( $subscription->status ),
 			'date'			=> ! empty( $subscription->created ) ? date_i18n( get_option( 'date_format' ), strtotime( $subscription->created ) ) : __( 'N/A', 'give-recurring' ),
 			'renewalDate'   => ! empty( $subscription->expiration ) ? date_i18n( get_option( 'date_format' ), strtotime( $subscription->expiration ) ) : __( 'N/A', 'give-recurring' ),
 			'progress' 		=> get_times_billed_text( $subscription ),
-			'mode'			=> (new \Give_Payment($subscription->parent_payment_id))->get_meta( '_give_payment_mode' ),
+			'mode'			=> (new Give_Payment($subscription->parent_payment_id))->get_meta( '_give_payment_mode' ),
 			'serialCode'    => give_is_setting_enabled( give_get_option( 'sequential-ordering_status', 'disabled' ) ) ? Give()->seq_donation_number->get_serial_code( $subscription->parent_payment_id ) : $subscription->parent_payment_id,
 		];
 	}
@@ -190,7 +198,8 @@ class SubscriptionsRoute extends RouteAbstract {
 	/**
 	 * Get array containing dynamic receipt information
 	 *
-	 * @param Give_Payment $payment
+	 * @param Give_Subscription $subscription
+	 *
 	 * @return array
 	 * @since 2.10.0
 	 */
@@ -314,11 +323,12 @@ class SubscriptionsRoute extends RouteAbstract {
 	 * Get formatted payment amount
 	 *
 	 * @param float $amount
-	 * @param Give_Payment $payment
-	 * @since 2.10.0
+	 * @param Give_Subscription $subscription
+	 *
 	 * @return string Formatted payment amount (with correct decimals and currency symbol)
+	 * @since 2.10.0
 	 */
-	protected function getformattedAmount( $amount, $subscription ) {
+	protected function getFormattedAmount( $amount, $subscription ) {
 		return give_currency_filter(
 			give_format_amount(
 				$amount,
@@ -337,11 +347,32 @@ class SubscriptionsRoute extends RouteAbstract {
 	/**
 	 * Get donor info
 	 *
-	 * @param Give_Payment $payment
-	 * @since 2.10.0
+	 * @param Give_Subscription $subscription
+	 *
 	 * @return array Donor info
+	 * @since 2.10.0
 	 */
 	protected function getDonorInfo( $subscription ) {
-		return (new \Give_Payment($subscription->parent_payment_id))->user_info;
+		return (new Give_Payment($subscription->parent_payment_id))->user_info;
+	}
+
+	/**
+	 * @since 1.12.5
+	 * @param Give_Subscription $subscription
+	 */
+	private function getPaymentGatewayOptions( $subscription ) {
+		$gatewayId = $subscription->gateway;
+
+		if( ! in_array( $gatewayId, give_stripe_supported_payment_methods() ) ) {
+			return [];
+		}
+
+		$stripeAccountId = give_stripe_get_connected_account_id( $subscription->form_id );
+		$stripePublishableKey = give_stripe_get_publishable_key( $subscription->form_id );
+
+		return [
+			'accountId' => $stripeAccountId,
+			'publishableKey' => $stripePublishableKey
+		];
 	}
 }
