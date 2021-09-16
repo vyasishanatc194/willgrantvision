@@ -5,7 +5,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
 Tested up to: 5.8
-Stable tag: 16.8
+Stable tag: 17.1
 Requires PHP: 5.6.20
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -236,40 +236,39 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 16.8 =
-Release Date: July 27th, 2021
+= 17.1 =
+Release Date: September 7th, 2021
 
-Yoast SEO 16.8 is out today! This release comes with an updated readability analysis with support for two new languages: Norwegian and Slovak. Did you know that Yoast SEO is nearing language support for twenty languages? Read more about what’s new in Yoast SEO 16.8 in [our release post](https://yoa.st/release-16-8)!
-
-Enhancements:
-
-* Completes the readability analysis for Slovak by adding the transition words, sentence beginnings and passive voice assessments.
-* Improves keyphrase recognition in Slovak by filtering out function words such as `som`, `a`, `jedna`, `že`.
-* Completes the readability analysis for Norwegian by adding the transition words, sentence beginnings and passive voice assessments.
-* Improves keyphrase recognition in Norwegian by expanding the list of function words that are filtered out.
-* Adds the first two steps of the Premium cornerstone workout.
-* Throws a notification in the plugins page to users who have an expired subscription.
-* Improves the performance of background requests (admin-ajax calls).
-
-Bugfixes:
-
-* Fixes a bug where paginated static frontpages would fail to output a valid breadcrumb.
-* Fixes a bug where the image selectors in the search appearance and social settings did not have a screen reader text.
-
-= 16.7 =
-Release Date: July 13th, 2021
-
-Meet Yoast SEO 16.7! This release comes with extended support for headless WordPress. Yoast SEO comes with a REST API that developers can use to access our metadata in a headless WordPress installation. In Yoast SEO 16.7, we’re making more data available and also in a different format: JSON. Read more about what’s new in Yoast SEO 16.7 in [our release post](https://yoa.st/release-16-7)!
+Yoast SEO 17.1 is out today! In this release, you’ll find a couple of small changes that’ll help you write great titles that stand up to Google’s scrutiny. It also includes some behind-the-scenes improvements, including several fixes for our indexables data management. For now, please enjoy Yoast SEO and write the best possible content in the language of your choice! Read more about what’s new in Yoast SEO 17.1 in [our release post](https://yoa.st/release-17-1)!
 
 Enhancements:
 
-* Upgrades our REST API to include individual keys/values for all of our meta tags, data and schema output. Read all about it in [this in-depth explanation about our REST API](https://yoa.st/rest-api).
+* Improves the performance of saving posts by excluding unchanged items, especially noticeable on posts with many links.
+* Stops showing the SEO Optimization notification on non-production sites.
+* Improves the filtering of function words in Dutch, English, Indonesian, Russian, and Spanish by including time-related words like 'minute'.
+* Updates the styling of our Google preview, to reflect the updated styling of the Google search results.
+* Stops warning users when they have short titles, because concise, specific titles are less likely to be altered by Google.
+* Removes the `|` and `~` separator options from titles, because Google frequently replaces these in search results.
+
+= 17.0 =
+Release Date: August 24th, 2021
+
+Say hello to Yoast SEO 17.0! This release includes some behind-the-scenes improvements, including several fixes for our indexables data management. For now, please enjoy Yoast SEO and write the best possible content in the language of your choice! Read more about what’s new in Yoast SEO 17.0 in [our release post](https://yoa.st/release-17-0)!
+
+Enhancements:
+
+* Speeds up load times of admin pages by preventing unnecessary counts of unindexed objects.
+* Cleans up items from the database that are not used anymore, thereby reducing the size of many sites' database.
+* Improves the overall performance and responsiveness in Gutenberg.
 
 Bugfixes:
 
-* Fixes a bug where a database entry would be added in the indexables table every time a WooCommerce order was created.
-* Fixes a bug where the SEO optimization could run indefinitely when the database contained at least 25 faulty indexables without a permalink.
-* Fixes a bug where the Advanced section and Schema tab wouldn't be visible in the metabox for Editors. Props to [jordif](https://github.com/jordif).
+* Fixes a bug where the `Save all` button in the bulk editor did not work.
+* Fixes a bug where the `Existing` column in the bulk editor did not update after save.
+
+Other:
+
+* Updates the message that recommends you to install WooCommerce SEO when WooCommerce is installed.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

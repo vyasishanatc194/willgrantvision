@@ -228,14 +228,14 @@
   line-height: 2em; }
 
 .bg-editor-button.bg-primary-color {
-  background-color: #f95b26;
+  background-color: #2271b1;
   color: white; }
 
 .bg-editor-button.bg-primary-color:hover {
-  background-color: #f04107; }
+  background-color: #1b5b8f; }
 
 .bg-editor-button.bg-primary-color[disabled] {
-  background-color: #fdccbb; }
+  background-color: #85bbe7; }
 
 .bg-editor-button.bg-secondary-color {
   background-color: #ececec;
@@ -724,7 +724,8 @@
   padding-bottom: 45px;
   font-size: 7px;
   margin: 0 auto;
-  width: 250px; }
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.75); }
 
 .editor-panel[data-type='box'] .presets.my-designs {
   padding-bottom: 15px; }
@@ -1074,11 +1075,14 @@
   margin-right: 10px; }
 
 .editor-panel[data-type='button'] .presets .panel-selection {
-  width: 48%;
+  width: calc( 48% - 20px);
   height: auto;
-  background-color: #eee;
-  padding: 10px 0;
+  background-color: #fff;
+  padding: 10px;
   margin: 0; }
+
+.editor-panel[data-type='button'] .presets .panel-selection[data-preset*='btn-block'] {
+  width: calc( 98% - 20px); }
 
 .editor-panel[data-type='button'] .panel-selection > * {
   max-width: 100%; }
@@ -1115,9 +1119,6 @@
 .editor-panel[data-type='button'] .section.class-control {
   padding-top: 0;
   padding-bottom: 8px; }
-
-.editor-panel[data-type='button'] [data-preset*='btn-block'] {
-  width: 100% !important; }
 
 /*************** Text Settings Panel ********************/
 .boldgrid-control.typography-control {
@@ -1659,6 +1660,9 @@
   -webkit-transition: color .3s;
   transition: color .3s;
   padding: 2px; }
+
+#boldgrid-instance-menu li .genericon {
+  font-family: Genericons; }
 
 #boldgrid-instance-menu li .fa {
   width: 24px;

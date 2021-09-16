@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Give - Donation Plugin plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Give - Donation Plugin 2.12.2\n"
+"Project-Id-Version: Give - Donation Plugin 2.13.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/givewp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-30T20:12:46+00:00\n"
+"POT-Creation-Date: 2021-09-03T17:05:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: give\n"
@@ -605,7 +605,7 @@ msgid "API Key"
 msgstr ""
 
 #: includes/admin/class-api-keys-table.php:59
-#: includes/gateways/stripe/includes/admin/admin-helpers.php:132
+#: includes/gateways/stripe/includes/admin/admin-helpers.php:75
 msgid "API Keys"
 msgstr ""
 
@@ -734,7 +734,7 @@ msgid "All"
 msgstr ""
 
 #: includes/admin/class-give-html-elements.php:489
-#: includes/admin/forms/class-metabox-form-data.php:397
+#: includes/admin/forms/class-metabox-form-data.php:398
 #: includes/admin/payments/view-payment-details.php:461
 #: includes/forms/widget.php:262
 msgid "None"
@@ -912,7 +912,7 @@ msgstr ""
 #: includes/admin/donors/class-donor-table.php:608
 #: includes/admin/payments/class-payments-table.php:639
 #: includes/admin/payments/class-payments-table.php:769
-#: includes/payments/functions.php:1453
+#: includes/payments/functions.php:1452
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/address-controls/index.js:51
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/email-controls/index.js:50
 msgid "Delete"
@@ -939,7 +939,6 @@ msgstr ""
 #: includes/class-give-scripts.php:239
 #: includes/class-give-scripts.php:288
 #: includes/forms/template.php:1558
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:777
 #: src/Log/Admin/Logs/index.js:278
 #: src/MigrationLog/Admin/Migrations/index.js:198
 msgid "Cancel"
@@ -1009,7 +1008,7 @@ msgstr ""
 #: includes/class-notices.php:627
 #: includes/formatting.php:767
 #: includes/gateways/manual.php:80
-#: includes/gateways/stripe/includes/admin/admin-actions.php:274
+#: includes/gateways/stripe/includes/admin/admin-actions.php:183
 #: src/Log/ValueObjects/LogType.php:42
 #: src/DonorDashboards/resources/js/app/components/tab-content/index.js:22
 #: src/DonorDashboards/resources/js/app/tabs/annual-receipts/content.js:26
@@ -1102,7 +1101,7 @@ msgstr ""
 #: includes/admin/donors/donor-actions.php:452
 #: includes/admin/donors/donor-actions.php:510
 #: includes/admin/donors/donor-actions.php:562
-#: includes/payments/functions.php:1433
+#: includes/payments/functions.php:1432
 msgid "System"
 msgstr ""
 
@@ -1139,12 +1138,12 @@ msgstr ""
 #: includes/admin/donors/donors.php:74
 #: includes/admin/emails/class-email-notification-table.php:203
 #: includes/admin/emails/class-email-notification-table.php:237
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:771
 msgid "Edit"
 msgstr ""
 
 #: includes/admin/donors/donors.php:75
 #: includes/admin/donors/donors.php:826
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:318
 msgid "Remove"
 msgstr ""
 
@@ -1347,7 +1346,7 @@ msgid "Recent Donations"
 msgstr ""
 
 #: includes/admin/donors/donors.php:872
-#: includes/admin/forms/class-metabox-form-data.php:257
+#: includes/admin/forms/class-metabox-form-data.php:258
 #: includes/admin/tools/export/class-export.php:81
 #: templates/history-donations.php:68
 #: src/DonorDashboards/resources/js/app/components/donation-row/index.js:41
@@ -1355,7 +1354,7 @@ msgid "ID"
 msgstr ""
 
 #: includes/admin/donors/donors.php:873
-#: includes/admin/forms/class-metabox-form-data.php:262
+#: includes/admin/forms/class-metabox-form-data.php:263
 #: includes/admin/forms/dashboard-columns.php:38
 #: includes/admin/import-functions.php:412
 #: includes/admin/payments/class-payments-table.php:416
@@ -1641,7 +1640,7 @@ msgstr ""
 
 #: includes/admin/emails/class-email-notifications.php:131
 #: includes/admin/emails/class-email-setting-field.php:176
-#: includes/admin/forms/class-metabox-form-data.php:550
+#: includes/admin/forms/class-metabox-form-data.php:551
 #: includes/gateways/offline-donations.php:285
 msgid "Customize"
 msgstr ""
@@ -1691,12 +1690,12 @@ msgid "Email Notification"
 msgstr ""
 
 #: includes/admin/emails/class-email-setting-field.php:166
-#: includes/admin/forms/class-metabox-form-data.php:171
-#: includes/admin/forms/class-metabox-form-data.php:364
-#: includes/admin/forms/class-metabox-form-data.php:376
-#: includes/admin/forms/class-metabox-form-data.php:387
-#: includes/admin/forms/class-metabox-form-data.php:436
-#: includes/admin/forms/class-metabox-form-data.php:503
+#: includes/admin/forms/class-metabox-form-data.php:172
+#: includes/admin/forms/class-metabox-form-data.php:365
+#: includes/admin/forms/class-metabox-form-data.php:377
+#: includes/admin/forms/class-metabox-form-data.php:388
+#: includes/admin/forms/class-metabox-form-data.php:437
+#: includes/admin/forms/class-metabox-form-data.php:504
 #: includes/admin/settings/class-settings-advanced.php:77
 #: includes/admin/settings/class-settings-advanced.php:109
 #: includes/admin/settings/class-settings-advanced.php:131
@@ -1714,9 +1713,9 @@ msgstr ""
 #: includes/admin/settings/class-settings-display.php:233
 #: includes/admin/settings/class-settings-display.php:244
 #: includes/admin/settings/class-settings-display.php:275
-#: includes/admin/settings/class-settings-gateways.php:68
-#: includes/admin/settings/class-settings-gateways.php:114
-#: includes/admin/settings/class-settings-gateways.php:305
+#: includes/admin/settings/class-settings-gateways.php:71
+#: includes/admin/settings/class-settings-gateways.php:117
+#: includes/admin/settings/class-settings-gateways.php:322
 #: includes/admin/settings/class-settings-general.php:93
 #: includes/admin/settings/class-settings-general.php:104
 #: includes/admin/settings/class-settings-general.php:379
@@ -1730,10 +1729,10 @@ msgstr ""
 #: includes/admin/tools/views/html-admin-page-system-info.php:726
 #: includes/forms/widget.php:246
 #: includes/gateways/offline-donations.php:298
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:396
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:424
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:467
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:495
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:390
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:418
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:461
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:489
 #: src/DonorDashboards/Admin/Settings.php:97
 #: src/Form/Template/Options.php:155
 #: src/Form/Template/Options.php:178
@@ -1749,14 +1748,14 @@ msgstr ""
 
 #: includes/admin/emails/class-email-setting-field.php:167
 #: includes/admin/emails/class-email-setting-field.php:177
-#: includes/admin/forms/class-metabox-form-data.php:172
-#: includes/admin/forms/class-metabox-form-data.php:327
-#: includes/admin/forms/class-metabox-form-data.php:352
-#: includes/admin/forms/class-metabox-form-data.php:365
-#: includes/admin/forms/class-metabox-form-data.php:377
-#: includes/admin/forms/class-metabox-form-data.php:388
-#: includes/admin/forms/class-metabox-form-data.php:437
-#: includes/admin/forms/class-metabox-form-data.php:504
+#: includes/admin/forms/class-metabox-form-data.php:173
+#: includes/admin/forms/class-metabox-form-data.php:328
+#: includes/admin/forms/class-metabox-form-data.php:353
+#: includes/admin/forms/class-metabox-form-data.php:366
+#: includes/admin/forms/class-metabox-form-data.php:378
+#: includes/admin/forms/class-metabox-form-data.php:389
+#: includes/admin/forms/class-metabox-form-data.php:438
+#: includes/admin/forms/class-metabox-form-data.php:505
 #: includes/admin/settings/class-settings-advanced.php:78
 #: includes/admin/settings/class-settings-advanced.php:110
 #: includes/admin/settings/class-settings-advanced.php:132
@@ -1776,8 +1775,8 @@ msgstr ""
 #: includes/admin/settings/class-settings-display.php:234
 #: includes/admin/settings/class-settings-display.php:245
 #: includes/admin/settings/class-settings-display.php:276
-#: includes/admin/settings/class-settings-gateways.php:69
-#: includes/admin/settings/class-settings-gateways.php:115
+#: includes/admin/settings/class-settings-gateways.php:72
+#: includes/admin/settings/class-settings-gateways.php:118
 #: includes/admin/settings/class-settings-general.php:94
 #: includes/admin/settings/class-settings-general.php:105
 #: includes/admin/settings/class-settings-general.php:380
@@ -1791,10 +1790,10 @@ msgstr ""
 #: includes/admin/tools/views/html-admin-page-system-info.php:726
 #: includes/forms/widget.php:247
 #: includes/gateways/offline-donations.php:299
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:397
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:425
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:468
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:496
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:391
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:419
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:462
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:490
 #: src/DonorDashboards/Admin/Settings.php:98
 #: src/Form/Template/Options.php:156
 #: src/Form/Template/Options.php:179
@@ -1997,7 +1996,7 @@ msgstr ""
 
 #: includes/admin/emails/class-offline-donation-instruction-email.php:44
 #: includes/admin/emails/class-offline-donation-instruction-email.php:54
-#: includes/admin/settings/class-settings-gateways.php:73
+#: includes/admin/settings/class-settings-gateways.php:76
 #: includes/gateways/offline-donations.php:160
 #: includes/gateways/offline-donations.php:175
 msgid "Offline Donation Instructions"
@@ -2042,7 +2041,7 @@ msgid "Form Template"
 msgstr ""
 
 #: includes/admin/forms/class-metabox-form-data.php:131
-#: includes/admin/forms/class-metabox-form-data.php:292
+#: includes/admin/forms/class-metabox-form-data.php:293
 msgid "Donation Options"
 msgstr ""
 
@@ -2067,170 +2066,171 @@ msgstr ""
 msgid "This is the set donation amount for this form. If you have a \"Custom Amount Minimum\" set, make sure it is less than this amount."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:165
-#: includes/admin/forms/class-metabox-form-data.php:197
+#: includes/admin/forms/class-metabox-form-data.php:166
+#: includes/admin/forms/class-metabox-form-data.php:198
 #: includes/admin/import-functions.php:182
 #: includes/admin/tools/export/give-export-donations-exporter.php:427
 #: includes/forms/template.php:526
-#: includes/payments/functions.php:1543
+#: includes/payments/functions.php:1542
 #: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:25
 #: src/DonorDashboards/resources/js/app/components/subscription-manager/amount-control/index.js:77
 msgid "Custom Amount"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:166
+#: includes/admin/forms/class-metabox-form-data.php:167
 msgid "Do you want the user to be able to input their own donation amount?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:176
+#: includes/admin/forms/class-metabox-form-data.php:177
 msgid "Donation Limit"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:177
+#: includes/admin/forms/class-metabox-form-data.php:178
 msgid "Set the minimum and maximum amount for all gateways."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:187
+#: includes/admin/forms/class-metabox-form-data.php:188
 msgid "Donation Limits: "
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:193
+#: includes/admin/forms/class-metabox-form-data.php:194
 #: includes/admin/import-functions.php:557
 msgid "Custom Amount Text"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:194
+#: includes/admin/forms/class-metabox-form-data.php:195
 msgid "This text appears as a label below the custom amount field for set donation forms. For multi-level forms the text will appear as its own level (button, radio, or select option)."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:208
+#: includes/admin/forms/class-metabox-form-data.php:209
 msgid "Add Level"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:209
-#: includes/admin/forms/class-metabox-form-data.php:276
+#: includes/admin/forms/class-metabox-form-data.php:210
+#: includes/admin/forms/class-metabox-form-data.php:277
 #: includes/admin/import-functions.php:553
 msgid "Donation Level"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:272
+#: includes/admin/forms/class-metabox-form-data.php:273
 msgid "Text"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:281
+#: includes/admin/forms/class-metabox-form-data.php:282
 #: includes/admin/give-metabox-functions.php:199
-#: includes/admin/settings/class-settings-gateways.php:304
+#: includes/admin/settings/class-settings-gateways.php:321
 #: includes/admin/tools/views/html-admin-page-system-info.php:133
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:411
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:482
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:405
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:476
 msgid "Default"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:307
+#: includes/admin/forms/class-metabox-form-data.php:308
 #: includes/admin/settings/class-settings-display.php:337
 msgid "Form Fields"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:313
-#: includes/admin/settings/class-settings-gateways.php:145
+#: includes/admin/forms/class-metabox-form-data.php:314
+#: includes/admin/settings/class-settings-gateways.php:148
 msgid "Default Gateway"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:314
+#: includes/admin/forms/class-metabox-form-data.php:315
 msgid "By default, the gateway for this form will inherit the global default gateway (set under GiveWP > Settings > Payment Gateways). This option allows you to customize the default gateway for this form only."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:319
+#: includes/admin/forms/class-metabox-form-data.php:320
 #: includes/admin/settings/class-settings-display.php:56
 msgid "Name Title Prefix"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:320
+#: includes/admin/forms/class-metabox-form-data.php:321
 msgid "Do you want to add a name title prefix dropdown field before the donor's first name field? This will display a dropdown with options such as Mrs, Miss, Ms, Sir, and Dr for donor to choose from."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:324
-#: includes/admin/forms/class-metabox-form-data.php:349
-#: includes/admin/forms/class-metabox-form-data.php:363
-#: includes/admin/forms/class-metabox-form-data.php:375
-#: includes/admin/forms/class-metabox-form-data.php:549
+#: includes/admin/forms/class-metabox-form-data.php:325
+#: includes/admin/forms/class-metabox-form-data.php:350
+#: includes/admin/forms/class-metabox-form-data.php:364
+#: includes/admin/forms/class-metabox-form-data.php:376
+#: includes/admin/forms/class-metabox-form-data.php:550
 #: includes/forms/widget.php:245
 #: includes/gateways/offline-donations.php:284
 #: src/Form/Template/Options.php:154
 msgid "Global Option"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:325
-#: includes/admin/forms/class-metabox-form-data.php:350
+#: includes/admin/forms/class-metabox-form-data.php:326
+#: includes/admin/forms/class-metabox-form-data.php:351
 #: includes/admin/settings/class-settings-display.php:63
 #: includes/admin/settings/class-settings-display.php:86
+#: src/Form/LegacyConsumer/templates/label-content.html.php:6
 msgid "Required"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:326
-#: includes/admin/forms/class-metabox-form-data.php:351
+#: includes/admin/forms/class-metabox-form-data.php:327
+#: includes/admin/forms/class-metabox-form-data.php:352
 #: includes/admin/settings/class-settings-display.php:64
 #: includes/admin/settings/class-settings-display.php:87
 msgid "Optional"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:332
+#: includes/admin/forms/class-metabox-form-data.php:333
 #: includes/admin/settings/class-settings-display.php:68
 msgid "Title Prefixes"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:333
+#: includes/admin/forms/class-metabox-form-data.php:334
 #: includes/admin/settings/class-settings-display.php:69
 msgid "Add or remove salutations from the dropdown using the field above."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:343
+#: includes/admin/forms/class-metabox-form-data.php:344
 #: assets/src/js/admin/onboarding-wizard/app/steps/features/index.js:55
 msgid "Company Donations"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:344
+#: includes/admin/forms/class-metabox-form-data.php:345
 msgid "Do you want a Company field to appear after First Name and Last Name?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:357
+#: includes/admin/forms/class-metabox-form-data.php:358
 #: includes/admin/settings/class-settings-display.php:91
 #: assets/src/js/admin/onboarding-wizard/app/steps/features/index.js:51
 msgid "Anonymous Donations"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:358
+#: includes/admin/forms/class-metabox-form-data.php:359
 msgid "Do you want to provide donors the ability mark themselves anonymous while giving? This will prevent their information from appearing publicly on your website but you will still receive their information for your records in the admin panel."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:369
+#: includes/admin/forms/class-metabox-form-data.php:370
 #: includes/admin/settings/class-settings-display.php:102
 msgid "Donor Comments"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:370
+#: includes/admin/forms/class-metabox-form-data.php:371
 #: includes/admin/settings/class-settings-display.php:103
 msgid "Do you want to provide donors the ability to add a comment to their donation? The comment will display publicly on the donor wall if they do not select to give anonymously."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:381
+#: includes/admin/forms/class-metabox-form-data.php:382
 msgid "Guest Donations"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:382
+#: includes/admin/forms/class-metabox-form-data.php:383
 msgid "Do you want to allow non-logged-in users to make donations?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:392
-#: includes/admin/forms/class-metabox-form-data.php:398
+#: includes/admin/forms/class-metabox-form-data.php:393
+#: includes/admin/forms/class-metabox-form-data.php:399
 msgid "Registration"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:393
+#: includes/admin/forms/class-metabox-form-data.php:394
 msgid "Display the registration and login forms in the payment section for non-logged-in users."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:399
+#: includes/admin/forms/class-metabox-form-data.php:400
 #: includes/admin/shortcodes/shortcode-give-login.php:24
 #: includes/admin/shortcodes/shortcode-give-login.php:25
 #: includes/forms/template.php:1417
@@ -2238,132 +2238,132 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:400
+#: includes/admin/forms/class-metabox-form-data.php:401
 msgid "Registration + Login"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:408
+#: includes/admin/forms/class-metabox-form-data.php:409
 #: src/Views/Form/Templates/Legacy/optionConfig.php:9
 msgid "Form Display"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:423
-#: includes/admin/forms/class-metabox-form-data.php:430
-#: includes/admin/forms/class-metabox-form-data.php:469
-#: includes/admin/forms/class-metabox-form-data.php:520
+#: includes/admin/forms/class-metabox-form-data.php:424
+#: includes/admin/forms/class-metabox-form-data.php:431
+#: includes/admin/forms/class-metabox-form-data.php:470
+#: includes/admin/forms/class-metabox-form-data.php:521
 #: assets/src/js/admin/onboarding-wizard/app/steps/features/index.js:35
 msgid "Donation Goal"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:431
+#: includes/admin/forms/class-metabox-form-data.php:432
 msgid "Do you want to set a donation goal for this form?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:442
+#: includes/admin/forms/class-metabox-form-data.php:443
 msgid "Goal Format"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:443
+#: includes/admin/forms/class-metabox-form-data.php:444
 msgid "Do you want to display the total amount raised based on your monetary goal or a percentage? For instance, \"$500 of $1,000 raised\" or \"50% funded\" or \"1 of 5 donations\". You can also display a donor-based goal, such as \"100 of 1,000 donors have given\"."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:448
+#: includes/admin/forms/class-metabox-form-data.php:449
 msgid "Amount Raised"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:449
+#: includes/admin/forms/class-metabox-form-data.php:450
 msgid "Percentage Raised"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:450
+#: includes/admin/forms/class-metabox-form-data.php:451
 #: includes/admin/shortcodes/shortcode-give-donation-grid.php:66
 #: includes/admin/tools/export/pdf-reports.php:113
 msgid "Number of Donations"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:451
+#: includes/admin/forms/class-metabox-form-data.php:452
 msgid "Number of Donors"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:456
+#: includes/admin/forms/class-metabox-form-data.php:457
 msgid "Goal Amount"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:457
+#: includes/admin/forms/class-metabox-form-data.php:458
 msgid "This is the monetary goal amount you want to reach for this form."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:470
+#: includes/admin/forms/class-metabox-form-data.php:471
 msgid "Set the total number of donations as a goal."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:479
+#: includes/admin/forms/class-metabox-form-data.php:480
 msgid "Donor Goal"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:480
+#: includes/admin/forms/class-metabox-form-data.php:481
 msgid "Set the total number of donors as a goal."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:488
+#: includes/admin/forms/class-metabox-form-data.php:489
 msgid "Progress Bar Color"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:489
+#: includes/admin/forms/class-metabox-form-data.php:490
 msgid "Customize the color of the goal progress bar."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:497
+#: includes/admin/forms/class-metabox-form-data.php:498
 msgid "Close Form"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:498
+#: includes/admin/forms/class-metabox-form-data.php:499
 msgid "Do you want to close the donation forms and stop accepting donations once this goal has been met?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:509
+#: includes/admin/forms/class-metabox-form-data.php:510
 msgid "Goal Achieved Message"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:510
+#: includes/admin/forms/class-metabox-form-data.php:511
 msgid "Do you want to display a custom message when the goal is closed?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:513
+#: includes/admin/forms/class-metabox-form-data.php:514
 #: src/Onboarding/DefaultFormFactory.php:65
 msgid "Thank you to all our donors, we have met our fundraising goal."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:535
+#: includes/admin/forms/class-metabox-form-data.php:536
 #: assets/src/js/admin/onboarding-wizard/app/steps/features/index.js:43
 msgid "Terms & Conditions"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:542
-#: includes/admin/forms/class-metabox-form-data.php:579
+#: includes/admin/forms/class-metabox-form-data.php:543
+#: includes/admin/forms/class-metabox-form-data.php:580
 #: includes/admin/settings/class-settings-display.php:269
 #: includes/admin/settings/class-settings-display.php:340
 msgid "Terms and Conditions"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:543
+#: includes/admin/forms/class-metabox-form-data.php:544
 msgid "Do you want to require the donor to accept terms prior to being able to complete their donation?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:551
+#: includes/admin/forms/class-metabox-form-data.php:552
 #: includes/gateways/offline-donations.php:286
 msgid "Disable"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:558
+#: includes/admin/forms/class-metabox-form-data.php:559
 msgid "Agreement Label"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:559
+#: includes/admin/forms/class-metabox-form-data.php:560
 msgid "The label shown next to the agree to terms check box. Add your own to customize or leave blank to use the default text placeholder."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:562
+#: includes/admin/forms/class-metabox-form-data.php:563
 #: includes/admin/settings/class-settings-display.php:284
 #: includes/forms/template.php:1758
 #: includes/forms/template.php:1763
@@ -2372,21 +2372,21 @@ msgstr ""
 msgid "Agree to Terms?"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:569
+#: includes/admin/forms/class-metabox-form-data.php:570
 #: includes/admin/settings/class-settings-display.php:290
 msgid "Agreement Text"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:570
+#: includes/admin/forms/class-metabox-form-data.php:571
 msgid "This is the actual text which the user will have to agree to in order to make a donation."
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:618
+#: includes/admin/forms/class-metabox-form-data.php:619
 msgid "Goal Statistics"
 msgstr ""
 
-#: includes/admin/forms/class-metabox-form-data.php:1338
-#: includes/admin/settings/class-settings-gateways.php:201
+#: includes/admin/forms/class-metabox-form-data.php:1339
+#: includes/admin/settings/class-settings-gateways.php:204
 #: includes/gateways/offline-donations.php:276
 #: includes/gateways/offline-donations.php:317
 #: assets/src/js/admin/onboarding-wizard/app/steps/features/index.js:47
@@ -2743,7 +2743,7 @@ msgstr ""
 #: src/Receipt/DonationReceipt.php:175
 #: templates/history-donations.php:73
 #: templates/shortcode-receipt.php:100
-#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:45
+#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:60
 msgid "Payment Method"
 msgstr ""
 
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #: includes/admin/import-functions.php:485
 #: includes/admin/reports/class-gateways-reports-table.php:137
-#: includes/admin/settings/class-settings-gateways.php:302
+#: includes/admin/settings/class-settings-gateways.php:319
 msgid "Gateway"
 msgstr ""
 
@@ -2774,7 +2774,7 @@ msgid "Mode"
 msgstr ""
 
 #: includes/admin/import-functions.php:491
-#: includes/admin/settings/class-settings-gateways.php:108
+#: includes/admin/settings/class-settings-gateways.php:111
 #: includes/admin/tools/views/html-admin-page-system-info.php:609
 msgid "Test Mode"
 msgstr ""
@@ -2890,19 +2890,19 @@ msgid "Completed"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:317
-#: includes/payments/functions.php:540
+#: includes/payments/functions.php:539
 #: src/API/Endpoints/Reports/PaymentStatuses.php:85
 #: src/MigrationLog/MigrationLogStatus.php:34
 msgid "Pending"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:321
-#: includes/payments/functions.php:547
+#: includes/payments/functions.php:546
 msgid "Processing"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:325
-#: includes/payments/functions.php:542
+#: includes/payments/functions.php:541
 #: includes/post-types.php:343
 #: src/API/Endpoints/Reports/PaymentStatuses.php:90
 #: assets/src/js/admin/reports/components/donation-item/utils/index.js:77
@@ -2910,14 +2910,14 @@ msgid "Refunded"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:329
-#: includes/payments/functions.php:548
+#: includes/payments/functions.php:547
 #: includes/post-types.php:365
 msgid "Revoked"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:333
 #: includes/class-give-cli-commands.php:1258
-#: includes/payments/functions.php:543
+#: includes/payments/functions.php:542
 #: includes/post-types.php:354
 #: src/API/Endpoints/Reports/PaymentStatuses.php:105
 #: src/MigrationLog/MigrationLogStatus.php:33
@@ -2925,7 +2925,7 @@ msgid "Failed"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:337
-#: includes/payments/functions.php:544
+#: includes/payments/functions.php:543
 #: includes/post-types.php:376
 #: src/API/Endpoints/Reports/PaymentStatuses.php:100
 #: assets/src/js/admin/reports/components/donation-item/utils/index.js:75
@@ -2933,7 +2933,7 @@ msgid "Cancelled"
 msgstr ""
 
 #: includes/admin/payments/class-payments-table.php:341
-#: includes/payments/functions.php:545
+#: includes/payments/functions.php:544
 #: includes/post-types.php:387
 #: src/API/Endpoints/Reports/PaymentStatuses.php:95
 #: assets/src/js/admin/reports/components/donation-item/utils/index.js:73
@@ -3381,7 +3381,7 @@ msgid "Donation Methods"
 msgstr ""
 
 #: includes/admin/reports/class-gateways-report.php:87
-#: includes/admin/settings/class-settings-gateways.php:197
+#: includes/admin/settings/class-settings-gateways.php:200
 msgid "Gateways"
 msgstr ""
 
@@ -3896,77 +3896,77 @@ msgstr ""
 msgid "Contact Information"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:30
+#: includes/admin/settings/class-settings-gateways.php:33
 msgid "Payment Gateways"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:62
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:211
+#: includes/admin/settings/class-settings-gateways.php:65
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:209
 #: src/PaymentGateways/PayPalCommerce/PayPalCommerce.php:93
 msgid "Collect Billing Details"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:63
+#: includes/admin/settings/class-settings-gateways.php:66
 msgid "If enabled, required billing address fields are added to Offline Donation forms. These fields are not required to process the transaction, but you may have a need to collect the data. Billing address details are added to both the donation and donor record in GiveWP. "
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:74
+#: includes/admin/settings/class-settings-gateways.php:77
 msgid "The Offline Donation Instructions are a chance for you to educate the donor on how to best submit offline donations. These instructions appear directly on the form, and after submission of the form. Note: You may also customize the instructions on individual forms as needed."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:83
+#: includes/admin/settings/class-settings-gateways.php:86
 msgid "Offline Donations Settings Docs Link"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:86
+#: includes/admin/settings/class-settings-gateways.php:89
 msgid "Offline Gateway Settings"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:109
+#: includes/admin/settings/class-settings-gateways.php:112
 msgid "If enabled, donations are processed through the sandbox/test accounts configured in each gateway's settings. This prevents having to use real money for tests. See the payment gateway documentation for instructions on configuring sandbox accounts."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:119
+#: includes/admin/settings/class-settings-gateways.php:122
 msgid "Enabled Gateways"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:120
+#: includes/admin/settings/class-settings-gateways.php:123
 msgid "Enable your payment gateway. Can be ordered by dragging."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:132
+#: includes/admin/settings/class-settings-gateways.php:135
 msgid "Gateways Label"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:146
+#: includes/admin/settings/class-settings-gateways.php:149
 msgid "The gateway that will be selected by default."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:152
+#: includes/admin/settings/class-settings-gateways.php:155
 msgid "Gateways Docs Link"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:155
+#: includes/admin/settings/class-settings-gateways.php:158
 msgid "Gateway Settings"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:246
+#: includes/admin/settings/class-settings-gateways.php:263
 msgid "Want to accept credit card donations directly on your website?"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:253
-msgid "Activate the free Stripe payment gateway %1$s or a premium gateway like <a href=\"%2$s\" target=\"_blank\">PayPal Pro</a>, <a href=\"%3$s\" target=\"_blank\">Authorize.net</a>, or <a href=\"%4$s\" target=\"_blank\">Stripe Premium</a> for no added fees and priority support."
+#: includes/admin/settings/class-settings-gateways.php:270
+msgid "Activate the free Stripe payment gateway %1$s, <a href=\"%2$s\" target=\"_blank\">PayPal Donations</a>, or a premium gateway like <a href=\"%3$s\" target=\"_blank\">Authorize.net</a>, or <a href=\"%4$s\" target=\"_blank\">Stripe Premium</a> for no added fees and priority support."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:254
+#: includes/admin/settings/class-settings-gateways.php:271
 msgid "The free version of Stripe includes an additional 2% processing fee in addition to Stripe's normal fees for one-time donations. This ensures we can fully support the plugin for the future. Upgrade to the premium Stripe add-on for no added fees."
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:266
+#: includes/admin/settings/class-settings-gateways.php:283
 msgid "View Premium Gateways"
 msgstr ""
 
-#: includes/admin/settings/class-settings-gateways.php:303
+#: includes/admin/settings/class-settings-gateways.php:320
 msgid "Label"
 msgstr ""
 
@@ -4120,7 +4120,7 @@ msgid "Currency Options Docs Link"
 msgstr ""
 
 #: includes/admin/settings/class-settings-general.php:260
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:113
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:111
 msgid "General Settings"
 msgstr ""
 
@@ -5436,7 +5436,7 @@ msgstr ""
 
 #: includes/admin/tools/import/class-give-import-donations.php:252
 #: includes/admin/tools/import/class-give-import-donations.php:258
-#: includes/forms/functions.php:1270
+#: includes/forms/functions.php:1275
 msgid "donors"
 msgstr ""
 
@@ -5477,7 +5477,7 @@ msgstr[1] ""
 
 #: includes/admin/tools/import/class-give-import-donations.php:270
 #: includes/admin/tools/import/class-give-import-donations.php:276
-#: includes/forms/functions.php:1270
+#: includes/forms/functions.php:1275
 msgid "donations"
 msgstr ""
 
@@ -7557,7 +7557,7 @@ msgid "Text ID within a group already exists."
 msgstr ""
 
 #: includes/class-notices.php:515
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:867
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:403
 msgid "Click here"
 msgstr ""
 
@@ -12240,6 +12240,11 @@ msgstr ""
 msgid "API Requests"
 msgstr ""
 
+#: includes/deprecated/deprecated-functions.php:1203
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:495
+msgid "Connect with Stripe"
+msgstr ""
+
 #: includes/donors/actions.php:49
 msgid "Your comment is too long."
 msgstr ""
@@ -12456,7 +12461,7 @@ msgstr ""
 msgid "%s million"
 msgstr ""
 
-#: includes/forms/functions.php:1267
+#: includes/forms/functions.php:1272
 #: src/DonorDashboards/resources/js/app/components/annual-receipt-table/index.js:73
 #: src/DonorDashboards/resources/js/app/components/donation-table/index.js:75
 #: src/DonorDashboards/resources/js/app/components/subscription-table/index.js:74
@@ -12464,21 +12469,21 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: includes/forms/functions.php:1274
+#: includes/forms/functions.php:1279
 msgid "Goal achieved"
 msgstr ""
 
-#: includes/forms/functions.php:1497
+#: includes/forms/functions.php:1502
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:36
 msgid "Mr."
 msgstr ""
 
-#: includes/forms/functions.php:1498
+#: includes/forms/functions.php:1503
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:44
 msgid "Mrs."
 msgstr ""
 
-#: includes/forms/functions.php:1499
+#: includes/forms/functions.php:1504
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:40
 msgid "Ms."
 msgstr ""
@@ -13115,6 +13120,7 @@ msgstr ""
 
 #: includes/gateways/stripe/class-give-stripe.php:196
 #: includes/gateways/stripe/class-give-stripe.php:202
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:112
 #: src/PaymentGateways/PayPalCommerce/PayPalCommerce.php:38
 msgid "Credit Card"
 msgstr ""
@@ -13128,7 +13134,7 @@ msgid "Stripe - SEPA Direct Debit"
 msgstr ""
 
 #: includes/gateways/stripe/class-give-stripe.php:208
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:116
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:114
 msgid "SEPA Direct Debit"
 msgstr ""
 
@@ -13137,39 +13143,31 @@ msgid "Stripe - BECS Direct Debit"
 msgstr ""
 
 #: includes/gateways/stripe/class-give-stripe.php:214
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:117
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:115
 msgid "BECS Direct Debit"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:71
-msgid "Stripe Error:"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-actions.php:72
-msgid "We are unable to connect Stripe account. Please contact support team for assistance"
-msgstr ""
-
 #. translators: %s Error Message
-#: includes/gateways/stripe/includes/admin/admin-actions.php:132
+#: includes/gateways/stripe/includes/admin/admin-actions.php:41
 msgid "<strong>Error:</strong> GiveWP could not disconnect from the Stripe API. Reason: %s"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:164
+#: includes/gateways/stripe/includes/admin/admin-actions.php:73
 msgid "Refund Charge in Stripe?"
 msgstr ""
 
 #. translators: 1. Refund ID
-#: includes/gateways/stripe/includes/admin/admin-actions.php:246
+#: includes/gateways/stripe/includes/admin/admin-actions.php:155
 msgid "Charge refunded in Stripe: %s"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:253
+#: includes/gateways/stripe/includes/admin/admin-actions.php:162
 msgid "The Stripe payment gateway returned an error while refunding a donation."
 msgstr ""
 
 #. translators: %s Exception Message
 #. translators: 1. Error Message
-#: includes/gateways/stripe/includes/admin/admin-actions.php:254
+#: includes/gateways/stripe/includes/admin/admin-actions.php:163
 #: includes/gateways/stripe/includes/class-give-stripe-gateway.php:448
 #: includes/gateways/stripe/includes/class-give-stripe-logger.php:61
 msgid "Message: %s"
@@ -13177,13 +13175,13 @@ msgstr ""
 
 #. translators: %s Trace String
 #. translators: 1. Error Code
-#: includes/gateways/stripe/includes/admin/admin-actions.php:255
+#: includes/gateways/stripe/includes/admin/admin-actions.php:164
 #: includes/gateways/stripe/includes/class-give-stripe-gateway.php:457
 #: includes/gateways/stripe/includes/class-give-stripe-logger.php:67
 msgid "Code: %s"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:258
+#: includes/gateways/stripe/includes/admin/admin-actions.php:167
 #: includes/gateways/stripe/includes/class-give-stripe-checkout-session.php:62
 #: includes/gateways/stripe/includes/class-give-stripe-checkout-session.php:102
 #: includes/gateways/stripe/includes/class-give-stripe-customer.php:373
@@ -13202,425 +13200,281 @@ msgstr ""
 msgid "Stripe Error"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:269
+#: includes/gateways/stripe/includes/admin/admin-actions.php:178
 msgid "Something went wrong while refunding the charge in Stripe."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:353
+#: includes/gateways/stripe/includes/admin/admin-actions.php:262
 msgid "The Stripe gateway is enabled but you're not connected. Connect to Stripe to start accepting credit card donations directly on your website."
 msgstr ""
 
 #. translators: 1. Main Text, 2. Connect Link
-#: includes/gateways/stripe/includes/admin/admin-actions.php:366
+#: includes/gateways/stripe/includes/admin/admin-actions.php:275
 msgid "<p><strong>Stripe Connect:</strong> %1$s </p>%2$s"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:412
+#: includes/gateways/stripe/includes/admin/admin-actions.php:321
 msgid "The currency must be set as \"Euro (&euro;)\" within Give's <a href=\"%s\">Currency Settings</a> in order to collect donations through the Stripe - SEPA Direct Debit Payment Gateway."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:433
+#: includes/gateways/stripe/includes/admin/admin-actions.php:342
 msgid "The currency must be set as \"AUD (&dollar;)\" within Give's <a href=\"%s\">Currency Settings</a> in order to collect donations through the Stripe - BECS Direct Debit Payment Gateway."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-actions.php:499
-msgid "Unauthorized access."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-actions.php:515
-msgid "This account name is already in use. Please enter a different account name."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-actions.php:538
-msgid "Account Name updated successfully."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-actions.php:545
-msgid "Unable to update account name. Please contact support."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-actions.php:576
+#: includes/gateways/stripe/includes/admin/admin-actions.php:400
 msgid "Stripe Account:"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/admin-filters.php:62
-msgid "Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:66
-msgid "Account Options"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:71
-msgid "Use Global Default Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:72
-msgid "Customize Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:74
-msgid "Do you want to customize the Stripe account for this donation form? The customize option allows you to modify the Stripe account this form processes payments through. By default, new donation forms will use the Global Default Stripe account."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:77
-msgid "Active Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:90
-msgid "Connect Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-filters.php:97
-msgid "Stripe Documentation"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-helpers.php:87
-msgid "Connect with Stripe"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/admin-helpers.php:133
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:163
+#: includes/gateways/stripe/includes/admin/admin-helpers.php:76
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:161
 msgid "Stripe Connect"
 msgstr ""
 
 #: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:67
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:96
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:134
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:94
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:132
 #: src/Onboarding/Setup/templates/index.html.php:97
 msgid "Stripe"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:112
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:110
 msgid "Manage Accounts"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:114
-msgid "Credit Card On Site"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:115
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:113
 msgid "Stripe Checkout"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:191
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:907
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:189
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:671
 msgid "Stripe Webhooks"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:199
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:197
 msgid "Statement Descriptor"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:200
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:198
 msgid "This is the text that appears on your donor's bank statements. Statement descriptors are limited to 22 characters, cannot use the special characters <code><</code>, <code>></code>, <code>'</code>, or <code>\"</code>, and must not consist solely of numbers. This is typically the name of your website or organization."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:212
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:210
 msgid "This option enables the billing details section for Stripe, requiring the donor's address to complete the donation. These fields are not required by Stripe to process the transaction, but you may have the need to collect the data."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:227
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:225
 msgid "Stripe Receipt Emails"
 msgstr ""
 
 #. translators: 1. GiveWP Support URL
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:230
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:228
 msgid "Check this option if you would like donors to receive receipt emails directly from Stripe. By default, donors will receive GiveWP generated <a href=\"%1$s\" target=\"_blank\">receipt emails</a>. Checking this option does not disable GiveWP emails."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:238
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:241
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:289
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:292
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:369
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:372
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:236
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:239
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:283
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:286
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:363
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:366
 msgid "Stripe Gateway Documentation"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:267
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:265
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:44
 msgid "Credit Card Fields Format"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:268
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:266
 msgid "This option allows you to show single or multiple credit card fields on your donation forms."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:274
-msgid "Single Field"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:275
-msgid "Multi Field"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:318
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:312
 msgid "Checkout Type"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:321
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:315
 msgid "This option allows you to select from the two types of Stripe Checkout methods available for processing donations. The \"Modal\" option uses Stripe elements in a popup modal which does not take the donor off your website. The \"Redirect\" option uses Stripe's new off-site"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:323
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:317
 msgid "Checkout"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:324
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:318
 msgid "interface that provides donors an easy way to pay with Credit or Debit Cards, Apple, and Google Pay."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:331
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:325
 msgid "Modal (Stripe Elements)"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:332
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:326
 msgid "Redirect (Checkout 2.0)"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:337
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:331
 msgid "Checkout Heading"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:338
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:332
 msgid "This is the main heading within the modal checkout. Typically, this is the name of your organization, cause, or website."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:346
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:340
 msgid "Background Image"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:347
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:341
 msgid "This background image appears in the header section of the Stripe checkout modal window and provides better brand recognition that leads to increased conversion rates. The recommended minimum size of background image is 400x200px. The supported image types are: .gif, .jpeg, and .png."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:355
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:349
 msgid "Add or Upload Image"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:389
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:460
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:383
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:454
 msgid "Display Icon"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:390
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:384
 msgid "This option allows you to display a bank building icon within the IBAN input field for SEPA Direct Debit."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:404
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:475
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:398
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:469
 msgid "Icon Style"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:405
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:476
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:399
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:470
 msgid "This option allows you to select the icon style for the IBAN element of SEPA Direct Debit."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:412
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:483
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:406
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:477
 msgid "Solid"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:417
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:488
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:411
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:482
 msgid "Display Mandate Acceptance"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:418
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:412
 msgid "The mandate acceptance text explains to donors how the payment processing will work for their donation. The text will display below the IBAN field."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:432
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:503
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:426
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:497
 msgid "Mandate Acceptance Text"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:433
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:427
 msgid "This text displays below the IBAN field and should provide clarity to your donors on how this payment option works."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:461
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:455
 msgid "This option allows you to display a bank building icon within the bank account input field for BECS Direct Debit."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:489
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:483
 msgid "The mandate acceptance text is meant to explain to your donors how the payment processing will work for their donation. The text will display below the Bank Account fields."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:504
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:498
 msgid "This text displays below the Bank Account fields and should provide clarity to your donors on how this payment option works."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:580
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:574
 msgid "Stripe JS Incompatibility"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:581
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:575
 msgid "If your site has problems with processing cards using Stripe JS, check this option to use a fallback method of processing."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:587
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:581
 msgid "Stripe Styles"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:588
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:582
 msgid "Edit the properties above to match the look and feel of your WordPress theme. These styles will be applied to Stripe Credit Card fields including Card Number, CVC and Expiration. Any valid CSS property can be defined, however, it must be formatted as JSON, not CSS. For more information on Styling Stripe CC fields please see this <a href=\"https://stripe.com/docs/stripe-js/reference#element-options\" target=\"_blank\">article</a>."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:595
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:589
 msgid "Stripe Fonts"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:596
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:590
 msgid "Select the type of font you want to load in Stripe Credit Card fields including Card Number, CVC and Expiration. For more information on Styling Stripe CC fields please see this <a href=\"https://stripe.com/docs/stripe-js/reference#stripe-elements\" target=\"_blank\">article</a>."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:601
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:595
 msgid "Google Fonts"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:602
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:615
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:596
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:609
 msgid "Custom Fonts"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:607
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:601
 msgid "Google Fonts URL"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:608
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:602
 msgid "Please enter the Google Fonts URL which is applied to your theme to have the Stripe Credit Card fields reflect the same fonts."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:616
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:610
 msgid "Edit the font properties above to match the fonts of your WordPress theme. These font properties will be applied to Stripe Credit Card fields including Card Number, CVC and Expiration. However, it must be formatted as JSON, not CSS."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:693
-msgid "You are connected! Now this is important: Please configure your Stripe webhook to finalize the setup."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:697
-msgid "In order for Stripe to function properly, you must add a new Stripe webhook endpoint. To do this please visit the <a href='https://dashboard.stripe.com/webhooks' target='_blank'>Webhooks Section of your Stripe Dashboard</a> and click the <strong>Add endpoint</strong> button and paste the following URL:"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:700
-msgid "Stripe webhooks are required so GiveWP can communicate properly with the payment gateway to confirm payment completion, renewals, and more."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:707
-msgid "Manage Your Stripe Accounts"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:708
-msgid "Connect to the Stripe payment gateway using this section. Multiple Stripe accounts can be connected simultaneously. All donation forms will use the \"Default Account\" unless configured otherwise. To specify a different Stripe account for a form, configure the settings within the \"Stripe Account\" tab on the individual form edit screen."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:716
-msgid "NOTE: You are using the free Stripe payment gateway integration. This includes an additional 2%% fee for processing one-time donations. This fee is removed by activating the premium <a href=\"%1$s\" target=\"_blank\">Stripe add-on</a> and never applies to subscription donations made through the <a href=\"%2$s\" target=\"_blank\">Recurring Donations add-on</a>. <a href=\"%3$s\" target=\"_blank\">Learn More ></a>"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:746
-msgid "Are you sure you want to disconnect this Stripe account?"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:776
-msgid "Update"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:781
-msgid "Default Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:789
-msgid "Set as Default"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:796
-msgid "Connection Method:"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:811
-#: src/PaymentGateways/PayPalCommerce/AdminSettingFields.php:167
-msgid "Disconnect"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:822
-msgid "No Stripe Accounts Connected."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:831
-msgid "Connect a New Stripe Account"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:850
-msgid "Stripe Connection"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:865
-msgid "Give 2.7.0 introduces the ability to connect a single site to multiple Stripe accounts. To use this feature, you need to complete database updates. "
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:868
-msgid "to complete your pending database updates."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:880
-msgid "Remove GiveWP as an Authorized Application for my Stripe account."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:882
-msgid "Removing GiveWP as an Authorized Application for your Stripe account will remove the connection between the website you are disconnecting as well as any other sites that you have connected to GiveWP using the same Stripe account and connect method. Proceed with caution when disconnecting if you have multiple sites connected."
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:886
-msgid "View authorized applications in Stripe"
-msgstr ""
-
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:914
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:678
 msgid "In order for Stripe to function properly, you must configure your Stripe webhooks."
 msgstr ""
 
 #. translators: 1. Webhook settings page.
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:917
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:681
 msgid " You can  visit your <a href=\"%1$s\" target=\"_blank\">Stripe Account Dashboard</a> to add a new webhook. "
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:920
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:684
 msgid "Please add a new webhook endpoint for the following URL:"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:924
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:688
 msgid "Webhook URL:"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:934
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:698
 msgid "Last webhook received on"
 msgstr ""
 
 #. translators: 1. Documentation on webhook setup.
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:943
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:707
 msgid "See our <a href=\"%1$s\" target=\"_blank\">documentation</a> for more information."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:951
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:715
 msgid "Stripe webhooks are critical to configure so that GiveWP can recieve communication properly from the payment gateway. Webhooks for test-mode donations are configured separately on the Stripe dashboard. Note: webhooks do not function on localhost or websites in maintenance mode."
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:991
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:755
 msgid "Base Styles"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:1005
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:769
 msgid "Empty Styles"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:1021
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:785
 msgid "Invalid Styles"
 msgstr ""
 
-#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:1037
+#: includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php:801
 msgid "Complete Styles"
 msgstr ""
 
@@ -14213,19 +14067,19 @@ msgstr ""
 msgid "This custom meta key has been deprecated for performance reasons. Your custom meta data will still be stored but we recommend updating your code to store meta keys individually from GiveWP 2.0.0."
 msgstr ""
 
-#: includes/payments/functions.php:541
+#: includes/payments/functions.php:540
 msgid "Complete"
 msgstr ""
 
-#: includes/payments/functions.php:546
+#: includes/payments/functions.php:545
 msgid "Pre-Approved"
 msgstr ""
 
-#: includes/payments/functions.php:1453
+#: includes/payments/functions.php:1452
 msgid "Delete this donation note."
 msgstr ""
 
-#: includes/payments/functions.php:1680
+#: includes/payments/functions.php:1679
 msgctxt "custom donation dropdown item"
 msgid "Custom"
 msgstr ""
@@ -14612,10 +14466,6 @@ msgstr ""
 #. translators: %s: the template
 #: includes/template-functions.php:58
 msgid "The %s template was not found."
-msgstr ""
-
-#: includes/template-functions.php:403
-msgid "GiveWP Placeholder Image"
 msgstr ""
 
 #: includes/user-functions.php:314
@@ -15168,7 +15018,7 @@ msgstr ""
 #: src/Onboarding/DefaultFormFactory.php:137
 #: src/Views/Form/Templates/Sequoia/optionConfig.php:204
 #: src/Views/Form/Templates/Sequoia/optionConfig.php:206
-msgid "Help us out by sharing with friends and followers that you supported the cause!"
+msgid "Help spread the word by sharing your support with your friends and followers!"
 msgstr ""
 
 #: src/Onboarding/DefaultFormFactory.php:138
@@ -15432,11 +15282,16 @@ msgid "PayPal is currently NOT connected."
 msgstr ""
 
 #: src/PaymentGateways/PayPalCommerce/AdminSettingFields.php:151
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:311
 msgid "Connected"
 msgstr ""
 
 #: src/PaymentGateways/PayPalCommerce/AdminSettingFields.php:160
 msgid "Connected for payments as"
+msgstr ""
+
+#: src/PaymentGateways/PayPalCommerce/AdminSettingFields.php:167
+msgid "Disconnect"
 msgstr ""
 
 #: src/PaymentGateways/PayPalCommerce/AdminSettingFields.php:171
@@ -15822,8 +15677,188 @@ msgstr ""
 msgid "PayPal Standard Gateway Settings"
 msgstr ""
 
-#: src/PaymentGateways/Stripe/Models/AccountDetail.php:75
-msgid "To create a %1$s object, please provide valid: %2$s"
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:90
+msgid "Connected Accounts"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:112
+msgid "Accept Donations with Stripe"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:118
+msgid "You are using the Pro version of the GiveWP add-on which includes additional payment methods, zero additional fees, and premium support."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:125
+msgid "Pro Version Active"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:132
+msgid "Connect to the Stripe payment gateway using this section. Multiple Stripe accounts can be connected simultaneously. All donation forms will use the \"Default Account\" unless configured otherwise. To specify a different Stripe account for a form, configure the settings within the \"Stripe Account\" tab on the individual form edit screen."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:187
+msgid "Add a New Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:256
+msgid "Account name:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:264
+msgid "Account email:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:273
+msgid "Account ID:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:282
+msgid "Connection Method:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:308
+msgid "Connection Status:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:326
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:66
+msgid "Default Account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:334
+msgid "Set as Default"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:354
+msgid "You are connected! Now this is important: Please configure your Stripe webhook to finalize the setup."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:361
+msgid "In order for Stripe to function properly, you must add a new Stripe webhook endpoint. To do this please visit the <a href='https://dashboard.stripe.com/webhooks' target='_blank'>Webhooks Section of your Stripe Dashboard</a> and click the <strong>Add endpoint</strong> button and paste the following URL:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:367
+msgid "Stripe webhooks are required so GiveWP can communicate properly with the payment gateway to confirm payment completion, renewals, and more."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:398
+msgid "Give 2.7.0 introduces the ability to connect a single site to multiple Stripe accounts. To use this feature, you need to complete database updates. "
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:404
+msgid "to complete your pending database updates."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:422
+msgid "NOTE: You are using the free Stripe payment gateway integration. This includes an additional 2%% fee for processing one-time donations. This fee is removed by activating the premium <a href=\"%1$s\" target=\"_blank\">Stripe add-on</a> and never applies to subscription donations made through the <a href=\"%2$s\" target=\"_blank\">Recurring Donations add-on</a>. <a href=\"%3$s\" target=\"_blank\">Learn More ></a>"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:446
+msgid "No Stripe Accounts Connected"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:447
+msgid "Connect a New Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:453
+msgid "Connect an account to get started!"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:454
+msgid "Add a new account to customize the Stripe account used for this donation form."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:511
+msgid "All payments go to the default account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:512
+msgid "Stripe donations process through the account set above"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:518
+msgid "You can set this globally (for all donation forms) or override the Stripe account per donation form."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/AccountManagerSettingField.php:519
+msgid "This overrides the global default account setting for this donation form."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:47
+msgid "The credit card fieldset uses Stripe Elements for a secure method of accepting payment. Stripe offers two different types of credit card fields. A consolidated single field or a more traditional multi-fields format."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:77
+msgid "Single Field"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:78
+msgid "The single credit card format combines the Card number, expiration date, CVC, and zip / postal code (if enabled) fields  into one intuitive field."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:80
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:105
+msgid "Example"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:101
+msgid "Multiple Fields"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CreditCardSettingField.php:102
+msgid "This is the more traditional credit card fieldset format that many are familiar with. All fields areseparate from one another."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:40
+msgid "Which Stripe account would you like to use to process donations for this form?"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:71
+msgid "All donations are processed through the default account set in the"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:77
+msgid "Default account name:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:83
+msgid "None set"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:107
+msgid "Customize Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Admin/CustomizeAccountField.php:110
+msgid "Donations are processed through a Stripe account custom to this donation form. The default account is overridden for this form."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Controllers/NewStripeAccountOnBoardingController.php:58
+#: src/PaymentGateways/Stripe/Controllers/NewStripeAccountOnBoardingController.php:128
+msgid "Stripe Error:"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Controllers/NewStripeAccountOnBoardingController.php:59
+#: src/PaymentGateways/Stripe/Controllers/NewStripeAccountOnBoardingController.php:129
+msgid "We are unable to connect your Stripe account. Please contact the support team for assistance."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/DonationFormSettingPage.php:31
+msgid "Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/DonationFormSettingPage.php:72
+msgid "Stripe Documentation"
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Repositories/Settings.php:89
+msgid "Stripe account already exist with same name."
+msgstr ""
+
+#: src/PaymentGateways/Stripe/Repositories/Settings.php:96
+msgid "Stripe account already connected"
 msgstr ""
 
 #: src/Receipt/DonationReceipt.php:91
@@ -16957,12 +16992,12 @@ msgstr ""
 msgid "Yes, cancel"
 msgstr ""
 
-#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:54
+#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:68
 #: src/DonorDashboards/resources/js/app/tabs/edit-profile/content.js:195
 msgid "Updated"
 msgstr ""
 
-#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:58
+#: src/DonorDashboards/resources/js/app/components/subscription-manager/index.js:72
 msgid "Update Subscription"
 msgstr ""
 
@@ -17304,6 +17339,46 @@ msgstr ""
 
 #: src/MultiFormGoals/resources/js/components/image-control/index.js:42
 msgid "Select an Image"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/customize-stripe-account-validation.js:42
+msgid "Select Default Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/customize-stripe-account-validation.js:43
+msgid "We notice that you want to accept donation with other then global default Stripe Account but you did not selected Stripe account."
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/disconnect-stripe-account-action.js:21
+msgid "Disconnect Stripe Account"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/disconnect-stripe-account-action.js:22
+msgid "Are you sure you want to disconnect this Stripe account?"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:29
+msgid "Account Name"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:36
+msgid "Account Email"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:44
+msgid "View Documentation >"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:49
+msgid "Please confirm you’d like to set the account below as the new default Stripe account. All donation forms set to inherit the Global Settings will use this new default account. %1$s<br>%2$s%3$s"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:55
+msgid "Please confirm you’d like to set the account below as the new default Stripe account for this donation form. All donations will process through this Stripe account rather than the Global default Stripe account. %1$s<br>%2$s%3$s"
+msgstr ""
+
+#: src/PaymentGateways/resources/js/stripe-account-manager/set-default-account-action.js:69
+msgid "Confirm New Default Account"
 msgstr ""
 
 #: src/Views/Components/Modal/index.js:98
